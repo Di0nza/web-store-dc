@@ -1,4 +1,6 @@
+// @ts-ignore
 import {connect} from "@/db/db";
+// @ts-ignore
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
@@ -39,9 +41,6 @@ export async function POST(request: NextRequest){
             success: true,
             savedUser
         })
-
-
-
 
     } catch (error: any) {
         return NextResponse.json({error: error.message}, {status: 500})
