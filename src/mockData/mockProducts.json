@@ -1,0 +1,268 @@
+{
+  "Products": [
+    {
+      "_id":"656501",
+      "title": "Пальто 'Рок-стиль'",
+      "description": "Элегантное пальто в стиле рок с элементами кожи.",
+      "price": 234,
+      "sizes": [
+        { "size": "S", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "M", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } },
+        { "size": "L", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
+      ],
+      "pictures": [
+        "https://ae04.alicdn.com/kf/HTB12YrkSRLoK1RjSZFuq6xn0XXae.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
+      "additionalInformation": [
+        { "title": "Материал", "description": "Шерсть, кожа" },
+        { "title": "Уход", "description": "Сухая чистка" }
+      ],
+      "__v": 0
+    },
+    {
+      "_id":"656502",
+      "title": "Куртка 'Байкерская свобода'",
+      "description": "Стеганая куртка в байкерском стиле с молниями и нашивками.",
+      "price": 454,
+      "sizes": [
+        { "size": "S", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "M", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } },
+        { "size": "L", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
+      ],
+      "pictures": [
+        "https://ae04.alicdn.com/kf/H2cd6dce38f564fb5bb5752488b463c46a.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
+      "additionalInformation": [
+        { "title": "Материал", "description": "Шерсть, кожа" },
+        { "title": "Уход", "description": "Сухая чистка" }
+      ],
+      "__v": 0
+    },
+    {
+      "_id":"656503",
+      "title": "Джинсы 'Гранж-революция'",
+      "price": 164,
+      "description": "Джинсы в гранж-стиле с потертостями и стильными принтами.",
+      "sizes": [
+        { "size": "S", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "M", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } },
+        { "size": "L", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
+      ],
+      "pictures": [
+        "https://ae04.alicdn.com/kf/S3bb220ae87cb457590af2e4455fe5e30H.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
+      "additionalInformation": [
+        { "title": "Материал", "description": "Шерсть, кожа" },
+        { "title": "Уход", "description": "Сухая чистка" }
+      ],
+      "__v": 0
+    },
+    {
+      "_id":"656504",
+      "title": "Футболка 'Роковой паттерн'",
+      "price": 55,
+      "description": "Футболка с роковым принтом для любителей ярких образов.",
+      "sizes": [
+        { "size": "S", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "M", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } },
+        { "size": "L", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
+      ],
+      "pictures": [
+        "https://images.prom.ua/4231501443_w640_h640_futbolka-s-printom.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
+      "additionalInformation": [
+        { "title": "Материал", "description": "Шерсть, кожа" },
+        { "title": "Уход", "description": "Сухая чистка" }
+      ],
+      "__v": 0
+    },
+    {
+      "_id":"656505",
+      "title": "Платье 'Панк-принцесса'",
+      "price": 311,
+      "description": "Платье в стиле панк с корсетом и асимметричными элементами.",
+      "sizes": [
+        { "size": "S", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "M", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } },
+        { "size": "L", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
+      ],
+      "pictures": [
+        "https://ae04.alicdn.com/kf/S2b1d686e9a714de58a8844bd9bb0abc8U.jpg_480x480.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
+      "additionalInformation": [
+        { "title": "Материал", "description": "Шерсть, кожа" },
+        { "title": "Уход", "description": "Сухая чистка" }
+      ],
+      "__v": 0
+    },
+    {
+      "_id":"656506",
+      "title": "Свитшот 'Готика в твоем стиле'",
+      "price": 136,
+      "description": "Свитшот в готическом стиле с уникальным дизайном.",
+      "sizes": [
+        { "size": "S", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "M", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } },
+        { "size": "L", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
+      ],
+      "pictures": [
+        "https://images.prom.ua/3477401372_w640_h640_svitshot-chernyj-loys.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
+      "additionalInformation": [
+        { "title": "Материал", "description": "Шерсть, кожа" },
+        { "title": "Уход", "description": "Сухая чистка" }
+      ],
+      "__v": 0
+    },
+    {
+      "_id":"656507",
+      "title": "Юбка 'Революция'",
+      "price": 76,
+      "description": "Асимметричная юбка с экспрессивным принтом и ремнями.",
+      "sizes": [
+        { "size": "S", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "M", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } },
+        { "size": "L", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
+      ],
+      "pictures": [
+        "https://ae04.alicdn.com/kf/Hab450f0930434728813582158fa2e5de4.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
+      "additionalInformation": [
+        { "title": "Материал", "description": "Шерсть, кожа" },
+        { "title": "Уход", "description": "Сухая чистка" }
+      ],
+      "__v": 0
+    },
+    {
+      "_id":"656508",
+      "title": "Кеды 'Альтернативная сила'",
+      "price": 221,
+      "description": "Кеды в альтернативном стиле с яркими деталями.",
+      "sizes": [
+        { "size": "S", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "M", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } },
+        { "size": "L", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
+      ],
+      "pictures": [
+        "https://prospectavenue.ru/photos/colors/9901/fdeae4aef5.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
+      "additionalInformation": [
+        { "title": "Материал", "description": "Шерсть, кожа" },
+        { "title": "Уход", "description": "Сухая чистка" }
+      ],
+      "__v": 0
+    },
+    {
+      "_id":"656509",
+      "title": "Рубашка 'Рок-вибрация'",
+      "price": 169,
+      "description": "Рубашка с рок-стилем и металлическими элементами.",
+      "sizes": [
+        { "size": "S", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "M", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } },
+        { "size": "L", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
+      ],
+      "pictures": [
+        "https://rockatributika.by/image/cache/catalog/rubachki/ac_dc_rub_1a-500x400.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
+      "additionalInformation": [
+        { "title": "Материал", "description": "Шерсть, кожа" },
+        { "title": "Уход", "description": "Сухая чистка" }
+      ],
+      "__v": 0
+    },
+    {
+      "_id":"6565010",
+      "title": "Пиджак 'Панк-энергия'",
+      "price": 326,
+      "description": "Пиджак с элементами панк-стиля и нестандартным кроем.",
+      "sizes": [
+        { "size": "S", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "M", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } },
+        { "size": "L", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
+      ],
+      "pictures": [
+        "https://sanada.club/uploads/posts/2021-10/1633361991_31-alimentola-info-p-goticheskii-pidzhak-devushka-krasivo-foto-32.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
+      "additionalInformation": [
+        { "title": "Материал", "description": "Шерсть, кожа" },
+        { "title": "Уход", "description": "Сухая чистка" }
+      ],
+      "__v": 0
+    },
+    {
+      "_id":"6565011",
+      "title": "Брюки 'Гранж-реальность'",
+      "price": 155,
+      "description": "Брюки в стиле гранж с эффектом рваных краев и карманами.",
+      "sizes": [
+        { "size": "S", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "M", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } },
+        { "size": "L", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
+      ],
+      "pictures": [
+        "https://ae04.alicdn.com/kf/S336118edb5b04979b6e65049cd1a300as.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
+      "additionalInformation": [
+        { "title": "Материал", "description": "Шерсть, кожа" },
+        { "title": "Уход", "description": "Сухая чистка" }
+      ],
+      "__v": 0
+    },
+    {
+      "_id":"6565011",
+      "title": "Свитер 'Альтернатива'",
+      "description": "Свитер в альтернативном стиле с яркими огненными мотивами.",
+      "price": 309,
+      "sizes": [
+        { "size": "S", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "M", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } },
+        { "size": "L", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
+        { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
+      ],
+      "pictures": [
+        "https://www.dhresource.com/webp/m/0x0/f2/albu/g8/M01/71/05/rBVaVF5zLVWASrsjAAFAw4iF3gE018.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
+        "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
+      "additionalInformation": [
+        { "title": "Материал", "description": "Шерсть, кожа" },
+        { "title": "Уход", "description": "Сухая чистка" }
+      ],
+      "__v": 0
+    }
+  ]
+}
