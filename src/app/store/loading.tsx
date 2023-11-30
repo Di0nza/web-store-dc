@@ -1,5 +1,8 @@
 import './storeStyles.css'
-
+import {Metadata} from "next";
+export const metadata: Metadata = {
+    title: 'Store | MariDeniz',
+}
 export default function LoadingProducts(){
     return (
             <div className='loading-container'>
