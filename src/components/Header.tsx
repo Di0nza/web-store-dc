@@ -2,22 +2,20 @@ import Link from "next/link";
 import './componentsStyles.css'
 import Image from "next/image";
 import headerLogo from '../img/headerLogo.png';
+import {Navigation} from "./Navigation";
+
+const navItems = [
+    {label: 'О нас', href: '/about'},
+    {label: 'Магазин', href: '/store'},
+    {label: 'Корзина', href: '/cart'},
+    {label: 'Профиль', href: '/profile'}
+]
 
 const Header = () => {
     return (
-        <footer className='header-container'>
-            <nav className='header-block'>
-                <Link href='/'>
-                    <Image  className='header-logo' src={headerLogo} alt={'MaryDeniz'}></Image>
-                </Link>
-                <div className='header-links-block'>
-                    <Link href='/about'>О нас</Link>
-                    <Link href='/store'>Магазин</Link>
-                    <Link href='/cart'>Корзина</Link>
-                    <Link href='/profile'>Профиль</Link>
-                </div>
-            </nav>
-        </footer>
+        <header className='header-container'>
+            <Navigation navLinks={navItems}/>
+        </header>
     )
 }
 
