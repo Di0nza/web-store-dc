@@ -6,7 +6,7 @@ interface AddInfos{
 }
 
 interface Pictures {
-    picture: string;
+    picture: string | any;
 }
 
 interface Sizes {
@@ -15,6 +15,7 @@ interface Sizes {
 }
 
 export interface IProduct {
+    id?:string;
     title: string;
     description: string;
     sizes: Types.DocumentArray<Sizes>;
