@@ -34,7 +34,7 @@
         { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
       ],
       "pictures": [
-        "https://ae04.alicdn.com/kf/H2cd6dce38f564fb5bb5752488b463c46a.jpg",
+        "https://ae01.alicdn.com/kf/HTB11ZyTaOnrK1RjSsziq6xptpXaj.jpg",
         "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
         "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
         "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
@@ -100,7 +100,7 @@
         { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
       ],
       "pictures": [
-        "https://ae04.alicdn.com/kf/S2b1d686e9a714de58a8844bd9bb0abc8U.jpg_480x480.jpg",
+        "https://ae04.alicdn.com/kf/Sd690650c93534c14987b63a4fefa57f34.jpg",
         "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
         "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
         "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
@@ -210,7 +210,7 @@
         { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
       ],
       "pictures": [
-        "https://sanada.club/uploads/posts/2021-10/1633361991_31-alimentola-info-p-goticheskii-pidzhak-devushka-krasivo-foto-32.jpg",
+        "https://ae04.alicdn.com/kf/H12be3d212d9e435bb3075d5182dfa83dS.jpg_640x640.jpg",
         "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
         "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
         "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
@@ -222,9 +222,9 @@
     },
     {
       "_id":"6565011",
-      "title": "Брюки 'Гранж-реальность'",
-      "price": 155,
+      "title": "Брюки Гранж",
       "description": "Брюки в стиле гранж с эффектом рваных краев и карманами.",
+      "price": 155,
       "sizes": [
         { "size": "S", "amount": 10, "_id": { "$oid": "65650af48772bb905e285ef2" } },
         { "size": "M", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } },
@@ -232,7 +232,7 @@
         { "size": "XL", "amount": 15, "_id": { "$oid": "65650af48772bb905e285ef3" } }
       ],
       "pictures": [
-        "https://ae04.alicdn.com/kf/S336118edb5b04979b6e65049cd1a300as.jpg",
+        "https://ae04.alicdn.com/kf/Ha0ee4b7ceec443c386c90e4043e26ae3p.jpg_480x480.jpg",
         "https://res.cloudinary.com/maticht12345/image/upload/v1701311253/S5c662594a64442feb2782a6628698e95Q_edr6nh.webp",
         "https://res.cloudinary.com/maticht12345/image/upload/v1701311267/214260816_310_430_nvnpck.jpg",
         "https://res.cloudinary.com/maticht12345/image/upload/v1701311268/2531196414_w640_h640_remen-tkanevyj-weatro_gepla6.webp"],
@@ -243,7 +243,7 @@
       "__v": 0
     },
     {
-      "_id":"6565011",
+      "_id":"6565012",
       "title": "Свитер 'Альтернатива'",
       "description": "Свитер в альтернативном стиле с яркими огненными мотивами.",
       "price": 309,

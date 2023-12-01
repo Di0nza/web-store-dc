@@ -11,11 +11,11 @@ export const getData = async () => {
 export const getDataBySearch = async (search: string) => {
     try {
         const foundProducts = Products.Products.filter(product =>
-            product.title.toLowerCase().includes(search.toLowerCase()) ||
+            product.title.toLowerCase().includes(search.toLowerCase()) &&
             product.description.toLowerCase().includes(search.toLowerCase())
         );
 
-        return foundProducts.length > 0 ? foundProducts : null;
+        return foundProducts;
     } catch (error) {
         console.error('Error fetching data:', error);
         return null;
