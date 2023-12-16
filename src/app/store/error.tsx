@@ -1,5 +1,5 @@
 'use client';
-import './storeStyles.css'
+import '../profile/profileStyles.css'
 export default function ErrorProducts({error}: {error: Error}){
     return (
         <div className='loading-container'>

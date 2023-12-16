@@ -4,6 +4,7 @@ export interface IUser {
     password: string;
     isVerified: boolean;
     isAdmin: boolean;
+    createdAt: Date;
     forgotPasswordToken: string;
     forgotPasswordTokenExpiry: string;
     verifyToken: string;

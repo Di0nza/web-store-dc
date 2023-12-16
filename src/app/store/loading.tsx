@@ -1,4 +1,4 @@
-import './storeStyles.css'
+import '../profile/profileStyles.css'
 import {Metadata} from "next";
 export const metadata: Metadata = {
     title: 'Store | MariDeniz',

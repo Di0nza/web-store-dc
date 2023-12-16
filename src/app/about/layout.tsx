@@ -1,6 +1,7 @@
 import type {Metadata} from 'next'
 import Link from "next/link";
 import './AboutStyles.css'
+import {usePathname} from "next/navigation";
 
 export const metadata: Metadata = {
     title: 'About | MariDeniz',
@@ -19,7 +20,7 @@ export default function AboutLayout({children}: { children: React.ReactNode }) {
                 <div  className='about-navigation'>
                     <h4>Ознакомьтесь с нашими</h4>
                     <div className='about-links-block'>
-                        <Link className='about-link' href='/about/contacts'>Контакты</Link>
+                        <Link className={`about-link`} href='/about/contacts'>Контакты</Link>
                         <Link className='about-link' href='/about/team'>Команда</Link>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 'use client';
-import './storeStyles.css'
+import '../profile/profileStyles.css'
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import {getData} from '../../services/getData'

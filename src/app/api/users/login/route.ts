@@ -5,7 +5,6 @@ import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import {ITokenData} from "@/types/TokenData";
 
-
 connect()
 
 export async function POST(request:NextRequest){
@@ -42,6 +41,7 @@ export async function POST(request:NextRequest){
         const response = NextResponse.json({
             message: "Login successful",
             success: true,
+            isAdmin: user.isAdmin
         })
         response.cookies.set("token", token, {
             httpOnly: true,

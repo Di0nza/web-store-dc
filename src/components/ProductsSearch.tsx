@@ -1,5 +1,5 @@
 'use client';
-import '../app/store/storeStyles.css'
+import '../app/profile/profileStyles.css'
 import Link from "next/link";
 import {FormEventHandler, useState} from "react";
 import {getDataBySearch} from "../services/getData";

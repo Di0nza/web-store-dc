@@ -1,0 +1,20 @@
+{
+  "promoCodes": [
+    {
+      "title": "EXTRA15",
+      "value": 15,
+      "expiration": "2023-12-31"
+    },
+    {
+      "title": "SAVE20NOW",
+      "value": 20,
+      "expiration": "2023-09-15"
+    },
+    {
+      "title": "FREESHIP",
+      "value": 10,
+      "expiration": "2023-11-30"
+    }
+  ]
+}
+
