@@ -65,7 +65,7 @@ export default function ChangeProfileData() {
     return (
         <div className='profileBlock'>
             <h2>{"Изменение данных профиля"}</h2>
-            <p className='signUpBlockText'>Хотите <Link className='loginLink' href="/login">Изменить пароль</Link>?</p>
+            <p className='changeBlockText'>Хотите <Link className='loginLink' href="/login">Изменить пароль</Link>?</p>
             {userData && (
                 <>
                     <div className='updateProfileBlock'>

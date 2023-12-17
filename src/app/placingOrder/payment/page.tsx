@@ -35,7 +35,13 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         deliveryMethod: 'Почта',
         paymentState: 'Неоплачено',
         promotionalCode: 'Без промокода',
-        orderStatus: 'Обработка заказа',
+        orderStatus: [
+            {title: "Обработка заказа", createdDate: Date.now(), selected: true},
+            {title: "Упаковка заказа", createdDate: '', selected: false},
+            {title: "Товар в пути", createdDate: '', selected: false},
+            {title: "Ожидает в пункте выдачи", createdDate: '', selected: false},
+            {title: "Получен покупателем", createdDate: '', selected: false},
+        ],
         totalCost: 0,
         totalNumber: 0,
         createdBy: '',
@@ -43,7 +49,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         products: [],
     });
     // @ts-ignore
-    const { username, email, telephone,  zip, city, country, house, apartment, deliveryMethod, promotionalCode, totalCost, totalNumber, createdBy, products} = useOrderContext();
+    const { username, email, telephone,  zip, city, country, house, apartment,orderStatus, deliveryMethod, promotionalCode, totalCost, totalNumber, createdBy, products} = useOrderContext();
     const createOrder = async () => {
         try {
             const updatedOrder = {
@@ -58,7 +64,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                 deliveryMethod: deliveryMethod,
                 paymentState: 'Оплачено',
                 promotionalCode: promotionalCode,
-                orderStatus: 'Обработка заказа',
+                orderStatus: orderStatus,
                 totalCost: totalCost,
                 totalNumber: totalNumber,
                 createdBy: createdBy,

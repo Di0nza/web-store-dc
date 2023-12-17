@@ -60,20 +60,19 @@ export default function ProfilePage() {
                     <p>Мои заказы</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </div>
-                <div className='additionalProfileLink'>
+                <Link href={'/cart'} className='additionalProfileLink'>
                     <p>Корзина</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
-                </div>
-                <div className='additionalProfileLink'>
+                </Link>
+                <Link href={'/favorites'} className='additionalProfileLink'>
                     <p>Избранные</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
-                </div>
+                </Link>
                 <div className='additionalProfileLink' onClick={logout}>
                     <p>Выйти из аккаунта</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </div>
             </div>
-
         </div>
     );
 }

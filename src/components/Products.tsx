@@ -1,25 +1,81 @@
 import '../app/profile/profileStyles.css'
 import Link from "next/link";
+import Image from "next/image";
+import favorites from "@/img/favorite.png";
+import unFavorites from "@/img/unfavorite.png";
+import React, {useEffect, useState} from "react";
+import {usePathname} from "next/navigation";
 
 type Props = {
     products: any[];
 }
 
 const Products = ({products}: Props) => {
+    const [favoritesArray, setFavoritesArray] = useState<string[]>([]);
+    const pathname = usePathname();
+    useEffect(() => {
+        const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const favorites = localStorage.getItem('favorites');
+        if (favorites) {
+            const favoritesArray = JSON.parse(favorites);
+            setFavoritesArray(favoritesArray);
+        }
+    }, []);
+
+
+    useEffect(() => {
+        const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const favorites = localStorage.getItem('favorites');
+        if (favorites) {
+            const favoritesArray = JSON.parse(favorites);
+            setFavoritesArray(favoritesArray);
+        }
+    }, []);
+
+    const isProductInFavorites = (productId: string) => {
+        return favoritesArray.includes(productId);
+    };
+
+    const handleToggleFavorite = (productId: string) => {
+        let updatedFavorites: string[] = [...favoritesArray];
+        const index = updatedFavorites.indexOf(productId);
+
+        if (index !== -1) {
+            updatedFavorites.splice(index, 1);
+            console.log(`Товар ${productId} был удален из избранного`);
+        } else {
+            updatedFavorites.push(productId);
+            console.log(`Товар ${productId} был добавлен в избранное`);
+        }
+
+        setFavoritesArray(updatedFavorites);
+        localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    };
 
     return (
         <div className='products-block'>
             {products.map((product: any) => (
-                <Link key={product._id} href={`store/${product._id}`} className='product-item'>
-                    <div className='product-info'>
-                        <img className='product-img' src={product.pictures[0]} alt={product.title}></img>
-                        <p className='product-title'>{product.title}</p>
-                        <p className='product-category'>{product.category}</p>
+                <div key={product._id} className='product-item'>
+                    <div className='product-overlay'>
+                        <div className='favorite-button' onClick={() => handleToggleFavorite(product._id)}>
+                            <Image
+                                className='favorite-button-image'
+                                src={isProductInFavorites(product._id) ? unFavorites : favorites}
+                                alt='Favorite'
+                            />
+                        </div>
                     </div>
-                    <p className='product-price'>${product.price}.00</p>
-                </Link>
+                    <Link href={`store/${product._id}`} >
+                        <div className='product-info'>
+                            <img className='product-img' src={product.pictures[0]} alt={product.title}></img>
+                            <p className='product-title'>{product.title}</p>
+                            <p className='product-category'>{product.category}</p>
+                        </div>
+                        <p className='product-price'>${product.price}.00</p>
+                    </Link>
+                </div>
             ))}
         </div>
-    )
+    );
 }
 export {Products};

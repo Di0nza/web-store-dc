@@ -60,6 +60,7 @@
 }
 .additionalProfileLink:last-child{
     border-bottom: 0 solid #d5d5d5;
+    color: #a43535;
 }
 .additionalProfileImage{
     width: 8px;
@@ -208,6 +209,20 @@
 .product-item:nth-child(3n) {
     margin-right: 0;
 }
+.product-item {
+    position: relative;
+    display: inline-block;
+}
+.product-item {
+    position: relative;
+    display: inline-block;
+}
+
+.product-info {
+    position: relative;
+    z-index: 1;
+}
+
 .product-info{
     display: flex;
     flex-direction: column;

@@ -10,7 +10,7 @@ export interface IOrder {
     deliveryMethod: string,
     paymentState: string,
     promotionalCode: string,
-    orderStatus: string,
+    orderStatus: any,
     totalCost: number,
     totalNumber: number,
     createdBy: string,
