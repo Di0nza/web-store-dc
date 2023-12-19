@@ -18,7 +18,13 @@ export const OrderProvider = ({children}) => {
     const [deliveryMethod, setDeliveryMethod] = useState('Почта');
     const [paymentState, setPaymentState] = useState('Неоплачено');
     const [promotionalCode, setPromotionalCode] = useState('Без промокода');
-    const [orderStatus, setOrderStatus] = useState('Обработка заказа');
+    const [orderStatus, setOrderStatus] = useState([
+        {title: "Обработка заказа", createdDate: Date.now(), selected: true},
+        {title: "Упаковка заказа", createdDate: '', selected: false},
+        {title: "Товар в пути", createdDate: '', selected: false},
+        {title: "Ожидает в пункте выдачи", createdDate: '', selected: false},
+        {title: "Получен покупателем", createdDate: '', selected: false},
+    ]);
     const [totalCost, setTotalCost] = useState(0);
     const [totalNumber, setTotalNumber] = useState(0);
     const [createdBy, setCreatedBy] = useState('');

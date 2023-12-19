@@ -20,7 +20,7 @@
     font-weight: 600;
 }
 .updateProfileBlock{
-    margin: 20px 0 30px;
+    margin: 5px 0 30px;
 }
 .updateProfileBlockLabel{
     margin: 0 0 2px 0;
@@ -32,7 +32,7 @@
     height: 50px;
     font-size: 14px;
     border-radius: 10px;
-    border: 1px solid #afafaf;
+    border: 1px solid #dadada;
     background-color: #ffffff;
     padding: 11px 10px 9px;
     outline: none;
@@ -56,6 +56,7 @@
     background-color: #111111;
     padding: 0 10px;
     outline: none;
+    color: #fafafa;
     border: 2px solid #111111;
     display: flex;
     justify-content: center;
@@ -191,8 +192,15 @@
     align-content: space-between;
     margin-bottom: 35px;
 }
+.product-item {
+    position: relative;
+    display: inline-block;
+}
 .product-item:nth-child(3n) {
     margin-right: 0;
+}
+.itemLink{
+    z-index: 0;
 }
 .product-info{
     display: flex;
@@ -309,6 +317,11 @@
 }
 .product-info-block p{
     margin: 5px 0;
+}
+.changeBlockText{
+    margin: 5px 0 10px 0;
+    color: #111111;
+    font-size: 14px;
 }
 .product-additionalInformation-block{
     display: flex;

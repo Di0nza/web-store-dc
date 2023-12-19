@@ -20,7 +20,7 @@
     font-weight: 600;
 }
 .updateProfileBlock{
-    margin: 20px 0 30px;
+    margin: 5px 0 30px;
 }
 .updateProfileBlockLabel{
     margin: 0 0 2px 0;
@@ -58,8 +58,35 @@
     padding: 15px 10px;
     cursor: pointer;
 }
+.product-item {
+    position: relative;
+    display: inline-block;
+}
+
+.product-overlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    opacity: 1;
+    border-radius: 8px;
+    transition: opacity 0.3s ease;
+    z-index: 33;
+}
+
+.product-overlay {
+    opacity: 1;
+}
+
+.product-info {
+    position: relative;
+    z-index: 1;
+}
 .additionalProfileLink:last-child{
     border-bottom: 0 solid #d5d5d5;
+    color: #cc0f0f;
 }
 .additionalProfileImage{
     width: 8px;
@@ -193,7 +220,7 @@
 }
 .product-item{
     height: 100%;
-    min-height: 420px;
+    min-height: 380px;
     width: 31%;
     background-color: #fafafa;
     border-radius: 10px;
@@ -324,6 +351,7 @@
 .favorite-button{
     border: 1px solid #dedede;
     border-radius: 8px;
+    background-color: #fafafa;
     padding: 8px 10px 3px;
 }
 .favorite-button-image{

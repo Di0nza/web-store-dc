@@ -15,7 +15,7 @@ const productSchema = mongoose.models.Order ?
         deliveryMethod: String,
         paymentState: String,
         promotionalCode: String,
-        orderStatus: String,
+        orderStatus: [],
         totalCost: Number,
         totalNumber: Number,
         createdBy: String,
