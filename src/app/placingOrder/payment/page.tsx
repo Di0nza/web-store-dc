@@ -74,6 +74,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
             const response = await axios.post("/api/users/order", updatedOrder);
             console.log(response.data.savedOrder._id);
             router.push(`/OrderReceipt/${response.data.savedOrder._id}`);
+            localStorage.removeItem('cart');
         } catch (error:any) {
             console.log(error.message);
         }

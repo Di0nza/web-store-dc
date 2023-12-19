@@ -11,6 +11,7 @@ import close from '../img/close.png'
 import deleteItem from '../img/delete.png'
 import plus from '../img/plus.png'
 import minus from '../img/minus.png'
+import axios from "axios";
 
 type NavLink = {
     label: string;
@@ -36,6 +37,21 @@ const Navigation = ({navLinks}: Props) => {
     const pathname = usePathname();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [cartItems, setCartItems] = useState([]);
+    const [userData, setUserData] = useState(null);
+
+    const getUserDetails = async () => {
+        try {
+            const res = await axios.get('/api/users/userdata');
+            console.log(res.data.data.username);
+            setUserData(res.data.data);
+        } catch (error: any) {
+            console.log(error.message);
+        }
+    };
+
+    useEffect(() => {
+        getUserDetails();
+    }, []);
 
     const handleLinkClick = (event) => {
         event.preventDefault();
@@ -101,7 +117,7 @@ const Navigation = ({navLinks}: Props) => {
     return (
         <>
             <nav className='header-block'>
-                <Link href='/'>
+                <Link href={userData?.isAdmin ? '/adminProfile' : '/'}>
                     <Image  className='header-logo' src={headerLogo} alt={'MaryDeniz'}></Image>
                 </Link>
                 <div className='header-links-block'>

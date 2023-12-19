@@ -108,7 +108,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
             <div className='placingOrderBlockRow'>
                 <div className='products-value-block'>
                     {orderData?.products.map((item, index) => (
-                        <div className={'mini-cart-item'} key={index}>
+                        <div className={'check-cart-item'} key={index}>
                             <img
                                 className={'mini-cart-item-img'}
                                 key={index}

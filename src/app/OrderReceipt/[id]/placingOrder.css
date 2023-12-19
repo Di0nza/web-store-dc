@@ -72,6 +72,19 @@
     display: flex;
     justify-content: center;
 }
+.check-cart-item{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.check-cart-item:last-child{
+    margin-bottom: 0;
+}
 .orderStatusLine div:first-child {
     width: 2px;
     height: 36px;
@@ -116,7 +129,8 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: flex-start;
     margin-bottom: 50px;
     margin-top: 6px;
     margin-right: 10px;

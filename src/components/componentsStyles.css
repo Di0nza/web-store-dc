@@ -44,7 +44,7 @@
     height: 35px;
 }
 .header-links-block{
-    max-width: 350px;
+    max-width: 450px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -167,7 +167,10 @@
     justify-content: space-between;
 }
 .mini-cart-item-title{
-    margin-bottom: 3px;
+    margin-top: 2px;
+}
+.transparent-text{
+    opacity: 0.3;
 }
 .delete-button{
     width: 14px;

@@ -36,6 +36,8 @@ export default function Cart() {
     const [userData, setUserData] = useState(null);
     const [promoCode, setPromoCode] = useState('');
     const [discount, setDiscount] = useState(0);
+    const [discountError, setDiscountError] = useState('');
+    const [promoList, setPromoList] = useState(null);
     const [discountName, setDiscountName] = useState(0);
     const [order, setOrder] = useState({
         username: '',
@@ -72,18 +74,32 @@ export default function Cart() {
         getUserDetails();
     }, []);
 
+    const getPromoCodes = async () => {
+        try {
+            const res = await axios.get(`/api/admin/promoCode`);
+            setPromoList(res.data.promo);
+        } catch (error: any) {
+            console.log(error.message);
+        }
+    };
+
+    useEffect(() => {
+        getPromoCodes();
+    }, []);
+
     const applyPromoCode = (e) => {
         e.preventDefault();
-        const foundPromoCode = promoCodes.promoCodes.find(
-            (code) => code.title === promoCode
+        const foundPromoCode = promoList.find(
+            (item) => item.title === promoCode
         );
         console.log(foundPromoCode);
-        if (foundPromoCode) {
+        if (foundPromoCode && foundPromoCode.isValid) {
             setDiscount(foundPromoCode.value);
+            setDiscountError('');
         } else {
             setDiscount(0);
+            setDiscountError('Извините такого промокода нет');
         }
-
     };
     const handlePromoCodeChange = (e) => {
         setPromoCode(e.target.value);
@@ -228,8 +244,12 @@ export default function Cart() {
                             </div>
                         </div>
                         <div className="summary-info">
-                            <p><b>{cartItems.length}</b> товаров на сумму <b>${cartItems.reduce(
-                                (total, item) => total + item.price, 0)}.00 {discount !== 0 && `- ${discount}%`}</b></p>
+                            <p><b>{cartItems.length}</b> товаров на сумму{' '}
+                                <b>
+                                    ${(cartItems.reduce((total, item) => total + item.price, 0)).toFixed(2)}{' '}
+                                    {discount !== 0 && `- ${discount}%`}
+                                </b>
+                            </p>
                             <p className="summary-additional-text">НДС и стоимость доставки включены в стоимость товара</p>
                             <div className={'promoCodesBlock'}>
                                 <label>Промокод</label>
@@ -240,6 +260,7 @@ export default function Cart() {
                                            onChange={handlePromoCodeChange}/>
                                     <button type='submit'><Image className={'promoCodesBlockInputBtnImg'} src={arrowIco} alt={">"}/></button>
                                 </form>
+                                {discountError && <p className={'discountError'}>{discountError}</p>}
                             </div>
                         </div>
                         <button className={'go-to-checkOut'} onClick={createOrder}>

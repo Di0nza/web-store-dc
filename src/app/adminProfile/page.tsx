@@ -57,6 +57,10 @@ export default function ProfilePage() {
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </Link>
                 <div className='additionalProfileLink'>
+                    <p>Стилизация</p>
+                    <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
+                </div>
+                <div className='additionalProfileLink'>
                     <p>Товары</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </div>
@@ -64,10 +68,10 @@ export default function ProfilePage() {
                     <p>Заказы</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </div>
-                <div className='additionalProfileLink'>
+                <Link href={'/adminPromocodes'} className='additionalProfileLink'>
                     <p>Промокоды</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
-                </div>
+                </Link>
                 <div className='additionalProfileLink'>
                     <p>Статистика</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
