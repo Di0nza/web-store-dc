@@ -9,74 +9,84 @@
 }
 .profileHelloText{
     margin: 10px 0 5px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
 }
+.promocodesProfileBlock{
+    margin: 15px 0 30px;
+}
+.promocodes-item-info{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    width: calc(100%);
+    border: 1px solid #dedede;
+    border-radius: 10px;
+    padding: 11px 10px 8px;
+    margin-bottom: 10px;
+}
+.promocodes-item-info-block{
+    display: flex;
+    flex-direction: row;
+}
+.promocodes-item-delete-img{
+    width: 14px;
+    height: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+}
 .createdDate{
-    font-size: 14px;
+    font-size: 13px;
     color: #606060;
 }
 .loginLink{
     font-weight: 600;
 }
 .updateProfileBlock{
-    margin: 20px 0 30px;
+    margin: 5px 0 30px;
 }
 .updateProfileBlockLabel{
     margin: 0 0 2px 0;
     font-size: 14px;
     font-weight: 600;
 }
-.profileBlock input{
+.updateProfileBlock input{
     width: calc(100%);
     height: 50px;
     font-size: 14px;
     border-radius: 10px;
-    border: 1px solid #afafaf;
+    border: 1px solid #dadada;
     background-color: #ffffff;
     padding: 11px 10px 9px;
     outline: none;
     color: #111111;
     margin-bottom: 10px;
 }
-.profileBlock input::-webkit-search-cancel-button {
+.updateProfileBlock input::-webkit-search-cancel-button {
     -webkit-appearance: none;
     appearance: none;
     color: #111111;
 }
-.profileLinkBlock{
-    margin-top: 15px;
-    border: 1px solid #d5d5d5;
-    border-radius: 10px;
-}
-.additionalProfileLink{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #d5d5d5;
-    padding: 15px 10px;
-    cursor: pointer;
-}
-.additionalProfileLink:last-child{
-    border-bottom: 0 solid #d5d5d5;
-    color: #da0d0d;
-}
+
 .additionalProfileImage{
     width: 8px;
     height: 14px;
 }
-.profileBlock button{
+.updateProfileBlock button{
+    border-radius: 10px;
     width: calc(100%);
     height: 50px;
     background-color: #111111;
     padding: 0 10px;
     outline: none;
+    color: #fafafa;
     border: 2px solid #111111;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 16px;
+    cursor: pointer;
     font-weight: 600;
 }
 .googleLogin{
@@ -206,23 +216,16 @@
     align-content: space-between;
     margin-bottom: 35px;
 }
+.product-item {
+    position: relative;
+    display: inline-block;
+}
 .product-item:nth-child(3n) {
     margin-right: 0;
 }
-.product-item {
-    position: relative;
-    display: inline-block;
+.itemLink{
+    z-index: 0;
 }
-.product-item {
-    position: relative;
-    display: inline-block;
-}
-
-.product-info {
-    position: relative;
-    z-index: 1;
-}
-
 .product-info{
     display: flex;
     flex-direction: column;
@@ -336,23 +339,13 @@
 .product-info-price{
     font-weight: 500;
 }
-.favorite-button{
-    border: 1px solid #dedede;
-    border-radius: 8px;
-    padding: 8px 10px 3px;
-}
-.favorite-button-image{
-    width: 20px;
-    height: 25px;
-}
 .product-info-block p{
     margin: 5px 0;
 }
-.product-info-block-head{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
+.changeBlockText{
+    margin: 5px 0 10px 0;
+    color: #111111;
+    font-size: 14px;
 }
 .product-additionalInformation-block{
     display: flex;
@@ -386,4 +379,43 @@
 .errorMessage{
     font-weight: 500;
     color: #d50404;
+}
+.toggleSwitch {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 22px;
+    margin-right: 10px;
+}
+.toggleSwitch input[type="checkbox"] {
+    display: none;
+}
+.toggleSwitch .switch {
+    position: absolute;
+    cursor: pointer;
+    background-color: #e8e8e8;
+    border-radius: 25px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: background-color 0.2s ease;
+}
+.toggleSwitch .switch::before {
+    position: absolute;
+    content: "";
+    left: 3px;
+    top: 3.7px;
+    width: 15px;
+    height: 15px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+.toggleSwitch input[type="checkbox"]:checked + .switch::before {
+    transform: translateX(15px);
+    background-color: #ffffff;
+}
+.toggleSwitch input[type="checkbox"]:checked + .switch {
+    background-color: #232323;
 }

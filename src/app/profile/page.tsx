@@ -56,10 +56,10 @@ export default function ProfilePage() {
                     <p>Изменить данные профиля</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </Link>
-                <div className='additionalProfileLink'>
+                <Link href={'/userOrders'} className='additionalProfileLink'>
                     <p>Мои заказы</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
-                </div>
+                </Link>
                 <Link href={'/cart'} className='additionalProfileLink'>
                     <p>Корзина</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
