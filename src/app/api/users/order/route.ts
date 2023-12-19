@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
             totalCost,
             totalNumber,
             createdBy,
-            createdAt: createdAt,
+            createdAt,
         })
 
         const savedOrder = await newOrder.save()

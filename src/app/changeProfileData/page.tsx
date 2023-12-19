@@ -17,16 +17,6 @@ export default function ChangeProfileData() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
 
-    const logout = async () => {
-        try {
-            await axios.get('/api/users/logout');
-            router.push('/');
-            window.location.reload();
-        } catch (error: any) {
-            console.log(error.message);
-        }
-    };
-
     const handleUpdateProfile = async () => {
         try {
             const updatedData: Partial<UserData> = {};

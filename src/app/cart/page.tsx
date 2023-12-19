@@ -99,18 +99,6 @@ export default function Cart() {
             setCreatedBy(userData?._id);
             setProducts(cartItems);
             setPromotionalCode(discount);
-            // const updatedOrder = {
-            //     ...order,
-            //     createdBy: userData?._id,
-            //     totalCost: cartItems.reduce(
-            //             (total, item) => total + item.price,
-            //             0
-            //         ) * ((100 - discount) / 100),
-            //     totalNumber: cartItems.length,
-            //     products: cartItems
-            // };
-            // const response = await axios.post("/api/users/order", updatedOrder);
-            // console.log(response.data.savedOrder._id);
             router.push(`/placingOrder`);
         } catch (error:any) {
             console.log(error.message);
