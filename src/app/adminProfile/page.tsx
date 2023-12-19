@@ -2,7 +2,7 @@
 import axios from "axios";
 import Link from "next/link";
 import React, {useEffect, useState} from "react";
-import {useRouter} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import Image from "next/image";
 import googleLogo from "@/img/pngwinggoogleLogo.png";
 import './profileStyles.css'
@@ -16,6 +16,7 @@ interface UserData {
 
 export default function ProfilePage() {
     const router = useRouter();
+    const pathname = usePathname();
     const [userData, setUserData] = useState<UserData | null>(null);
 
     const getUserDetails = async () => {
@@ -56,10 +57,12 @@ export default function ProfilePage() {
                     <p>Изменить данные профиля</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </Link>
+                <Link href={`${pathname}/products`} className='additionalProfileLink'>
                 <div className='additionalProfileLink'>
                     <p>Товары</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </div>
+                </Link>
                 <div className='additionalProfileLink'>
                     <p>Заказы</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
