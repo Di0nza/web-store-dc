@@ -5,6 +5,7 @@ import {Header} from "@/components/Header";
 import {Footer} from "@/components/Footer";
 // @ts-ignore
 import {OrderProvider} from "@/orderContext/store";
+import {ModalProvider} from "@/components/providers/modalProvider";
 const inter = Inter({subsets: ['latin']})
 
 export const metadata: Metadata = {
@@ -20,10 +21,14 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: { children: React.ReactNode }) {
     return (
         <html lang="en">
+        <ModalProvider/>
             <OrderProvider>
                 <body className={inter.className}>
                     <Header/>
-                        <main className='home-container'>{children}</main>
+                        <main className='home-container'>
+
+                            {children}
+                        </main>
                     <Footer/>
                 </body>
             </OrderProvider>

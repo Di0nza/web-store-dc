@@ -3,7 +3,7 @@
 
 import {useState, useEffect} from "react";
 
-import {CreateProductModal} from "../modals/CreateProductModal";
+import {CreateProductModal} from "@/components/modals/CreateProductModal";
 
 export const ModalProvider = () => {
 

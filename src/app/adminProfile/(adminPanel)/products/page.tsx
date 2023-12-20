@@ -1,20 +1,13 @@
 "use client"
-import React, {useState} from 'react';
+import React from 'react';
+import {AdminProducts} from "@/components/adminProducts";
 
 const Page = () => {
 
-    const [createProductModalIsOpen, setCreateProductModalIsOpen] = useState(false)
-
-    const createProduct = ( ) => {
-
-    }
 
     return (
         <div>
-            <button onClick={()=> setCreateProductModalIsOpen(true)}>
-                Добавить продукт
-            </button>
-
+            <AdminProducts/>
         </div>
     );
 };
