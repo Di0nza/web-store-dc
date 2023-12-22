@@ -4,9 +4,21 @@ import {NextRequest, NextResponse} from "next/server";
 import {IProduct} from "@/types/Product";
 import {ITokenData} from "@/types/TokenData";
 import {getDataFromToken} from "@/helpers/getDataFromToken";
-import path from "path";
-import {writeFile} from "fs/promises";
-const uuid = require('uuid')
+const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+cloudinary.config({
+    cloud_name: 'du8qdkle4',
+    api_key: '649152983145251',
+    api_secret: '2eFelVsPTvAPFx9HJByXSlmJhRo'
+})
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {allowed_formats: ['jpg', 'jpeg', 'png', 'webp']}
+});
+
+const upload = multer({ storage: storage });
 
 connect()
 
@@ -17,13 +29,6 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({error: "Access denied"}, {status: 403})
         }
 
-        // const reqBody: IProduct = await request.json()
-        // const {
-        //     title,
-        //     description,
-        //     sizes,
-        //     additionalInformation
-        // } = reqBody;
 
         const data = await request.formData();
 
@@ -36,32 +41,39 @@ export async function POST(request: NextRequest) {
         }
 
         const description = data.get('description');
-        const sizes = JSON.parse(<string>data.get('sizes'));
-        const additionalInformation = JSON.parse(<string>data.get('additionalInformation'));
+        const price = data.get('price');
+        const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => ({
+            size: size,
+            amount: data.get(size),
+        }));
 
-        const picturesFiles = data.get("pictures") as unknown as File[]
-        const picturesNames = [];
 
-        if(!picturesFiles){
-            return NextResponse.json({error: "No files in request"}, {status: 400})
+        console.log("Title:", title);
+        console.log("Description:", description);
+        console.log("Price:", price);
+        console.log("Sizes:", sizes);
+
+        const promises = [];
+        // @ts-ignore
+        for (const key of data.keys()) {
+            if (key.startsWith('picturesFiles[')) {
+                const value = data.get(key) as File;
+                    promises.push(
+                        cloudinary.uploader.upload(value.name, { folder: 'my-folder' })
+                            .then((res)=> res.secure_url)
+                    );
+            }
         }
 
-        for (let i = 0; i < picturesFiles.length; i++) {
-            let fileName = uuid.v4() + ".jpg"
-            const bytes = await picturesFiles[i].arrayBuffer();
-            const buffer = Buffer.from(bytes);
-            await writeFile(path.resolve(__dirname, '..', 'src/static', fileName), buffer);
-            picturesNames.push(fileName);
-        }
-        //console.log(reqBody)
+        const picturesNames = await Promise.all(promises);
 
 
         const newProduct = new Product({
             title: title,
             description: description,
+            price:price,
             sizes: sizes,
             pictures: picturesNames,
-            additionalInformation: additionalInformation
         })
 
         const savedProduct = await newProduct.save();

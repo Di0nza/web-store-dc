@@ -7,7 +7,7 @@ const productSchema = mongoose.models.Product ?
     model('Product', new Schema<IProduct>({
         title: { type: String, required: true },
         description: { type: String, required: true },
-        sizes: [String],
+        sizes: [{size:String, amount:String}],
         pictures: [String],
         additionalInformation: [{ title: String, description: String }],
     }));

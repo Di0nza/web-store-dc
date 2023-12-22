@@ -29,12 +29,10 @@ import axios from "axios";
 import {useRouter} from "next/navigation";
 import {useModal} from "@/hooks/useModalStore"
 import {useState} from "react";
-import Image from "next/image"
 import {X} from "lucide-react"
 import {Textarea} from "@/components/ui/textarea";
-import {log} from "util";
 
-const validSizes = ['XS', 'S', 'M', 'L', 'XL'];
+const validSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 const formSchema = z.object({
     title: z.string().min(1, {
@@ -55,29 +53,21 @@ const formSchema = z.object({
             size: z
                 .string()
                 .refine((value) => validSizes.includes(value), {
-                    message: 'Недоступный размер. Доступные: xs, s, m, l, xl.',
+                    message: 'Недоступный размер. Доступные: xs, s, m, l, xl, xxl.',
                 }),
             amount: z
-                .number()
-                .refine((value) => value >= 0, {
+                .string()
+                .refine((value) => /^\d+$/.test(value), {
                     message: 'Количество товаров должно быть целым положительным числом.',
-                })
-                .refine((value) => /^\d+$/.test(value.toString()), {
-                    message: 'Количество товаров должно быть целым положительным числом.',
-                })
+                }),
         })
-    ),
-    pictures: z.array(
-        z.object({
-            picture: z.string()
-        })
-    ),
-    additionalInformation: z.array(
-        z.object({
-            title: z.string(),
-            description: z.string()
-        })
-    ),
+    )
+    // additionalInformation: z.array(
+    //     z.object({
+    //         title: z.string(),
+    //         description: z.string()
+    //     })
+    // ),
 });
 export const CreateProductModal = () => {
 
@@ -87,13 +77,16 @@ export const CreateProductModal = () => {
     const isModalOpen = isOpen && type === "createProduct";
 
     const [selectedPictures, setSelectedPictures] = useState([]);
+    const [selectedPicturesFiles, setSelectedPicturesFiles] = useState<File[]>([])
 
     const handlePictureChange = (event) => {
         const files = event.target.files;
         const newPictures = Array.from(files).map((file) =>
             URL.createObjectURL(file)
         );
+        setSelectedPicturesFiles([...selectedPicturesFiles, files?.[0]]);
         setSelectedPictures((prevPictures) => [...prevPictures, ...newPictures]);
+        console.log(selectedPictures)
     };
 
     const handleSelectPicture = (index) => {
@@ -113,8 +106,11 @@ export const CreateProductModal = () => {
 
     const handleDeletePicture = (index) => {
         const updatedPictures = [...selectedPictures];
+        const updatedPicturesFiles = [...selectedPicturesFiles];
         updatedPictures.splice(index, 1);
+        updatedPicturesFiles.splice(index, 1);
         setSelectedPictures(updatedPictures);
+        setSelectedPicturesFiles(updatedPicturesFiles);
     }
 
     const handleClose = () => {
@@ -130,17 +126,45 @@ export const CreateProductModal = () => {
             title: "",
             description: "",
             price: "",
-            sizes: [],
-            pictures: [],
-            additionalInformation: []
+            sizes: [
+                {size: "XS", amount:null},
+                {size: "S", amount:null},
+                {size: "M", amount:null},
+                {size: "L", amount:null},
+                {size: "XL", amount:null},
+                {size: "XXL", amount:null},
+            ]
+            //additionalInformation: []
         }
     });
 
     const isLoading = form.formState.isSubmitting;
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        console.log(values);
+        console.log(selectedPicturesFiles);
         try {
-            console.log(values)
-            await axios.post("/api/servers", values);
+            const formData = new FormData();
+
+            Object.keys(values).forEach((key) => {
+                if (key === "sizes") {
+                    values[key].forEach((size, index) => {
+                        formData.append(size.size, size.amount);
+                    });
+                } else {
+                    formData.append(key, values[key]);
+                }
+            });
+
+            selectedPicturesFiles.forEach((file, index) => {
+                    formData.append(`picturesFiles[${index}]`, file);
+            });
+
+            await axios.post("/api/admin/products", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data", // Указываем, что это форма для передачи файлов
+                },
+            });
+
             form.reset();
             router.refresh();
             onClose();
@@ -296,8 +320,8 @@ export const CreateProductModal = () => {
                                         <FormField
                                             key={size}
                                             control={form.control}
-                                            name={`sizes.${size}.amount`}
-                                            render={({field}) => (
+                                            name={`sizes.${index}.amount`}
+                                            render={({ field }) => (
                                                 <FormItem className="flex items-center mt-3">
                                                     <div className="flex flex-row items-center justify-center">
                                                         <div
@@ -323,10 +347,12 @@ export const CreateProductModal = () => {
                                 </div>
                             </div>
                         </div>
+
                         <DialogFooter className="bg-gray-200 px-6 py-4">
                             <Button variant="secondary" disabled={isLoading}>
                                 Создать
                             </Button>
+
                         </DialogFooter>
                     </form>
                 </Form>
