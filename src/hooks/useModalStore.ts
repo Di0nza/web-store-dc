@@ -1,9 +1,10 @@
 import {create} from "zustand"
+import {IProduct} from "@/types/Product";
 
-export type ModalType = "createProduct" | "invite"
+export type ModalType = "createProduct" | "editProduct" | "deleteProduct"
 
 interface ModalData {
-    server?: any;
+    product?: any;
     channel?: any;
     channelType?: any;
     apiUrl?: string;
@@ -23,5 +24,5 @@ export const useModal = create<ModalStore>((set)=> ({
     isOpen:false,
     data:{},
     onOpen: (type, data={})=> set({isOpen:true, type, data}),
-    onClose: () => set({type:null, isOpen: false})
+    onClose: () => set({type:null, isOpen: false, data:{}})
 }))

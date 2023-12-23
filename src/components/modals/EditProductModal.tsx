@@ -28,9 +28,10 @@ import {Button} from "@/components/ui/button"
 import axios from "axios";
 import {useRouter} from "next/navigation";
 import {useModal} from "@/hooks/useModalStore"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {X} from "lucide-react"
 import {Textarea} from "@/components/ui/textarea";
+import {IProduct} from "@/types/Product";
 
 const validSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
@@ -69,15 +70,17 @@ const formSchema = z.object({
     //     })
     // ),
 });
-export const CreateProductModal = () => {
 
-    const {isOpen, onClose, type} = useModal();
+export const EditProductModal = () => {
+
+    const {isOpen, onClose, type, data} = useModal();
+    const {product} = data;
+    console.log(product)
+    const [selectedPictures, setSelectedPictures] = useState([]);
+    const [selectedPicturesFiles, setSelectedPicturesFiles] = useState<any[]>([]);
     const router = useRouter();
 
-    const isModalOpen = isOpen && type === "createProduct";
-
-    const [selectedPictures, setSelectedPictures] = useState([]);
-    const [selectedPicturesFiles, setSelectedPicturesFiles] = useState<File[]>([]);
+    const isModalOpen = isOpen && type === "editProduct";
 
     const convertBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -172,32 +175,55 @@ export const CreateProductModal = () => {
             });
 
             selectedPicturesFiles.forEach((file, index) => {
+                if(file.length > 1000) {
                     formData.append(`picturesFiles[${index}]`, file);
+                }else {
+                    formData.append(`picturesString[${index}]`, file);
+                }
             });
 
-            await axios.post("/api/admin/products", formData, {
+            await axios.patch(`/api/admin/products/${product._id}`, formData, {
                 headers: {
-                    "Content-Type": "multipart/form-data", // Указываем, что это форма для передачи файлов
+                    "Content-Type": "multipart/form-data",
                 },
             });
+
 
             form.reset();
             onClose();
             window.location.reload();
+
         } catch (error) {
             console.log(error)
         }
     }
+
+
+    useEffect(()=> {
+        if(product){
+            form.setValue("title", product.title);
+            form.setValue("description", product.description);
+            form.setValue("price", product.price);
+            form.setValue("sizes.0.amount", product.sizes[0].amount);
+            form.setValue("sizes.1.amount", product.sizes[1].amount)
+            form.setValue("sizes.2.amount", product.sizes[2].amount)
+            form.setValue("sizes.3.amount", product.sizes[3].amount)
+            form.setValue("sizes.4.amount", product.sizes[4].amount)
+            form.setValue("sizes.5.amount", product.sizes[5].amount)
+            setSelectedPictures(product.pictures);
+            setSelectedPicturesFiles(product.pictures);
+        }
+    },[product, form])
 
     return (
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
             <DialogContent className="bg-white text-black p-0 overflow-hidden">
                 <DialogHeader className="pt-8 px6">
                     <DialogTitle className="text-2xl text-center font-bold">
-                        Создайте товар
+                        Отредактируйте товар
                     </DialogTitle>
                     <DialogDescription className="text-center text-zinc-500">
-                        Дайте товару название, описание, добавьте фотографии и количество товара для каждого размера.
+                        Отредактируйте название, описание, фотографии и количество товаров для каждого размера.
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
@@ -216,7 +242,7 @@ export const CreateProductModal = () => {
                                             <FormControl>
                                                 <div className="flex space-x-2 items-center justify-center">
                                                     {selectedPictures.map((picture, index) => (
-                                                        <div key={index}>
+                                                        <div key={index} className="relative">
                                                             <div
                                                                 className={`relative ${index === 0 ? 'h-52 w-52' : 'h-20 w-20'}`}>
                                                                 <img
@@ -366,7 +392,7 @@ export const CreateProductModal = () => {
 
                         <DialogFooter className="bg-gray-200 px-6 py-4">
                             <Button variant="secondary" disabled={isLoading}>
-                                Создать
+                                Сохранить
                             </Button>
 
                         </DialogFooter>

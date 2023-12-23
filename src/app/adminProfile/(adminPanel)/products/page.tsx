@@ -2,19 +2,23 @@
 import React, {useEffect, useState} from 'react';
 import {AdminProducts} from "@/components/adminProducts";
 import {ProductsSearch} from "@/components/ProductsSearch";
-import {Products} from "@/components/Products";
-import {getData} from "@/services/getData";
+import {getAllProducts, getData} from "@/services/getData";
+import axios from "axios";
 
 const Page = () => {
     const [products, setProducts] = useState<any[]>([]);
+
     useEffect(() => {
-        getData().then(setProducts)
+        getAllProducts().then((data)=>setProducts(data.data.products))
     }, [])
+
+    useEffect(()=>{
+        console.log(products)
+    },[products])
 
     return (
         <div>
             <div className='store-container'>
-                <AdminProducts/>
                 <div className='store-head-block'>
                     <div>
                         <h3>Каталог товаров</h3>
@@ -22,7 +26,8 @@ const Page = () => {
                     </div>
                     <ProductsSearch onSearch={setProducts}/>
                 </div>
-                <Products products={products}/>
+
+                <AdminProducts/>
             </div>
         </div>
     );

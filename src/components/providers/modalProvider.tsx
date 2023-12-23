@@ -4,6 +4,8 @@
 import {useState, useEffect} from "react";
 
 import {CreateProductModal} from "@/components/modals/CreateProductModal";
+import {EditProductModal} from "@/components/modals/EditProductModal";
+import {DeleteProductModal} from "@/components/modals/DeleteProductModal";
 
 export const ModalProvider = () => {
 
@@ -19,8 +21,9 @@ export const ModalProvider = () => {
 
     return (
         <>
-            <CreateProductModal/>
-
+            <CreateProductModal />
+            <EditProductModal/>
+            <DeleteProductModal/>
         </>
     )
 }
