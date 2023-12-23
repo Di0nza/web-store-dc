@@ -1,6 +1,7 @@
 import styles from './page.module.css'
 import {VideoPreview} from "../components/videoPreview";
 import {HomeImageSlider} from "../components/HomeImageSlider";
+import OwnDesignOrder from "@/components/ownDesignOrder";
 
 export default function Home() {
     return (
@@ -19,6 +20,7 @@ export default function Home() {
                     миру и частью вашей истории.</p>
             </div>
             <HomeImageSlider/>
+            <OwnDesignOrder/>
         </main>
     );
 }

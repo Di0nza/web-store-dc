@@ -1,14 +1,35 @@
 "use client";
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useRef} from 'react';
 import favorites from '@/img/favorite.png';
 import unFavorites from '@/img/unfavorite.png'
 import Image from "next/image";
+import unusualDesign from '../img/unusualDesign.png'
+import errorMsg from '../img/errorMsg.png'
+import shearLink from '../img/shear.png'
+import shearLogo from '../img/shearlogo.png'
+import oklogo from '../img/shearIcons/oklogo.png';
+import fblogo from '../img/shearIcons/fblogo.png';
+import vklogo from '../img/shearIcons/vklogo.png';
+import tglogo from '../img/shearIcons/tglogo.png';
+import instlogo from '../img/shearIcons/viberlogo.png';
+import wtplogo from '../img/shearIcons/wtplogo.png';
+import UnusualDesignMessage from "@/components/unusualDesignMessage";
+
+
+function Images(props: { onClick: () => Window, src: any, alt: string, style: { cursor: string; width: string } }) {
+    return null;
+}
 
 const ProductContainer = ({ product }) => {
     const [currentImage, setCurrentImage] = useState(product.pictures[0]);
     const [selectedSize, setSelectedSize] = useState(null);
     const [cartItems, setCartItems] = useState([]);
     const [isFavorite, setIsFavorite] = useState(false);
+    const [currentUrl, setCurrentUrl] = useState('');
+    const [inputCurrentUrl, setInputCurrentUrl] = useState('');
+    const [showCopiedMessage, setShowCopiedMessage] = useState(false);
+    const [sendUnusualDesign, setSendUnusualDesign] = useState(false)
+    const wrapperRef = useRef(null);
 
     useEffect(() => {
         const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
@@ -73,7 +94,66 @@ const ProductContainer = ({ product }) => {
         localStorage.setItem('favorites', JSON.stringify(favoritesArray));
         console.log("Избранные товары:", favoritesArray);
     };
+    const copyLinkAndShowMessage = () => {
+        let currentUrl = window.location.href;
+        setCurrentUrl(currentUrl);
+        setInputCurrentUrl(currentUrl);
+        navigator.clipboard.writeText(currentUrl).then(() => {
+            (showCopiedMessage !== true) ? setShowCopiedMessage(true) : setShowCopiedMessage(!showCopiedMessage)
+        }).catch(err => console.error('Could not copy text: ', err));
+    };
 
+    const copyLinkToClipboard = () => {
+        navigator.clipboard.writeText(currentUrl).then(() => {
+            setInputCurrentUrl('Скопировано!')
+        }).catch(err => console.error('Could not copy text: ', err));
+
+    };
+    let socialMediaLogos = [
+        {
+            name: 'Telegram',
+            logo: tglogo,
+            url: `https://telegram.me/share/url?url=${encodeURIComponent(`${currentUrl}`)}`
+        },
+        {
+            name: 'VK',
+            logo: vklogo,
+            url: `https://vk.com/share.php?url=${encodeURIComponent(`${currentUrl}`)}`
+        },
+        {
+            name: 'Facebook',
+            logo: fblogo,
+            url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${currentUrl}`)}`
+        },
+        {
+            name: 'OK',
+            logo: oklogo,
+            url: `https://connect.ok.ru/offer?url=${encodeURIComponent(`${currentUrl}`)}`
+        },
+        {
+            name: 'WhatsApp',
+            logo: wtplogo,
+            url: `https://wa.me/?text=${encodeURIComponent(`${currentUrl}`)}`
+        },
+        {
+            name: 'Viber',
+            logo: instlogo,
+            url: `viber://forward?text=${encodeURIComponent(`${currentUrl}`)}`
+        }
+    ];
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+                setShowCopiedMessage(false);
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [wrapperRef]);
 
 
     return (
@@ -99,9 +179,61 @@ const ProductContainer = ({ product }) => {
                             <h3>{product.title}</h3>
                             <p className='product-info-price'>${product.price}.00</p>
                         </div>
-                        <div className='favorite-button' onClick={() => handleToggleFavorite(product._id)}>
-                            <Image className='favorite-button-image' src={!isFavorite ? favorites : unFavorites} alt='Favorite' />
+                        <div className={'cart-items-btns-container'}>
+                            <div className={'cart-items-btns-block'}>
+                                <div className='error-button' onClick={() => setSendUnusualDesign(true)}>
+                                    <Image className='error-button-image' src={unusualDesign} alt='!' />
+                                </div>
+                                <div className='favorite-button' onClick={() => handleToggleFavorite(product._id)}>
+                                    <Image className='favorite-button-image' src={!isFavorite ? favorites : unFavorites} alt='Favorite' />
+                                </div>
+                                <div className='shear-button' onClick={copyLinkAndShowMessage}>
+                                    <Image className='shear-button-image' src={shearLink} alt='+' />
+                                </div>
+                            </div>
+                            {showCopiedMessage && (
+                                <div className="shearLinkContainer" ref={wrapperRef}>
+                                    <div>
+
+                                        <div className="copiedMessage">
+                                            <div>
+                                                <div className={'inputCurrentUrl'} style={{
+
+                                                }}>
+                                                    <input type="text" value={inputCurrentUrl}/>
+                                                    <div className={'inputCurrentBtn'}>
+                                                        <Image className={'inputCurrentBtnImg'} src={shearLogo} onClick={copyLinkToClipboard} alt={'+'}/>
+                                                    </div>
+                                                </div>
+                                                <div style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'row',
+                                                    justifyContent: 'space-between',
+                                                    marginTop: "10px",
+                                                    marginBottom: "5px"
+                                                }}>
+                                                    {socialMediaLogos.map((platform, index) => (
+                                                        <Image
+                                                            key={index}
+                                                            style={{width: '24px', cursor: 'pointer'}}
+                                                            src={platform.logo}
+                                                            alt={platform.name}
+                                                            onClick={() => window.open(platform.url, '_blank')}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                            <UnusualDesignMessage
+                                show={sendUnusualDesign}
+                                onHide={() => setSendUnusualDesign(false)}
+                                item={product}
+                            />
                         </div>
+
                     </div>
 
 

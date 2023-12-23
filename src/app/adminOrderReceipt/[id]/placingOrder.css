@@ -1,14 +1,168 @@
 .placingOrderBlock{
     min-height: 100vh;
     width: 100%;
-    max-width: 600px;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
     padding-top: 25px;
 }
+.placingOrderBlockRow{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
 .placingOrderBlock h2{
     margin-bottom: 15px;
+}
+.orderStatusInput{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.orderStatusInput:first-child{
+    margin-top: 10px;
+}
+.orderStatusInput:last-child{
+    margin-bottom: 0;
+}
+.orderStatusInputBtn{
+    background-color: #111111;
+    border-radius: 8px;
+    padding: 6px 15px 6px 16px;
+}
+.orderStatusInputBtnImg{
+    width: 11px;
+    height: 14px;
+}
+.placingOrderInfoBlock{
+    width: calc(100% + 100px);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    flex-wrap: wrap;
+    margin: 5px 0 10px;
+}
+.placingOrderInfoBlock h4{
+    font-weight: bold;
+}
+.placingOrderInfoBlock p{
+    margin: 1px 0;
+}
+.placingOrderInfoBlock h3{
+    margin: 15px 0 5px;
+}
+.placingOrderInfoBlock h3:first-child{
+    margin: 5px 0 5px;
+}
+.placingOrderInfoBlock b{
+    font-weight: 600;
+}
+.orderStatusBlock{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 180px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+.orderStatusBlock {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.orderStatusTimes,
+.orderStatusTitles {
+    display: flex;
+    flex-direction: column;
+}
+
+.orderStatusLine {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 180px;
+}
+
+.orderStatusLine div {
+    width: 2px;
+    height: 36px;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+}
+.check-cart-item{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.check-cart-item:last-child{
+    margin-bottom: 0;
+}
+.orderStatusLine div:first-child {
+    width: 2px;
+    height: 36px;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+    border-radius: 3px 3px 0 0 ;
+}
+.orderStatusLine div:last-child {
+    width: 2px;
+    height: 36px;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+    border-radius:  0 0 3px 3px;
+}
+.statusLineCheckImg{
+    width: 11px;
+    height: 11px;
+    margin-right: 0px;
+    margin-top: 12px;
+}
+.orderStatusTitleBlock{
+    padding: 8px 0 9px 10px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    width: 200px;
+}
+.orderStatusTimeBlock{
+    padding: 8px 0 9px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    width: 140px;
+}
+.products-value-block{
+    width: calc(100% - 100px);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 50px;
+    margin-top: 6px;
+    margin-right: 10px;
 }
 .order-input-title{
     margin-bottom: 3px;
@@ -123,11 +277,13 @@
     appearance: none;
     color: #111111;
 }
-.placingOrderBlock button{
+.placingOrderBlockButton{
     border-radius: 10px;
-    width: calc(100%);
+    margin-top: 10px;
+    width: calc(100% + 100px);
     height: 50px;
     background-color: #111111;
+    color: #fafafa;
     padding: 0 10px;
     outline: none;
     border: 2px solid #111111;
@@ -136,7 +292,6 @@
     align-items: center;
     font-size: 16px;
     cursor: pointer;
-    color: #fafafa;
     font-weight: 600;
     margin-bottom: 70px;
 }
@@ -174,32 +329,4 @@
     margin-top: 30px;
     font-weight: 500;
     color: #d50404;
-}
-.numbers-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin: 5px 0 15px;
-}
-
-.number-circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 2px solid #c9c9c9;
-    background-color: #fafafa;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    font-weight: 500;
-    color: #c9c9c9;
-    font-size: 18px;
-}
-
-.line {
-    flex: 1;
-    height: 1.5px;
-    margin: 0 10px;
-    background-color: #c9c9c9;
 }

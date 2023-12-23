@@ -16,7 +16,7 @@
     margin-bottom: 15px;
 }
 .placingOrderInfoBlock{
-    width: 100%;
+    width: calc(100% + 10px);
     display: flex;
     flex-direction: column;
     border: 1px solid #dedede;
@@ -25,6 +25,9 @@
     font-size: 14px;
     flex-wrap: wrap;
     margin: 5px 0 10px;
+}
+.placingOrderInfoBlock h4{
+    font-weight: bold;
 }
 .placingOrderInfoBlock p{
     margin: 1px 0;
@@ -51,7 +54,18 @@
     flex-direction: row;
     align-items: center;
 }
-
+.orderStatusBtnsBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.orderStatusInput{
+    width: 100%;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+}
 .orderStatusTimes,
 .orderStatusTitles {
     display: flex;
@@ -126,7 +140,7 @@
     width: 140px;
 }
 .products-value-block{
-    width: 100%;
+    width: calc(100% - 100px);
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -251,7 +265,7 @@
 .placingOrderBlockButton{
     border-radius: 10px;
     margin-top: 10px;
-    width: calc(100%);
+    width: calc(100% + 100px);
     height: 50px;
     background-color: #111111;
     color: #fafafa;

@@ -15,6 +15,20 @@ export default function adminPromocodes() {
         value: '',
         isValid: true
     });
+    const addPromoCode = async () => {
+        try {
+            const promoCodeData = {
+                title: promoCode.title,
+                value: promoCode.value,
+                isValid: promoCode.isValid
+            };
+            const response = await axios.post("/api/admin/promoCode", promoCodeData);
+            console.log(response.data.promo._id);
+            window.location.reload();
+        } catch (error:any) {
+            console.log(error.message);
+        }
+    };
 
     const getPromoCodes = async () => {
         try {
@@ -35,20 +49,6 @@ export default function adminPromocodes() {
 
     const handleValueChange = (event) => {
         setPromoCode({ ...promoCode, value: event.target.value });
-    };
-    const addPromoCode = async () => {
-        try {
-            const promoCodeData = {
-                title: promoCode.title,
-                value: promoCode.value,
-                isValid: promoCode.isValid
-            };
-            const response = await axios.post("/api/admin/promoCode", promoCodeData);
-            console.log(response.data.promo._id);
-            window.location.reload();
-        } catch (error:any) {
-            console.log(error.message);
-        }
     };
 
     const deletePromoCode = async (promoCodeId) => {

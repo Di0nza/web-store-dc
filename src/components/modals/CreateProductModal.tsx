@@ -31,7 +31,7 @@ import {useModal} from "@/hooks/useModalStore"
 import {useState} from "react";
 import Image from "next/image"
 import {X} from "lucide-react"
-import {Textarea} from "@/components/ui/textarea";
+// import {Textarea} from "@/components/ui/textarea";
 import {log} from "util";
 
 const validSizes = ['XS', 'S', 'M', 'L', 'XL'];
@@ -276,12 +276,12 @@ export const CreateProductModal = () => {
                                                 Описание
                                             </FormLabel>
                                             <FormControl>
-                                                <Textarea
-                                                    disabled={isLoading}
-                                                    className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                                                    placeholder="Введите описание товара"
-                                                    {...field}
-                                                />
+                                                {/*<Textarea*/}
+                                                {/*    disabled={isLoading}*/}
+                                                {/*    className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"*/}
+                                                {/*    placeholder="Введите описание товара"*/}
+                                                {/*    {...field}*/}
+                                                {/*/>*/}
                                             </FormControl>
                                             <FormMessage/>
                                         </FormItem>

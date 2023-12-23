@@ -18,6 +18,21 @@ export default function ProfilePage() {
     const router = useRouter();
     const pathname = usePathname();
     const [userData, setUserData] = useState<UserData | null>(null);
+    const [userOrders, setUserOrders] = useState(null);
+
+    const getUserOrders = async () => {
+        try {
+            const res = await axios.get(`/api/users/messages`);
+            setUserOrders(res.data.messages);
+            console.log(res.data.messages)
+        } catch (error: any) {
+            console.log(error.message);
+        }
+    };
+
+    useEffect(() => {
+        getUserOrders();
+    }, []);
 
     const getUserDetails = async () => {
         try {
@@ -57,20 +72,18 @@ export default function ProfilePage() {
                     <p>Изменить данные профиля</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </Link>
-                <Link href={`${pathname}/products`} className='additionalProfileLink'>
                 <div className='additionalProfileLink'>
                     <p>Стилизация</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </div>
-                <div className='additionalProfileLink'>
+                <Link href={`${pathname}/products`} className='additionalProfileLink'>
                     <p>Товары</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
-                </div>
                 </Link>
-                <div className='additionalProfileLink'>
+                <Link href={`allAdminOrders`} className='additionalProfileLink'>
                     <p>Заказы</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
-                </div>
+                </Link>
                 <Link href={'/adminPromocodes'} className='additionalProfileLink'>
                     <p>Промокоды</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
@@ -79,6 +92,15 @@ export default function ProfilePage() {
                     <p>Статистика</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </div>
+                <Link href={'/allAdminMessages'} className='additionalProfileLink'>
+                    <p>Сообщения</p>
+                    <div className='messagesBlock'>
+                        <div className='messagesBlockCount'>
+                            <p>{userOrders?.length}</p>
+                        </div>
+                        <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
+                    </div>
+                </Link>
                 <div className='additionalProfileLink' onClick={logout}>
                     <p>Выйти из аккаунта</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>

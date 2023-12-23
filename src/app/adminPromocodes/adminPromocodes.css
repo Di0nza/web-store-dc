@@ -1,5 +1,5 @@
 .profileBlock{
-    max-height: 100vh;
+    min-height: 100vh;
     width: 100%;
     max-width: 600px;
     display: flex;
@@ -347,6 +347,15 @@
     color: #111111;
     font-size: 14px;
 }
+.profileBlockCategories{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.mini-cart-item-close-block{
+    background-color: #fafafa;
+}
+
 .product-additionalInformation-block{
     display: flex;
     flex-direction: column;

@@ -1,7 +1,7 @@
 import mongoose, {model, Schema} from 'mongoose'
 import {IPromoCode} from "@/types/PromoCode";
 
-const productSchema = mongoose.models.PromoCode ?
+const promoCodeSchema = mongoose.models.PromoCode ?
     mongoose.model('PromoCode') :
     model('PromoCode', new Schema<IPromoCode>({
         title: String,
@@ -9,4 +9,4 @@ const productSchema = mongoose.models.PromoCode ?
         isValid: Boolean,
     }));
 
-export default productSchema as mongoose.Model<IPromoCode & Document>;
+export default promoCodeSchema as mongoose.Model<IPromoCode & Document>;

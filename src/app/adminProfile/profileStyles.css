@@ -1,5 +1,5 @@
 .profileBlock{
-    max-height: 100vh;
+    min-height: 100vh;
     width: 100%;
     max-width: 600px;
     display: flex;
@@ -339,11 +339,11 @@
 .favorite-button{
     border: 1px solid #dedede;
     border-radius: 8px;
-    padding: 8px 10px 3px;
+    padding: 8px 10px 8px;
 }
 .favorite-button-image{
     width: 20px;
-    height: 25px;
+    height: 35px;
 }
 .product-info-block p{
     margin: 5px 0;

@@ -7,13 +7,41 @@
     padding: 25px 0 0 0;
     margin: 0 auto;
 }
+.profileBlockCategories{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.mini-order-item-info{
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    width: calc(100% + 20px);
+    border: 1px solid #dedede;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.orderProfileBlock{
+    margin: 10px 0 30px;
+}
+.profileBlockCategories{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.mini-cart-item-date{
+    font-size: 14px;
+    color: #818181;
+}
 .profileHelloText{
     margin: 10px 0 5px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
 }
 .createdDate{
-    font-size: 13px;
+    font-size: 14px;
     color: #606060;
 }
 .loginLink{
@@ -27,42 +55,82 @@
     font-size: 14px;
     font-weight: 600;
 }
-.updateProfileBlock input{
+.profileBlock input{
     width: calc(100%);
     height: 50px;
     font-size: 14px;
     border-radius: 10px;
-    border: 1px solid #dadada;
+    border: 1px solid #afafaf;
     background-color: #ffffff;
     padding: 11px 10px 9px;
     outline: none;
     color: #111111;
     margin-bottom: 10px;
 }
-.updateProfileBlock input::-webkit-search-cancel-button {
+.profileBlock input::-webkit-search-cancel-button {
     -webkit-appearance: none;
     appearance: none;
     color: #111111;
 }
+.profileLinkBlock{
+    margin-top: 15px;
+    border: 1px solid #d5d5d5;
+    border-radius: 10px;
+}
+.additionalProfileLink{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #d5d5d5;
+    padding: 15px 10px;
+    cursor: pointer;
+}
+.product-item {
+    position: relative;
+    display: inline-block;
+}
 
+.product-overlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    opacity: 1;
+    border-radius: 8px;
+    transition: opacity 0.3s ease;
+    z-index: 33;
+}
+
+.product-overlay {
+    opacity: 1;
+}
+
+.product-info {
+    position: relative;
+    z-index: 1;
+}
+.additionalProfileLink:last-child{
+    border-bottom: 0 solid #d5d5d5;
+    color: #cc0f0f;
+}
 .additionalProfileImage{
     width: 8px;
     height: 14px;
 }
-.updateProfileBlock button{
-    border-radius: 10px;
+.profileBlock button{
     width: calc(100%);
     height: 50px;
     background-color: #111111;
     padding: 0 10px;
     outline: none;
-    color: #fafafa;
     border: 2px solid #111111;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 16px;
-    cursor: pointer;
     font-weight: 600;
 }
 .googleLogin{
@@ -183,7 +251,7 @@
 }
 .product-item{
     height: 100%;
-    min-height: 420px;
+    min-height: 380px;
     width: 31%;
     background-color: #fafafa;
     border-radius: 10px;
@@ -195,15 +263,8 @@
     align-content: space-between;
     margin-bottom: 35px;
 }
-.product-item {
-    position: relative;
-    display: inline-block;
-}
 .product-item:nth-child(3n) {
     margin-right: 0;
-}
-.itemLink{
-    z-index: 0;
 }
 .product-info{
     display: flex;
@@ -318,18 +379,23 @@
 .product-info-price{
     font-weight: 500;
 }
+.favorite-button{
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    background-color: #fafafa;
+    padding: 8px 10px 3px;
+}
+.favorite-button-image{
+    width: 20px;
+    height: 25px;
+}
 .product-info-block p{
     margin: 5px 0;
 }
-.changeBlockText{
-    margin: 5px 0 10px 0;
-    color: #111111;
-    font-size: 14px;
-}
-.profileBlockCategories{
-    width: 100%;
+.product-info-block-head{
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
     justify-content: space-between;
 }
 .product-additionalInformation-block{

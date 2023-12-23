@@ -5,39 +5,14 @@ import {useRouter} from "next/navigation";
 import Link from "next/link";
 import './orderStyles.css'
 
-interface UserData {
-    username: string;
-    email: string;
-    createdAt?: string;
-}
-
 export default function UserOrders() {
     const router = useRouter();
     const [userOrders, setUserOrders] = useState(null);
-    const [userData, setUserData] = useState<UserData | null>(null);
-
-    const getUserDetails = async () => {
-        try {
-            const res = await axios.get<{ data: UserData }>('/api/users/userdata');
-            console.log(res.data.data.username);
-            setUserData(res.data.data);
-        } catch (error: any) {
-            console.log(error.message);
-        }
-    };
-
-    useEffect(() => {
-        getUserDetails();
-    }, []);
 
     const getUserOrders = async () => {
         try {
-            const userRes = await axios.get<{ data: UserData }>('/api/users/userdata');
             const res = await axios.get(`/api/users/getAllOrders`);
-            const filteredOrders = res.data.orders.filter(order => {
-                return order.createdBy === userRes.data.data._id;
-            });
-            setUserOrders(filteredOrders);
+            setUserOrders(res.data.orders);
         } catch (error: any) {
             console.log(error.message);
         }
@@ -73,7 +48,7 @@ export default function UserOrders() {
             {userOrders && (
                 <div className='orderProfileBlock'>
                     {userOrders?.map((item, index) => (
-                        <Link href={`/OrderReceipt/${item._id}`} key={index}>
+                        <Link href={`/adminOrderReceipt/${item._id}`} key={index}>
                             <div className={'mini-order-item-info'}>
                                 <div className={'mini-cart-item-info-head'}>
                                     <div>

@@ -88,14 +88,27 @@ export async function PUT(request: NextRequest) {
         if (!existingOrder) {
             return NextResponse.json({ message: "Order not found" }, { status: 404 });
         }
-        for (const key in reqBody) {
-            if (key !== 'orderId') {
-                if (reqBody[key] !== undefined) {
-                    existingOrder[key] = reqBody[key];
-                }
+        const { title, createdDate } = reqBody;
+        const statusToUpdate = existingOrder.orderStatus.find(status => status.title === title);
+
+        if (!statusToUpdate) {
+            return NextResponse.json({ message: "Status not found" }, { status: 404 });
+        }
+        statusToUpdate.createdDate = createdDate;
+        statusToUpdate.selected = true;
+        let updated = false;
+        for (let i = existingOrder.orderStatus.indexOf(statusToUpdate) - 1; i >= 0; i--) {
+            if (!existingOrder.orderStatus[i].selected && !existingOrder.orderStatus[i].createdDate) {
+                existingOrder.orderStatus[i].createdDate = createdDate;
+                existingOrder.orderStatus[i].selected = true;
+                updated = true;
+            } else {
+                break;
             }
         }
+        existingOrder.markModified('orderStatus');
         const updatedOrder = await existingOrder.save();
+
         return NextResponse.json({
             message: "Order updated successfully",
             updatedOrder
@@ -104,3 +117,8 @@ export async function PUT(request: NextRequest) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
+
+
+
+
+

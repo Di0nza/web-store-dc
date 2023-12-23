@@ -15,7 +15,7 @@ export default function Store() {
         <div className='store-container'>
             <div className='store-head-block'>
                 <div>
-                    <h3>Каталог товаров</h3>
+                    <p className='store-container-title'>Каталог товаров</p>
                     <p className='store-quantity'>Количество товаров {products.length}</p>
                 </div>
                 <ProductsSearch onSearch={setProducts}/>

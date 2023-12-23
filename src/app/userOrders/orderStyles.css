@@ -1,5 +1,5 @@
 .profileBlock{
-    max-height: 100vh;
+    min-height: 100vh;
     width: 100%;
     max-width: 600px;
     display: flex;
@@ -20,6 +20,11 @@
 }
 .orderProfileBlock{
     margin: 10px 0 30px;
+}
+.profileBlockCategories{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 .mini-cart-item-date{
     font-size: 14px;
@@ -173,6 +178,9 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
+}
+.store-container-title{
+    font-weight: 600;
 }
 .store-quantity{
     margin: 2px 0 30px;

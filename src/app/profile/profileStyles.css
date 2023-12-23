@@ -1,5 +1,5 @@
 .profileBlock{
-    max-height: 100vh;
+    min-height: 100vh;
     width: 100%;
     max-width: 600px;
     display: flex;
@@ -15,6 +15,20 @@
 .createdDate{
     font-size: 14px;
     color: #606060;
+}
+.messagesBlock{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.messagesBlockCount{
+    background-color: #111111;
+    padding: 2px 7px;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+.messagesBlockCount p{
+    color: #fafafa;
 }
 .loginLink{
     font-weight: 600;
@@ -155,6 +169,9 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
+}
+.store-container-title{
+    font-weight: 600;
 }
 .store-quantity{
     margin: 2px 0 30px;
@@ -348,11 +365,202 @@
 .product-info-price{
     font-weight: 500;
 }
-.favorite-button{
+.cart-items-btns-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.cart-items-btns-block{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.shearLinkContainer{
+    position: absolute;
     border: 1px solid #dedede;
     border-radius: 8px;
     background-color: #fafafa;
-    padding: 8px 10px 3px;
+    z-index: 10;
+    padding: 10px;
+    margin-top: 51px;
+}
+.shearContainer{
+    position: absolute;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    background-color: #fafafa;
+    z-index: 10;
+    margin-top: 51px;
+}
+.сooperationContainer{
+    position: absolute;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    background-color: #fafafa;
+    z-index: 101;
+    bottom: 100px;
+}
+.ownDesignOrder{
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    background-color: #fafafa;
+    z-index: 10;
+    margin: 25px 0;
+}
+.shearContainerHeader{
+    display: flex;
+    width: 100%;
+    padding: 5px 10px;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dedede;
+}
+.shearContainerBlock{
+    padding: 5px 10px 10px 10px;
+}
+.shearContainerTitle{
+    font-size: 17px;
+    font-weight: 600;
+}
+.shearContainerCloseImg{
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+.shearContainerOptionsBlock{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    font-size: 15px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+.shearContainerOption{
+    border-radius: 8px;
+    padding: 8px 10px;
+    border:  1px solid #dedede;
+    color: #111111;
+    font-weight: 400;
+}
+.mainMsgButton{
+    width: calc(100% - 20px);
+    background-color: #111111;
+    color: #fafafa;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    padding: 5px 0;
+    margin: 0px 10px 10px 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.ownDesignMsgButton{
+    width: calc(100% - 20px);
+    background-color: #111111;
+    color: #fafafa;
+    border-radius: 8px;
+    font-weight: 600;
+    display: flex;
+    padding: 10px 0;
+    margin: 0px 10px 10px 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.shearContainerTextarea{
+    outline: none;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    min-height: 100px;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #fafafa;
+    font-size: 15px;
+}
+.shearContainerInput{
+    outline: none;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    width: 100%;
+    padding: 10px;
+    margin-top: 3px;
+    background-color: #fafafa;
+    font-size: 14px;
+}
+.shearSuccess{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+.shearSuccessFooter{
+    width: 100%;
+    border-top: 0;
+}
+.inputCurrentUrl{
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    padding: 12px 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 44px;
+}
+.inputCurrentUrl input{
+    background-color: #fafafa;
+    color: #606060;
+    font-size: 13px;
+}
+.inputCurrentBtn{
+    background-color: #111111;
+    height: 34px;
+    width: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 2px 0 2px 5px;
+}
+.inputCurrentBtnImg{
+    width: 20px;
+    height: 20px;
+}
+.shear-button{
+    cursor: pointer;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    background-color: #fafafa;
+    padding: 8px 10px 8px 9px;
+    margin-left: 10px;
+}
+.error-button{
+    cursor: pointer;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    background-color: #fafafa;
+    padding: 7px 8px 9px;
+    margin-left: 10px;
+}
+.error-button-image{
+    width: 25px;
+    height: 25px;
+}
+.shear-button-image{
+    width: 21px;
+    height: 25px;
+}
+.favorite-button{
+    cursor: pointer;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    background-color: #fafafa;
+    padding: 8px 10px 7px;
+    margin-left: 10px;
 }
 .favorite-button-image{
     width: 20px;

@@ -11,6 +11,7 @@
     height: 60px;
 }
 .footer-container{
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -19,16 +20,71 @@
     color: #111111;
     width: 100%;
     background-color: rgb(241, 241, 241);
-    height: 60px;
+    height: 150px;
     border-top: 1px solid #d5d5d5;
 }
 .footer-block{
     width: 100%;
     max-width: 1000px;
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.footer-privacy-text{
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: #606060;
+}
+.footer-info-block{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+.footer-error-block{
+    font-size: 17px;
+    font-weight: 600;
+}
+.footer-btns-block{
+    display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+}
+.footer-cooperation-btn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 2px solid #111111;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 5px 8px;
+    margin-top: 5px;
+    margin-left: 10px;
+    border-radius: 8px;
+}
+.footer-error-btn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 2px solid #111111;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 5px 8px;
+    margin-top: 5px;
+    border-radius: 8px;
+}
+.footer-info-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+.footer-info-title p{
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
 }
 .header-block{
     width: 100%;
@@ -42,6 +98,16 @@
 .header-logo{
     width: 65px;
     height: 35px;
+}
+.footer-title-logo{
+    width: 40px;
+    height: 22px;
+}
+.error-btn-logo{
+    margin-bottom: 5px;
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
 }
 .header-links-block{
     max-width: 450px;
@@ -166,6 +232,9 @@
     align-items: flex-start;
     justify-content: space-between;
 }
+.mini-cart-item-info-head button{
+    width: 40px;
+}
 .mini-cart-item-title{
     margin-top: 2px;
 }
@@ -182,6 +251,12 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+}
+.mini-admin-cart-footer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 .mini-count-pad{
     display: flex;
