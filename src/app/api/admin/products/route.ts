@@ -5,20 +5,18 @@ import {IProduct} from "@/types/Product";
 import {ITokenData} from "@/types/TokenData";
 import {getDataFromToken} from "@/helpers/getDataFromToken";
 const cloudinary = require('cloudinary').v2;
-const multer = require('multer');
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 cloudinary.config({
-    cloud_name: 'du8qdkle4',
-    api_key: '649152983145251',
-    api_secret: '2eFelVsPTvAPFx9HJByXSlmJhRo'
+    cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_API_KEY,
+    api_secret: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_API_SECRET,
 })
-const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-    params: {allowed_formats: ['jpg', 'jpeg', 'png', 'webp']}
-});
 
-const upload = multer({ storage: storage });
+const opts = {
+    overwrite: true,
+    invalidate: true,
+    resource_type: "auto",
+};
 
 connect()
 
@@ -47,7 +45,6 @@ export async function POST(request: NextRequest) {
             amount: data.get(size),
         }));
 
-
         console.log("Title:", title);
         console.log("Description:", description);
         console.log("Price:", price);
@@ -59,14 +56,13 @@ export async function POST(request: NextRequest) {
             if (key.startsWith('picturesFiles[')) {
                 const value = data.get(key) as File;
                     promises.push(
-                        cloudinary.uploader.upload(value.name, { folder: 'my-folder' })
+                        cloudinary.uploader.upload(value, opts, { folder: 'my-folder' })
                             .then((res)=> res.secure_url)
                     );
             }
         }
 
         const picturesNames = await Promise.all(promises);
-
 
         const newProduct = new Product({
             title: title,

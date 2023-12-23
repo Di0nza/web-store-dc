@@ -77,14 +77,30 @@ export const CreateProductModal = () => {
     const isModalOpen = isOpen && type === "createProduct";
 
     const [selectedPictures, setSelectedPictures] = useState([]);
-    const [selectedPicturesFiles, setSelectedPicturesFiles] = useState<File[]>([])
+    const [selectedPicturesFiles, setSelectedPicturesFiles] = useState<File[]>([]);
 
-    const handlePictureChange = (event) => {
+    const convertBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+
+            fileReader.onerror = (error) => {
+                reject(error);
+            };
+        });
+    };
+
+    const handlePictureChange = async (event) => {
         const files = event.target.files;
         const newPictures = Array.from(files).map((file) =>
             URL.createObjectURL(file)
         );
-        setSelectedPicturesFiles([...selectedPicturesFiles, files?.[0]]);
+        const convertedFile = await convertBase64(files?.[0]) as File;
+        setSelectedPicturesFiles([...selectedPicturesFiles, convertedFile]);
         setSelectedPictures((prevPictures) => [...prevPictures, ...newPictures]);
         console.log(selectedPictures)
     };

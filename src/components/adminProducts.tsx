@@ -12,9 +12,9 @@ export const AdminProducts = () => {
     }
 
     return (
-        <div>
+        <div className="mt-5">
             <Button className="bg-emerald-500" variant="ghost" onClick={(e) => onAction(e, "createProduct")}>
-                Добавить продукт
+                Добавить Товар
             </Button>
         </div>
     );
