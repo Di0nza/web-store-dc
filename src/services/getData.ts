@@ -18,6 +18,8 @@ export const getAllProducts = async ()=>{
         return null;
     }
 }
+
+
 export const getDataBySearch = async (search: string) => {
     try {
         const foundProducts = Products.Products.filter(product =>

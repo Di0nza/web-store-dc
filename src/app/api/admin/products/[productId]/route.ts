@@ -109,3 +109,28 @@ export async function DELETE(
         return NextResponse.json({error: error.message}, {status: 500})
     }
 }
+
+export async function GET(
+    request: NextRequest,
+    {params}: { params: { productId: string } }
+) {
+    try {
+        const product = await Product.findById(params.productId);
+        console.log(product)
+
+        if (!product) {
+            return NextResponse.json({error: "No such product"}, {status: 400})
+        }
+
+        console.log(product)
+
+        return NextResponse.json({
+            message:"Product found successfully",
+            success: true,
+            product
+        })
+    } catch (error: any) {
+        return NextResponse.json({error: error.message}, {status: 500})
+    }
+}
+

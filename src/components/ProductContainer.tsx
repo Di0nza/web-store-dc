@@ -22,6 +22,10 @@ const ProductContainer = ({ product }) => {
         }
     }, []);
 
+    useEffect(()=>{
+        console.log(product)
+    },[product])
+
     const changeImage = (newImage) => {
         setCurrentImage(newImage);
     };
@@ -118,7 +122,8 @@ const ProductContainer = ({ product }) => {
                             <div
                                 key={index}
                                 className={`product-size ${selectedSize === size.size ? 'selected-size' : ''}`}
-                                onClick={() => handleSizeSelection(size.size)}
+                                onClick={() => parseInt(size.amount) !== 0 && handleSizeSelection(size.size)}
+                                style={{ opacity: parseInt(size.amount) === 0 ? 0.5 : 1, cursor: parseInt(size.amount) === 0 ? 'not-allowed' : 'pointer' }}
                             >
                                 {size.size}
                             </div>

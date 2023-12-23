@@ -106,9 +106,9 @@ const Navigation = ({navLinks}: Props) => {
     const groupedCartItems: Record<string, GroupedCartItem> = cartItems.reduce((acc, item) => {
         const key = `${item.title}-${item.size}`;
         if (!acc[key]) {
-            acc[key] = { ...item, totalPrice: item.price, count: 1 };
+            acc[key] = { ...item, totalPrice: parseFloat(item.price), count: 1 };
         } else {
-            acc[key].totalPrice += item.price;
+            acc[key].totalPrice+= parseFloat(item.price);
             acc[key].count += 1;
         }
         return acc;
@@ -150,7 +150,7 @@ const Navigation = ({navLinks}: Props) => {
                                     </div>
                                 </div>
                                 <div className="modal-header-info">
-                                    <p><b>{cartItems.length}</b> товаров на сумму <b>${cartItems.reduce((total, item) => total + item.price, 0)}.00</b></p>
+                                    <p><b>{cartItems.length}</b> товаров на сумму <b>${cartItems.reduce((total, item) => parseFloat(total) + parseFloat(item.price), 0)}.00</b></p>
                                 </div>
                             </div>
                             <div className={'mini-cart-items-block'}>

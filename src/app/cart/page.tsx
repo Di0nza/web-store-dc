@@ -226,7 +226,7 @@ export default function Cart() {
                             <div className="modal-header-title">
                                 <h4>Итог заказа:</h4>
                                 <p className="modal-header-title-value">${cartItems.reduce(
-                                    (total, item) => total + item.price,
+                                    (total, item) => parseFloat(total) + parseFloat(item.price),
                                     0
                                 ) * ((100 - discount) / 100)}</p>
                             </div>
@@ -234,7 +234,7 @@ export default function Cart() {
                         <div className="summary-info">
                             <p><b>{cartItems.length}</b> товаров на сумму{' '}
                                 <b>
-                                    ${(cartItems.reduce((total, item) => total + item.price, 0)).toFixed(2)}{' '}
+                                    ${(cartItems.reduce((total, item) => parseFloat(total) + parseFloat(item.price), 0)).toFixed(2)}{' '}
                                     {discount !== 0 && `- ${discount}%`}
                                 </b>
                             </p>
