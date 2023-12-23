@@ -18,26 +18,20 @@ const opts = {
     resource_type: "auto",
 };
 
-connect()
-
-export async function POST(request: NextRequest) {
+export async function PATCH(
+    request: NextRequest,
+    {params}: { params: { productId: string } }
+) {
     try {
         const tokenData: ITokenData = getDataFromToken(request);
         if (tokenData.isAdmin === false) {
             return NextResponse.json({error: "Access denied"}, {status: 403})
         }
-
-
         const data = await request.formData();
 
-        console.log(data)
+        console.log(data, params.productId)
 
         const title = data.get('title');
-        const product = await Product.findOne({title});
-        if (product) {
-            return NextResponse.json({error: "Product already exist"}, {status: 400})
-        }
-
         const description = data.get('description');
         const price = data.get('price');
         const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => ({
@@ -45,41 +39,44 @@ export async function POST(request: NextRequest) {
             amount: data.get(size),
         }));
 
-        console.log("Title:", title);
-        console.log("Description:", description);
-        console.log("Price:", price);
-        console.log("Sizes:", sizes);
+        const picturesNames = [];
 
         const promises = [];
         // @ts-ignore
         for (const key of data.keys()) {
             if (key.startsWith('picturesFiles[')) {
                 const value = data.get(key) as File;
-                    promises.push(
-                        cloudinary.uploader.upload(value, opts, { folder: 'my-folder' })
-                            .then((res)=> res.secure_url)
-                    );
+                    await cloudinary.uploader.upload(value, opts, { folder: 'my-folder' })
+                        .then((res)=> picturesNames.push(res.secure_url))
+
+            } else if (key.startsWith('picturesString[')){
+                const value = data.get(key)
+                picturesNames.push(value)
             }
         }
 
-        const picturesNames = await Promise.all(promises);
-
-        const newProduct = new Product({
+        const product = await Product.findByIdAndUpdate(params.productId, {
             title: title,
             description: description,
-            price:price,
+            price: price,
             sizes: sizes,
-            pictures: picturesNames,
-        })
+            pictures: picturesNames
+        });
+        if (!product) {
+            return NextResponse.json({error: "No such product"}, {status: 400})
+        }
 
-        const savedProduct = await newProduct.save();
-        console.log(savedProduct);
 
+        console.log("Title:", title);
+        console.log("Description:", description);
+        console.log("Price:", price);
+        console.log("Sizes:", sizes);
+        console.log("Pictures", picturesNames);
 
         return NextResponse.json({
-            message: "Product created successfully",
+            message: "Product updated successfully",
             success: true,
-            savedProduct
+            //product
         })
 
     } catch (error: any) {
@@ -87,39 +84,53 @@ export async function POST(request: NextRequest) {
     }
 }
 
-export async function DELETE(request: NextRequest) {
+export async function DELETE(
+    request: NextRequest,
+    {params}: { params: { productId: string } }
+) {
     try {
         const tokenData: ITokenData = getDataFromToken(request);
         if (tokenData.isAdmin === false) {
             return NextResponse.json({error: "Access denied"}, {status: 403})
         }
-        const reqBody: IProduct = await request.json()
-        const {
-            id
-        } = reqBody;
 
-        console.log(reqBody)
+        const product = await Product.findByIdAndDelete(params.productId);
 
-        const product = await Product.findById(id);
         if (!product) {
             return NextResponse.json({error: "No such product"}, {status: 400})
         }
-        const deletedProduct = await Product.findByIdAndDelete(id);
-        return NextResponse.json({error: "Product successfully deleted"}, {status: 200})
-    } catch (error: any) {
-        return NextResponse.json({error: error.message}, {status: 500})
-    }
-}
 
-export async function GET(){
-    try{
-        const products:IProduct[] = await Product.find();
         return NextResponse.json({
-            message: "All products",
+            message:"Product deleted successfully",
             success: true,
-            products
+            product
         })
     } catch (error: any) {
         return NextResponse.json({error: error.message}, {status: 500})
     }
 }
+
+export async function GET(
+    request: NextRequest,
+    {params}: { params: { productId: string } }
+) {
+    try {
+        const product = await Product.findById(params.productId);
+        console.log(product)
+
+        if (!product) {
+            return NextResponse.json({error: "No such product"}, {status: 400})
+        }
+
+        console.log(product)
+
+        return NextResponse.json({
+            message:"Product found successfully",
+            success: true,
+            product
+        })
+    } catch (error: any) {
+        return NextResponse.json({error: error.message}, {status: 500})
+    }
+}
+

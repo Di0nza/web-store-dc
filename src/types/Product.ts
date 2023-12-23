@@ -18,6 +18,7 @@ export interface IProduct {
     id?:string;
     title: string;
     description: string;
+    price: string;
     sizes: Types.DocumentArray<Sizes>;
     pictures: Types.DocumentArray<Pictures>;
     additionalInformation: Types.DocumentArray<AddInfos>;

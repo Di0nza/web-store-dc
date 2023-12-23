@@ -16,7 +16,6 @@ const ProductsSearch = ({onSearch}: Props) => {
         event.preventDefault()
         const products = await getDataBySearch(search);
         onSearch(products);
-
     }
 
     return (

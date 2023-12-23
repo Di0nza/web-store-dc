@@ -2,14 +2,14 @@
 import '../profile/profileStyles.css'
 import Link from "next/link";
 import {useEffect, useState} from "react";
-import {getData} from '../../services/getData'
-import {Products} from "../../components/Products";
-import {ProductsSearch} from "../../components/ProductsSearch";
+import {getAllProducts, getData} from '@/services/getData'
+import {Products} from "@/components/Products";
+import {ProductsSearch} from "@/components/ProductsSearch";
 
 export default function Store() {
     const [products, setProducts] = useState<any[]>([]);
     useEffect(() => {
-        getData().then(setProducts)
+        getAllProducts().then((data)=>setProducts(data.data.products))
     }, [])
     return (
         <div className='store-container'>

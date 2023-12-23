@@ -1,4 +1,5 @@
 import Products from "../mockData/mockProducts.json";
+import axios from "axios";
 
 export const getData = async () => {
     try {
@@ -8,6 +9,17 @@ export const getData = async () => {
         return null;
     }
 }
+
+export const getAllProducts = async ()=>{
+    try {
+        return await axios.get("/api/admin/products");
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return null;
+    }
+}
+
+
 export const getDataBySearch = async (search: string) => {
     try {
         const foundProducts = Products.Products.filter(product =>

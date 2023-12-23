@@ -1,5 +1,6 @@
 import {connect} from "@/db/db";
 import Order from "@/models/orderModel";
+import Product from "@/models/productModel"
 import {NextRequest, NextResponse} from "next/server";
 connect()
 
@@ -25,6 +26,7 @@ export async function POST(request: NextRequest) {
             createdBy,
             createdAt
         } = reqBody
+
         console.log(reqBody);
 
         const newOrder = new Order({
@@ -50,6 +52,17 @@ export async function POST(request: NextRequest) {
         const savedOrder = await newOrder.save()
         console.log(savedOrder);
 
+        let sizeToDec;
+        let prod;
+        for (let i = 0; i < products.length; i++) {
+            sizeToDec = products[i].size;
+            prod = await Product.findById(products[i].id);
+            const sizeIndex = prod.sizes.findIndex((size) => size.size === sizeToDec);
+            if (sizeIndex !== -1) {
+                prod.sizes[sizeIndex].amount = parseInt(prod.sizes[sizeIndex].amount) - 1;
+                await prod.save();
+            }
+        }
         return NextResponse.json({
             message: "Order created successfully",
             savedOrder
