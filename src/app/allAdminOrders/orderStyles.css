@@ -32,6 +32,10 @@
     justify-content: space-between;
 }
 .mini-cart-item-date{
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-end;
     font-size: 14px;
     color: #818181;
 }

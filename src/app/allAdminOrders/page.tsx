@@ -43,8 +43,8 @@ export default function UserOrders() {
 
     return (
         <div className='profileBlock'>
-            <h2>{"Мои заказы"}</h2>
-            <p className='changeBlockText'>{`Вы уже сделали ${userOrders?.length} в нашем магазине!`}</p>
+            <h2>{"Все заказы"}</h2>
+            <p className='changeBlockText'>{`В обработке находятся ${userOrders?.length} заказов`}</p>
             {userOrders && (
                 <div className='orderProfileBlock'>
                     {userOrders?.map((item, index) => (

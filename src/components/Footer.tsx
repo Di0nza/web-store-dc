@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import headerLogo from "@/img/headerLogo.png";
+import textLogo from "@/img/textLogo.png";
 import Link from "next/link";
 import React, {useState} from "react";
 import axios from "axios";
@@ -48,7 +49,7 @@ const Footer = () => {
                     <FooterCooperationBlock/>
                 )}
                 <p className='footer-privacy-text'>Этот веб-сайт использует Google Analytics, чтобы помочь нам улучшить его содержимое.
-                    <Link href={'/'}> Политика Конфиденциальности</Link>
+                    <Link className='footer-privacy-link-text' href={'/privacyPolicy'}> Политика Конфиденциальности</Link>
                 </p>
 
                 <div className='footer-info-block'>
@@ -64,7 +65,7 @@ const Footer = () => {
                         </div>
                     </div>
                     <Link className='footer-info-title' href={userData?.isAdmin ? '/adminProfile' : '/'}>
-                        <p>Mari Deniz</p>
+                        <Image  className='footer-title-textLogo' src={textLogo} alt={'MaryDeniz'}></Image>
                         <Image  className='footer-title-logo' src={headerLogo} alt={'MaryDeniz'}></Image>
                     </Link>
                 </div>

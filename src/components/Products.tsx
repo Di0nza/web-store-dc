@@ -5,6 +5,7 @@ import favorites from "@/img/favorite.png";
 import unFavorites from "@/img/unfavorite.png";
 import React, {useEffect, useState} from "react";
 import {usePathname} from "next/navigation";
+import './componentsStyles.css'
 
 type Props = {
     products: any[];

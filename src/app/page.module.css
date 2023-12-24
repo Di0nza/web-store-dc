@@ -10,6 +10,7 @@
   max-width: 100%;
   height: 500px;
   object-fit: cover;
+  object-position: center 1px;
 }
 .videoContainer {
   position: relative;
@@ -26,6 +27,9 @@
   justify-content: center;
   align-items: center;
 }
+.textLogo{
+  width: 100px;
+}
 .homeDescriptionBlock{
   width: 100%;
   max-width: 600px;
@@ -38,7 +42,12 @@
 .homeDescriptionBlock p{
   text-align: center;
   font-size: 16px;
-  margin-top: 20px;
+}
+.homeOrderSliderBlock{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
 .logo {
   width: 264px;
@@ -60,37 +69,71 @@
   position: relative;
   overflow: hidden;
 }
-
 .slideContainer {
   display: flex;
   transition: transform 0.5s ease;
 }
-.slideImg{
+.blurContainer {
   width: 100vw;
+  height: 100%;
+  z-index: 0;
+}
+
+.blurBackground {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(8px);
+}
+.slideImg{
+  width: 335px;
   max-width: 100%;
   height: 500px;
   object-fit: cover;
-  z-index: 1;
+  z-index: 4;
   transition: opacity 0.5s ease;
 }
 .sliderOverlay {
   position: absolute;
   top: 0;
+  right: 0;
   bottom: 0;
-  padding: 0 20px;
-  width: 100%;
+  padding: 0 15px;
+  width: 325px;
   display: flex;
   align-items: center;
+  align-self: flex-end;
   justify-content: space-between;
   pointer-events: none;
   z-index: 10;
 }
+.arrowSlider {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #dedede;
+}
 
+.arrowSliderImg{
+  width: 10px;
+  margin-left: 1px;
+}
+.lastArrowSliderImg{
+  transform: rotate(-180deg);
+  width: 10px;
+  margin-right: 1px;
+}
 .arrowRight {
   width: 20px;
   height: 20px;
   clip-path: polygon(0 0, 100% 50%, 0% 100%);
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgb(255, 255, 255);
   pointer-events: auto;
   cursor: pointer;
 }
@@ -98,7 +141,7 @@
   width: 20px;
   height: 20px;
   clip-path: polygon(0% 50%, 100% 0, 100% 100%);
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgb(255, 255, 255);
   pointer-events: auto;
   cursor: pointer;
 }

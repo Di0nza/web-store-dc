@@ -8,7 +8,6 @@ export default function Home() {
         <main className={styles.main}>
             <VideoPreview/>
             <div className={styles.homeDescriptionBlock}>
-                <h2>Mary Deniz</h2>
                 <p>Добро пожаловать в уникальный мир рок-панк стиля,
                     где энергия музыки сливается с художественным дизайном,
                     создавая уникальные модные образы. Наш интернет-магазин —
@@ -19,8 +18,10 @@ export default function Home() {
                     где каждая покупка становится вашим неповторимым посланием
                     миру и частью вашей истории.</p>
             </div>
-            <HomeImageSlider/>
-            <OwnDesignOrder/>
+            <div className={styles.homeOrderSliderBlock}>
+                <HomeImageSlider/>
+                <OwnDesignOrder/>
+            </div>
         </main>
     );
 }

@@ -57,7 +57,7 @@ export default function allAdminMessages() {
     const formatTimestampToDate = (timestamp) => {
         if (!timestamp) return '';
 
-        const formattedDate = new Date(parseInt(timestamp));
+        const formattedDate = new Date(timestamp);
         const monthIndex = formattedDate.getMonth();
         const day = formattedDate.getDate();
         const year = formattedDate.getFullYear();
@@ -106,17 +106,18 @@ export default function allAdminMessages() {
                             <div className={'mini-cart-item-info-head'}>
                                 <div>
                                     <h4 className={'mini-cart-item-title'}>{item.title}</h4>
-                                    <p>{item.category}</p>
+
                                 </div>
                                 <div className={'mini-cart-item-close-block'} onClick={() => {deleteMessage(item._id)}}>
                                     <Image className="shearContainerCloseImg" src={close} alt={'x'}></Image>
                                 </div>
                             </div>
                             <div className={'mini-admin-cart-footer'}>
-                                <h5>
-                                    Отправитель:{item.authorsContact}
+                                <p className={'messages-category-block'}>{item.category}</p>
+                                <h5 className={'messages-category-sender'}>
+                                    <b>Отправитель:</b> {item.authorsContact}
                                 </h5>
-                                <p className={'mini-cart-item-date'}>{(item.message)}</p>
+                                <p className={'messages-category-sender'}>{(item.message)}</p>
                                 <p className={'mini-cart-item-date'}>{formatTimestampToDate(item.createdAt)}</p>
                             </div>
                         </div>

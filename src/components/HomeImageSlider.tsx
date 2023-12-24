@@ -2,10 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../app/page.module.css'
 import Image from "next/image";
-import sliderImg1 from '../img/homeSlider/maxresdefault.jpg';
-import sliderImg2 from '../img/homeSlider/gucci-ajjvb4hud7mpthy4.jpg';
-import sliderImg3 from '../img/homeSlider/GettyImages-1469437081.webp';
-import sliderImg4 from '../img/homeSlider/real-gq-october-2020.webp';
+import arrowW from '../img/arrowW.png'
+import sliderImg1 from '../img/homeSlider/00751.jpg';
+import sliderImg2 from '../img/homeSlider/00757.jpg';
+import sliderImg3 from '../img/homeSlider/00755.jpg';
+import sliderImg4 from '../img/homeSlider/00763.jpg';
 
 const HomeImageSlider = () => {
     const images = [sliderImg1,sliderImg2,sliderImg3,sliderImg4,];
@@ -32,14 +33,28 @@ const HomeImageSlider = () => {
     return (
         <div className={styles.slider}>
             <div className={styles.slideContainer}>
+                <div className={styles.blurContainer}>
+                    <Image
+                        className={styles.blurBackground}
+                        src={images[currentImageIndex]}
+                        alt="Blurred Background"
+                        layout="fill"
+                        objectFit="cover"
+                        quality={100}
+                    />
+                </div>
                 <Image
                     className={styles.slideImg}
                     src={images[currentImageIndex]}
                     alt={`Slide ${currentImageIndex}`}
                 />
                 <div className={styles.sliderOverlay}>
-                    <div className={styles.arrowLeft} onClick={prevSlide}></div>
-                    <div className={styles.arrowRight} onClick={nextSlide}></div>
+                    <div className={styles.arrowSlider} onClick={prevSlide}>
+                        <Image className={styles.lastArrowSliderImg} src={arrowW} alt={'<'}/>
+                    </div>
+                    <div className={styles.arrowSlider} onClick={nextSlide}>
+                        <Image className={styles.arrowSliderImg} src={arrowW} alt={'>'}/>
+                    </div>
                 </div>
             </div>
         </div>

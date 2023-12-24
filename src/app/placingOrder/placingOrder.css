@@ -8,7 +8,8 @@
     padding-top: 25px;
 }
 .placingOrderBlock h2{
-    margin-bottom: 15px;
+    font-size: 25px;
+    font-weight: bold;
 }
 .order-input-title{
     margin-bottom: 3px;

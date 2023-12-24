@@ -7,8 +7,12 @@
     padding: 25px 0 0 0;
     margin: 0 auto;
 }
+.profileBlock h2{
+    font-size: 25px;
+    font-weight: bold;
+}
 .profileHelloText{
-    margin: 10px 0 5px;
+    margin: 0 0 5px;
     font-size: 16px;
     font-weight: 600;
 }
@@ -411,11 +415,12 @@
     z-index: 101;
 }
 .ownDesignOrder{
+    position: absolute;
     border: 1px solid #dedede;
     border-radius: 8px;
     background-color: #fafafa;
     z-index: 10;
-    margin: 25px 0;
+    margin: 90px 270px;
 }
 .shearContainerHeader{
     display: flex;
@@ -545,7 +550,7 @@
     border: 1px solid #dedede;
     border-radius: 8px;
     background-color: #fafafa;
-    padding: 8px 10px 8px 9px;
+    padding: 8px 11px 8px 9px;
     margin-left: 10px;
 }
 .error-button{
@@ -553,28 +558,28 @@
     border: 1px solid #dedede;
     border-radius: 8px;
     background-color: #fafafa;
-    padding: 7px 8px 9px;
+    padding: 10px 9px 9px;
     margin-left: 10px;
 }
 .error-button-image{
-    width: 25px;
-    height: 25px;
+    width: 21px;
+    height: 21px;
 }
 .shear-button-image{
-    width: 21px;
-    height: 25px;
+    width: 19px;
+    height: 24px;
 }
 .favorite-button{
     cursor: pointer;
     border: 1px solid #dedede;
     border-radius: 8px;
     background-color: #fafafa;
-    padding: 8px 10px 7px;
+    padding: 10px 10px 10px;
     margin-left: 10px;
 }
 .favorite-button-image{
     width: 20px;
-    height: 25px;
+    height: 20px;
 }
 .product-info-block p{
     margin: 5px 0;

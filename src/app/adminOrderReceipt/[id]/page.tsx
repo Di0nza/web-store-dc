@@ -119,21 +119,25 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
 
     return (
         <div className='placingOrderBlock'>
-            <h2>{"Спасибо за ваш заказ!"}</h2>
-            <h4>{orderData?.totalNumber} товаров на сумму ${orderData?.totalCost} ({orderData?.paymentState})</h4>
+            <h2>{`Заказ #${orderData?._id}`}</h2>
+            <h4><b>{orderData?.totalNumber}</b> товаров на сумму <b>${orderData?.totalCost}</b> ({orderData?.paymentState})</h4>
             <div>
                 <div className='placingOrderBlockRow'>
-                    <div className='firstInfoBlock'>
-                        <h3>Контактные данные</h3>
-                        <p><b>Имя:</b> {orderData?.username}</p>
-                        <p><b>Email:</b> {orderData?.email}</p>
-                        <p><b>Телефон:</b> {orderData?.telephone}</p>
+                    <div className={'firstInfoContainer'}>
+                        <div className='firstInfoBlock'>
+                            <h3>Контактные данные</h3>
+                            <p><b>Имя:</b> {orderData?.username}</p>
+                            <p><b>Email:</b> {orderData?.email}</p>
+                            <p><b>Телефон:</b> {orderData?.telephone}</p>
+                        </div>
                     </div>
-                    <div className='firstInfoBlock'>
-                        <h3>Информация о доставке</h3>
-                        <p><b>Способ доставки:</b> {orderData?.deliveryMethod}</p>
-                        <p><b>Пункт назначения:</b> {orderData?.country}, {orderData?.city}(д.{orderData?.house}, кв.{orderData?.apartment}), {orderData?.zip}</p>
-                        <p><b>Дата создания:</b> {formattedDateTime}</p>
+                    <div className={'firstInfoContainer'}>
+                        <div className='firstInfoBlock'>
+                            <h3>Информация о доставке</h3>
+                            <p><b>Способ доставки:</b> {orderData?.deliveryMethod}</p>
+                            <p><b>Пункт назначения:</b> {orderData?.country}, {orderData?.city}(д.{orderData?.house}, кв.{orderData?.apartment}), {orderData?.zip}</p>
+                            <p><b>Дата создания:</b> {formattedDateTime}</p>
+                        </div>
                     </div>
                 </div>
                 <div className='placingOrderBlockRow'>
@@ -164,7 +168,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                     </div>
                     <div className='placingOrderInfoContainer'>
                         <div className='placingOrderInfoBlock'>
-                            <p><b>Статус заказа:</b></p>
+                            <h3>Статус заказа:</h3>
                             <div className={'orderStatusBtnsBlock'}>
                                 {statuses.map((status, index) => (
                                     <div key={index} className='orderStatusInput'>

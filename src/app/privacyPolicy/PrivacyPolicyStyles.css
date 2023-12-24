@@ -1,0 +1,62 @@
+.about-container{
+    min-height: 100vh;
+    width: 100%;
+    height: calc(100% - 30px);
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.about-container h4{
+    margin-top: 20px;
+}
+.about-links-block{
+    margin-top: 10px;
+}
+.about-link{
+    margin: 0 10px 0 0;
+}
+.about-navigation{
+    margin: 10px 0 40px 0;
+}
+.about-content{
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.privacyPolicy{
+    margin: 25px 0 50px;
+}
+.privacyPolicy h1{
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.privacyPolicy h2{
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+.aboutUs {
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+}
+.contacts {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+}
+.title {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.description {
+    font-size: 16px;
+    margin-bottom: 15px;
+}

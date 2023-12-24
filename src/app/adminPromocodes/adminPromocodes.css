@@ -7,13 +7,21 @@
     padding: 25px 0 0 0;
     margin: 0 auto;
 }
+.profileBlock h2{
+    font-size: 25px;
+    font-weight: bold;
+}
+.profileBlock h4{
+    font-size: 17px;
+    font-weight: 600;
+}
 .profileHelloText{
     margin: 10px 0 5px;
     font-size: 18px;
     font-weight: 600;
 }
 .promocodesProfileBlock{
-    margin: 15px 0 30px;
+    margin: 10px 0 30px;
 }
 .promocodes-item-info{
     display: flex;
@@ -30,10 +38,16 @@
     display: flex;
     flex-direction: row;
 }
+.promocodes-item-info-block h5{
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom: 2px;
+}
 .promocodes-item-delete-img{
     width: 14px;
     height: 18px;
     margin-left: 10px;
+    margin-top: 3px;
     cursor: pointer;
 }
 .createdDate{
@@ -343,7 +357,7 @@
     margin: 5px 0;
 }
 .changeBlockText{
-    margin: 5px 0 10px 0;
+    margin: 0 0 10px 0;
     color: #111111;
     font-size: 14px;
 }
