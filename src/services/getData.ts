@@ -1,5 +1,6 @@
 import Products from "../mockData/mockProducts.json";
 import axios from "axios";
+import {IProduct} from "@/types/Product";
 
 export const getData = async () => {
     try {
@@ -10,7 +11,7 @@ export const getData = async () => {
     }
 }
 
-export const getAllProducts = async ()=>{
+export const getAllProductsAdmin = async ()=>{
     try {
         return await axios.get("/api/admin/products");
     } catch (error) {
@@ -19,14 +20,24 @@ export const getAllProducts = async ()=>{
     }
 }
 
-
+export const getAllProductsUser = async ()=>{
+    try {
+        return await axios.get("/api/users/products");
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return null;
+    }
+}
 export const getDataBySearch = async (search: string) => {
     try {
-        const foundProducts = Products.Products.filter(product =>
-            product.title.toLowerCase().includes(search.toLowerCase()) &&
+        const data = await axios.get("/api/admin/products");
+        const products = data.data.products as IProduct[];
+        console.log(products)
+        const foundProducts = products.filter(product =>
+            product.title.toLowerCase().includes(search.toLowerCase()) ||
             product.description.toLowerCase().includes(search.toLowerCase())
         );
-
+        console.log(foundProducts)
         return foundProducts;
     } catch (error) {
         console.error('Error fetching data:', error);

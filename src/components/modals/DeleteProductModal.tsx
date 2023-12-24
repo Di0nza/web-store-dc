@@ -32,7 +32,6 @@ export const DeleteProductModal = () => {
             await axios.delete(`/api/admin/products/${product?._id}`);
 
             onClose();
-            window.location.reload();
 
         } catch (error) {
             console.log(error);

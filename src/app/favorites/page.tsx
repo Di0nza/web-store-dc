@@ -1,7 +1,7 @@
 'use client';
 import '../profile/profileStyles.css'
 import {useEffect, useState} from "react";
-import {getAllProducts, getData} from '@/services/getData'
+import {getAllProductsUser, getData} from '@/services/getData'
 import {Products} from "@/components/Products";
 import {ProductsSearch} from "@/components/ProductsSearch";
 
@@ -18,7 +18,7 @@ export default function Store() {
     }, []);
 
     useEffect(() => {
-        getAllProducts().then((data)=>setProducts(data.data.products))
+        getAllProductsUser().then((data)=>setProducts(data.data.products))
     }, [])
 
     const filteredProducts = products.filter((product: any) => favorites.includes(product._id));

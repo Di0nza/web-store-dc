@@ -34,10 +34,29 @@ export async function PATCH(
         const title = data.get('title');
         const description = data.get('description');
         const price = data.get('price');
+        const category = data.get('category');
         const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => ({
             size: size,
             amount: data.get(size),
         }));
+
+
+        const additionalInformation = [];
+
+        for (const key of data.keys()) {
+            if (key.startsWith('additionalInformation')) {
+                const [index, field] = key
+                    .match(/additionalInformation\[(\d+)\]\.(title|description)/)
+                    .slice(1);
+
+                if (!additionalInformation[index]) {
+                    additionalInformation[index] = {};
+                }
+
+                additionalInformation[index][field] = data.get(key);
+            }
+        }
+
 
         const picturesNames = [];
 
@@ -58,9 +77,11 @@ export async function PATCH(
         const product = await Product.findByIdAndUpdate(params.productId, {
             title: title,
             description: description,
+            category: category,
             price: price,
             sizes: sizes,
-            pictures: picturesNames
+            pictures: picturesNames,
+            additionalInformation:additionalInformation
         });
         if (!product) {
             return NextResponse.json({error: "No such product"}, {status: 400})

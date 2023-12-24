@@ -6,6 +6,7 @@ import unFavorites from "@/img/unfavorite.png";
 import React, {useEffect, useState} from "react";
 import {usePathname} from "next/navigation";
 import './componentsStyles.css'
+import axios from "axios";
 
 type Props = {
     products: any[];
@@ -14,6 +15,21 @@ type Props = {
 const Products = ({products}: Props) => {
     const [favoritesArray, setFavoritesArray] = useState<string[]>([]);
     const pathname = usePathname();
+
+    enum OptionsType { ADD_TO_FAV = "ADD", DELETE_FROM_FAV = "DEL"}
+    const updateFavoritesAmountInDb = async (id:string, option:OptionsType) =>{
+        try {
+            const data = {
+                id: id,
+                option: option
+            }
+            await axios.post("/api/users/products/favorites", data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+
     useEffect(() => {
         const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
         const favorites = localStorage.getItem('favorites');
@@ -44,9 +60,11 @@ const Products = ({products}: Props) => {
 
         if (index !== -1) {
             updatedFavorites.splice(index, 1);
+            updateFavoritesAmountInDb(productId, OptionsType.DELETE_FROM_FAV);
             console.log(`Товар ${productId} был удален из избранного`);
         } else {
             updatedFavorites.push(productId);
+            updateFavoritesAmountInDb(productId, OptionsType.ADD_TO_FAV);
             console.log(`Товар ${productId} был добавлен в избранное`);
         }
 

@@ -34,6 +34,7 @@ import {Textarea} from "@/components/ui/textarea";
 import {IProduct} from "@/types/Product";
 
 const validSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+const additionalInformation = [1, 1, 1, 1];
 
 const formSchema = z.object({
     title: z.string().min(1, {
@@ -41,6 +42,9 @@ const formSchema = z.object({
     }),
     description: z.string().min(1, {
         message: 'Необходимо ввести описание товара.',
+    }),
+    category: z.string().min(1, {
+        message: 'Необходимо ввести категорию товара.',
     }),
     price: z
         .string().min(1, {
@@ -62,13 +66,13 @@ const formSchema = z.object({
                     message: 'Количество товаров должно быть целым положительным числом.',
                 }),
         })
-    )
-    // additionalInformation: z.array(
-    //     z.object({
-    //         title: z.string(),
-    //         description: z.string()
-    //     })
-    // ),
+    ),
+    additionalInformation: z.array(
+        z.object({
+            title: z.string(),
+            description: z.string()
+        })
+    ),
 });
 
 export const EditProductModal = () => {
@@ -99,7 +103,7 @@ export const EditProductModal = () => {
 
     const handlePictureChange = async (event) => {
         const files = event.target.files;
-        const newPictures = Array.from(files).map((file:File) =>
+        const newPictures = Array.from(files).map((file: File) =>
             URL.createObjectURL(file)
         );
         const convertedFile = await convertBase64(files?.[0]) as File;
@@ -135,6 +139,8 @@ export const EditProductModal = () => {
     const handleClose = () => {
         setSelectedPictures([]);
         form.reset();
+        setSelectedPictures([]);
+        setSelectedPicturesFiles([]);
         onClose();
     }
 
@@ -145,15 +151,21 @@ export const EditProductModal = () => {
             title: "",
             description: "",
             price: "",
+            category: "",
             sizes: [
-                {size: "XS", amount:null},
-                {size: "S", amount:null},
-                {size: "M", amount:null},
-                {size: "L", amount:null},
-                {size: "XL", amount:null},
-                {size: "XXL", amount:null},
+                {size: "XS", amount: null},
+                {size: "S", amount: null},
+                {size: "M", amount: null},
+                {size: "L", amount: null},
+                {size: "XL", amount: null},
+                {size: "XXL", amount: null},
+            ],
+            additionalInformation: [
+                {title: "", description: ""},
+                {title: "", description: ""},
+                {title: "", description: ""},
+                {title: "", description: ""},
             ]
-            //additionalInformation: []
         }
     });
 
@@ -166,18 +178,25 @@ export const EditProductModal = () => {
 
             Object.keys(values).forEach((key) => {
                 if (key === "sizes") {
-                    values[key].forEach((size, index) => {
+                    values[key].forEach((size) => {
                         formData.append(size.size, size.amount);
                     });
+                } else if (key === "additionalInformation") {
+                    values[key].forEach((ai, index) => {
+                        if (ai.title.trim() !== "" && ai.description.trim() !== "") {
+                            formData.append(`additionalInformation[${index}].title`, ai.title);
+                            formData.append(`additionalInformation[${index}].description`, ai.description);
+                        }
+                    })
                 } else {
                     formData.append(key, values[key]);
                 }
             });
 
             selectedPicturesFiles.forEach((file, index) => {
-                if(file.length > 1000) {
+                if (file.length > 1000) {
                     formData.append(`picturesFiles[${index}]`, file);
-                }else {
+                } else {
                     formData.append(`picturesString[${index}]`, file);
                 }
             });
@@ -190,30 +209,35 @@ export const EditProductModal = () => {
 
 
             form.reset();
+            setSelectedPictures([]);
+            setSelectedPicturesFiles([]);
             onClose();
-            window.location.reload();
-
         } catch (error) {
             console.log(error)
         }
     }
 
 
-    useEffect(()=> {
-        if(product){
+    useEffect(() => {
+        if (product) {
             form.setValue("title", product.title);
             form.setValue("description", product.description);
             form.setValue("price", product.price);
+            form.setValue("category", product.category);
             form.setValue("sizes.0.amount", product.sizes[0].amount);
-            form.setValue("sizes.1.amount", product.sizes[1].amount)
-            form.setValue("sizes.2.amount", product.sizes[2].amount)
-            form.setValue("sizes.3.amount", product.sizes[3].amount)
-            form.setValue("sizes.4.amount", product.sizes[4].amount)
-            form.setValue("sizes.5.amount", product.sizes[5].amount)
+            form.setValue("sizes.1.amount", product.sizes[1].amount);
+            form.setValue("sizes.2.amount", product.sizes[2].amount);
+            form.setValue("sizes.3.amount", product.sizes[3].amount);
+            form.setValue("sizes.4.amount", product.sizes[4].amount);
+            form.setValue("sizes.5.amount", product.sizes[5].amount);
+            for (let i = 0; i < product.additionalInformation.length; i++) {
+                form.setValue(`additionalInformation.${i}.title`, product.additionalInformation[i].title);
+                form.setValue(`additionalInformation.${i}.description`, product.additionalInformation[i].description);
+            }
             setSelectedPictures(product.pictures);
             setSelectedPicturesFiles(product.pictures);
         }
-    },[product, form])
+    }, [product, form])
 
     return (
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
@@ -228,13 +252,13 @@ export const EditProductModal = () => {
                 </DialogHeader>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        <div className="flex flex-row space-y-6 px-6">
+                        <div className="flex flex-row space-y-6 px-6" style={{maxHeight: '63vh', overflowY: 'auto'}}>
                             <div className="flex-1 space-y-6">
                                 <FormField
                                     control={form.control}
                                     name="pictures"
                                     render={({field}) => (
-                                        <FormItem  className="addImagesConteiner">
+                                        <FormItem className="addImagesConteiner">
                                             {/*<FormLabel*/}
                                             {/*    className="uppercase  text-xs font-bold text-zinc-500 dark:text-secondary/70">*/}
                                             {/*    Фотографии*/}
@@ -307,6 +331,28 @@ export const EditProductModal = () => {
                                 </FormField>
                                 <FormField
                                     control={form.control}
+                                    name="category"
+                                    render={({field}) => (
+                                        <FormItem>
+                                            <FormLabel
+                                                className="uppercase mt-0 text-xs font-bold text-zinc-500 dark:text-secondary/70"
+                                            >
+                                                Категория товара
+                                            </FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    disabled={isLoading}
+                                                    className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                                                    placeholder="Введите категорию товара"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}>
+                                </FormField>
+                                <FormField
+                                    control={form.control}
                                     name="price"
                                     render={({field}) => (
                                         <FormItem>
@@ -363,7 +409,7 @@ export const EditProductModal = () => {
                                             key={size}
                                             control={form.control}
                                             name={`sizes.${index}.amount`}
-                                            render={({ field }) => (
+                                            render={({field}) => (
                                                 <FormItem className="flex items-center mt-3">
                                                     <div className="flex flex-row items-center justify-center">
                                                         <div
@@ -387,6 +433,48 @@ export const EditProductModal = () => {
                                         />
                                     ))}
                                 </div>
+                                <div className="uppercase text-s font-bold text-zinc-700 dark:text-secondary/70"
+                                     style={{marginTop: "40px"}}>
+                                    Дополнительная информация о товаре
+                                </div>
+                                {additionalInformation.map((info, index) => (
+                                    <div key={index}>
+                                        <FormField
+                                            control={form.control}
+                                            name={`additionalInformation.${index}.title`}
+                                            render={({field}) => (
+                                                <FormItem>
+                                                    <FormLabel
+                                                        className="uppercase mt-0 text-xs font-bold text-zinc-500 dark:text-secondary/70"
+                                                    >Заголовок №{index + 1}</FormLabel>
+                                                    <FormControl>
+                                                        <Input
+                                                            className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                                                            {...field}
+                                                            placeholder="Введите заголовок"/>
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
+                                        <FormField
+                                            control={form.control}
+                                            name={`additionalInformation.${index}.description`}
+                                            render={({field}) => (
+                                                <FormItem>
+                                                    <FormLabel
+                                                        className="uppercase mt-0 text-xs font-bold text-zinc-500 dark:text-secondary/70"
+                                                    >Описание №{index + 1}</FormLabel>
+                                                    <FormControl>
+                                                        <Textarea
+                                                            {...field}
+                                                            placeholder="Введите описание"
+                                                            className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"/>
+                                                    </FormControl>
+                                                </FormItem>
+                                            )}
+                                        />
+                                    </div>
+                                ))}
                             </div>
                         </div>
 

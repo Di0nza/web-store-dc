@@ -4,6 +4,7 @@ import {NextRequest, NextResponse} from "next/server";
 import {IProduct} from "@/types/Product";
 import {ITokenData} from "@/types/TokenData";
 import {getDataFromToken} from "@/helpers/getDataFromToken";
+import {log} from "util";
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
@@ -40,11 +41,29 @@ export async function POST(request: NextRequest) {
 
         const description = data.get('description');
         const price = data.get('price');
+        const category = data.get('category')
         const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => ({
             size: size,
             amount: data.get(size),
         }));
 
+        const additionalInformation = [];
+
+        for (const key of data.keys()) {
+            if (key.startsWith('additionalInformation')) {
+                const [index, field] = key
+                    .match(/additionalInformation\[(\d+)\]\.(title|description)/)
+                    .slice(1);
+
+                if (!additionalInformation[index]) {
+                    additionalInformation[index] = {};
+                }
+
+                additionalInformation[index][field] = data.get(key);
+            }
+        }
+
+        console.log(additionalInformation)
         console.log("Title:", title);
         console.log("Description:", description);
         console.log("Price:", price);
@@ -68,8 +87,10 @@ export async function POST(request: NextRequest) {
             title: title,
             description: description,
             price:price,
+            category:category,
             sizes: sizes,
             pictures: picturesNames,
+            additionalInformation: additionalInformation
         })
 
         const savedProduct = await newProduct.save();

@@ -7,8 +7,11 @@ const productSchema = mongoose.models.Product ?
     model('Product', new Schema<IProduct>({
         title: {type: String, required: true},
         description: {type: String, required: true},
-        sizes: [{size: String, amount: String}],
+        category: {type: String, required: true},
         price: {type: String, required: true},
+        favorites: {type: Number, default: 0},
+        views: {type: Number, default: 0},
+        sizes: [{size: String, amount: String}],
         pictures: [String],
         additionalInformation: [{title: String, description: String}],
     }));

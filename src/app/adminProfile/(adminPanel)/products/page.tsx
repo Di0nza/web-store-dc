@@ -2,14 +2,14 @@
 import React, {useEffect, useState} from 'react';
 import {AdminProducts} from "@/components/adminProducts";
 import {ProductsSearch} from "@/components/ProductsSearch";
-import {getAllProducts, getData} from "@/services/getData";
+import {getAllProductsAdmin, getData} from "@/services/getData";
 import axios from "axios";
 
 const Page = () => {
     const [products, setProducts] = useState<any[]>([]);
 
     useEffect(() => {
-        getAllProducts().then((data)=>setProducts(data.data.products))
+        getAllProductsAdmin().then((data)=>setProducts(data.data.products))
     }, [])
 
     useEffect(()=>{
@@ -26,8 +26,7 @@ const Page = () => {
                     </div>
                     <ProductsSearch onSearch={setProducts}/>
                 </div>
-
-                <AdminProducts/>
+                <AdminProducts search={products}/>
             </div>
         </div>
     );

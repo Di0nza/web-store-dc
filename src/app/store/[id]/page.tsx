@@ -28,15 +28,23 @@ export async function generateMetadata({params: {id}}: Props): Promise<Metadata>
 
 async function getProductById(id){
     try {
-        const product = await Product.findById(id).lean();
-        console.log(product)
 
+        const product = await Product.findById(id);
         if (!product) {
             return NextResponse.json({error: "No such product"}, {status: 400})
         }
-
+        product.views += 1;
+        const updatedProduct = await product.save();
         console.log(product)
-        return product;
+        let resultProduct;
+        if(updatedProduct){
+            resultProduct = product.toObject();
+        }else{
+            return NextResponse.json({error: "No such product"}, {status: 400})
+        }
+
+        console.log("RESULT",resultProduct)
+        return resultProduct;
     } catch (error) {
         console.error('Error fetching data:', error.message);
         return null;
