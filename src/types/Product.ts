@@ -18,7 +18,10 @@ export interface IProduct {
     id?:string;
     title: string;
     description: string;
+    category: string;
     price: string;
+    favorites: number;
+    views: number;
     sizes: Types.DocumentArray<Sizes>;
     pictures: Types.DocumentArray<Pictures>;
     additionalInformation: Types.DocumentArray<AddInfos>;

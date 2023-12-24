@@ -14,6 +14,7 @@ import tglogo from '../img/shearIcons/tglogo.png';
 import instlogo from '../img/shearIcons/viberlogo.png';
 import wtplogo from '../img/shearIcons/wtplogo.png';
 import UnusualDesignMessage from "@/components/unusualDesignMessage";
+import axios from "axios";
 
 
 function Images(props: { onClick: () => Window, src: any, alt: string, style: { cursor: string; width: string } }) {
@@ -79,6 +80,20 @@ const ProductContainer = ({ product }) => {
             alert('Пожалуйста, выберите размер');
         }
     };
+
+    enum OptionsType { ADD_TO_FAV = "ADD", DELETE_FROM_FAV = "DEL"}
+    const updateFavoritesAmountInDb = async (id:string, option:OptionsType) =>{
+        try {
+            const data = {
+                id: id,
+                option: option
+            }
+            await axios.post("/api/users/products/favorites", data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
     const handleToggleFavorite = (productId: string) => {
         let favoritesArray: string[] = [];
         const favorites = localStorage.getItem('favorites');
@@ -89,10 +104,12 @@ const ProductContainer = ({ product }) => {
         if (index !== -1) {
             favoritesArray.splice(index, 1);
             console.log(`Товар ${productId} был удален из избранного`);
+            updateFavoritesAmountInDb(productId, OptionsType.DELETE_FROM_FAV);
             setIsFavorite(false);
         } else {
             favoritesArray.push(productId);
             console.log(`Товар ${productId} был добавлен в избранное`);
+            updateFavoritesAmountInDb(productId, OptionsType.ADD_TO_FAV);
             setIsFavorite(true);
         }
         localStorage.setItem('favorites', JSON.stringify(favoritesArray));

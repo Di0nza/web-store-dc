@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import {ModalType, useModal} from "@/hooks/useModalStore";
 import {Button} from "@/components/ui/button";
-import {getAllProducts} from "@/services/getData";
+import {getAllProductsAdmin} from "@/services/getData";
 import {Trash} from "lucide-react";
 import {ActionToolTip} from "@/components/ActionToolTip";
 import './componentsStyles.css'
@@ -11,20 +11,22 @@ import './componentsStyles.css'
 type AdminProductsProps = {
     products: any[];
 }
-export const AdminProducts = () => {
+export const AdminProducts = ({search}) => {
 
     const [products, setProducts] = useState<any[]>([]);
     const [updated, setUpdated] = useState("")
 
+    const {onOpen, data} = useModal();
+
     useEffect(() => {
-        getAllProducts().then((data) => setProducts(data.data.products));
-    }, [updated]); // Update products when `updated` state changes
+        getAllProductsAdmin().then((data) => setProducts(data.data.products));
+    }, [data]); // Update products when `updated` state changes
 
     const handleProductUpdate = () => {
         setUpdated(Date.now().toString());
     };
 
-    const {onOpen} = useModal();
+
     const onActionCreate = (e: React.MouseEvent, action: ModalType) => {
         e.stopPropagation();
         onOpen(action, {});
@@ -38,6 +40,10 @@ export const AdminProducts = () => {
         e.stopPropagation();
         onOpen(action, {product});
     }
+
+    useEffect(()=>{
+        setProducts(search)
+    },[search])
 
     return (
         <>
