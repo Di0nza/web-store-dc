@@ -109,7 +109,7 @@ export default function Cart() {
         try {
             setTotalNumber(cartItems.length);
             setTotalCost(cartItems.reduce(
-                (total, item) => total + item.price,
+                (total, item) => parseFloat(total) + parseFloat(item.price),
                 0
             ) * ((100 - discount) / 100));
             setCreatedBy(userData?._id);
@@ -171,13 +171,18 @@ export default function Cart() {
         setStringCartItems(JSON.stringify(storedCartItems));
         setCartItems(storedCartItems);
     }, []);
+    const totalValue = cartItems.reduce(
+        (total, item) => parseFloat(total) + parseFloat(item.price), 0
+    ) * ((100 - discount) / 100);
+
+    const roundedTotalValue = totalValue.toFixed(2);
 
     const groupedCartItems: Record<string, GroupedCartItem> = cartItems.reduce((acc, item) => {
         const key = `${item.title}-${item.size}`;
         if (!acc[key]) {
             acc[key] = { ...item, totalPrice: item.price, count: 1 };
         } else {
-            acc[key].totalPrice += item.price;
+            acc[key].totalPrice += parseFloat(item.price);
             acc[key].count += 1;
         }
         return acc;
@@ -225,10 +230,7 @@ export default function Cart() {
                         <div className="modal-header">
                             <div className="modal-header-title">
                                 <h4>Итог заказа:</h4>
-                                <p className="modal-header-title-value">${cartItems.reduce(
-                                    (total, item) => parseFloat(total) + parseFloat(item.price),
-                                    0
-                                ) * ((100 - discount) / 100)}</p>
+                                <p className="modal-header-title-value">${roundedTotalValue}</p>
                             </div>
                         </div>
                         <div className="summary-info">

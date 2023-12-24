@@ -255,7 +255,7 @@ const ProductContainer = ({ product }) => {
                                 key={index}
                                 className={`product-size ${selectedSize === size.size ? 'selected-size' : ''}`}
                                 onClick={() => parseInt(size.amount) !== 0 && handleSizeSelection(size.size)}
-                                style={{ opacity: parseInt(size.amount) === 0 ? 0.5 : 1, cursor: parseInt(size.amount) === 0 ? 'not-allowed' : 'pointer' }}
+                                style={{ opacity: parseInt(size.amount) === 0 ? 0.2 : 1, cursor: parseInt(size.amount) === 0 ? 'not-allowed' : 'pointer' }}
                             >
                                 {size.size}
                             </div>

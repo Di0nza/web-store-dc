@@ -218,11 +218,11 @@ export const EditProductModal = () => {
     return (
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
             <DialogContent className="bg-white text-black p-0 overflow-hidden">
-                <DialogHeader className="pt-8 px6">
-                    <DialogTitle className="text-2xl text-center font-bold">
+                <DialogHeader className="pt-8 px6 ml-6">
+                    <DialogTitle className="text-2xl text-left font-bold">
                         Отредактируйте товар
                     </DialogTitle>
-                    <DialogDescription className="text-center text-zinc-500">
+                    <DialogDescription className="text-left text-zinc-500">
                         Отредактируйте название, описание, фотографии и количество товаров для каждого размера.
                     </DialogDescription>
                 </DialogHeader>
@@ -234,17 +234,17 @@ export const EditProductModal = () => {
                                     control={form.control}
                                     name="pictures"
                                     render={({field}) => (
-                                        <FormItem className="flex flex-col items-center justify-center mt-10">
+                                        <FormItem  className="addImagesConteiner">
                                             {/*<FormLabel*/}
                                             {/*    className="uppercase  text-xs font-bold text-zinc-500 dark:text-secondary/70">*/}
                                             {/*    Фотографии*/}
                                             {/*</FormLabel>*/}
                                             <FormControl>
-                                                <div className="flex space-x-2 items-center justify-center">
+                                                <div className="addImagesBlock">
                                                     {selectedPictures.map((picture, index) => (
                                                         <div key={index} className="relative">
                                                             <div
-                                                                className={`relative ${index === 0 ? 'h-52 w-52' : 'h-20 w-20'}`}>
+                                                                className={`relative ${index === 0 ? 'h-72 w-72' : 'h-20 w-20 mt-3 mr-5'}`}>
                                                                 <img
                                                                     src={picture}
                                                                     alt={`Uploaded Picture ${index + 1}`}
@@ -253,7 +253,7 @@ export const EditProductModal = () => {
                                                                 />
                                                                 <button
                                                                     onClick={() => handleDeletePicture(index)}
-                                                                    className="bg-rose-500 text-white p-1 rounded-full absolute top-0 right-0 shadow-sm"
+                                                                    className="bg-black text-white p-1 rounded-full absolute top-0 right-0 shadow-sm"
                                                                     type="button"
                                                                 >
                                                                     <X className="h-4 w-4"/>
@@ -263,7 +263,7 @@ export const EditProductModal = () => {
                                                     ))}
                                                     <label
                                                         htmlFor="fileInput"
-                                                        className={`cursor-pointer flex items-center justify-center ${selectedPictures.length === 0 ? 'h-52 w-52' : 'h-20 w-20'} bg-gray-200 rounded`}
+                                                        className={`cursor-pointer flex items-center justify-center ${selectedPictures.length === 0 ? 'h-72 w-72' : 'h-20 w-20 mt-3 mr-5'} bg-gray-200 rounded`}
                                                     >
                                                         <Input
                                                             id="fileInput"

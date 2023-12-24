@@ -15,8 +15,9 @@
 .placingOrderBlock h2{
     margin-bottom: 15px;
 }
+
 .placingOrderInfoBlock{
-    width: calc(100% + 10px);
+    width: calc(100%);
     display: flex;
     flex-direction: column;
     border: 1px solid #dedede;
@@ -173,12 +174,12 @@
 }
 .deliveryMethodInput{
     width: calc(50% - 7.5px);
-    height: 50px;
+    height: 52px;
     font-size: 14px;
     border-radius: 10px;
     border: 1px solid #d9d9d9;
     background-color: #ffffff;
-    padding: 8px 10px 8px;
+    padding: 6px 10px 6px;
     outline: none;
     color: #111111;
     margin-bottom: 10px;
@@ -196,12 +197,12 @@
 }
 .deliveryMethodInputC{
     width: calc(100%);
-    height: 50px;
+    height: 52px;
     font-size: 14px;
     border-radius: 10px;
     border: 1px solid #fafafa;
     background-color: #ffffff;
-    padding: 8px 10px 8px;
+    padding: 6px 10px 6px;
     outline: none;
     color: #111111;
     margin-top: 3px;
@@ -210,12 +211,12 @@
 }
 .selectedDeliveryMethodInput{
     width: calc(50% - 7.5px);
-    height: 50px;
+    height: 52px;
     font-size: 14px;
     border-radius: 10px;
     border: 2px solid #111111;
     background-color: #ffffff;
-    padding: 8px 10px 8px;
+    padding: 6px 10px 6px;
     outline: none;
     color: #111111;
     margin-bottom: 10px;
@@ -265,7 +266,7 @@
 .placingOrderBlockButton{
     border-radius: 10px;
     margin-top: 10px;
-    width: calc(100% + 100px);
+    width: calc(100%);
     height: 50px;
     background-color: #111111;
     color: #fafafa;

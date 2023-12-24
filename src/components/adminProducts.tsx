@@ -5,6 +5,7 @@ import {Button} from "@/components/ui/button";
 import {getAllProducts} from "@/services/getData";
 import {Trash} from "lucide-react";
 import {ActionToolTip} from "@/components/ActionToolTip";
+import './componentsStyles.css'
 
 
 type AdminProductsProps = {
@@ -41,7 +42,7 @@ export const AdminProducts = () => {
     return (
         <>
             <div>
-                <Button className="bg-emerald-500" variant="ghost" onClick={(e) => onActionCreate(e, "createProduct")}>
+                <Button className="addItemBtn" variant="ghost" onClick={(e) => onActionCreate(e, "createProduct")}>
                     Добавить Товар
                 </Button>
             </div>
@@ -53,7 +54,7 @@ export const AdminProducts = () => {
                          style={{cursor:"pointer"}}
                     >
                         <div className='product-overlay'>
-                            <div className="rounded p-0.5" style={{ backgroundColor: 'rgba(255, 255, 255, 0.6)' }}>
+                            <div className="deleteBtnBlock">
                             <ActionToolTip label="Удалить">
                                     <Trash
                                         onClick={(e) => onActionDelete(e, "deleteProduct", product)}

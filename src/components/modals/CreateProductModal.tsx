@@ -3,6 +3,7 @@
 import * as z from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
+import '../componentsStyles.css'
 
 
 import {
@@ -192,11 +193,11 @@ export const CreateProductModal = () => {
     return (
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
             <DialogContent className="bg-white text-black p-0 overflow-hidden">
-                <DialogHeader className="pt-8 px6">
-                    <DialogTitle className="text-2xl text-center font-bold">
+                <DialogHeader className="pt-8 px6 ml-6">
+                    <DialogTitle className="text-2xl text-left font-bold">
                         Создайте товар
                     </DialogTitle>
-                    <DialogDescription className="text-center text-zinc-500">
+                    <DialogDescription className="text-left text-zinc-500">
                         Дайте товару название, описание, добавьте фотографии и количество товара для каждого размера.
                     </DialogDescription>
                 </DialogHeader>
@@ -208,17 +209,17 @@ export const CreateProductModal = () => {
                                     control={form.control}
                                     name="pictures"
                                     render={({field}) => (
-                                        <FormItem className="flex flex-col items-center justify-center mt-10">
+                                        <FormItem  className="addImagesConteiner">
                                             {/*<FormLabel*/}
                                             {/*    className="uppercase  text-xs font-bold text-zinc-500 dark:text-secondary/70">*/}
                                             {/*    Фотографии*/}
                                             {/*</FormLabel>*/}
                                             <FormControl>
-                                                <div className="flex space-x-2 items-center justify-center">
+                                                <div className="addImagesBlock">
                                                     {selectedPictures.map((picture, index) => (
                                                         <div key={index}>
                                                             <div
-                                                                className={`relative ${index === 0 ? 'h-52 w-52' : 'h-20 w-20'}`}>
+                                                                className={`relative ${index === 0 ? 'h-72 w-72' : 'h-20 w-20 mt-3 mr-5'}`}>
                                                                 <img
                                                                     src={picture}
                                                                     alt={`Uploaded Picture ${index + 1}`}
@@ -227,7 +228,7 @@ export const CreateProductModal = () => {
                                                                 />
                                                                 <button
                                                                     onClick={() => handleDeletePicture(index)}
-                                                                    className="bg-rose-500 text-white p-1 rounded-full absolute top-0 right-0 shadow-sm"
+                                                                    className="bg-black text-white p-1 rounded-full absolute top-0 right-0 shadow-sm"
                                                                     type="button"
                                                                 >
                                                                     <X className="h-4 w-4"/>
@@ -237,7 +238,7 @@ export const CreateProductModal = () => {
                                                     ))}
                                                     <label
                                                         htmlFor="fileInput"
-                                                        className={`cursor-pointer flex items-center justify-center ${selectedPictures.length === 0 ? 'h-52 w-52' : 'h-20 w-20'} bg-gray-200 rounded`}
+                                                        className={`cursor-pointer flex items-center justify-center ${selectedPictures.length === 0 ? 'h-72 w-72' : 'h-20 w-20 mt-3 mr-5'} bg-gray-200 rounded`}
                                                     >
                                                         <Input
                                                             id="fileInput"
@@ -256,14 +257,14 @@ export const CreateProductModal = () => {
                                     )}
                                 ></FormField>
                             </div>
-                            <div className="flex-1 space-y-5">
+                            <div className="flex-1 space-y-5 mt-0">
                                 <FormField
                                     control={form.control}
                                     name="title"
                                     render={({field}) => (
                                         <FormItem>
                                             <FormLabel
-                                                className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
+                                                className="uppercase mt-0 text-xs font-bold text-zinc-500 dark:text-secondary/70"
                                             >
                                                 Название товара
                                             </FormLabel>

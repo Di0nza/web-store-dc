@@ -120,69 +120,76 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     return (
         <div className='placingOrderBlock'>
             <h2>{"Спасибо за ваш заказ!"}</h2>
-            <div className='placingOrderBlockRow'>
-                <div className='products-value-block'>
-                    {orderData?.products.map((item, index) => (
-                        <div className={'check-cart-item'} key={index}>
-                            <img
-                                className={'mini-cart-item-img'}
-                                key={index}
-                                src={item.image}
-                                alt={`Thumbnail ${index}`}
-                            />
-                            <div className={'mini-cart-item-info'}>
-                                <div className={'mini-cart-item-info-head'}>
-                                    <div>
-                                        <h5 className={'mini-cart-item-title'}>{item.title}</h5>
-                                        <p key={index}>{item.size}</p>
-                                    </div>
-                                </div>
-                                <div className={'mini-cart-footer'}>
-                                    <h5>
-                                        ${item.price}.00
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-                <div>
-                    <div className='placingOrderInfoBlock'>
-                        <h4>{orderData?.totalNumber} товаров на сумму ${orderData?.totalCost}</h4>
+            <h4>{orderData?.totalNumber} товаров на сумму ${orderData?.totalCost} ({orderData?.paymentState})</h4>
+            <div>
+                <div className='placingOrderBlockRow'>
+                    <div className='firstInfoBlock'>
                         <h3>Контактные данные</h3>
                         <p><b>Имя:</b> {orderData?.username}</p>
                         <p><b>Email:</b> {orderData?.email}</p>
                         <p><b>Телефон:</b> {orderData?.telephone}</p>
+                    </div>
+                    <div className='firstInfoBlock'>
                         <h3>Информация о доставке</h3>
                         <p><b>Способ доставки:</b> {orderData?.deliveryMethod}</p>
                         <p><b>Пункт назначения:</b> {orderData?.country}, {orderData?.city}(д.{orderData?.house}, кв.{orderData?.apartment}), {orderData?.zip}</p>
                         <p><b>Дата создания:</b> {formattedDateTime}</p>
-                        <p><b>Статус оплаты:</b> {orderData?.paymentState}</p>
-                        <p><b>Статус заказа:</b></p>
-                        <div className={'orderStatusBtnsBlock'}>
-                            {statuses.map((status, index) => (
-                                <div key={index} className='orderStatusInput'>
-                                    <div>
-                                        <div key={index} style={{color: getStatusColor(index, status.selected), fontWeight: getStatusWeight(index, status.selected)}}>
-                                            <p>{status.title}</p>
-                                        </div>
-                                        <div key={index} style={{color: getStatusColor(index, status.selected), fontWeight: getStatusWeight(index, status.selected)}}>
-                                            {status.createdDate !== '' ? (<p>{formatTimestampToDate(status.createdDate)}</p>)
-                                                : (
-                                                    <p>Пока неизвестно</p>
-                                                )}
+                    </div>
+                </div>
+                <div className='placingOrderBlockRow'>
+                    <div className='products-value-block'>
+                        {orderData?.products.map((item, index) => (
+                            <div className={'check-cart-item'} key={index}>
+                                <img
+                                    className={'mini-cart-item-img'}
+                                    key={index}
+                                    src={item.image}
+                                    alt={`Thumbnail ${index}`}
+                                />
+                                <div className={'mini-cart-item-info'}>
+                                    <div className={'mini-cart-item-info-head'}>
+                                        <div>
+                                            <h5 className={'mini-cart-item-title'}>{item.title}</h5>
+                                            <p key={index}>{item.size}</p>
                                         </div>
                                     </div>
-                                    <button className={'orderStatusInputBtn'} onClick={() => handleStatusUpdate(status.title, orderData?._id)}>
-                                        <Image className={'orderStatusInputBtnImg'} src={arrowW} alt={'>'}/>
-                                    </button>
+                                    <div className={'mini-cart-footer'}>
+                                        <h5>
+                                            ${item.price}.00
+                                        </h5>
+                                    </div>
                                 </div>
-                            ))}
-                        </div>
+                            </div>
+                        ))}
                     </div>
-                    <Link href={'/'} className={'placingOrderBlockButton'}>
-                        {"На главную"}
-                    </Link>
+                    <div className='placingOrderInfoContainer'>
+                        <div className='placingOrderInfoBlock'>
+                            <p><b>Статус заказа:</b></p>
+                            <div className={'orderStatusBtnsBlock'}>
+                                {statuses.map((status, index) => (
+                                    <div key={index} className='orderStatusInput'>
+                                        <div>
+                                            <div key={index} style={{color: getStatusColor(index, status.selected), fontWeight: getStatusWeight(index, status.selected)}}>
+                                                <p>{status.title}</p>
+                                            </div>
+                                            <div key={index} style={{color: getStatusColor(index, status.selected), fontWeight: getStatusWeight(index, status.selected)}}>
+                                                {status.createdDate !== '' ? (<p>{formatTimestampToDate(status.createdDate)}</p>)
+                                                    : (
+                                                        <p>Пока неизвестно</p>
+                                                    )}
+                                            </div>
+                                        </div>
+                                        <button className={'orderStatusInputBtn'} onClick={() => handleStatusUpdate(status.title, orderData?._id)}>
+                                            <Image className={'orderStatusInputBtnImg'} src={arrowW} alt={'>'}/>
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <Link href={'/'} className={'placingOrderBlockButton'}>
+                            {"На главную"}
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

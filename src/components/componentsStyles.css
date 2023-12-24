@@ -235,6 +235,50 @@
 .mini-cart-item-info-head button{
     width: 40px;
 }
+.addImagesContainer{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+
+}
+.deleteBtnBlock{
+    background-color: #fafafa;
+    margin-top: 3px;
+    margin-right: 3px;
+    padding: 9px;
+    border-radius: 7px;
+    border: 1px solid #dedede;
+}
+.deleteModalBlock{
+    max-width: 600px;
+}
+.addItemBtn{
+    padding: 8px 12px;
+    background-color: #111111;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fafafa;
+    outline: none;
+}
+.addItemBtn:hover{
+    padding: 8px 10px;
+    background-color: #111111;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fafafa;
+    outline: none;
+}
+.addImagesBlock{
+    max-width: 300px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
 .mini-cart-item-title{
     margin-top: 2px;
 }

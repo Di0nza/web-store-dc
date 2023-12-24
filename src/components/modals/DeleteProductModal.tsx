@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { useModal } from "@/hooks/useModalStore";
 import { Button } from "@/components/ui/button";
+import '../componentsStyles.css'
 
 export const DeleteProductModal = () => {
     const { isOpen, onClose, type, data } = useModal();
@@ -42,12 +43,12 @@ export const DeleteProductModal = () => {
 
     return (
         <Dialog open={isModalOpen} onOpenChange={onClose}>
-            <DialogContent className="bg-white text-black p-0 overflow-hidden">
+            <DialogContent className="bg-white text-black p-0 overflow-hidden deleteModalBlock">
                 <DialogHeader className="pt-8 px-6">
-                    <DialogTitle className="text-2xl text-center font-bold">
+                    <DialogTitle className="text-2xl text-left font-bold">
                         Удаление товара
                     </DialogTitle>
-                    <DialogDescription className="text-center text-zinc-500">
+                    <DialogDescription className="text-left text-zinc-500">
                         Вы уверены, что хотите удалить этот товар ? <br />
                         <span className="text-red-600 font-semibold">{product?.title}</span> будет удален безвозвратно.
                     </DialogDescription>

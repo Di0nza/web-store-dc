@@ -26,6 +26,7 @@ const Products = ({products}: Props) => {
     useEffect(() => {
         const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
         const favorites = localStorage.getItem('favorites');
+        console.log(favorites);
         if (favorites) {
             const favoritesArray = JSON.parse(favorites);
             setFavoritesArray(favoritesArray);
