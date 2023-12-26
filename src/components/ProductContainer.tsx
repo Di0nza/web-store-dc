@@ -178,7 +178,7 @@ const ProductContainer = ({ product }) => {
 
 
     return (
-        <div className='product-container'>
+        <div className='product-container' style={{marginBottom:'50px', minHeight:'100vh'}}>
             <div className='product-slider'>
                 <img className='product-slider-preview' src={currentImage} alt={product.title} />
                 <div className='product-thumbnails'>
@@ -259,28 +259,32 @@ const ProductContainer = ({ product }) => {
 
 
                     <div className='product-additionalInformation-block'>
-                        <h4>{product.category}</h4>
-                        <p>{product.description}</p>
+                        <h3>{product.description}</h3>
+                        <div className='product-sizes-block'>
+                            {product.sizes.map((size, index) => (
+                                <div
+                                    key={index}
+                                    className={`product-size ${selectedSize === size.size ? 'selected-size' : ''}`}
+                                    onClick={() => parseInt(size.amount) !== 0 && handleSizeSelection(size.size)}
+                                    style={{ opacity: parseInt(size.amount) === 0 ? 0.2 : 1, cursor: parseInt(size.amount) === 0 ? 'not-allowed' : 'pointer' }}
+                                >
+                                    {size.size}
+                                </div>
+                            ))}
+                        </div>
                         {product.additionalInformation.map((info, index) => (
-                            <span key={index}><b>{info.title}:</b> {info.description}</span>
+                            <div>
+                                <b>{info.title}:</b>
+                                <p key={index}> {info.description}</p>
+                            </div>
+
                         ))}
                     </div>
 
-                    <div className='product-sizes-block'>
-                        {product.sizes.map((size, index) => (
-                            <div
-                                key={index}
-                                className={`product-size ${selectedSize === size.size ? 'selected-size' : ''}`}
-                                onClick={() => parseInt(size.amount) !== 0 && handleSizeSelection(size.size)}
-                                style={{ opacity: parseInt(size.amount) === 0 ? 0.2 : 1, cursor: parseInt(size.amount) === 0 ? 'not-allowed' : 'pointer' }}
-                            >
-                                {size.size}
-                            </div>
-                        ))}
-                    </div>
+
                 </div>
                 <div className='product-btn' onClick={handleAddToCart}>
-                    {selectedSize ? "Добавить в корзину" : "Выберете размер"}
+                    {selectedSize ? "Добавить в корзину" : "Выберите размер"}
                 </div>
             </div>
         </div>

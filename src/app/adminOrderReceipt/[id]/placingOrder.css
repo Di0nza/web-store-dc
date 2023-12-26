@@ -206,12 +206,13 @@
     max-width: 600px;
     width: calc(100%);
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     justify-content: flex-start;
     margin-bottom: 50px;
     margin-top: 6px;
     margin-right: 10px;
+    overflow-y: scroll;
+    max-height: 405px;
 }
 .order-input-title{
     margin-bottom: 3px;

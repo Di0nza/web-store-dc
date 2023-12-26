@@ -304,6 +304,7 @@
     width: 100%;
     margin-top: 30px;
     display: flex;
+    margin-bottom: 50px;
     flex-direction:row ;
     justify-content: space-between;
     align-items: flex-start;
@@ -411,7 +412,6 @@
     padding: 10px;
     border-radius: 10px;
     margin: 20px 0;
-    border: 1px solid #dedede;
 }
 .product-btn{
     width: 100%;

@@ -29,12 +29,12 @@ import {Button} from "@/components/ui/button"
 import axios from "axios";
 import {useRouter} from "next/navigation";
 import {useModal} from "@/hooks/useModalStore"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {X} from "lucide-react"
 import {Textarea} from "@/components/ui/textarea";
 
 const validSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
-const additionalInformation = [1, 1, 1, 1];
+const additionalInformation = ['Материал', 'Уход', '', ''];
 
 const formSchema = z.object({
     title: z.string().min(1, {
@@ -166,6 +166,10 @@ export const CreateProductModal = () => {
             ]
         }
     });
+    useEffect(() => {
+        form.setValue('additionalInformation.0.title', 'Материал');
+        form.setValue('additionalInformation.1.title', 'Уход');
+    }, [form])
 
     const isLoading = form.formState.isSubmitting;
     const onSubmit = async (values: z.infer<typeof formSchema>) => {

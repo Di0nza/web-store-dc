@@ -27,6 +27,10 @@
     justify-content: space-between;
 }
 .mini-cart-item-date{
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-end;
     font-size: 14px;
     color: #818181;
 }
@@ -402,7 +406,6 @@
     padding: 10px;
     border-radius: 10px;
     margin: 20px 0;
-    border: 1px solid #dedede;
 }
 .product-btn{
     width: 100%;

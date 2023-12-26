@@ -11,15 +11,24 @@ import sliderImg4 from '../img/homeSlider/00763.jpg';
 const HomeImageSlider = () => {
     const images = [sliderImg1,sliderImg2,sliderImg3,sliderImg4,];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [slideAnimation, setSlideAnimation] = useState('');
 
     const nextSlide = () => {
-        const newIndex = (currentImageIndex + 1) % images.length;
-        setCurrentImageIndex(newIndex);
+        setSlideAnimation('slide-left');
+        setTimeout(() => {
+            const newIndex = (currentImageIndex + 1) % images.length;
+            setCurrentImageIndex(newIndex);
+            setSlideAnimation('');
+        }, 100);
     };
 
     const prevSlide = () => {
-        const newIndex = (currentImageIndex - 1 + images.length) % images.length;
-        setCurrentImageIndex(newIndex);
+        setSlideAnimation('slide-right');
+        setTimeout(() => {
+            const newIndex = (currentImageIndex - 1 + images.length) % images.length;
+            setCurrentImageIndex(newIndex);
+            setSlideAnimation('');
+        }, 100);
     };
 
     useEffect(() => {
@@ -44,7 +53,7 @@ const HomeImageSlider = () => {
                     />
                 </div>
                 <Image
-                    className={styles.slideImg}
+                    className={`${styles.slideImg} ${slideAnimation === 'slide-left' ? 'previous' : 'current'}`}
                     src={images[currentImageIndex]}
                     alt={`Slide ${currentImageIndex}`}
                 />

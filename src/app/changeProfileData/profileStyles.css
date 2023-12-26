@@ -242,6 +242,7 @@
     flex-direction:row ;
     justify-content: space-between;
     align-items: flex-start;
+    margin-bottom: 50px;
 }
 .product-slider{
     width: 400px;
@@ -341,7 +342,6 @@
     padding: 10px;
     border-radius: 10px;
     margin: 20px 0;
-    border: 1px solid #dedede;
 }
 .product-btn{
     width: 100%;

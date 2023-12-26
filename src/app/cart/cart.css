@@ -9,6 +9,8 @@
     padding: 25px 0 0 0;
 }
 .cart-block h3{
+    font-size: 25px;
+    font-weight: bold;
     margin: 0 0 15px 0;
 }
 .cart-frame{
@@ -42,6 +44,7 @@
     align-items: center;
 }
 .modal-header-title h4{
+    font-weight: 600;
     margin: 0 0 3px 0;
 }
 .close-button {
@@ -112,6 +115,7 @@
     justify-content: space-between;
 }
 .mini-cart-item-title{
+    font-weight: 600;
     margin-bottom: 3px;
 }
 .delete-button{
