@@ -15,6 +15,7 @@ import instlogo from '../img/shearIcons/viberlogo.png';
 import wtplogo from '../img/shearIcons/wtplogo.png';
 import UnusualDesignMessage from "@/components/unusualDesignMessage";
 import axios from "axios";
+import './componentsStyles.css'
 
 
 function Images(props: { onClick: () => Window, src: any, alt: string, style: { cursor: string; width: string } }) {
@@ -179,8 +180,8 @@ const ProductContainer = ({ product }) => {
 
     return (
         <div className='product-container' style={{marginBottom:'50px', minHeight:'100vh'}}>
-            <div className='product-slider'>
-                <img className='product-slider-preview' src={currentImage} alt={product.title} />
+            <div className='product-container-slider'>
+                <img className='product-container-slider-preview' src={currentImage} alt={product.title} />
                 <div className='product-thumbnails'>
                     {product.pictures.map((image, index) => (
                         <img

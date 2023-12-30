@@ -9,6 +9,10 @@
     padding-top: 50px;
     padding-bottom: 100px;
 }
+.signUpBlock h2{
+    font-size: 25px;
+    font-weight: 600;
+}
 .signUpBlockText{
     margin: 5px 0 30px 0;
     color: #606060;
@@ -24,8 +28,8 @@
     height: 50px;
     font-size: 14px;
     border-radius: 10px;
-    border: 1px solid #afafaf;
-    background-color: #ffffff;
+    border: 1px solid #dadada;
+    background-color: #fafafa;
     padding: 11px 10px 9px;
     outline: none;
     color: #111111;
@@ -60,8 +64,8 @@
     height: 50px;
     font-size: 14px;
     border-radius: 10px;
-    border: 1px solid #afafaf;
-    background-color: #ffffff;
+    border: 1px solid #dadada;
+    background-color: #fafafa;
     padding: 15px 10px 14px;
     text-align: center;
     font-weight: bold;

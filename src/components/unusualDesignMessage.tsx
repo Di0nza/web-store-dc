@@ -87,7 +87,7 @@ const UnusualDesignMessage = ({show, onHide, item}) => {
                 </div>
             ) : (
                 <>
-                    <header className="shearContainerHeader">
+                    <header className="shearStoreContainerHeader">
                         <p className="shearContainerTitle">
                             Дополнительные предпочтения
                         </p>

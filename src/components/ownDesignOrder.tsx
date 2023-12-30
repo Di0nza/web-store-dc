@@ -44,7 +44,13 @@ const OwnDesignOrder = () => {
         <div className="ownDesignOrder">
             <header className="shearContainerHeader">
                 <p className="shearContainerTitle">
-                    Особый дизайн
+                    Уникальный стиль по вашему желанию
+                </p>
+                <p className="shearContainerText">
+                    Дайте жизнь своим идеям! Независимо от того, ищете ли вы особый дизайн
+                    для повседневной одежды, специальное платье для важного события или что-то совершенно новое,
+                    мы готовы воплотить вашу мечту в реальность. Оставьте заявку,
+                    чтобы мы могли начать работу над вашим индивидуальным заказом уже сегодня!
                 </p>
             </header>
             <div className="shearContainerBlock">

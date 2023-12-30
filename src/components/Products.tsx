@@ -87,7 +87,7 @@ const Products = ({products}: Props) => {
                     </div>
                     <Link href={`store/${product._id}`} >
                         <div className='product-info'>
-                            <img className='product-img' src={product.pictures[0]} alt={product.title}></img>
+                            <img className='product-info-img' src={product.pictures[0]} alt={product.title}></img>
                             <p className='product-title'>{product.title}</p>
                             <p className='product-category'>{product.category}</p>
                         </div>

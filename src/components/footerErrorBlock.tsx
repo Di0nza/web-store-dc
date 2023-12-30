@@ -45,7 +45,7 @@ const FooterErrorBlock = () => {
     return (
         <div className="blur-background">
             <div className="сooperationContainer">
-                <header className="shearContainerHeader">
+                <header className="shearStoreContainerHeader">
                     <p className="shearContainerTitle">
                         Сообщение об ошибке
                     </p>
