@@ -44,7 +44,7 @@ const FooterCooperationBlock = () => {
     return (
         <div className="blur-background">
             <div className="сooperationContainer">
-                <header className="shearContainerHeader">
+                <header className="shearStoreContainerHeader">
                     <p className="shearContainerTitle">
                         Предложение о сотруднечисве
                     </p>

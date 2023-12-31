@@ -14,6 +14,7 @@
 }
 .videoContainer {
   position: relative;
+  font-family: "Century Gothic", serif;
 }
 
 .overlay {
@@ -28,6 +29,7 @@
   align-items: center;
 }
 .textLogo{
+  margin-left: 4px;
   width: 100px;
 }
 .homeDescriptionBlock{
@@ -55,6 +57,9 @@
 }
 
 .text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   color: white;
   margin-top: 20px;

@@ -166,7 +166,7 @@ const Navigation = ({navLinks}: Props) => {
                                             <div className={'mini-cart-item-info-head'}>
                                                 <div>
                                                     <h5 className={'mini-cart-item-title'}>{item.title}</h5>
-                                                    <p key={index}>{item.size}</p>
+                                                    <b><p className={'mini-cart-item-size'} key={index}>{item.size}</p></b>
                                                 </div>
                                                 <div className="delete-button" onClick={() => removeAllFromCartLocalStorage(item)}>
                                                     <Image src={deleteItem} className="delete-button"  alt={'x'}/>
@@ -175,7 +175,7 @@ const Navigation = ({navLinks}: Props) => {
                                             <div className={'mini-cart-footer'}>
                                                 <div key={index} className='mini-count-pad'>
                                                     <Image src={minus} alt={'-'} className='mini-count-pad-icon' onClick={() => handleDecrease(item)}></Image>
-                                                    <p>{item.count}</p>
+                                                    <b><p>{item.count}</p></b>
                                                     <Image src={plus} alt={'+'} className='mini-count-pad-icon' onClick={() => handleIncrease(item)}></Image>
                                                 </div>
                                                 <h5>

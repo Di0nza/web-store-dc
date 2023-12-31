@@ -3,7 +3,7 @@ import Image from "next/image";
 import headerLogo from "@/img/headerLogo.png";
 import textLogo from "@/img/textLogo.png";
 import Link from "next/link";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import OwnDesignOrder from "@/components/ownDesignOrder";
 import FooterCooperationBlock from "@/components/footerCooperationBlock";
@@ -38,6 +38,10 @@ const Footer = () => {
             console.log(error.message);
         }
     };
+    useEffect(() => {
+        getUserDetails()
+        console.log(userData);
+    }, []);
     return (
         <footer className='footer-container'>
 
@@ -49,12 +53,36 @@ const Footer = () => {
                     <FooterCooperationBlock/>
                 )}
                 <p className='footer-privacy-text'>Этот веб-сайт использует Google Analytics, чтобы помочь нам улучшить его содержимое.
-                    <Link className='footer-privacy-link-text' href={'/privacyPolicy'}> Политика Конфиденциальности</Link>
+                    <Link className='footer-privacy-link-text' href={'/privacyPolicy'}>Политика Конфиденциальности</Link>
                 </p>
+                <div className='footer-navigation-container'>
+                    <div className='footer-navigation-block'>
+                        <Link href={'/about'}>О нас</Link>
+                        <Link href={'/about/contacts'}>Контакты</Link>
+                        <Link href={'/about/team'}>Команда</Link>
+                    </div>
+                    {userData !== null ? (
+                        <div className='footer-navigation-block'>
+                            <Link href={'/profile'}>Профиль</Link>
+                            <Link href={'/userOrders'}>Заказы</Link>
+                            <Link href={'/favorites'}>Избранные</Link>
+                        </div>
+                    ) : (
+                        <div className='footer-navigation-block'>
+                            <Link href={'/login'}>Авторизация</Link>
+                            <Link href={'/signup'}>Регистрация</Link>
+                        </div>
+                    )}
+                    <div className='footer-navigation-block'>
+                        <Link href={'/about'}>Магазин</Link>
+                        <Link href={'/cart'}>Корзина</Link>
+                    </div>
+
+                </div>
 
                 <div className='footer-info-block'>
                     <div className='footer-error-block'>
-                        <p>Помогите сделать наш сервис лучше</p>
+                    <p>Помогите сделать наш сервис лучше</p>
                         <div className='footer-btns-block'>
                             <button className='footer-error-btn' onClick={toggleFooterErrorBlock}>
                                 <p>Сообщить об ошоибке</p>
