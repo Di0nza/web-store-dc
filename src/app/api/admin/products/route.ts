@@ -24,6 +24,7 @@ connect()
 export async function POST(request: NextRequest) {
     try {
         const tokenData: ITokenData = getDataFromToken(request);
+        console.log(tokenData)
         if (tokenData.isAdmin === false) {
             return NextResponse.json({error: "Access denied"}, {status: 403})
         }
@@ -111,9 +112,11 @@ export async function POST(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
     try {
         const tokenData: ITokenData = getDataFromToken(request);
+
         if (tokenData.isAdmin === false) {
             return NextResponse.json({error: "Access denied"}, {status: 403})
         }
+
         const reqBody: IProduct = await request.json()
         const {
             id

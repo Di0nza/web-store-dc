@@ -24,9 +24,12 @@ export async function PATCH(
 ) {
     try {
         const tokenData: ITokenData = getDataFromToken(request);
-        if (tokenData.isAdmin === false) {
+        console.log(tokenData)
+
+        if (tokenData.isAdmin == false) {
             return NextResponse.json({error: "Access denied"}, {status: 403})
         }
+
         const data = await request.formData();
 
         console.log(data, params.productId)
@@ -111,6 +114,7 @@ export async function DELETE(
 ) {
     try {
         const tokenData: ITokenData = getDataFromToken(request);
+        console.log(tokenData)
         if (tokenData.isAdmin === false) {
             return NextResponse.json({error: "Access denied"}, {status: 403})
         }
