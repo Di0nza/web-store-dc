@@ -157,9 +157,10 @@
     align-items: center;
     font-size: 15px;
     color: #afafaf;
-    font-weight: bolder;
+    font-weight: 400;
 }
 .activeNavLink{
+    font-weight: 600;
     color: #111111;
 }
 .modal-overlay {

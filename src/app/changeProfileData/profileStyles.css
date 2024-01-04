@@ -19,7 +19,7 @@
 .loginLink{
     font-weight: 600;
 }
-.updateProfileBlock{
+.updateInfoProfileBlock{
     margin: 5px 0 30px;
 }
 .updateProfileBlockLabel{
@@ -27,18 +27,19 @@
     font-size: 14px;
     font-weight: 600;
 }
-.updateProfileBlock input{
+.updateInfoProfileBlock input{
     width: calc(100%);
     height: 50px;
     font-size: 14px;
     border-radius: 10px;
     border: 1px solid #dadada;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 11px 10px 9px;
     outline: none;
     color: #111111;
     margin-bottom: 10px;
 }
-.updateProfileBlock input::-webkit-search-cancel-button {
+.updateInfoProfileBlock input::-webkit-search-cancel-button {
     -webkit-appearance: none;
     appearance: none;
     color: #111111;
@@ -48,7 +49,7 @@
     width: 8px;
     height: 14px;
 }
-.updateProfileBlock button{
+.updateInfoProfileBlock button{
     border-radius: 10px;
     width: calc(100%);
     height: 50px;
@@ -63,29 +64,6 @@
     font-size: 16px;
     cursor: pointer;
     font-weight: 600;
-}
-.googleLogin{
-    width: calc(100%);
-    height: 50px;
-    font-size: 14px;
-    border-radius: 10px;
-    border: 1px solid #afafaf;
-    background-color: #ffffff;
-    padding: 15px 10px 14px;
-    text-align: center;
-    font-weight: bold;
-    outline: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #111111;
-    margin-top: 10px;
-}
-.googleLogin p{
-    margin: 0;
-    color: #111111;
-    align-items: center;
-    display: flex;
 }
 .Google-logo{
     width: 26px;

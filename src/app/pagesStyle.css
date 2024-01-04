@@ -29,7 +29,7 @@
     font-size: 14px;
     border-radius: 10px;
     border: 1px solid #dadada;
-    background-color: #fafafa;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 11px 10px 9px;
     outline: none;
     color: #111111;
@@ -65,7 +65,7 @@
     font-size: 14px;
     border-radius: 10px;
     border: 1px solid #dadada;
-    background-color: #fafafa;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 15px 10px 14px;
     text-align: center;
     font-weight: bold;

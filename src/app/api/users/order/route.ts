@@ -135,7 +135,22 @@ export async function PUT(request: NextRequest) {
     }
 }
 
-
+export async function DELETE(request: NextRequest) {
+    try {
+        const reqBody = await request.json()
+        const { orderId } = reqBody
+        const deletedOrder = await Order.findByIdAndDelete(orderId)
+        if (!deletedOrder) {
+            return NextResponse.json({ message: "PromoCode not found" }, { status: 404 })
+        }
+        return NextResponse.json({
+            message: "Order deleted successfully",
+            promo: deletedOrder
+        })
+    } catch (error: any) {
+        return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+}
 
 
 

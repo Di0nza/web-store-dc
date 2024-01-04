@@ -1,15 +1,26 @@
-.profileBlock{
+.adminOrdersBlock{
     min-height: 100vh;
     width: 100%;
-    max-width: 600px;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
     padding: 25px 0 0 0;
     margin: 0 auto;
 }
+.adminOrdersBlock h2{
+    font-size: 25px;
+    font-weight: 600;
+}
 .profileBlockCategories{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+}
+.orderFilterBlock{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
     justify-content: space-between;
 }
 .mini-order-item-info{
@@ -19,12 +30,144 @@
     justify-content: space-between;
     width: calc(100% + 20px);
     border: 1px solid #dedede;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
 }
-.orderProfileBlock{
-    margin: 10px 0 30px;
+.blockCategory{
+    font-size: 13px;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    margin: 5px 5px 0 0;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.blockCategory.selected{
+    font-size: 13px;
+    border: 2px solid #111111;
+    border-radius: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.filterBlock{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: calc(100%);
+    max-width: 390px;
+    margin: 10px 0 0 0;
+    border: 1px solid #dedede;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 10px;
+}
+.filterBlock h4{
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.profileBlockOrderFiltersColumn{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.profileBlockOrderFilters{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.profileBlockOrderFilters:last-child{
+    margin-bottom: 0;
+}
+.order-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.confirmation-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(241, 241, 241, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+.order-delete-btns{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.cancel-order-delete{
+    background-color: #111111;
+    padding: 5px 15px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    color: #fafafa;
+    cursor: pointer;
+}
+.confirm-order-delete{
+    border: 2px solid #111111;
+    padding: 3px 13px;
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    border-radius: 8px;
+    color: #111111;
+    cursor: pointer;
+}
+.confirmation-modal {
+    width: 100%;
+    max-width: 450px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #dadada;
+}
+.confirmation-modal p{
+    margin-bottom: 20px;
+}
+.confirmation-modal button {
+    margin-right: 10px;
+}
+.order-item-delete-img{
+    width: 14px;
+    height: 18px;
+    margin-left: 10px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+.mini-order-footer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.mini-cart-footer-right{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.ordersProfileBlock{
+    width: calc(100% - 20px);
+    max-width: 580px;
+    margin: 10px 10px 30px 0;
 }
 .profileBlockCategories{
     display: flex;
@@ -33,9 +176,6 @@
 }
 .mini-cart-item-date{
     text-align: right;
-    display: flex;
-    justify-content: flex-end;
-    align-self: flex-end;
     font-size: 14px;
     color: #818181;
 }
@@ -59,7 +199,7 @@
     font-size: 14px;
     font-weight: 600;
 }
-.profileBlock input{
+.adminOrdersBlock input{
     width: calc(100%);
     height: 50px;
     font-size: 14px;
@@ -71,7 +211,7 @@
     color: #111111;
     margin-bottom: 10px;
 }
-.profileBlock input::-webkit-search-cancel-button {
+.adminOrdersBlock input::-webkit-search-cancel-button {
     -webkit-appearance: none;
     appearance: none;
     color: #111111;
@@ -124,7 +264,7 @@
     width: 8px;
     height: 14px;
 }
-.profileBlock button{
+.adminOrdersBlock button{
     width: calc(100%);
     height: 50px;
     background-color: #111111;
@@ -136,29 +276,6 @@
     align-items: center;
     font-size: 16px;
     font-weight: 600;
-}
-.googleLogin{
-    width: calc(100%);
-    height: 50px;
-    font-size: 14px;
-    border-radius: 10px;
-    border: 1px solid #afafaf;
-    background-color: #ffffff;
-    padding: 15px 10px 14px;
-    text-align: center;
-    font-weight: bold;
-    outline: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #111111;
-    margin-top: 10px;
-}
-.googleLogin p{
-    margin: 0;
-    color: #111111;
-    align-items: center;
-    display: flex;
 }
 .Google-logo{
     width: 26px;

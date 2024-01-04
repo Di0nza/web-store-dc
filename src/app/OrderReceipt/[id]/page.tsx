@@ -93,7 +93,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
 
     const getStatusWeight = (index, selected) => {
         if (selected) {
-            return "500";
+            return "600";
         } else {
             return "300";
         }
@@ -170,8 +170,8 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                                 </div>
                                 <div className={'orderStatusTitleBlock'}>
                                     {statuses.map((status, index) => (
-                                        <div className={'orderStatusItem'} key={index} style={{color: getStatusColor(index, status.selected), fontWeight: getStatusWeight(index, status.selected)}}>
-                                            <p className={'orderStatusTitle'}>{status.title}</p>
+                                        <div className={'orderStatusItem'} key={index} style={{color: getStatusColor(index, status.selected)}}>
+                                            <p style={{fontWeight: getStatusWeight(index, status.selected)}} className={'orderStatusTitle'}>{status.title}</p>
                                             {status.createdDate !== '' ? (<p className={'orderStatusTime'}>{formatTimestampToDate(status.createdDate)}</p>) : (<p className={'orderStatusTime'}>Пока неизвестно</p>)}
                                         </div>
                                     ))}
