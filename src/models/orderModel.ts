@@ -21,6 +21,8 @@ const productSchema = mongoose.models.Order ?
         createdBy: String,
         createdAt: {type: Date, default: Date.now},
         products: [],
+        trackingCode: String,
+        trackingLink: String,
     }));
 
 export default productSchema as mongoose.Model<IOrder & Document>;

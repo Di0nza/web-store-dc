@@ -30,9 +30,6 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const formattedDateRef = useRef(null);
     const [formattedDateTime, setFormattedDateTime] = useState('');
     const [orderData, setOrderData] = useState(null);
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [buttonDisabled, setButtonDisabled] = useState(false);
     const [selectedDelivery, setSelectedDelivery] = useState(null);
 
     const handleDeliverySelection = (method) => {
@@ -103,9 +100,18 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     };
 
     return (
-        <div className='placingOrderBlock'>
-            <h2>{"Спасибо за ваш заказ!"}</h2>
-            <h4><b>{orderData?.totalNumber}</b> товаров на сумму <b>${orderData?.totalCost}</b> ({orderData?.paymentState})</h4>
+        <div className='bigPlacingOrderBlock'>
+            <div className='placingOrderBlockRow'>
+                <div>
+                    <h2>{"Спасибо за ваш заказ!"}</h2>
+                    <h4 className='placingOrderBlockTitle'><b>{orderData?.totalNumber}</b> товаров на
+                        сумму <b>${orderData?.totalCost}</b> ({orderData?.paymentState})</h4>
+                </div>
+                <div className='placingOrderTracking'>
+                    <h4><b>Сайт отслеживания:</b> {orderData?.trackingLink}</h4>
+                    <h4><b>Трек-код:</b> {orderData?.trackingCode}</h4>
+                </div>
+            </div>
             <div>
                 <div className='placingOrderBlockRow'>
                     <div className={'firstInfoContainer'}>

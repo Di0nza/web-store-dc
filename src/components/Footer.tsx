@@ -44,7 +44,6 @@ const Footer = () => {
     }, []);
     return (
         <footer className='footer-container'>
-
             <div className='footer-block'>
                 {isFooterErrorBlockOpen && (
                     <FooterErrorBlock/>
@@ -52,51 +51,51 @@ const Footer = () => {
                 {isFooterCooperationBlockOpen && (
                     <FooterCooperationBlock/>
                 )}
-                <p className='footer-privacy-text'>Этот веб-сайт использует Google Analytics, чтобы помочь нам улучшить его содержимое.
-                    <Link className='footer-privacy-link-text' href={'/privacyPolicy'}>Политика Конфиденциальности</Link>
-                </p>
-                <div className='footer-navigation-container'>
-                    <div className='footer-navigation-block'>
-                        <Link href={'/about'}>О нас</Link>
-                        <Link href={'/about/contacts'}>Контакты</Link>
-                        <Link href={'/about/team'}>Команда</Link>
-                    </div>
-                    {userData !== null ? (
-                        <div className='footer-navigation-block'>
-                            <Link href={'/profile'}>Профиль</Link>
-                            <Link href={'/userOrders'}>Заказы</Link>
-                            <Link href={'/favorites'}>Избранные</Link>
-                        </div>
-                    ) : (
-                        <div className='footer-navigation-block'>
-                            <Link href={'/login'}>Авторизация</Link>
-                            <Link href={'/signup'}>Регистрация</Link>
-                        </div>
-                    )}
-                    <div className='footer-navigation-block'>
-                        <Link href={'/about'}>Магазин</Link>
-                        <Link href={'/cart'}>Корзина</Link>
-                    </div>
-
-                </div>
-
                 <div className='footer-info-block'>
-                    <div className='footer-error-block'>
-                    <p>Помогите сделать наш сервис лучше</p>
-                        <div className='footer-btns-block'>
-                            <button className='footer-error-btn' onClick={toggleFooterErrorBlock}>
-                                <p>Сообщить об ошоибке</p>
-                            </button>
-                            <button className='footer-cooperation-btn' onClick={toggleFooterCooperationBlock}>
-                                <p>Предложение о сотрудничестве</p>
-                            </button>
+                    <div className='footer-navigation-container'>
+                        <div className='footer-navigation-block'>
+                            <Link href={'/about'}>О нас</Link>
+                            <Link href={'/about/contacts'}>Контакты</Link>
+                            <Link href={'/about/team'}>Команда</Link>
+                        </div>
+                        {userData !== null ? (
+                            <div className='footer-navigation-block'>
+                                <Link href={'/profile'}>Профиль</Link>
+                                <Link href={'/userOrders'}>Заказы</Link>
+                                <Link href={'/favorites'}>Избранные</Link>
+                            </div>
+                        ) : (
+                            <div className='footer-navigation-block'>
+                                <Link href={'/login'}>Авторизация</Link>
+                                <Link href={'/signup'}>Регистрация</Link>
+                            </div>
+                        )}
+                        <div className='footer-navigation-block'>
+                            <Link href={'/about'}>Магазин</Link>
+                            <Link href={'/cart'}>Корзина</Link>
                         </div>
                     </div>
                     <Link className='footer-info-title' href={userData?.isAdmin ? '/adminProfile' : '/'}>
-                        <Image  className='footer-title-textLogo' src={textLogo} alt={'MaryDeniz'}></Image>
-                        <Image  className='footer-title-logo' src={headerLogo} alt={'MaryDeniz'}></Image>
+                        <Image className='footer-title-textLogo' src={textLogo} alt={'MaryDeniz'}></Image>
+                        <Image className='footer-title-logo' src={headerLogo} alt={'MaryDeniz'}></Image>
                     </Link>
                 </div>
+                <div className='footer-error-block'>
+                    <p>Помогите сделать наш сервис лучше</p>
+                    <div className='footer-btns-block'>
+                        <button className='footer-error-btn' onClick={toggleFooterErrorBlock}>
+                            <p>Сообщить об ошоибке</p>
+                        </button>
+                        <button className='footer-cooperation-btn' onClick={toggleFooterCooperationBlock}>
+                            <p>Предложение о сотрудничестве</p>
+                        </button>
+                    </div>
+                </div>
+                <p className='footer-privacy-text'>Этот сайт использует Google Analytics, чтобы помочь нам улучшить
+                    его содержимое.
+                    <Link className='footer-privacy-link-text' href={'/privacyPolicy'}>Политика
+                        Конфиденциальности</Link>
+                </p>
             </div>
         </footer>
     )

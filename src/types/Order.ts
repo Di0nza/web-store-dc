@@ -16,4 +16,6 @@ export interface IOrder {
     createdBy: string,
     createdAt: Date;
     products: any,
+    trackingCode: string,
+    trackingLink: string,
 }

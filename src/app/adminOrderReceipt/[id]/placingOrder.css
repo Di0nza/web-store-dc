@@ -11,6 +11,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 .placingOrderBlock h2{
     font-size: 25px;
@@ -29,10 +30,9 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    box-shadow: 0px 0px 10px rgba(17, 17, 17, 0.1);
-    background-color: white;
+    border: 1px solid #dedede;
     border-radius: 8px;
-    padding: 8px;
+    padding: 5px 5px 5px 10px;
     font-size: 14px;
     margin-bottom: 10px;
 }
@@ -45,14 +45,14 @@
 .orderStatusInputBtn{
     background-color: #111111;
     border-radius: 8px;
-    padding: 6px 15px 6px 16px;
+    padding: 1px 15px 1px 16px;
 }
 .orderStatusInputBtnImg{
     width: 11px;
     height: 14px;
 }
 .placingOrderInfoContainer{
-    width: 100%;
+    width: calc(100% - 5px);
 }
 .firstInfoContainer{
     width: calc(100% - 5px);
@@ -74,24 +74,27 @@
     width: calc(100%);
     display: flex;
     flex-direction: column;
-    box-shadow: 2px 2px 10px rgba(17, 17, 17, 0.06);
-    background-color: white;
+    border: 1px solid #dedede;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
     padding: 8px;
+    line-height: 22px;
     font-size: 14px;
     flex-wrap: wrap;
 }
-.firstInfoBlock p:first-child{
-    margin-top: 10px;
+.firstInfoBlock h3{
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 .placingOrderInfoBlock{
-    width: 100%;
+    width: calc(100%);
     display: flex;
+    background-color: rgba(255, 255, 255, 0.8);
     flex-direction: column;
-    box-shadow: 1px 1px 12px rgba(17, 17, 17, 0.1);
-    background-color: white;
+    border: 1px solid #dedede;
     border-radius: 8px;
-    padding: 8px;
+    padding: 8px 8px 10px;
     font-size: 14px;
     flex-wrap: wrap;
     margin: 5px 0 10px;
@@ -99,14 +102,13 @@
 .placingOrderInfoBlock h4{
     font-weight: bold;
 }
-.mini-cart-item-title{
-    font-weight: bold;
-}
 .placingOrderInfoBlock p{
     margin: 1px 0;
 }
 .placingOrderInfoBlock h3{
-    margin: 15px 0 5px;
+    font-weight: 600;
+    font-size: 17px;
+    margin: 0 0 8px 0;
 }
 .placingOrderInfoBlock h3:first-child{
     margin: 5px 0 5px;
@@ -114,6 +116,10 @@
 .placingOrderInfoBlock b{
     font-weight: 600;
 }
+.mini-cart-item-title{
+    font-weight: bold;
+}
+
 .orderStatusBlock{
     width: 100%;
     display: flex;
@@ -152,15 +158,38 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    box-shadow: 2px 2px 10px rgba(17, 17, 17, 0.06);
-    background-color: white;
+    border: 1px solid #dedede;
     border-radius: 8px;
     height: 100px;
     padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
     margin-bottom: 10px;
 }
 .check-cart-item:last-child{
     margin-bottom: 0;
+}
+.check-cart-trek-inputs{
+    width: calc(100% - 8px);
+    border-radius: 8px;
+    margin-top: 10px;
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #dedede;
+}
+.check-cart-trek-inputs h3{
+    margin-bottom: 10px;
+}
+.check-cart-trek-inputs button{
+    border: 2px solid #111111;
+    width: 100%;
+    border-radius: 10px;
+    color: #111111;
+    font-weight: 600;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
 }
 .orderStatusLine div:first-child {
     width: 2px;
@@ -203,16 +232,21 @@
     width: 140px;
 }
 .products-value-block{
-    max-width: 600px;
     width: calc(100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: scroll;
+    max-height: 320px;
+}
+.products-value-cont{
+    width: calc(100% + 10px);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     margin-bottom: 50px;
     margin-top: 6px;
-    margin-right: 10px;
-    overflow-y: scroll;
-    max-height: 405px;
+    margin-right: 2px;
 }
 .order-input-title{
     margin-bottom: 3px;

@@ -30,6 +30,7 @@ export const OrderProvider = ({children}) => {
     const [createdBy, setCreatedBy] = useState('');
     const [createdAt, setCreatedAt] = useState(Date.now());
     const [products, setProducts] = useState([]);
+    const [tokenReload, setTokenReload] = useState(false);
 
     return (
         <OrderContext.Provider
@@ -51,6 +52,7 @@ export const OrderProvider = ({children}) => {
                 createdBy, setCreatedBy,
                 createdAt, setCreatedAt,
                 products, setProducts,
+                tokenReload, setTokenReload,
             }}
         >
             {children}

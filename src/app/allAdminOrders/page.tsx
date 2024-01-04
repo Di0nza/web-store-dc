@@ -50,15 +50,15 @@ export default function UserOrders() {
                     {userOrders?.map((item, index) => (
                         <Link href={`/adminOrderReceipt/${item._id}`} key={index}>
                             <div className={'mini-order-item-info'}>
-                                <div className={'mini-cart-item-info-head'}>
-                                    <div>
-                                        <h4 className={'mini-cart-item-title'}>Заказ #{item._id.toString().substring(0, 7)}</h4>
-                                    </div>
-                                </div>
+                                <p className={'mini-admin-item-info-head'}><b>Заказ #{item._id.toString().substring(0, 7)}</b></p>
+                                {item.orderStatus && (
+                                    <p className={'mini-cart-item-order-status'}>
+                                        Статус заказа: <b>{item.orderStatus.slice().reverse().find(status => status.selected)?.title}</b>
+                                    </p>
+                                )}
                                 <div className={'mini-cart-footer'}>
                                     <p className={'mini-cart-item-date'}>{formatTimestampToDate(item.orderStatus[0].createdDate)}</p>
-                                    <h5>
-                                        Стоимость:${item.totalCost}
+                                    <h5 className={'mini-cart-item-cost'}>Стоимость: <b>${item.totalCost.toFixed(2)}</b>
                                     </h5>
                                 </div>
                             </div>

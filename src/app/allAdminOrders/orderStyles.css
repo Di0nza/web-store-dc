@@ -188,8 +188,16 @@
     align-items: flex-start;
     justify-content: space-between;
 }
-.store-container-title{
+.mini-admin-item-info-head{
+    font-size: 16px;
     font-weight: 600;
+}
+.mini-cart-item-info-head{
+    font-size: 16px;
+    font-weight: 600;
+}
+.mini-cart-item-order-status{
+    font-size: 13px;
 }
 .store-quantity{
     margin: 2px 0 30px;

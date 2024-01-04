@@ -24,7 +24,9 @@ export async function POST(request: NextRequest) {
             totalCost,
             totalNumber,
             createdBy,
-            createdAt
+            createdAt,
+            trackingCode,
+            trackingLink,
         } = reqBody
 
         console.log(reqBody);
@@ -47,6 +49,8 @@ export async function POST(request: NextRequest) {
             totalNumber,
             createdBy,
             createdAt,
+            trackingCode,
+            trackingLink
         })
 
         const savedOrder = await newOrder.save()

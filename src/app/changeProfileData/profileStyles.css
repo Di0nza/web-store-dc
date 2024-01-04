@@ -116,6 +116,7 @@
     justify-content: space-between;
 }
 .store-container-title{
+    font-size: 25px;
     font-weight: 600;
 }
 .store-quantity{

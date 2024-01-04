@@ -269,7 +269,7 @@ export const CreateProductModal = () => {
 
     return (
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
-            <DialogContent className="bg-white text-black p-0 overflow-hidden">
+            <DialogContent className="text-black p-0 overflow-hidden" style={{fontFamily: "Century Gothic", backgroundColor:'#fafafa', maxWidth:'800px'}}>
                 <DialogHeader className="pt-8 px6 ml-6">
                     <DialogTitle className="text-2xl text-left font-bold">
                         Создайте товар
@@ -316,7 +316,8 @@ export const CreateProductModal = () => {
                                                     ))}
                                                     <label
                                                         htmlFor="fileInput"
-                                                        className={`cursor-pointer flex items-center justify-center ${selectedPictures.length === 0 ? 'h-72 w-72' : 'h-20 w-20 mt-3 mr-5'} bg-gray-200 rounded`}
+                                                        style={{border:'1px solid #dadada', borderRadius:'10px'}}
+                                                        className={`cursor-pointer flex items-center justify-center ${selectedPictures.length === 0 ? 'h-72 w-72' : 'h-20 w-20 mt-3 mr-5'} bg-white rounded`}
                                                     >
                                                         <Input
                                                             id="fileInput"
@@ -341,15 +342,13 @@ export const CreateProductModal = () => {
                                     name="title"
                                     render={({field}) => (
                                         <FormItem>
-                                            <FormLabel
-                                                className="uppercase mt-0 text-xs font-bold text-zinc-500 dark:text-secondary/70"
-                                            >
+                                            <FormLabel className="mt-0 text-xs font-bold">
                                                 Название товара
                                             </FormLabel>
                                             <FormControl>
                                                 <Input
                                                     disabled={isLoading}
-                                                    className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                                                    className="text-black bg-white"
                                                     placeholder="Введите название товара"
                                                     {...field}
                                                 />
@@ -363,15 +362,13 @@ export const CreateProductModal = () => {
                                     name="category"
                                     render={({field}) => (
                                         <FormItem>
-                                            <FormLabel
-                                                className="uppercase mt-0 text-xs font-bold text-zinc-500 dark:text-secondary/70"
-                                            >
+                                            <FormLabel className="mt-0 text-xs font-bold">
                                                 Категория товара
                                             </FormLabel>
                                             <FormControl>
                                                 <Input
                                                     disabled={isLoading}
-                                                    className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                                                    className="text-black bg-white"
                                                     placeholder="Введите категорию товара"
                                                     {...field}
                                                 />
@@ -385,16 +382,14 @@ export const CreateProductModal = () => {
                                     name="price"
                                     render={({field}) => (
                                         <FormItem>
-                                            <FormLabel
-                                                className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
-                                            >
+                                            <FormLabel className="mt-0 text-xs font-bold">
                                                 Цена
                                             </FormLabel>
                                             <FormControl>
                                                 <Input
                                                     type={"number"}
                                                     disabled={isLoading}
-                                                    className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                                                    className="text-black bg-white"
                                                     placeholder="Введите цену"
                                                     {...field}
                                                 />
@@ -411,15 +406,13 @@ export const CreateProductModal = () => {
                                     name="description"
                                     render={({field}) => (
                                         <FormItem>
-                                            <FormLabel
-                                                className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
-                                            >
+                                            <FormLabel className="mt-0 text-xs font-bold">
                                                 Описание
                                             </FormLabel>
                                             <FormControl>
                                                 <Textarea
                                                     disabled={isLoading}
-                                                    className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                                                    className="text-black input-product"
                                                     placeholder="Введите описание товара"
                                                     {...field}
                                                 />
@@ -440,15 +433,14 @@ export const CreateProductModal = () => {
                                             name={`sizes.${index}.amount`}
                                             render={({field}) => (
                                                 <FormItem className="flex items-center mt-3">
-                                                    <div className="flex flex-row items-center justify-center">
-                                                        <div
-                                                            className={`uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70 ${index === 0 ? "ml-0" : "ml-5"}`}>{size}</div>
+                                                    <div className={`flex flex-col items-start justify-start ${index === 0 ? "ml-0" : "ml-2"}`}>
+                                                        <FormLabel className="mb-1 mt-0 text-xs font-bold">{size}</FormLabel>
                                                         <FormControl>
                                                             <Input
                                                                 type="number"
                                                                 min="0"
                                                                 disabled={isLoading}
-                                                                className=" bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0 w-16 ml-1"
+                                                                className="text-black bg-white"
                                                                 style={{
                                                                     WebkitAppearance: 'none',
                                                                 }}
@@ -456,7 +448,6 @@ export const CreateProductModal = () => {
                                                             />
                                                         </FormControl>
                                                     </div>
-                                                    <FormMessage/>
                                                 </FormItem>
                                             )}
                                         />
@@ -467,53 +458,53 @@ export const CreateProductModal = () => {
                                      style={{marginTop: "40px"}}>
                                     Дополнительная информация о товаре
                                 </div>
-                                {additionalInformation.map((info, index) => (
-                                    <div key={index}>
-                                        <FormField
-                                            control={form.control}
-                                            name={`additionalInformation.${index}.title`}
-                                            render={({field}) => (
-                                                <FormItem>
-                                                    <FormLabel
-                                                        className="uppercase mt-0 text-xs font-bold text-zinc-500 dark:text-secondary/70"
-                                                    >Заголовок №{index + 1}</FormLabel>
-                                                    <FormControl>
-                                                        <Input
-                                                            className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                                                            {...field}
-                                                            placeholder="Введите заголовок"/>
-                                                    </FormControl>
-                                                </FormItem>
-                                            )}
-                                        />
-                                        <FormField
-                                            control={form.control}
-                                            name={`additionalInformation.${index}.description`}
-                                            render={({field}) => (
-                                                <FormItem>
-                                                    <FormLabel
-                                                        className="uppercase mt-0 text-xs font-bold text-zinc-500 dark:text-secondary/70"
-                                                    >Описание №{index + 1}</FormLabel>
-                                                    <FormControl>
-                                                        <Textarea
-                                                            {...field}
-                                                            placeholder="Введите описание"
-                                                            className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"/>
-                                                    </FormControl>
-                                                </FormItem>
-                                            )}
-                                        />
-                                    </div>
-                                ))}
+                                <div>
+                                    {additionalInformation.map((info, index) => (
+                                        <div key={index} style={{marginBottom:'15px'}}>
+                                            <FormField
+                                                control={form.control}
+                                                name={`additionalInformation.${index}.title`}
+                                                render={({field}) => (
+                                                    <FormItem>
+                                                        <FormLabel className="font-bold">Заголовок
+                                                            №{index + 1}</FormLabel>
+                                                        <FormControl>
+                                                            <Input
+                                                                className="text-black bg-white"
+                                                                {...field}
+                                                                placeholder="Введите заголовок"/>
+                                                        </FormControl>
+                                                    </FormItem>
+                                                )}
+                                            />
+                                            <FormField
+                                                control={form.control}
+                                                name={`additionalInformation.${index}.description`}
+                                                render={({field}) => (
+                                                    <FormItem>
+                                                        <FormLabel className="font-bold">Описание
+                                                            №{index + 1}</FormLabel>
+                                                        <FormControl>
+                                                            <Textarea
+                                                                {...field}
+                                                                placeholder="Введите описание"
+                                                                className={`text-black `}/>
+                                                        </FormControl>
+                                                    </FormItem>
+                                                )}
+                                            />
+                                        </div>
+                                    ))}
+                                    <br/>
+                                </div>
+
                             </div>
                         </div>
-
-                        <DialogFooter className="bg-gray-200 px-6 py-4">
-                            <Button variant="secondary" disabled={isLoading}>
+                        <footer style={{display:'flex', padding: '15px 10px', justifyContent:'flex-end', margin:'0', borderTop:'1px solid #dadada'}}>
+                            <Button style={{backgroundColor:'#111111', color:'#fafafa'}} variant="secondary" disabled={isLoading}>
                                 Создать
                             </Button>
-
-                        </DialogFooter>
+                        </footer>
                     </form>
                 </Form>
             </DialogContent>
