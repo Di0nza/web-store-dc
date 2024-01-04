@@ -285,7 +285,7 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
-    margin: 10px 0;
+    margin: 10px 0 5px;
 }
 .product-size{
     display: flex;
@@ -338,7 +338,7 @@
     align-items: flex-start;
     justify-content: flex-start;
     background-color: #fafafa;
-    padding: 10px;
+    padding: 10px 0;
     border-radius: 10px;
     margin: 20px 0;
     border: 1px solid #dedede;

@@ -488,7 +488,7 @@ export const CreateProductModal = () => {
                                                             <Textarea
                                                                 {...field}
                                                                 placeholder="Введите описание"
-                                                                className={`text-black `}/>
+                                                                className={`text-black`}/>
                                                         </FormControl>
                                                     </FormItem>
                                                 )}
@@ -497,7 +497,6 @@ export const CreateProductModal = () => {
                                     ))}
                                     <br/>
                                 </div>
-
                             </div>
                         </div>
                         <footer style={{display:'flex', padding: '15px 10px', justifyContent:'flex-end', margin:'0', borderTop:'1px solid #dadada'}}>

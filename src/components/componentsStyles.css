@@ -149,6 +149,18 @@
     width: 25px;
     height: 25px;
 }
+.product-sizes-table{
+    width: 118px;
+    color: #606060;
+    padding: 0 0 0 0;
+    margin-bottom: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-bottom: 1px solid #606060;
+}
+.product-sizes-cont{
+    margin-bottom: 10px;
+}
 .header-links-block{
     max-width: 450px;
     width: 100%;
@@ -456,4 +468,96 @@
     justify-content: center;
     align-items: center;
     transform: translateX(-50%);
+}
+
+.size-table-modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.size-table-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    border-radius: 8px;
+    padding: 5px 15px 20px 15px;
+    border: 1px solid #dadada;
+    max-width: 800px;
+    width: 100%;
+}
+
+.size-table-modal-content p{
+    font-size: 14px;
+    margin: 0;
+}
+.modal-content-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+}
+.modal-content-header h2{
+    font-size: 22px;
+    font-weight: 600;
+}
+.modal-content-info{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    font-size: 14px;
+    line-height: 20px;
+}
+.modal-content-info img{
+    width: 210px;
+    margin-right: 20px;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.size-chart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.size-column {
+    flex: 1;
+    padding: 0;
+}
+
+.size-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.size-item p {
+    margin: 5px 0;
+    text-align: center;
+}
+
+.size-item p:first-child {
+    font-weight: bold;
 }
