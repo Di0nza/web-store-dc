@@ -8,3 +8,12 @@ export const postVideo = async (data)=>{
         return null;
     }
 }
+
+export const getVideo = async ()=>{
+    try {
+        return await axios.get("/api/users/customizations/mainPageVideo");
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return null;
+    }
+}
