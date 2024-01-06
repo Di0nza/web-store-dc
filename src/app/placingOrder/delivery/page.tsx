@@ -22,12 +22,12 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const pathname = usePathname();
     const [userData, setUserData] = useState<UserData | null>(null);
     const [orderData, setOrderData] = useState({
-        zip: '',
-        house: '',
-        apartment: '',
+        zip: '298312',
+        house: '23',
+        apartment: '2',
         deliveryMethod: '',
-        city: '',
-        country: ''
+        city: 'Россия',
+        country: 'Москва'
     });
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [selectedDelivery, setSelectedDelivery] = useState(null);

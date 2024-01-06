@@ -24,7 +24,9 @@ export async function POST(request: NextRequest) {
             totalCost,
             totalNumber,
             createdBy,
-            createdAt
+            createdAt,
+            trackingCode,
+            trackingLink,
         } = reqBody
 
         console.log(reqBody);
@@ -47,6 +49,8 @@ export async function POST(request: NextRequest) {
             totalNumber,
             createdBy,
             createdAt,
+            trackingCode,
+            trackingLink
         })
 
         const savedOrder = await newOrder.save()
@@ -131,7 +135,22 @@ export async function PUT(request: NextRequest) {
     }
 }
 
-
+export async function DELETE(request: NextRequest) {
+    try {
+        const reqBody = await request.json()
+        const { orderId } = reqBody
+        const deletedOrder = await Order.findByIdAndDelete(orderId)
+        if (!deletedOrder) {
+            return NextResponse.json({ message: "PromoCode not found" }, { status: 404 })
+        }
+        return NextResponse.json({
+            message: "Order deleted successfully",
+            promo: deletedOrder
+        })
+    } catch (error: any) {
+        return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+}
 
 
 

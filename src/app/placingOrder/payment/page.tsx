@@ -47,6 +47,8 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         createdBy: '',
         createdAt: Date.now(),
         products: [],
+        trackingCode: '',
+        trackingLink: '',
     });
     // @ts-ignore
     const { username, email, telephone,  zip, city, country, house, apartment,orderStatus, deliveryMethod, promotionalCode, totalCost, totalNumber, createdBy, products} = useOrderContext();
@@ -69,7 +71,9 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                 totalNumber: totalNumber,
                 createdBy: createdBy,
                 createdAt: Date.now(),
-                products: products
+                products: products,
+                trackingCode: '',
+                trackingLink: '',
             };
             const response = await axios.post("/api/users/order", updatedOrder);
             console.log(response.data.savedOrder._id);

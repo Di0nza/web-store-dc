@@ -31,8 +31,22 @@
     display: flex;
     justify-content: flex-end;
     align-self: flex-end;
-    font-size: 14px;
+    font-size: 13px;
     color: #818181;
+}
+.mini-cart-item-cost{
+    font-size: 15px;
+}
+.mini-admin-item-info-head{
+    font-size: 16px;
+    font-weight: 600;
+}
+.mini-cart-item-info-head{
+    font-size: 16px;
+    font-weight: 600;
+}
+.mini-cart-item-order-status{
+    font-size: 13px;
 }
 .profileHelloText{
     margin: 10px 0 5px;
@@ -131,29 +145,6 @@
     align-items: center;
     font-size: 16px;
     font-weight: 600;
-}
-.googleLogin{
-    width: calc(100%);
-    height: 50px;
-    font-size: 14px;
-    border-radius: 10px;
-    border: 1px solid #afafaf;
-    background-color: #ffffff;
-    padding: 15px 10px 14px;
-    text-align: center;
-    font-weight: bold;
-    outline: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #111111;
-    margin-top: 10px;
-}
-.googleLogin p{
-    margin: 0;
-    color: #111111;
-    align-items: center;
-    display: flex;
 }
 .Google-logo{
     width: 26px;
@@ -319,37 +310,16 @@
 }
 .product-thumbnails {
     display: flex;
+    flex-direction: row;
     justify-content: flex-start;
     flex-wrap: wrap;
-}
-
-.product-thumbnail {
-    width: 68px;
-    height: 68px;
-    margin-top: 15px;
-    border-radius: 8px;
-    margin-right: 15px;
-    cursor: pointer;
-    transition: opacity 0.3s ease-in-out;
-    overflow: hidden;
-    object-fit: cover;
-}
-.product-thumbnail.selected {
-    border: 2px solid #111111;
-}
-.product-thumbnail:nth-child(5n) {
-    margin-right: 0;
-}
-
-.product-thumbnail:hover {
-    opacity: 0.7;
 }
 .product-sizes-block{
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
-    margin: 10px 0;
+    margin: 10px 0 5px;
 }
 .product-size{
     display: flex;

@@ -58,7 +58,7 @@ export default function ChangeProfileData() {
             <p className='changeBlockText'>Хотите <Link className='loginLink' href="/login">Изменить пароль</Link>?</p>
             {userData && (
                 <>
-                    <div className='updateProfileBlock'>
+                    <div className='updateInfoProfileBlock'>
                         <label className='updateProfileBlockLabel'>Имя</label>
                         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
                         <label className='updateProfileBlockLabel'>Почта</label>

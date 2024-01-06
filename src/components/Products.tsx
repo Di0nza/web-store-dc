@@ -75,7 +75,7 @@ const Products = ({products}: Props) => {
     return (
         <div className='products-block'>
             {products.map((product: any) => (
-                <div key={product._id} className='product-item'>
+                <div key={product._id} className='component-product-item'>
                     <div className='product-overlay'>
                         <div className='favorite-button' onClick={() => handleToggleFavorite(product._id)}>
                             <Image

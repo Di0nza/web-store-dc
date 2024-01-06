@@ -89,7 +89,7 @@ export default function adminPromocodes() {
         <div className='profileBlock'>
             <h2>{"Добавление промокодов"}</h2>
             <p className='changeBlockText'>Добавление и изменение</p>
-            <div className='updateProfileBlock'>
+            <div className='updatePromoProfileBlock'>
                 <label className='updateProfileBlockLabel'>Название</label>
                 <input placeholder={'SAVE20NOW'} type="text" value={promoCode.title} onChange={handleTitleChange} />
                 <label className='updateProfileBlockLabel'>Значение скидки</label>
@@ -110,10 +110,10 @@ export default function adminPromocodes() {
                                     />
                                     <span className={'switch'} />
                                 </label>
-                                <h5 className={`mini-cart-item-title ${item.isValid ? '' : 'transparent-text'}`}>{item.title}</h5>
+                                <h5 className={`mini-promo-item-title ${item.isValid ? '' : 'transparent-text'}`}>{item.title}</h5>
                             </div>
                             <div className={'promocodes-item-info-block'}>
-                                <h5 className={`mini-cart-item-title ${item.isValid ? '' : 'transparent-text'}`}>Скидка: {item.value}%</h5>
+                                <h5 className={`mini-promo-item-title ${item.isValid ? '' : 'transparent-text'}`}>Скидка: {item.value}%</h5>
                                 <Image onClick={() => deletePromoCode(item._id)} className={'promocodes-item-delete-img'} src={deleteItem} alt={'x'}></Image>
                             </div>
                         </div>

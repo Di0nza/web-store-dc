@@ -4,7 +4,6 @@ import favorites from '@/img/favorite.png';
 import unFavorites from '@/img/unfavorite.png'
 import Image from "next/image";
 import unusualDesign from '../img/unusualDesign.png'
-import errorMsg from '../img/errorMsg.png'
 import shearLink from '../img/shear.png'
 import shearLogo from '../img/shearlogo.png'
 import oklogo from '../img/shearIcons/oklogo.png';
@@ -16,6 +15,8 @@ import wtplogo from '../img/shearIcons/wtplogo.png';
 import UnusualDesignMessage from "@/components/unusualDesignMessage";
 import axios from "axios";
 import './componentsStyles.css'
+import ProductSizeTable from "@/components/modals/ProductSizeTable";
+import BigPhotosSlider from "@/components/modals/BigPhotosSlider";
 
 
 function Images(props: { onClick: () => Window, src: any, alt: string, style: { cursor: string; width: string } }) {
@@ -32,6 +33,22 @@ const ProductContainer = ({ product }) => {
     const [showCopiedMessage, setShowCopiedMessage] = useState(false);
     const [sendUnusualDesign, setSendUnusualDesign] = useState(false)
     const wrapperRef = useRef(null);
+    const [isSizeTableOpen, setIsSizeTableOpen] = useState(false);
+    const [isPhotosSliderOpen, setIsPhotosSliderOpen] = useState(false);
+
+    const closeSizeTable = () => {
+        setIsSizeTableOpen(false);
+    };
+    const toggleSizeTable = () => {
+        setIsSizeTableOpen(!isSizeTableOpen);
+    };
+
+    const closePhotosSlider = () => {
+        setIsPhotosSliderOpen(false);
+    };
+    const togglePhotosSlider = () => {
+        setIsPhotosSliderOpen(!isPhotosSliderOpen);
+    };
 
     useEffect(() => {
         const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
@@ -181,7 +198,7 @@ const ProductContainer = ({ product }) => {
     return (
         <div className='product-container' style={{marginBottom:'50px', minHeight:'100vh'}}>
             <div className='product-container-slider'>
-                <img className='product-container-slider-preview' src={currentImage} alt={product.title} />
+                <img onClick={togglePhotosSlider} className='product-container-slider-preview' src={currentImage} alt={product.title} />
                 <div className='product-thumbnails'>
                     {product.pictures.map((image, index) => (
                         <img
@@ -261,17 +278,20 @@ const ProductContainer = ({ product }) => {
 
                     <div className='product-additionalInformation-block'>
                         <h3>{product.description}</h3>
-                        <div className='product-sizes-block'>
-                            {product.sizes.map((size, index) => (
-                                <div
-                                    key={index}
-                                    className={`product-size ${selectedSize === size.size ? 'selected-size' : ''}`}
-                                    onClick={() => parseInt(size.amount) !== 0 && handleSizeSelection(size.size)}
-                                    style={{ opacity: parseInt(size.amount) === 0 ? 0.2 : 1, cursor: parseInt(size.amount) === 0 ? 'not-allowed' : 'pointer' }}
-                                >
-                                    {size.size}
-                                </div>
-                            ))}
+                        <div className='product-sizes-cont'>
+                            <div className='product-sizes-block'>
+                                {product.sizes.map((size, index) => (
+                                    <div
+                                        key={index}
+                                        className={`product-size ${selectedSize === size.size ? 'selected-size' : ''}`}
+                                        onClick={() => parseInt(size.amount) !== 0 && handleSizeSelection(size.size)}
+                                        style={{ opacity: parseInt(size.amount) === 0 ? 0.2 : 1, cursor: parseInt(size.amount) === 0 ? 'not-allowed' : 'pointer' }}
+                                    >
+                                        {size.size}
+                                    </div>
+                                ))}
+                            </div>
+                            <p onClick={toggleSizeTable} className='product-sizes-table'>Узнать свой рамер</p>
                         </div>
                         {product.additionalInformation.map((info, index) => (
                             <div>
@@ -281,8 +301,12 @@ const ProductContainer = ({ product }) => {
 
                         ))}
                     </div>
-
-
+                    {isSizeTableOpen && (
+                        <ProductSizeTable onClose={closeSizeTable}/>
+                    )}
+                    {isPhotosSliderOpen && (
+                        <BigPhotosSlider product={product} onClose={closePhotosSlider}/>
+                    )}
                 </div>
                 <div className='product-btn' onClick={handleAddToCart}>
                     {selectedSize ? "Добавить в корзину" : "Выберите размер"}

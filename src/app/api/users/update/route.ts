@@ -12,7 +12,7 @@ export async function PUT(request: NextRequest) {
         const { username, email } = reqBody;
         const userId = await getDataFromToken(request);
         const updatedUser = await User.findOneAndUpdate(
-            { _id: userId },
+            { _id: userId.id },
             { username, email },
             { new: true, select: '-password' }
         );

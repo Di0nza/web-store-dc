@@ -29,22 +29,18 @@ interface CartItem {
 }
 export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const formattedDateRef = useRef(null);
+    const [trackingCode, setTrackingCode] = useState('');
+    const [trackingLink, setTrackingLink] = useState('');
     const [formattedDateTime, setFormattedDateTime] = useState('');
     const [orderData, setOrderData] = useState(null);
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [buttonDisabled, setButtonDisabled] = useState(false);
-    const [selectedDelivery, setSelectedDelivery] = useState(null);
-
-    const handleDeliverySelection = (method) => {
-        setSelectedDelivery(method);
-    };
     const getUserDetails = async () => {
         try {
             const res = await axios.get<{ data: orderData }>(`/api/users/getAllOrders`);
             let foundOrder: any;
             foundOrder = res.data.orders.find(order => order._id === id);
             setOrderData(foundOrder);
+            setTrackingCode(foundOrder.trackingCode);
+            setTrackingLink(foundOrder.trackingLink);
         } catch (error: any) {
             console.log(error.message);
         }
@@ -97,7 +93,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
 
     const getStatusWeight = (index, selected) => {
         if (selected) {
-            return "500";
+            return "600";
         } else {
             return "300";
         }
@@ -111,6 +107,20 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
             };
             const res = await axios.put(`/api/users/order`, updatedStatus);
             console.log(res.data.updatedOrder.orderStatus)
+            window.location.reload();
+        } catch (error) {
+            console.error('Error updating status:', error.message);
+        }
+    };
+    const handleTrackingUpdate = async (orderId) => {
+        try {
+            const updatedStatus = {
+                id: orderId,
+                trackingCode: trackingCode,
+                trackingLink: trackingLink
+            };
+            const res = await axios.put(`/api/users/orderTracking`, updatedStatus);
+            console.log(res.data.updatedOrder);
             window.location.reload();
         } catch (error) {
             console.error('Error updating status:', error.message);
@@ -141,43 +151,73 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                     </div>
                 </div>
                 <div className='placingOrderBlockRow'>
-                    <div className='products-value-block'>
-                        {orderData?.products.map((item, index) => (
-                            <div className={'check-cart-item'} key={index}>
-                                <img
-                                    className={'mini-cart-item-img'}
-                                    key={index}
-                                    src={item.image}
-                                    alt={`Thumbnail ${index}`}
-                                />
-                                <div className={'mini-cart-item-info'}>
-                                    <div className={'mini-cart-item-info-head'}>
-                                        <div>
-                                            <h5 className={'mini-cart-item-title'}>{item.title}</h5>
-                                            <p key={index}>{item.size}</p>
+                    <div className='products-value-cont'>
+                        <div className='products-value-block'>
+                            {orderData?.products.map((item, index) => (
+                                <div className={'check-cart-item'} key={index}>
+                                    <img
+                                        className={'mini-cart-item-img'}
+                                        key={index}
+                                        src={item.image}
+                                        alt={`Thumbnail ${index}`}
+                                    />
+                                    <div className={'mini-cart-item-info'}>
+                                        <div className={'mini-cart-item-info-head'}>
+                                            <div>
+                                                <h5 className={'mini-cart-item-title'}>{item.title}</h5>
+                                                <p key={index}>{item.size}</p>
+                                            </div>
+                                        </div>
+                                        <div className={'mini-cart-footer'}>
+                                            <h5>
+                                                ${item.price}.00
+                                            </h5>
                                         </div>
                                     </div>
-                                    <div className={'mini-cart-footer'}>
-                                        <h5>
-                                            ${item.price}.00
-                                        </h5>
-                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
+                        <div className={'check-cart-trek-inputs'}>
+                            <h3>Трекер заказа:</h3>
+                            <input
+                                id="trackingCodeInput"
+                                type="text"
+                                placeholder="Трекер-код"
+                                value={trackingCode}
+                                onChange={(e) => setTrackingCode(e.target.value)}
+                            />
+                            <input
+                                id="trackingLinkInput"
+                                type="text"
+                                placeholder="Сайт для отслеживания"
+                                value={trackingLink}
+                                onChange={(e) => setTrackingLink(e.target.value)}
+                            />
+                            <button onClick={() => handleTrackingUpdate(orderData?._id)}>Обновить трекер</button>
+                        </div>
                     </div>
+
                     <div className='placingOrderInfoContainer'>
                         <div className='placingOrderInfoBlock'>
                             <h3>Статус заказа:</h3>
+                            <p className='placingOrderAdvice'>
+                                Лучше редактировать статус заказа после реального изменения статуса заказа.
+                                Если "Доставка", то указать, что товар в пути лучше только после добавления трек-кода</p>
                             <div className={'orderStatusBtnsBlock'}>
                                 {statuses.map((status, index) => (
                                     <div key={index} className='orderStatusInput'>
                                         <div>
-                                            <div key={index} style={{color: getStatusColor(index, status.selected), fontWeight: getStatusWeight(index, status.selected)}}>
+                                            <div key={index} style={{
+                                                color: getStatusColor(index, status.selected),
+                                                fontWeight: getStatusWeight(index, status.selected)
+                                            }}>
                                                 <p>{status.title}</p>
                                             </div>
-                                            <div key={index} style={{color: getStatusColor(index, status.selected), fontWeight: getStatusWeight(index, status.selected)}}>
-                                                {status.createdDate !== '' ? (<p>{formatTimestampToDate(status.createdDate)}</p>)
+                                            <div key={index} style={{
+                                                color: getStatusColor(index, status.selected),
+                                            }}>
+                                                {status.createdDate !== '' ? (
+                                                        <p>{formatTimestampToDate(status.createdDate)}</p>)
                                                     : (
                                                         <p>Пока неизвестно</p>
                                                     )}

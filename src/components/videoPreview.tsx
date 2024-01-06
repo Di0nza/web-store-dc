@@ -4,6 +4,9 @@ import HomeScreenLogo from "../img/HomeScreenLogo.png";
 import textLogo from "@/img/textLogoW.png";
 import React, {useEffect, useState} from "react";
 import MainPageVideo from "@/models/mainPageVideo";
+import {connect} from "@/db/db";
+
+connect();
 
 async function getVideo() {
     const video = await MainPageVideo.findOne({active: true});
