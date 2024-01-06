@@ -52,14 +52,14 @@ export async function DELETE(
             return NextResponse.json({error: "Access denied"}, {status: 403})
         }
 
-        const video = await Product.findByIdAndDelete(params.mainPageVideoId);
+        const video = await MainPageVideo.findByIdAndDelete(params.mainPageVideoId);
 
         if (!video) {
-            return NextResponse.json({error: "No such product"}, {status: 400})
+            return NextResponse.json({error: "No such video"}, {status: 400})
         }
 
         return NextResponse.json({
-            message:"Product deleted successfully",
+            message:"Video deleted successfully",
             success: true
         })
     } catch (error: any) {

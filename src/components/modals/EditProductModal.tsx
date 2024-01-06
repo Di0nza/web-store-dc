@@ -79,7 +79,6 @@ export const EditProductModal = () => {
 
     const {isOpen, onClose, type, data} = useModal();
     const {product} = data;
-    console.log(product)
     const [selectedPictures, setSelectedPictures] = useState([]);
     const [selectedPicturesFiles, setSelectedPicturesFiles] = useState<any[]>([]);
     const router = useRouter();
