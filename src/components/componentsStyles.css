@@ -21,8 +21,9 @@
     margin: 0 auto;
     color: #111111;
     width: 100%;
+    padding-top: 10px;
     background-color: rgb(241, 241, 241);
-    height: 240px;
+    height: 250px;
     border-top: 1px solid #d5d5d5;
 }
 .product-container-slider-preview{
@@ -31,7 +32,9 @@
     border-radius: 12px;
     overflow: hidden;
     object-fit: cover;
+    cursor: pointer;
 }
+
 .footer-block{
     width: 100%;
     max-width: 1000px;
@@ -498,6 +501,73 @@
     font-size: 14px;
     margin: 0;
 }
+.big-photo-modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    border-radius: 8px;
+    padding: 0 5px 15px 15px;
+    border: 1px solid #dadada;
+    max-width: 1000px;
+    width: 100%;
+    height: 90%;
+}
+.big-photo-thumbnails {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+.img-magnifier-container {
+    width: calc(100% - 15px);
+    height: calc(100% - 15px);
+    border-radius: 12px;
+    margin-top: 5px;
+    position: relative;
+    display: inline-block;
+}
+.big-photo-slider-preview{
+    width: calc(100% - 15px);
+    height: calc(100%);
+    border-radius: 12px;
+    object-fit: cover;
+}
+.img-magnifier-glass {
+    position: absolute;
+    border: 2px solid #000;
+    border-radius: 12px;
+    cursor: none;
+    width: 180px;
+    height: 200px;
+    background-size: auto;
+    display: none;
+}
+.big-photo-slider-info{
+    width: 100%;
+    max-width: 360px;
+}
+.img-magnifier-glass.visible {
+    display: block;
+}
+.big-photo-thumbnail {
+    width: 68px;
+    height: 85px;
+    border-radius: 8px;
+    margin-right: 15px;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+    overflow: hidden;
+    object-fit: cover;
+}
+.big-photo-thumbnail.selected {
+    border: 2px solid #111111;
+}
+
+.big-photo-thumbnail:hover {
+    opacity: 0.7;
+}
 .modal-content-header{
     display: flex;
     flex-direction: row;
@@ -522,10 +592,34 @@
     width: 210px;
     margin-right: 20px;
 }
+.big-photos-content-info{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    font-size: 14px;
+    line-height: 20px;
+}
+.big-photo-close {
+    color: #aaa;
+    float: right;
+    font-size: 21px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.big-photo-close:hover,
+.big-photo-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 .close {
     color: #aaa;
     float: right;
-    font-size: 28px;
+    font-size: 21px;
     font-weight: bold;
     cursor: pointer;
 }
