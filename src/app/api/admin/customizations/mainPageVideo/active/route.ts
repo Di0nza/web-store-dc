@@ -37,3 +37,21 @@ export async function POST(
         return NextResponse.json({error: error.message}, {status: 500})
     }
 }
+
+export async function GET(
+    request: NextRequest,
+) {
+    try {
+
+        const video = await MainPageVideo.findOne({active:true});
+
+        return NextResponse.json({
+            message:"Video fetch successfully",
+            success: true,
+            video
+        })
+
+    } catch (error: any) {
+        return NextResponse.json({error: error.message}, {status: 500})
+    }
+}

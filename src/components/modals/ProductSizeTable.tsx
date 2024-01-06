@@ -1,7 +1,7 @@
 "use client";
 import React,{useState} from 'react';
 import Image from "next/image";
-import tableInfo from '../../img/sizesinfo.png'
+//import tableInfo from '../../img/sizesinfo.png'
 import '../componentsStyles.css'
 
 
@@ -16,7 +16,7 @@ const ProductSizeTable = ({ onClose }) => {
                 <p>Чтобы правильно измерить талию, грудь и плечи, используйте гибкую сантиметровую
                     ленту. Вот как это сделать:</p>
                 <div className='modal-content-info'>
-                    <Image src={tableInfo} alt={'tableInfo'}></Image>
+                    {/*<Image src={tableInfo} alt={'tableInfo'}></Image>*/}
                     <div>
                         <p><b>1. Грудь:</b> Измерение производится на уровне самой широкой части груди, под подмышками.
                             Лента должна быть обхвачена вокруг тела, обеспечивая небольшой запас для свободы движения.
