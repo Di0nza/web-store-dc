@@ -17,7 +17,7 @@ const HomeImageSlider = () => {
     const nextSlide = () => {
         setSlideAnimation('slide-left');
         setTimeout(() => {
-            const newIndex = (currentImageIndex + 1) % images.length;
+            const newIndex = (currentImageIndex + 1) % images?.length;
             setCurrentImageIndex(newIndex);
             setSlideAnimation('');
         }, 100);
@@ -26,7 +26,7 @@ const HomeImageSlider = () => {
     const prevSlide = () => {
         setSlideAnimation('slide-right');
         setTimeout(() => {
-            const newIndex = (currentImageIndex - 1 + images.length) % images.length;
+            const newIndex = (currentImageIndex - 1 + images?.length) % images?.length;
             setCurrentImageIndex(newIndex);
             setSlideAnimation('');
         }, 100);
@@ -34,13 +34,13 @@ const HomeImageSlider = () => {
 
     useEffect(() => {
         getActivePhotos().then((data) => {
-            setImages(data.data.photos);
-            console.log(data.data.photos)
+            setImages(data?.data?.photos);
+            console.log(data?.data?.photos)
         })
     }, [])
 
     useEffect(() => {
-        if(images.length!==0) {
+        if(images?.length !== 0) {
             const interval = setInterval(() => {
                 nextSlide();
             }, 3000);

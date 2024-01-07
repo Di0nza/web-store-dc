@@ -358,6 +358,13 @@
     object-fit: cover;
     overflow: hidden;
 }
+.product-stat-img {
+    height: 170px;
+    border-radius: 10px;
+    margin: 5px 0 10px 0;
+    object-fit: cover;
+    overflow: hidden;
+}
 .component-product-item {
     position: relative;
     display: inline-block;
@@ -546,6 +553,42 @@
 .big-photo-slider-info{
     width: 100%;
     max-width: 360px;
+}
+.chartContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.chartBtnBlock{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+.chartBtn{
+    width: 42px;
+    height: 42px;
+    padding: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid #dadada;
+}
+.selectedChartBtn{
+    width: 41px;
+    height: 41px;
+    padding: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    border: 2px solid #111111;
 }
 .img-magnifier-glass.visible {
     display: block;

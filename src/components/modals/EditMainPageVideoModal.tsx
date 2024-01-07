@@ -19,7 +19,7 @@ export const EditMainPageVideoModal = () => {
 
 
     useEffect(() => {
-        getAllVideos().then((data) => setVideos(data.data.videos))
+        getAllVideos().then((data) => setVideos(data?.data?.videos))
     }, [isOpen])
 
 
@@ -46,7 +46,7 @@ export const EditMainPageVideoModal = () => {
                     </DialogDescription>
                 </DialogHeader>
                 <div className="p-6 flex flex-wrap w-full" style={{maxHeight: '70vh', overflowY: 'auto'}}>
-                    {videos.map((video) => (
+                    {videos?.map((video) => (
                         <div key={video._id} className={`relative w-full mb-4`}>
                             <video
                                 className={`w-full p-0.5 rounded ${video.active ? 'border-4 border-solid border-green-500' : ''} cursor-pointer`}

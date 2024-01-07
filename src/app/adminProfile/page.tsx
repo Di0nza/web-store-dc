@@ -88,10 +88,10 @@ export default function ProfilePage() {
                     <p>Промокоды</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </Link>
-                <div className='additionalProfileLink'>
+                <Link href={'/adminStatistics'} className='additionalProfileLink'>
                     <p>Статистика</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
-                </div>
+                </Link>
                 <Link href={'/allAdminMessages'} className='additionalProfileLink'>
                     <p>Сообщения</p>
                     <div className='messagesBlock'>
