@@ -135,7 +135,9 @@ const Navigation = ({navLinks}: Props) => {
                                     <p>{cartItems.length}</p>
                                 </div>
                             ) : (
-                            <Link key={link.label} href={link.href} className={pathname === link.href ? "activeNavLink" : ''}>{link.label}</Link>
+                            <Link key={link.label} href={link.href}
+                                  className={pathname.substring(0, 5) === link.href.substring(0, 5) ? "activeNavLink" : ''}
+                            >{link.label}</Link>
                         )
                     })}
                 </div>

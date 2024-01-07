@@ -14,10 +14,24 @@
     margin-top: 10px;
 }
 .about-link{
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    border: 1px solid #dadada;
+    margin: 0 10px 0 0;
+}
+.selected-link{
+    padding: 4px 9px;
+    border-radius: 8px;
+    font-size: 14px;
+    border: 2px solid #111111;
     margin: 0 10px 0 0;
 }
 .about-navigation{
-    margin: 10px 0 40px 0;
+    margin: 10px 0 30px 0;
+}
+.about-navigation h4{
+    font-weight: 600;
 }
 .about-content{
     width: 100%;
@@ -33,16 +47,42 @@
     width: 100%;
 }
 .contacts {
+    position: relative;
     max-width: 1000px;
     width: 100%;
     margin: 0 auto;
 }
+.contacts img{
+    position: absolute;
+    z-index: 2;
+    margin-left: auto;
+    max-width: 550px;
+    width: 100%;
+    display: flex;
+    opacity: 0.4;
+    right: 0;
+    align-self: flex-end;
+}
 .title {
-    font-size: 26px;
+    font-size: 25px;
+    font-weight: 600;
     margin-bottom: 20px;
 }
 
+.description-block {
+    position: absolute;
+    z-index: 8;
+    max-width: 650px;
+    width: 100%;
+}
 .description {
     font-size: 16px;
     margin-bottom: 15px;
+}
+.contact-data-block{
+    margin-bottom: 15px;
+}
+.contact-data {
+    font-size: 16px;
+    margin-bottom: 5px;
 }
