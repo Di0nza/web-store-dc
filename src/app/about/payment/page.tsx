@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Payment() {
     return (
         <div className={'contacts'}>
-            <Image src={aboutBg} alt={''}/>
+            <Image className={'contacts-bg-img'} src={aboutBg} alt={''}/>
             <h2 className={'title'}>Оплата</h2>
             <div className={'description-block'}>
                 <p className={'description'}>

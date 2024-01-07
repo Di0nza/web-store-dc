@@ -1,8 +1,8 @@
 'use client'
 import '../AboutStyles.css'
 import React, {useState} from "react";
-import FooterErrorBlock from "@/components/footerErrorBlock";
-import FooterCooperationBlock from "@/components/footerCooperationBlock";
+import FooterErrorBlock from "@/components/modals/footerErrorBlock";
+import FooterCooperationBlock from "@/components/modals/footerCooperationBlock";
 import aboutBg from "@/img/aboutBg.png";
 import Image from "next/image";
 
@@ -26,7 +26,7 @@ export default function Contacts() {
             {isFooterCooperationBlockOpen && (
                 <FooterCooperationBlock/>
             )}
-            <Image src={aboutBg} alt={''}/>
+            <Image className={'contacts-bg-img'} src={aboutBg} alt={''}/>
             <h2 className={'title'}>Контакты</h2>
             <div className={'contact-data-block'}>
                 <p className={'contact-data'}><b>Наш адрес:</b> ул. Название, город, Почтовый индекс</p>

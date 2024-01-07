@@ -6,8 +6,8 @@ import Link from "next/link";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import OwnDesignOrder from "@/components/ownDesignOrder";
-import FooterCooperationBlock from "@/components/footerCooperationBlock";
-import FooterErrorBlock from "@/components/footerErrorBlock";
+import FooterCooperationBlock from "@/components/modals/footerCooperationBlock";
+import FooterErrorBlock from "@/components/modals/footerErrorBlock";
 interface UserData {
     isAdmin: boolean;
     username: string;

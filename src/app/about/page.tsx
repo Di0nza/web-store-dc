@@ -5,7 +5,7 @@ import aboutBg from '../../img/aboutBg.png'
 export default function AboutUs() {
     return (
         <div className={'contacts'}>
-            <Image src={aboutBg} alt={''}/>
+            <Image className={'contacts-bg-img'} src={aboutBg} alt={''}/>
             <h2 className={'title'}>О нас</h2>
             <div className={'description-block'}>
                 <p className={'description'}>

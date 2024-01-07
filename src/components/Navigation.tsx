@@ -134,11 +134,15 @@ const Navigation = ({navLinks}: Props) => {
                                     <Image className={"cartLogo"} src={isModalOpen ? cartLogo : cartLogoB} alt={link.label}></Image>
                                     <p>{cartItems.length}</p>
                                 </div>
-                            ) : (
-                            <Link key={link.label} href={link.href}
-                                  className={pathname.substring(0, 5) === link.href.substring(0, 5) ? "activeNavLink" : ''}
-                            >{link.label}</Link>
-                        )
+                            ) : userData?.isAdmin ? (
+                                    <Link key={link.label} href={link.href}
+                                          className={pathname === link.href ? "activeNavLink" : ''}
+                                    >{link.label}</Link>
+                                ) : (
+                                    <Link key={link.label} href={link.href}
+                                          className={pathname.substring(0, 5) === link.href.substring(0, 5) ? "activeNavLink" : ''}
+                                    >{link.label}</Link>
+                                )
                     })}
                 </div>
                 {isModalOpen && (

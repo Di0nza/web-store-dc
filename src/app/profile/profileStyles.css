@@ -443,7 +443,7 @@
     color: #606060;
 }
 .shearContainerCloseImg{
-    width: 16px;
+    width: 16px !important;
     height: 16px;
     cursor: pointer;
 }

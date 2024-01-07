@@ -24,10 +24,10 @@ const Header = () => {
         {label: 'Корзина', href: '/cart'},
     ];
     const navAdminItems = [
-        {label: 'Стилизация', href: '/adminProfile'},
-        {label: 'Товары', href: '/adminProfile'},
-        {label: 'Заказы', href: '/adminProfile'},
-        {label: 'Промокоды', href: '/adminPromocodes'},
+        {label: 'Стилизация', href: '/adminProfile/customizations'},
+        {label: 'Товары', href: '/adminProfile/products'},
+        {label: 'Заказы', href: '/allAdminOrders'},
+        {label: 'Профиль', href: '/adminProfile'},
     ];
     const getUserDetails = async () => {
         try {

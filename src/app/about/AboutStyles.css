@@ -52,7 +52,7 @@
     width: 100%;
     margin: 0 auto;
 }
-.contacts img{
+.contacts-bg-img{
     position: absolute;
     z-index: 2;
     margin-left: auto;

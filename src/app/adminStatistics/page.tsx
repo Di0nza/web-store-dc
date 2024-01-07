@@ -4,7 +4,8 @@ import React, {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import Link from "next/link";
 import './statisticsStyles.css'
-import deleteItem from "@/img/delete.png";
+import views from "@/img/eye.svg";
+import favorites from "@/img/favorite.png";
 import Image from "next/image";
 import OrdersChart from "@/components/OrdersChart";
 import {getAllProductsUser} from "@/services/getData";
@@ -76,14 +77,42 @@ export default function AdminStatistics() {
                 {products.map((product) => (
                     <div key={product._id} className='productStatistics'>
                         <div className='productStatisticsInfo'>
-                            <p className='product-title'>{product.title}</p>
                             <img className='product-stat-img' src={product.pictures[0]} alt={product.title}></img>
-                            <p className='product-category'>{product.category}</p>
-                            <p className='product-price'>${product.price}.00</p>
+                            <div className={'productStatisticsInfoBlock'}>
+                                <div>
+                                    <p className='product-title'>{product.title}</p>
+                                    <p className='product-category'>{product.category}</p>
+                                    <div>
+                                        <div className={'viewsBlock'}>
+                                            <Image src={views} alt={''}></Image>
+                                            <b>Просмотры: </b>
+                                            <p>{product.views}</p>
+                                        </div>
+                                        <div className={'viewsBlock'}>
+                                            <Image src={favorites} alt={''}></Image>
+                                            <b>Избранные: </b>
+                                            <p>{product.favorites}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p className='product-price'>${product.price}.00</p>
+                                    <div className={'productSizeBlock'}>
+                                        {product.sizes.map((size, index) => (
+                                            <div className={'productSize'}>
+                                                <b key={index}>{size.size}:</b>
+                                                <p key={index}>{size.amount}</p>
+                                            </div>
+
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                        <div className='productStatisticViewsFavorites'>
-                            <ProductViewsFavorites product={product}/>
-                        </div>
+                        {/*<div className='productStatisticViewsFavorites'>*/}
+                        {/*    <ProductViewsFavorites product={product}/>*/}
+                        {/*</div>*/}
                         <div className='productStatisticBlock'>
                             <ProductRadialChart product={product}/>
                         </div>
