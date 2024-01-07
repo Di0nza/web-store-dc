@@ -1,7 +1,7 @@
 "use client"
 import React, {useEffect, useState} from 'react';
 import {ModalType, useModal} from "@/hooks/useModalStore";
-import {getAllVideos, patchVideo} from "@/services/uploadVideo";
+import {getAllVideos, patchVideo} from "@/services/MainPageVideoFunctions";
 import {Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Trash, X} from "lucide-react";
@@ -62,10 +62,10 @@ export const EditMainPageVideoModal = () => {
                             <div className="absolute rounded top-3 right-3">
                                 <ActionToolTip label="Удалить" >
                                     <div className="bg-white p-1 rounded">
-                                    <Trash
-                                        onClick={(e) => onActionDelete(e, "deleteMainPageVideo", video)}
-                                        className="group-hover:block w-6 h-6 text-zinc-800 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"
-                                    />
+                                        <Trash
+                                            onClick={(e) => onActionDelete(e, "deleteMainPageVideo", video)}
+                                            className="group-hover:block w-6 h-6 text-zinc-800 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"
+                                        />
                                     </div>
                                 </ActionToolTip>
                             </div>

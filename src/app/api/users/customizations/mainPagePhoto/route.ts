@@ -1,20 +1,18 @@
 import {NextRequest, NextResponse} from "next/server";
-import {ITokenData} from "@/types/TokenData";
-import {getDataFromToken} from "@/helpers/getDataFromToken";
-import Product from "@/models/productModel";
-import MainPageVideo from "@/models/mainPageVideo";
+import MainPagePhoto from "@/models/mainPagePhotoModel";
 
 export async function GET(
     request: NextRequest,
 ) {
     try {
 
-        const video = await MainPageVideo.findOne({active:true});
+        const photos = await MainPagePhoto.find({active:true});
 
+        console.log(photos)
         return NextResponse.json({
             message:"Video fetch successfully",
             success: true,
-            video
+            photos
         })
 
     } catch (error: any) {
