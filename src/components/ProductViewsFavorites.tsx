@@ -18,10 +18,10 @@ const ProductViewsFavorites = ({ product }) => {
             chartInstance.current = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: [`Favorites: ${product.favorites}`, `Views: ${product.views}`],
+                    labels: [`Избрвнное: ${product.favorites}`, `Просмотры: ${product.views}`],
                     datasets: [
                         {
-                            label: 'Doughnut Chart',
+                            label: 'Количество',
                             data: [favoritesData, viewsData],
                             backgroundColor: ['#505050', '#afafaf'],
                             borderColor: '#fafafa',
