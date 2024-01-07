@@ -1,12 +1,16 @@
 import {create} from "zustand"
 import {IProduct} from "@/types/Product";
+import {IMainPageVideo} from "@/types/MainPageVideo";
+import {IMainPagePhoto} from "@/types/MainPagePhoto";
 
-export type ModalType = "createProduct" | "editProduct" | "deleteProduct" | "editMainPageVideo" | "deleteMainPageVideo"
+export type ModalType = "createProduct" | "editProduct" | "deleteProduct" | "editMainPageVideo" |
+    "deleteMainPageVideo" | "deleteMainPagePhoto"
 
 interface ModalData {
     product?: any;
     reload?:string
-    video?: any;
+    video?: IMainPageVideo;
+    photo?: IMainPagePhoto;
     channelType?: any;
     apiUrl?: string;
     query?: Record<string, any>;

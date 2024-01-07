@@ -3,7 +3,7 @@ import Image from "next/image";
 import HomeScreenLogo from "../img/HomeScreenLogo.png";
 import textLogo from "@/img/textLogoW.png";
 import React, {useEffect, useState} from "react";
-import MainPageVideo from "@/models/mainPageVideo";
+import MainPageVideo from "@/models/mainPageVideoModel";
 import {connect} from "@/db/db";
 
 connect();

@@ -1,8 +1,8 @@
 import {NextRequest, NextResponse} from "next/server";
+import MainPageVideo from "@/models/mainPagePhotoModel";
 import {ITokenData} from "@/types/TokenData";
 import {getDataFromToken} from "@/helpers/getDataFromToken";
-import Product from "@/models/productModel";
-import MainPageVideo from "@/models/mainPageVideoModel";
+import MainPagePhoto from "@/models/mainPagePhotoModel";
 
 export async function POST(
     request: NextRequest,
@@ -20,18 +20,15 @@ export async function POST(
 
         console.log(secure_url);
 
-        const video = await new MainPageVideo({
-            title:"Main Page Video",
+        const photo = await new MainPagePhoto({
             url: secure_url,
             active: true
         }).save();
 
-        await MainPageVideo.updateMany({_id: {$ne: video._id}}, {active:false});
-
         return NextResponse.json({
-            message:"Video uploaded successfully",
+            message:"Photo uploaded successfully",
             success: true,
-            video
+            photo
         })
     } catch (error: any) {
         return NextResponse.json({error: error.message}, {status: 500})
@@ -43,12 +40,14 @@ export async function GET(
 ) {
     try {
 
-        const video = await MainPageVideo.findOne({active:true});
+        const photos = await MainPagePhoto.find();
+
+        console.log(photos)
 
         return NextResponse.json({
-            message:"Video fetch successfully",
+            message:"Photos fetch successfully",
             success: true,
-            video
+            photos
         })
 
     } catch (error: any) {

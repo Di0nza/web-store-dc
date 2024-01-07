@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from '../app/page.module.css'
 import Image from "next/image";
 import arrowW from '../img/arrowW.png'
@@ -7,9 +7,10 @@ import sliderImg1 from '../img/homeSlider/00751.jpg';
 import sliderImg2 from '../img/homeSlider/00757.jpg';
 import sliderImg3 from '../img/homeSlider/00755.jpg';
 import sliderImg4 from '../img/homeSlider/00763.jpg';
+import {getActivePhotos, getAllPhotos} from "@/services/MainPagePhotoFunctions";
 
 const HomeImageSlider = () => {
-    const images = [sliderImg1,sliderImg2,sliderImg3,sliderImg4,];
+    const [images, setImages] = useState([]);//[sliderImg1,sliderImg2,sliderImg3,sliderImg4,];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [slideAnimation, setSlideAnimation] = useState('');
 
@@ -32,31 +33,40 @@ const HomeImageSlider = () => {
     };
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            nextSlide();
-        }, 3000);
+        getActivePhotos().then((data) => {
+            setImages(data.data.photos);
+            console.log(data.data.photos)
+        })
+    }, [])
 
-        return () => clearInterval(interval);
-    }, [currentImageIndex]);
+    useEffect(() => {
+        if(images.length!==0) {
+            const interval = setInterval(() => {
+                nextSlide();
+            }, 3000);
 
-    return (
+            return () => clearInterval(interval);
+        }
+    }, [currentImageIndex, images]);
+
+    return images ? (
         <div className={styles.slider}>
             <div className={styles.slideContainer}>
                 <div className={styles.blurContainer}>
                     <Image
                         className={styles.blurBackground}
-                        src={images[currentImageIndex]}
+                        src={images[currentImageIndex]?.url}
                         alt="Blurred Background"
                         layout="fill"
                         objectFit="cover"
                         quality={100}
                     />
                 </div>
-                <Image
-                    className={`${styles.slideImg} ${slideAnimation === 'slide-left' ? 'previous' : 'current'}`}
-                    src={images[currentImageIndex]}
-                    alt={`Slide ${currentImageIndex}`}
-                />
+                    <img
+                        className={`${styles.slideImg} ${slideAnimation === 'slide-left' ? 'previous' : 'current'}`}
+                        src={images[currentImageIndex]?.url}
+                        alt={`Slide ${currentImageIndex}`}
+                    />
                 <div className={styles.sliderOverlay}>
                     <div className={styles.arrowSlider} onClick={prevSlide}>
                         <Image className={styles.lastArrowSliderImg} src={arrowW} alt={'<'}/>
@@ -67,6 +77,6 @@ const HomeImageSlider = () => {
                 </div>
             </div>
         </div>
-    )
+    ) : null
 }
 export {HomeImageSlider}

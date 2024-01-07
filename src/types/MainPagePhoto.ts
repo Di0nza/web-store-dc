@@ -1,6 +1,5 @@
-export interface IMainPageVideo {
+export interface IMainPagePhoto {
     _id?:string,
-    title:string,
     url:string,
     active:boolean,
     uploadedAt:Date,

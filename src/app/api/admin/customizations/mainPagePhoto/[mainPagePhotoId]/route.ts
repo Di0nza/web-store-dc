@@ -1,15 +1,13 @@
 import {connect} from "@/db/db";
-import Product from "@/models/productModel";
 import {NextRequest, NextResponse} from "next/server";
-import {IProduct} from "@/types/Product";
 import {ITokenData} from "@/types/TokenData";
 import {getDataFromToken} from "@/helpers/getDataFromToken";
-import MainPageVideo from "@/models/mainPageVideoModel";
+import MainPagePhoto from "@/models/mainPagePhotoModel";
 
 
 export async function PATCH(
     request: NextRequest,
-    {params}: { params: { mainPageVideoId: string } }
+    {params}: { params: { mainPagePhotoId: string } }
 ) {
     try {
 
@@ -20,20 +18,20 @@ export async function PATCH(
             return NextResponse.json({error: "Access denied"}, {status: 403})
         }
 
-        const video = await MainPageVideo.findByIdAndUpdate(params.mainPageVideoId, {
-            active:true
-        });
+        const photoToUpdate = await MainPagePhoto.findById(params.mainPagePhotoId);
 
-        await MainPageVideo.updateMany({_id: {$ne: video._id}}, {active:false});
+        photoToUpdate.active = !photoToUpdate.active;
 
-        if (!video) {
+        const photo = await photoToUpdate.save();
+
+        if (!photo) {
             return NextResponse.json({error: "No such video"}, {status: 400})
         }
 
-
         return NextResponse.json({
-            message: "New active video updated successfully",
+            message: "Photo array updated successfully",
             success: true,
+            photo
         })
 
     } catch (error: any) {
@@ -43,7 +41,7 @@ export async function PATCH(
 
 export async function DELETE(
     request: NextRequest,
-    {params}: { params: { mainPageVideoId: string } }
+    {params}: { params: { mainPagePhotoId: string } }
 ) {
     try {
         const tokenData: ITokenData = getDataFromToken(request);
@@ -52,14 +50,14 @@ export async function DELETE(
             return NextResponse.json({error: "Access denied"}, {status: 403})
         }
 
-        const video = await MainPageVideo.findByIdAndDelete(params.mainPageVideoId);
+        const photo = await MainPagePhoto.findByIdAndDelete(params.mainPagePhotoId);
 
-        if (!video) {
-            return NextResponse.json({error: "No such video"}, {status: 400})
+        if (!photo) {
+            return NextResponse.json({error: "No such photo"}, {status: 400})
         }
 
         return NextResponse.json({
-            message:"Video deleted successfully",
+            message:"Photo deleted successfully",
             success: true
         })
     } catch (error: any) {
