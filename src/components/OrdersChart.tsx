@@ -102,7 +102,7 @@ const OrdersChart = ({ userOrders }) => {
                 setStartDate(newStartDate);
             }
         } else {
-            console.error('Нет данных о заказах для установки начальной даты');
+            console.error('Нет данных о заказах');
         }
     };
 
