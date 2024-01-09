@@ -6,7 +6,7 @@ import Link from "next/link";
 import './orderStyles.css'
 
 interface UserData {
-    username: string;
+    name: string;
     email: string;
     createdAt?: string;
 }
@@ -19,7 +19,7 @@ export default function UserOrders() {
     const getUserDetails = async () => {
         try {
             const res = await axios.get<{ data: UserData }>('/api/users/userdata');
-            console.log(res.data.data.username);
+            console.log(res.data.data.name);
             setUserData(res.data.data);
         } catch (error: any) {
             console.log(error.message);

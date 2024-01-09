@@ -45,6 +45,9 @@ export const {
             if ((token.isAdmin === false || token.isAdmin === true) && session.user) {
                 session.user.isAdmin = token.isAdmin as boolean;
             }
+            if (token.emailVerified && session.user) {
+                session.user.emailVerified = token.emailVerified;
+            }
             return session;
         },
         async jwt({token}) {

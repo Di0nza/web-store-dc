@@ -9,7 +9,7 @@ import OrderNavBarContainer from "@/components/OrderNavBarContainer";
 import {useOrderContext} from "@/orderContext/store";
 
 interface UserData {
-    username: string;
+    name: string;
     email: string;
     telephone: string;
 }
@@ -24,7 +24,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const [userData, setUserData] = useState<UserData | null>(null);
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [order, setOrder] = useState({
-        username: '',
+        name: '',
         email: '',
         telephone: '',
         zip: '',
@@ -51,11 +51,11 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         trackingLink: '',
     });
     // @ts-ignore
-    const { username, email, telephone,  zip, city, country, house, apartment,orderStatus, deliveryMethod, street, additionalInformation, promotionalCode, totalCost, totalNumber, createdBy, products, setSessionTime} = useOrderContext();
+    const { name, email, telephone,  zip, city, country, house, apartment,orderStatus, deliveryMethod, street, additionalInformation, promotionalCode, totalCost, totalNumber, createdBy, products, setSessionTime} = useOrderContext();
     const createOrder = async () => {
         try {
             const updatedOrder = {
-                username: username,
+                name: name,
                 email: email,
                 telephone: telephone,
                 zip: zip,
@@ -90,7 +90,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         try {
             const res = await axios.get<{ data: UserData }>('/api/users/userdata');
             setUserData(res.data.data);
-            console.log(username, email, telephone, createdBy, products, totalCost, totalNumber, street, additionalInformation, promotionalCode, zip, city, country, house, apartment, deliveryMethod)
+            console.log(name, email, telephone, createdBy, products, totalCost, totalNumber, street, additionalInformation, promotionalCode, zip, city, country, house, apartment, deliveryMethod)
         } catch (error: any) {
             console.log(error.message);
         }

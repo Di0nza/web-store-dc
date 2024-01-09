@@ -7,7 +7,7 @@ import OrderNavBarContainer from "@/components/OrderNavBarContainer";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
 
 interface UserData {
-    username: string;
+    name: string;
     email: string;
     telephone: string;
 }
@@ -32,7 +32,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [selectedDelivery, setSelectedDelivery] = useState(null);
     // @ts-ignore
-    const { username, email, telephone, zip, setZip, city, setCity, country, setCountry, house, setHouse, apartment, setApartment, street, setStreet, additionalInformation, setAdditionalInformation, deliveryMethod, setDeliveryMethod, promotionalCode, totalCost, totalNumber, createdBy, products} = useOrderContext();
+    const { name, email, telephone, zip, setZip, city, setCity, country, setCountry, house, setHouse, apartment, setApartment, street, setStreet, additionalInformation, setAdditionalInformation, deliveryMethod, setDeliveryMethod, promotionalCode, totalCost, totalNumber, createdBy, products} = useOrderContext();
 
     const handleDeliverySelection = (method) => {
         setSelectedDelivery(method);
@@ -58,7 +58,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         try {
             const res = await axios.get<{ data: UserData }>('/api/users/userdata');
             setUserData(res.data.data);
-            console.log(username, email, telephone, createdBy, products, totalCost, totalNumber, promotionalCode)
+            console.log(name, email, telephone, createdBy, products, totalCost, totalNumber, promotionalCode)
         } catch (error: any) {
             console.log(error.message);
         }

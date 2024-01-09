@@ -4,7 +4,7 @@ import {IOrder} from "@/types/Order";
 const productSchema = mongoose.models.Order ?
     mongoose.model('Order') :
     model('Order', new Schema<IOrder>({
-        username: String,
+        name: String,
         email: String,
         telephone: String,
         zip: String,

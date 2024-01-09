@@ -11,7 +11,7 @@ import checkOrderStatusW from "@/img/checkOrderStatusW.png";
 import checkOrderStatusB from "@/img/checkOrderStatusB.png";
 
 interface orderData {
-    username: string;
+    name: string;
     email: string;
     telephone: string;
 }
@@ -186,7 +186,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                     <div className={'firstInfoContainer'}>
                         <div className='firstInfoBlock'>
                             <h3>Контактные данные</h3>
-                            <p><b>Имя:</b> {orderData?.username}</p>
+                            <p><b>Имя:</b> {orderData?.name}</p>
                             <p><b>Email:</b> {orderData?.email}</p>
                             <p><b>Телефон:</b> {orderData?.telephone}</p>
                         </div>

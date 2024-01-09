@@ -7,7 +7,7 @@ OrderContext = createContext();
 
 
 export const OrderProvider = ({children}) => {
-    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [telephone, setTelephone] = useState('');
     const [zip, setZip] = useState('');
@@ -38,7 +38,7 @@ export const OrderProvider = ({children}) => {
     return (
         <OrderContext.Provider
             value={{
-                username, setUsername,
+                name, setName,
                 email, setEmail,
                 telephone, setTelephone,
                 zip, setZip,

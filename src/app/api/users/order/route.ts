@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json()
         const {
-            username,
+            name,
             email,
             telephone,
             products,
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
         console.log(reqBody);
 
         const newOrder = new Order({
-            username,
+            name,
             email,
             telephone,
             products,

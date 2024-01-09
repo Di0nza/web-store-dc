@@ -1,6 +1,6 @@
 export interface ITokenData{
     id: string;
-    username: string;
+    name: string;
     email: string;
     isAdmin: boolean;
 }

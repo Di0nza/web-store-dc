@@ -48,7 +48,7 @@ const Navigation = ({navLinks}: Props) => {
     const getUserDetails = async () => {
         try {
             const res = await axios.get('/api/users/userdata');
-            console.log(res.data.data.username);
+            console.log(res.data.data.name);
             setUserData(res.data.data);
             setIsAdmin(res.data.data.isAdmin);
         } catch (error: any) {

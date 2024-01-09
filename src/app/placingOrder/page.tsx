@@ -8,7 +8,7 @@ import {OrderProvider, useOrderContext} from "@/orderContext/store";
 import OrderNavBarContainer from "@/components/OrderNavBarContainer";
 
 interface UserData {
-    username: string;
+    name: string;
     email: string;
     telephone: string;
 }
@@ -21,18 +21,18 @@ type Props = {
 export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const router = useRouter();
     const [userData, setUserData] = useState({
-        username: '',
+        name: '',
         email: '',
         telephone: ''
     });
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [selectedDelivery, setSelectedDelivery] = useState(null);
     // @ts-ignore
-    const {username, setUsername, email, setEmail, telephone, setTelephone} = useOrderContext();
+    const {name, setName, email, setEmail, telephone, setTelephone} = useOrderContext();
 
     const createOrder = async () => {
         try {
-            setUsername(userData.username);
+            setName(userData.name);
             setEmail(userData.email);
             setTelephone(telephone);
             router.push(`/placingOrder/delivery`);
@@ -64,8 +64,8 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                 <label className={'order-input-title'}>Имя</label>
                 <input
                     type="text"
-                    value={userData.username}
-                    onChange={(e) => setUserData({...userData, username: e.target.value})}
+                    value={userData.name}
+                    onChange={(e) => setUserData({...userData, name: e.target.value})}
                 />
                 <label className={'order-input-title'}>Почта</label>
                 <input

@@ -7,9 +7,11 @@ import Image from "next/image";
 import googleLogo from "@/img/pngwinggoogleLogo.png";
 import './profileStyles.css'
 import arrowB from '../../img/arrowB.png'
+import {useCurrentUser} from "@/hooks/useCurrentUser";
+
 
 interface UserData {
-    username: string;
+    name: string;
     email: string;
     createdAt?: string;
 }
@@ -19,6 +21,7 @@ export default function ProfilePage() {
     const pathname = usePathname();
     const [userData, setUserData] = useState<UserData | null>(null);
     const [userOrders, setUserOrders] = useState(null);
+    const user = useCurrentUser();
     const getUserOrders = async () => {
         try {
             const res = await axios.get(`/api/users/messages`);
@@ -36,14 +39,16 @@ export default function ProfilePage() {
     const getUserDetails = async () => {
         try {
             const res = await axios.get<{ data: UserData }>('/api/users/userdata');
-            console.log(res.data.data.username);
+            console.log(res.data.data.name);
             setUserData(res.data.data);
+
         } catch (error: any) {
             console.log(error.message);
         }
     };
     useEffect(() => {
         //getUserDetails();
+        setUserData(user);
     }, []);
 
     const logout = async () => {
@@ -61,7 +66,7 @@ export default function ProfilePage() {
             <h2>{"Личный кабинет администратора"}</h2>
             {userData && (
                 <>
-                    <p className='profileHelloText'>Здравсвуйте, Админ {userData.username}</p>
+                    <p className='profileHelloText'>Здравсвуйте, Админ {userData.name}</p>
                     <p  className='createdDate'>Дата создания аккаунта: {new Date(userData.createdAt).toLocaleString()}</p>
                 </>
             )}

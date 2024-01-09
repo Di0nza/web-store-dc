@@ -40,7 +40,7 @@ export default function Cart() {
     const [promoList, setPromoList] = useState(null);
     const [discountName, setDiscountName] = useState(0);
     const [order, setOrder] = useState({
-        username: '',
+        name: '',
         email: '',
         zip: '',
         city: '',
@@ -64,7 +64,7 @@ export default function Cart() {
     const getUserDetails = async () => {
         try {
             const res = await axios.get('/api/users/userdata');
-            console.log(res.data.data.username);
+            console.log(res.data.data.name);
             setUserData(res.data.data);
         } catch (error: any) {
             console.log(error.message);
