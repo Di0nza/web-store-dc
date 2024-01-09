@@ -4,9 +4,10 @@ import React, {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import './profileStyles.css'
 import Link from "next/link";
+import {useCurrentUser} from "@/hooks/useCurrentUser";
 
 interface UserData {
-    username: string;
+    name: string;
     email: string;
     createdAt?: string;
 }
@@ -14,14 +15,15 @@ interface UserData {
 export default function ChangeProfileData() {
     const router = useRouter();
     const [userData, setUserData] = useState<UserData | null>(null);
-    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const user = useCurrentUser();
 
     const handleUpdateProfile = async () => {
         try {
             const updatedData: Partial<UserData> = {};
-            if (username.trim() !== '' && username !== (userData?.username ?? '')) {
-                updatedData.username = username;
+            if (name.trim() !== '' && name !== (userData?.name ?? '')) {
+                updatedData.name = name;
             }
             if (email.trim() !== '' && email !== (userData?.email ?? '')) {
                 updatedData.email = email;
@@ -39,9 +41,9 @@ export default function ChangeProfileData() {
     const getUserDetails = async () => {
         try {
             const res = await axios.get<{ data: UserData }>('/api/users/userdata');
-            console.log(res.data.data.username);
+            console.log(res.data.data.name);
             setUserData(res.data.data);
-            setUsername(res.data.data.username);
+            setName(res.data.data.name);
             setEmail(res.data.data.email);
         } catch (error: any) {
             console.log(error.message);
@@ -50,6 +52,9 @@ export default function ChangeProfileData() {
 
     useEffect(() => {
         //getUserDetails();
+        setUserData(user);
+        setName(user.name);
+        setEmail(user.email);
     }, []);
 
     return (
@@ -60,7 +65,7 @@ export default function ChangeProfileData() {
                 <>
                     <div className='updateInfoProfileBlock'>
                         <label className='updateProfileBlockLabel'>Имя</label>
-                        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                        <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
                         <label className='updateProfileBlockLabel'>Почта</label>
                         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                         <button onClick={handleUpdateProfile}>Изменить</button>

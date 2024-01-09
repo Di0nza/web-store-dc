@@ -12,7 +12,7 @@
 //     const [user, setUser] = useState({
 //         email: "",
 //         password: "",
-//         username: "",
+//         name: "",
 //         createdAt: Date.now(),
 //     })
 //
@@ -30,7 +30,7 @@
 //     }
 //
 //     useEffect(() => {
-//         if(user.email.length > 0 && user.password.length > 0 && user.username.length > 0) {
+//         if(user.email.length > 0 && user.password.length > 0 && user.name.length > 0) {
 //             setButtonDisabled(false);
 //         } else {
 //             setButtonDisabled(true);
@@ -43,10 +43,10 @@
 //             <h2>{"Регистрация"}</h2>
 //             <p className='signUpBlockText'>Уже есть аккаунт? <Link className='loginLink' href="/login">Авторизируйтесь</Link></p>
 //             <input
-//                 id="username"
+//                 id="name"
 //                 type="text"
-//                 value={user.username}
-//                 onChange={(e) => setUser({...user, username: e.target.value})}
+//                 value={user.name}
+//                 onChange={(e) => setUser({...user, name: e.target.value})}
 //                 placeholder="Имя"
 //             />
 //             <input

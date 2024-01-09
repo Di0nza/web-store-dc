@@ -11,6 +11,8 @@ import {Button} from "@/components/ui/button";
 import Image from "next/image";
 import googleLogo from "@/img/pngwinggoogleLogo.png";
 import '@/app/pagesStyle.css'
+import {signIn} from "next-auth/react"
+import {DEFAULT_LOGIN_REDIRECT} from "@/routes";
 import {SignUpSchema} from "@/types/authSchemas";
 import {FormError} from "@/components/auth/FormError";
 import {FormSuccess} from "@/components/auth/FormSuccess";
@@ -65,6 +67,12 @@ export const SignUpForm = () => {
                 .catch(() => setError("Что-то пошло не так :("));
         });
     };
+
+    const googleAuth = () => {
+        signIn("google", {
+            callbackUrl: DEFAULT_LOGIN_REDIRECT
+        })
+    }
 
     useEffect(()=>{
         console.log(`error : ${error}`)
@@ -175,7 +183,7 @@ export const SignUpForm = () => {
                     </Button>
                 </form>
             </Form>
-            <div className='googleLogin'>
+            <div className='googleLogin' onClick={()=>googleAuth()}>
                 <p>Авторизироваться с помощью <Image className='Google-logo' src={googleLogo} alt={'Google'}></Image></p>
             </div>
         </div>

@@ -14,7 +14,7 @@ import { jsPDF } from 'jspdf';
 import headerLogo  from "@/img/headerLogo.png";
 
 interface orderData {
-    username: string;
+    name: string;
     email: string;
     telephone: string;
 }
@@ -123,7 +123,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         const pdfContent6 = 'Delivery Method: ' + orderData?.deliveryMethod;
 
         const data = [
-            `Username: ${orderData.username}`,
+            `Name: ${orderData.name}`,
             `Email: ${orderData.email}`,
             `Phone: ${orderData.telephone}`,
             `Zip Code: ${orderData.zip}`,
@@ -224,7 +224,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                     <div className={'firstInfoContainer'}>
                         <div className='firstInfoBlock'>
                             <h3>Контактные данные</h3>
-                            <p><b>Имя:</b> {orderData?.username}</p>
+                            <p><b>Имя:</b> {orderData?.name}</p>
                             <p><b>Email:</b> {orderData?.email}</p>
                             <p><b>Телефон:</b> {orderData?.telephone}</p>
                         </div>

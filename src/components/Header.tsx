@@ -11,7 +11,7 @@ import {OrderProvider, useOrderContext} from "@/orderContext/store";
 
 interface UserData {
     isAdmin: boolean;
-    username: string;
+    name: string;
     email: string;
     createdAt?: string;
 }
@@ -35,7 +35,7 @@ const Header = () => {
     const getUserDetails = async () => {
         try {
             const res = await axios.get<{ data: UserData }>('/api/users/userdata');
-            console.log(res.data.data.username);
+            console.log(res.data.data.name);
             setUserData(res.data.data);
         } catch (error: any) {
             console.log(error.message);

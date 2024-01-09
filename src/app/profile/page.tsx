@@ -11,7 +11,7 @@ import {signOut} from "next-auth/react";
 import {useCurrentUser} from "@/hooks/useCurrentUser";
 
 interface UserData {
-    username: string;
+    name: string;
     email: string;
     createdAt?: string;
 }
@@ -24,7 +24,7 @@ export default function ProfilePage() {
     const getUserDetails = async () => {
         try {
             const res = await axios.get<{ data: UserData }>('/api/users/userdata');
-            console.log(res.data.data.username);
+            console.log(res.data.data.name);
             setUserData(res.data.data);
         } catch (error: any) {
             console.log(error.message);
@@ -33,6 +33,7 @@ export default function ProfilePage() {
 
     useEffect(() => {
         console.log(user)
+        setUserData(user);
         //getUserDetails();
     }, []);
 
@@ -52,7 +53,7 @@ export default function ProfilePage() {
             <h2>{"Личный кабинет"}</h2>
             {userData && (
                 <>
-                    <p className='profileHelloText'>Здравсвуйте, {userData.username}</p>
+                    <p className='profileHelloText'>Здравсвуйте, {userData.name}</p>
                     <p  className='createdDate'>Дата создания аккаунта: {new Date(userData.createdAt).toLocaleString()}</p>
                 </>
             )}

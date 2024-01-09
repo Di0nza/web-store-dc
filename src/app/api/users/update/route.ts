@@ -9,11 +9,11 @@ connect();
 export async function PUT(request: NextRequest) {
     try {
         const reqBody = await request.json();
-        const { username, email } = reqBody;
+        const { name, email } = reqBody;
         const userId = await getDataFromToken(request);
         const updatedUser = await User.findOneAndUpdate(
             { _id: userId.id },
-            { username, email },
+            { name, email },
             { new: true, select: '-password' }
         );
 
@@ -22,7 +22,7 @@ export async function PUT(request: NextRequest) {
         }
         const tokenData: ITokenData = {
             id: updatedUser._id,
-            username: updatedUser.username,
+            name: updatedUser.name,
             email: updatedUser.email,
             isAdmin: updatedUser.isAdmin
         };

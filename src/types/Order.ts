@@ -1,5 +1,5 @@
 export interface IOrder {
-    username: string;
+    name: string;
     email: string;
     telephone: string;
     zip: string;
