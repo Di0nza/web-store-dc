@@ -12,6 +12,8 @@ const productSchema = mongoose.models.Order ?
         country: String,
         house: String,
         apartment: String,
+        street: String,
+        additionalInformation: String,
         deliveryMethod: String,
         paymentState: String,
         promotionalCode: String,

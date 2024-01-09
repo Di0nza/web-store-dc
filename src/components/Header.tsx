@@ -7,6 +7,7 @@ import React, {useEffect, useState} from "react";
 import {Navigation} from "./Navigation";
 import axios from "axios";
 import arrowB from "@/img/arrowB.png";
+import {OrderProvider, useOrderContext} from "@/orderContext/store";
 
 interface UserData {
     isAdmin: boolean;
@@ -17,10 +18,12 @@ interface UserData {
 
 const Header = () => {
     const [userData, setUserData] = useState<UserData | null>(null);
+    // @ts-ignore
+    const {sessionTime, setSessionTime} = useOrderContext();
     const navItems = [
         {label: 'О нас', href: '/about'},
         {label: 'Магазин', href: '/store'},
-        {label: userData ? 'Профиль' : 'Войти', href: userData ? '/profile' : '/signup' },
+        {label: userData ? 'Профиль' : 'Войти', href: userData ? '/profile' : '/login' },
         {label: 'Корзина', href: '/cart'},
     ];
     const navAdminItems = [
@@ -41,12 +44,14 @@ const Header = () => {
 
     useEffect(() => {
         getUserDetails();
-    }, []);
+    }, [sessionTime]);
 
     return (
-        <header className='header-container'>
-            <Navigation navLinks={userData?.isAdmin ? navAdminItems : navItems}/>
-        </header>
+        <OrderProvider>
+            <header className='header-container'>
+                <Navigation navLinks={userData?.isAdmin ? navAdminItems : navItems}/>
+            </header>
+        </OrderProvider>
     )
 }
 

@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import '../app/profile/profileStyles.css'
+import specialBg from '../img/special.png'
 
 const OwnDesignOrder = () => {
     const [orderTitle, setOrderTitle] = useState('');

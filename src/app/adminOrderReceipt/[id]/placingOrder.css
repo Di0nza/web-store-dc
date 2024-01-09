@@ -53,23 +53,23 @@
     height: 11px;
 }
 .placingOrderInfoContainer{
-    width: calc(100% - 5px);
+    width: calc(100%);
 }
 .firstInfoContainer{
-    width: calc(100% - 5px);
+    width: calc(100% - 7.5px);
     display: flex;
     flex-direction: column;
     font-size: 14px;
     flex-wrap: wrap;
-    margin: 5px 5px 5px 0;
+    margin: 5px 7.5px 5px 0;
 }
 .firstInfoContainer:last-child{
-    width: calc(100% - 5px);
+    width: calc(100% - 7.5px);
     display: flex;
     flex-direction: column;
     font-size: 14px;
     flex-wrap: wrap;
-    margin: 5px 0 5px 5px;
+    margin: 5px 0 5px 7.5px;
 }
 .firstInfoBlock{
     width: calc(100%);
@@ -98,7 +98,7 @@
     padding: 8px 8px 10px;
     font-size: 14px;
     flex-wrap: wrap;
-    margin: 5px 0 10px;
+    margin: 15px 0 10px;
 }
 .placingOrderInfoBlock h4{
     font-weight: bold;
@@ -164,15 +164,15 @@
     height: 100px;
     padding: 10px;
     background-color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .check-cart-item:last-child{
     margin-bottom: 0;
 }
 .check-cart-trek-inputs{
-    width: calc(100% - 8px);
+    width: calc(100%);
     border-radius: 8px;
-    margin-top: 10px;
+    margin-top: 15px;
     display: flex;
     padding: 10px;
     flex-direction: column;
@@ -238,15 +238,15 @@
     flex-direction: column;
     justify-content: flex-start;
     overflow-y: scroll;
-    max-height: 320px;
+    max-height: 313px;
 }
 .products-value-cont{
-    width: calc(100% + 10px);
+    width: calc(100% + 7.5px);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     margin-bottom: 50px;
-    margin-top: 6px;
+    margin-top: 15px;
     margin-right: 2px;
 }
 .order-input-title{

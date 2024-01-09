@@ -187,10 +187,14 @@ export default function UserOrders() {
                         <h2>Подтвердите удаление</h2>
                         <p>Вы уверены, что хотите удалить заказ <b>{orderIdToDelete}</b>?</p>
                         <div className="order-delete-btns">
-                            <div className="confirm-order-delete"
-                                 onClick={(event) => deleteOrder(orderIdToDelete, event)}>Да
+                            <div className="confirm-order-delete" onClick={() => cancelDeleteOrder()}
+                                 >Отмена
                             </div>
-                            <div className="cancel-order-delete" onClick={() => cancelDeleteOrder()}>Отмена</div>
+                            <div
+                                className="cancel-order-delete"
+                                onClick={(event) =>
+                                    deleteOrder(orderIdToDelete, event)
+                            }>Удалить</div>
                         </div>
                     </div>
                 </div>

@@ -4,11 +4,14 @@ import React, { useState, useEffect } from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
 import '../pagesStyle.css'
+import {OrderProvider, useOrderContext} from "@/orderContext/store";
 
 export default function SignupPage() {
     const router = useRouter();
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [loading, setLoading] = useState(false);
+    // @ts-ignore
+    const {sessionTime, setSessionTime} = useOrderContext();
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -23,7 +26,7 @@ export default function SignupPage() {
             console.log(response.data + 'fefwuiwi');
             router.push("/profile");
             setLoading(false);
-            window.location.reload();
+            setSessionTime(Date.now());
         } catch (error:any) {
             console.log(error.message);
         }
@@ -39,35 +42,37 @@ export default function SignupPage() {
 
 
     return (
-        <div className='signUpBlock'>
-            <h2>{"Регистрация"}</h2>
-            <p className='signUpBlockText'>Уже есть аккаунт? <Link className='loginLink' href="/login">Авторизируйтесь</Link></p>
-            <input
-                id="username"
-                type="text"
-                value={user.username}
-                onChange={(e) => setUser({...user, username: e.target.value})}
-                placeholder="Имя"
-            />
-            <input
-                id="email"
-                type="text"
-                value={user.email}
-                onChange={(e) => setUser({...user, email: e.target.value})}
-                placeholder="Email"
-            />
-            <input
-                id="password"
-                type="password"
-                value={user.password}
-                onChange={(e) => setUser({...user, password: e.target.value})}
-                placeholder="Пароль"
-            />
-            <button
-                onClick={onSignup}
-                style={{pointerEvents: buttonDisabled ? "none" : null }}
-            >{buttonDisabled ? "Введите данные" : loading ? "Загрузка..." : "Создать аккаунт"}</button>
-        </div>
+        <OrderProvider>
+            <div className='signUpBlock'>
+                <h2>{"Регистрация"}</h2>
+                <p className='signUpBlockText'>Уже есть аккаунт? <Link className='loginLink'
+                                                                       href="/login">Авторизируйтесь</Link></p>
+                <input
+                    id="username"
+                    type="text"
+                    value={user.username}
+                    onChange={(e) => setUser({...user, username: e.target.value})}
+                    placeholder="Имя"
+                />
+                <input
+                    id="email"
+                    type="text"
+                    value={user.email}
+                    onChange={(e) => setUser({...user, email: e.target.value})}
+                    placeholder="Email"
+                />
+                <input
+                    id="password"
+                    type="password"
+                    value={user.password}
+                    onChange={(e) => setUser({...user, password: e.target.value})}
+                    placeholder="Пароль"
+                />
+                <button
+                    onClick={onSignup}
+                    style={{pointerEvents: buttonDisabled ? "none" : null}}
+                >{buttonDisabled ? "Введите данные" : loading ? "Загрузка..." : "Создать аккаунт"}</button>
+            </div>
+        </OrderProvider>
     )
-
 }

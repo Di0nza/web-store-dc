@@ -32,20 +32,23 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [selectedDelivery, setSelectedDelivery] = useState(null);
     // @ts-ignore
-    const { username, email, telephone, setZip, setCity, setCountry, setHouse, setApartment, setDeliveryMethod,promotionalCode, totalCost, totalNumber, createdBy, products} = useOrderContext();
+    const { username, email, telephone, zip, setZip, city, setCity, country, setCountry, house, setHouse, apartment, setApartment, street, setStreet, additionalInformation, setAdditionalInformation, deliveryMethod, setDeliveryMethod, promotionalCode, totalCost, totalNumber, createdBy, products} = useOrderContext();
 
     const handleDeliverySelection = (method) => {
         setSelectedDelivery(method);
+        setDeliveryMethod(method);
         setOrderData({...orderData, deliveryMethod: method });
     };
     const createOrder = async () => {
         try {
-            setZip(orderData.zip);
-            setCity(orderData.city);
-            setCountry(orderData.country);
-            setApartment(orderData.apartment);
-            setHouse(orderData.house);
-            setDeliveryMethod(orderData.deliveryMethod);
+            setZip(zip === '' ? '298312' : zip);
+            setCity(city === '' ? 'Москва' : city);
+            setCountry(country === '' ? 'Москва' : country);
+            setApartment(apartment === '' ? '2' : apartment);
+            setHouse(house === '' ? '23' : house);
+            setStreet(street === '' ? 'Пушкинская' : street);
+            setAdditionalInformation(additionalInformation === '' ? 'Без дополнительной информации' : additionalInformation);
+            setDeliveryMethod(deliveryMethod);
             router.push(`/placingOrder/payment`);
         } catch (error:any) {
             console.log(error.message);
@@ -72,51 +75,104 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                 <label className={'order-input-title'}>Способ доставки</label>
                 <div className={'deliveryMethodBlock'}>
                     <div
-                        className={selectedDelivery === 'Самовывоз' ? 'selectedDeliveryMethodInput' : 'deliveryMethodInput'}
-                        onClick={() => handleDeliverySelection('Самовывоз')}
+                        className={deliveryMethod === 'Самовывоз' ? 'selectedDeliveryMethodInput' : 'deliveryMethodInput'}
+                        onClick={() => setDeliveryMethod('Самовывоз')}
                     >
                         <p className={'deliveryMethodInputTitle'}>Самовывоз</p>
                         <p className={'deliveryMethodInputText'}>Херсонская ул., 20, Санкт-Петербург</p>
                     </div>
                     <div
-                        className={selectedDelivery === 'Доставка' ? 'selectedDeliveryMethodInput' : 'deliveryMethodInput'}
-                        onClick={() => handleDeliverySelection('Доставка')}
+                        className={deliveryMethod === 'Доставка' ? 'selectedDeliveryMethodInput' : 'deliveryMethodInput'}
+                        onClick={() => setDeliveryMethod('Доставка')}
                     >
                         <p className={'deliveryMethodInputTitle'}>Доставка</p>
                         <p className={'deliveryMethodInputText'}>Почта России</p>
                     </div>
                 </div>
-                {selectedDelivery === 'Доставка' && (
+                {deliveryMethod === 'Доставка' && (
                     <div>
                         <div className={'deliveryMethodBlock'}>
                             <div className={'deliveryInputBlock'}>
                                 <label className={'order-input-title'}>Страна</label>
-                                <input className={'deliveryMethodInputC'} onChange={(e) => setOrderData({ ...orderData, country: e.target.value })} placeholder={'Россия'} type="text" />
+                                <input
+                                    value={country}
+                                    className={'deliveryMethodInputC'}
+                                    onChange={(e) => setCountry(e.target.value)}
+                                    placeholder={'Россия'}
+                                    type="text"
+                                />
                             </div>
                             <div className={'deliveryInputBlock'}>
                                 <label className={'order-input-title'}>Город</label>
-                                <input className={'deliveryMethodInputC'} onChange={(e) => setOrderData({ ...orderData, city: e.target.value })} placeholder={'Санкт-Петербург'} type="text"/>
+                                <input
+                                    value={city}
+                                    className={'deliveryMethodInputC'}
+                                    onChange={(e) => setCity(e.target.value)}
+                                    placeholder={'Санкт-Петербург'}
+                                    type="text"
+                                />
+                            </div>
+                        </div>
+                        <div className={'deliveryMethodBlock'}>
+                            <div className={'deliveryOneInputBlock'}>
+                                <label className={'order-input-title'}>Улица</label>
+                                <input
+                                    value={street}
+                                    className={'deliveryMethodInputC'}
+                                    onChange={(e) => setStreet(e.target.value)}
+                                    placeholder={'Пушкинская'}
+                                    type="text"
+                                />
                             </div>
                         </div>
                         <div className={'deliveryMethodBlock'}>
                             <div className={'deliveryInputThreeBlocks'}>
                                 <label className={'order-input-title'}>Дом</label>
-                                <input className={'deliveryMethodInputC'} onChange={(e) => setOrderData({ ...orderData, house: e.target.value })} placeholder={'23'} type="text" />
+                                <input
+                                    value={house}
+                                    className={'deliveryMethodInputC'}
+                                    onChange={(e) => setHouse(e.target.value)}
+                                    placeholder={'23'}
+                                    type="text"
+                                />
                             </div>
                             <div className={'deliveryInputThreeBlocks'}>
                                 <label className={'order-input-title'}>Квартира</label>
-                                <input className={'deliveryMethodInputC'} onChange={(e) => setOrderData({ ...orderData, apartment: e.target.value })} placeholder={'54'} type="text"/>
+                                <input
+                                    value={apartment}
+                                    className={'deliveryMethodInputC'}
+                                    onChange={(e) => setApartment(e.target.value)}
+                                    placeholder={'54'}
+                                    type="text"
+                                />
                             </div>
                             <div className={'deliveryInputThreeBlocks'}>
                                 <label className={'order-input-title'}>Почтовый индекс</label>
-                                <input className={'deliveryMethodInputC'} onChange={(e) => setOrderData({ ...orderData, zip: e.target.value })} placeholder={'124521'} type="text"/>
+                                <input
+                                    value={zip}
+                                    className={'deliveryMethodInputC'}
+                                    onChange={(e) => setZip(e.target.value)}
+                                    placeholder={'124521'}
+                                    type="text"
+                                />
+                            </div>
+                        </div>
+                        <div className={'deliveryMethodBlock'}>
+                            <div className={'deliveryOneInputBlock'}>
+                                <label className={'order-input-title'}>Дополнительная информация</label>
+                                <textarea
+                                    value={additionalInformation}
+                                    className={'deliveryMethodInputC'}
+                                    onChange={(e) => setAdditionalInformation(e.target.value)}
+                                    placeholder={'Особенности места назначения'}
+                                />
                             </div>
                         </div>
                     </div>
                 )}
                 <button
                     onClick={createOrder}
-                    style={{pointerEvents: buttonDisabled ? "none" : null }}>
+                    style={{pointerEvents: buttonDisabled ? "none" : null}}>
                     {"Перейти к оплате"}
                 </button>
             </div>

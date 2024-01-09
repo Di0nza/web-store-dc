@@ -15,6 +15,8 @@ export const OrderProvider = ({children}) => {
     const [country, setCountry] = useState('');
     const [house, setHouse] = useState('');
     const [apartment, setApartment] = useState('');
+    const [street, setStreet] = useState('');
+    const [additionalInformation, setAdditionalInformation] = useState('');
     const [deliveryMethod, setDeliveryMethod] = useState('Почта');
     const [paymentState, setPaymentState] = useState('Неоплачено');
     const [promotionalCode, setPromotionalCode] = useState('Без промокода');
@@ -31,6 +33,7 @@ export const OrderProvider = ({children}) => {
     const [createdAt, setCreatedAt] = useState(Date.now());
     const [products, setProducts] = useState([]);
     const [tokenReload, setTokenReload] = useState(false);
+    const [sessionTime, setSessionTime] = useState(Date.now());
 
     return (
         <OrderContext.Provider
@@ -43,6 +46,8 @@ export const OrderProvider = ({children}) => {
                 country, setCountry,
                 house, setHouse,
                 apartment, setApartment,
+                street, setStreet,
+                additionalInformation, setAdditionalInformation,
                 deliveryMethod, setDeliveryMethod,
                 paymentState, setPaymentState,
                 promotionalCode, setPromotionalCode,
@@ -53,6 +58,7 @@ export const OrderProvider = ({children}) => {
                 createdAt, setCreatedAt,
                 products, setProducts,
                 tokenReload, setTokenReload,
+                sessionTime, setSessionTime
             }}
         >
             {children}

@@ -16,21 +16,22 @@ const OrdersChart = ({ userOrders }) => {
         if (userOrders && userOrders.length > 0 && startDate !== null) {
             const endDate = moment(startDate).clone().add(period - 1, 'days');
 
-            const allDates = [];
+            const datesInRange = [];
             let currentDate = moment(startDate);
 
             while (currentDate <= endDate) {
-                allDates.push(currentDate.format('DD-MM-YY'));
+                datesInRange.push(currentDate.format('DD-MM-YY'));
                 currentDate = currentDate.clone().add(1, 'day');
             }
 
-            const ordersInRange = userOrders.filter((order) =>
-                moment(order.createdAt).isBetween(startDate, endDate, undefined, '[]')
+            const ordersInRange = userOrders.filter(order =>
+                datesInRange.includes(moment(order.createdAt).format('DD-MM-YY'))
             );
 
-            const ordersCountByDate = allDates.reduce((acc, date) => {
-                const count = ordersInRange.filter((order) => moment(order.createdAt).format('DD-MM-YY') === date)
-                    .length;
+            const ordersCountByDate = datesInRange.reduce((acc, date) => {
+                const count = ordersInRange.filter(order =>
+                    moment(order.createdAt).format('DD-MM-YY') === date
+                ).length;
                 acc[date] = count;
                 return acc;
             }, {});
@@ -89,15 +90,19 @@ const OrdersChart = ({ userOrders }) => {
 
     const changePeriod = (newPeriod) => {
         setPeriod(newPeriod);
-        setStartDate(moment(userOrders[0].createdAt)); // Устанавливаем начальную дату при изменении периода
+        setStartDate(moment(userOrders[0].createdAt));
     };
 
     const handleDateChange = (direction) => {
-        if (startDate === null) {
-            setStartDate(moment(userOrders[0].createdAt)); // Устанавливаем начальную дату при первом переключении
+        if (userOrders && userOrders.length > 0) {
+            if (startDate === null) {
+                setStartDate(moment(userOrders[0].createdAt));
+            } else {
+                const newStartDate = direction === 'prev' ? moment(startDate).subtract(period, 'days') : moment(startDate).add(period, 'days');
+                setStartDate(newStartDate);
+            }
         } else {
-            const newStartDate = direction === 'prev' ? moment(startDate).subtract(period, 'days') : moment(startDate).add(period, 'days');
-            setStartDate(newStartDate);
+            console.error('Нет данных о заказах для установки начальной даты');
         }
     };
 
@@ -113,6 +118,5 @@ const OrdersChart = ({ userOrders }) => {
         </div>
     );
 };
-
 export default OrdersChart;
 
