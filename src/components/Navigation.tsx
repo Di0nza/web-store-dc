@@ -1,5 +1,5 @@
 'use client';
-import React,{useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import './componentsStyles.css'
@@ -12,11 +12,13 @@ import deleteItem from '../img/delete.png'
 import plus from '../img/plus.png'
 import minus from '../img/minus.png'
 import axios from "axios";
+import {OrderProvider, useOrderContext} from "@/orderContext/store";
 
 type NavLink = {
     label: string;
-    href:string;
+    href: string;
 }
+
 interface CartItem {
     title: string;
     size: string;
@@ -24,6 +26,7 @@ interface CartItem {
     image: string;
     category: string;
 }
+
 interface GroupedCartItem extends CartItem {
     totalPrice: number;
     count: number;
@@ -35,23 +38,28 @@ type Props = {
 
 const Navigation = ({navLinks}: Props) => {
     const pathname = usePathname();
+    // @ts-ignore
+    const {sessionTime, setSessionTime} = useOrderContext();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [userData, setUserData] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const getUserDetails = async () => {
         try {
             const res = await axios.get('/api/users/userdata');
             console.log(res.data.data.username);
             setUserData(res.data.data);
+            setIsAdmin(res.data.data.isAdmin);
         } catch (error: any) {
             console.log(error.message);
         }
     };
 
     useEffect(() => {
-        //getUserDetails();
-    }, []);
+        getUserDetails();
+
+    }, [sessionTime]);
 
     const handleLinkClick = (event) => {
         event.preventDefault();
@@ -106,41 +114,65 @@ const Navigation = ({navLinks}: Props) => {
     const groupedCartItems: Record<string, GroupedCartItem> = cartItems.reduce((acc, item) => {
         const key = `${item.title}-${item.size}`;
         if (!acc[key]) {
-            acc[key] = { ...item, totalPrice: parseFloat(item.price), count: 1 };
+            acc[key] = {...item, totalPrice: parseFloat(item.price), count: 1};
         } else {
-            acc[key].totalPrice+= parseFloat(item.price);
+            acc[key].totalPrice += parseFloat(item.price);
             acc[key].count += 1;
         }
         return acc;
     }, {});
 
     return (
-        <>
+        <OrderProvider>
             <nav className='header-block'>
                 <Link href={userData?.isAdmin ? '/adminProfile' : '/'}>
-                    <Image  className='header-logo' src={headerLogo} alt={'MaryDeniz'}></Image>
+                    <Image className='header-logo' src={headerLogo} alt={'MaryDeniz'}></Image>
                 </Link>
                 <div className='header-links-block'>
                     {navLinks.map((link) => {
-                        const isActive = pathname === link.href
-                        return link.label === 'Корзина' ?
+                        const isActive = pathname === link.href;
+                        return link.label === 'Корзина' ? (
                             pathname === '/cart' ? (
                                 <div key={link.label} className={"cartNavLink"}>
                                     <Image className={"cartLogo"} src={cartLogo} alt={link.label}></Image>
                                     <p>{cartItems.length}</p>
                                 </div>
                             ) : (
-                                <div key={link.label} onClick={handleLinkClick} className={isModalOpen ? "cartNavLink" : 'inactiveCartNavLink'}>
-                                    <Image className={"cartLogo"} src={isModalOpen ? cartLogo : cartLogoB} alt={link.label}></Image>
+                                <div
+                                    key={link.label}
+                                    onClick={handleLinkClick}
+                                    className={isModalOpen ? "cartNavLink" : 'inactiveCartNavLink'}
+                                >
+                                    <Image
+                                        className={"cartLogo"}
+                                        src={isModalOpen ? cartLogo : cartLogoB}
+                                        alt={link.label}
+                                    ></Image>
                                     <p>{cartItems.length}</p>
                                 </div>
+                            )
+                        ) : (
+                            isAdmin ? (
+                                <Link
+                                    key={link.label}
+                                    href={link.href}
+                                    className={pathname === link.href ? "activeNavLink" : ''}
+                                >
+                                    {link.label}
+                                </Link>
                             ) : (
-                            <Link key={link.label} href={link.href}
-                                  className={pathname.substring(0, 5) === link.href.substring(0, 5) ? "activeNavLink" : ''}
-                            >{link.label}</Link>
-                        )
+                                <Link
+                                    key={link.label}
+                                    href={link.href}
+                                    className={pathname.startsWith(link.href) ? "activeNavLink" : ''}
+                                >
+                                    {link.label}
+                                </Link>
+                            )
+                        );
                     })}
                 </div>
+
                 {isModalOpen && (
                     <div className="modal-overlay">
                         <div className="modal-content">
@@ -148,11 +180,13 @@ const Navigation = ({navLinks}: Props) => {
                                 <div className="modal-header-title">
                                     <h4>Корзина</h4>
                                     <div onClick={closeModal}>
-                                        <Image src={close} className="close-button"  alt={'x'}></Image>
+                                        <Image src={close} className="close-button" alt={'x'}></Image>
                                     </div>
                                 </div>
                                 <div className="modal-header-info">
-                                    <p><b>{cartItems.length}</b> товаров на сумму <b>${cartItems.reduce((total, item) => parseFloat(total) + parseFloat(item.price), 0)}.00</b></p>
+                                    <p><b>{cartItems.length}</b> товаров на
+                                        сумму <b>${cartItems.reduce((total, item) => parseFloat(total) + parseFloat(item.price), 0)}.00</b>
+                                    </p>
                                 </div>
                             </div>
                             <div className={'mini-cart-items-block'}>
@@ -168,17 +202,21 @@ const Navigation = ({navLinks}: Props) => {
                                             <div className={'mini-cart-item-info-head'}>
                                                 <div>
                                                     <h5 className={'mini-cart-item-title'}>{item.title}</h5>
-                                                    <b><p className={'mini-cart-item-size'} key={index}>{item.size}</p></b>
+                                                    <b><p className={'mini-cart-item-size'} key={index}>{item.size}</p>
+                                                    </b>
                                                 </div>
-                                                <div className="delete-button" onClick={() => removeAllFromCartLocalStorage(item)}>
-                                                    <Image src={deleteItem} className="delete-button"  alt={'x'}/>
+                                                <div className="delete-button"
+                                                     onClick={() => removeAllFromCartLocalStorage(item)}>
+                                                    <Image src={deleteItem} className="delete-button" alt={'x'}/>
                                                 </div>
                                             </div>
                                             <div className={'mini-cart-footer'}>
                                                 <div key={index} className='mini-count-pad'>
-                                                    <Image src={minus} alt={'-'} className='mini-count-pad-icon' onClick={() => handleDecrease(item)}></Image>
+                                                    <Image src={minus} alt={'-'} className='mini-count-pad-icon'
+                                                           onClick={() => handleDecrease(item)}></Image>
                                                     <b><p>{item.count}</p></b>
-                                                    <Image src={plus} alt={'+'} className='mini-count-pad-icon' onClick={() => handleIncrease(item)}></Image>
+                                                    <Image src={plus} alt={'+'} className='mini-count-pad-icon'
+                                                           onClick={() => handleIncrease(item)}></Image>
                                                 </div>
                                                 <h5>
                                                     ${item.price * item.count}.00
@@ -195,7 +233,7 @@ const Navigation = ({navLinks}: Props) => {
                     </div>
                 )}
             </nav>
-        </>
+        </OrderProvider>
     )
 }
 

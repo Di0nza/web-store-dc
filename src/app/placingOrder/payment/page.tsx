@@ -51,7 +51,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         trackingLink: '',
     });
     // @ts-ignore
-    const { username, email, telephone,  zip, city, country, house, apartment,orderStatus, deliveryMethod, promotionalCode, totalCost, totalNumber, createdBy, products} = useOrderContext();
+    const { username, email, telephone,  zip, city, country, house, apartment,orderStatus, deliveryMethod, street, additionalInformation, promotionalCode, totalCost, totalNumber, createdBy, products, setSessionTime} = useOrderContext();
     const createOrder = async () => {
         try {
             const updatedOrder = {
@@ -63,6 +63,8 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                 country: country,
                 house: house,
                 apartment: apartment,
+                street: street,
+                additionalInformation: additionalInformation,
                 deliveryMethod: deliveryMethod,
                 paymentState: 'Оплачено',
                 promotionalCode: promotionalCode,
@@ -79,6 +81,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
             console.log(response.data.savedOrder._id);
             router.push(`/OrderReceipt/${response.data.savedOrder._id}`);
             localStorage.removeItem('cart');
+            setSessionTime(Date.now());
         } catch (error:any) {
             console.log(error.message);
         }
@@ -87,7 +90,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         try {
             const res = await axios.get<{ data: UserData }>('/api/users/userdata');
             setUserData(res.data.data);
-            console.log(username, email, telephone, createdBy, products, totalCost, totalNumber, promotionalCode, zip, city, country, house, apartment, deliveryMethod)
+            console.log(username, email, telephone, createdBy, products, totalCost, totalNumber, street, additionalInformation, promotionalCode, zip, city, country, house, apartment, deliveryMethod)
         } catch (error: any) {
             console.log(error.message);
         }

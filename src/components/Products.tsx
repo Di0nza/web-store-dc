@@ -73,11 +73,11 @@ const Products = ({products}: Props) => {
     };
 
     return (
-        <div className='products-block'>
+        <div className='products-list-block'>
             {products.map((product: any) => (
                 <div key={product._id} className='component-product-item'>
                     <div className='product-overlay'>
-                        <div className='favorite-button' onClick={() => handleToggleFavorite(product._id)}>
+                        <div className='favorite-button-block' onClick={() => handleToggleFavorite(product._id)}>
                             <Image
                                 className='favorite-button-image'
                                 src={isProductInFavorites(product._id) ? unFavorites : favorites}

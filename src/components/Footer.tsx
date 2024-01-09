@@ -6,8 +6,9 @@ import Link from "next/link";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import OwnDesignOrder from "@/components/ownDesignOrder";
-import FooterCooperationBlock from "@/components/footerCooperationBlock";
-import FooterErrorBlock from "@/components/footerErrorBlock";
+import FooterCooperationBlock from "@/components/modals/footerCooperationBlock";
+import FooterErrorBlock from "@/components/modals/footerErrorBlock";
+import {OrderProvider, useOrderContext} from "@/orderContext/store";
 interface UserData {
     isAdmin: boolean;
     username: string;
@@ -18,6 +19,8 @@ const Footer = () => {
     const [userData, setUserData] = useState<UserData | null>(null);
     const [isFooterErrorBlockOpen, setIsFooterErrorBlockOpen] = useState(false);
     const [isFooterCooperationBlockOpen, setIsFooterCooperationBlockOpen] = useState(false);
+    // @ts-ignore
+    const {sessionTime, setSessionTime} = useOrderContext();
     const toggleFooterErrorBlock = () => {
         setIsFooterErrorBlockOpen(!isFooterErrorBlockOpen);
         setIsFooterCooperationBlockOpen(false);
@@ -41,7 +44,7 @@ const Footer = () => {
     useEffect(() => {
         //getUserDetails()
         console.log(userData);
-    }, []);
+    }, [sessionTime]);
     return (
         <footer className='footer-container'>
             <div className='footer-block'>

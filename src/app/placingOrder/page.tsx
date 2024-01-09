@@ -28,13 +28,13 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [selectedDelivery, setSelectedDelivery] = useState(null);
     // @ts-ignore
-    const {setUsername, setEmail, setTelephone} = useOrderContext();
+    const {username, setUsername, email, setEmail, telephone, setTelephone} = useOrderContext();
 
     const createOrder = async () => {
         try {
             setUsername(userData.username);
             setEmail(userData.email);
-            setTelephone(userData.telephone);
+            setTelephone(telephone);
             router.push(`/placingOrder/delivery`);
         } catch (error:any) {
             console.log(error.message);
@@ -65,20 +65,20 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                 <input
                     type="text"
                     value={userData.username}
-                    onChange={(e) => setUserData({ ...userData, username: e.target.value })}
+                    onChange={(e) => setUserData({...userData, username: e.target.value})}
                 />
                 <label className={'order-input-title'}>Почта</label>
                 <input
                     type="email"
                     value={userData.email}
-                    onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+                    onChange={(e) => setUserData({...userData, email: e.target.value})}
                 />
                 <label className={'order-input-title'}>Телефон <p>(необязательно)</p></label>
                 <input
                     type="tel"
-                    value={userData.telephone}
+                    value={telephone}
                     placeholder={'+7342894734'}
-                    onChange={(e) => setUserData({ ...userData, telephone: e.target.value })}
+                    onChange={(e) => setTelephone(e.target.value)}
                 />
                 <button onClick={createOrder}>
                     {"Перейти к доставке"}

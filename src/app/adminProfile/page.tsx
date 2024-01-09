@@ -19,7 +19,6 @@ export default function ProfilePage() {
     const pathname = usePathname();
     const [userData, setUserData] = useState<UserData | null>(null);
     const [userOrders, setUserOrders] = useState(null);
-
     const getUserOrders = async () => {
         try {
             const res = await axios.get(`/api/users/messages`);
@@ -43,7 +42,6 @@ export default function ProfilePage() {
             console.log(error.message);
         }
     };
-
     useEffect(() => {
         //getUserDetails();
     }, []);

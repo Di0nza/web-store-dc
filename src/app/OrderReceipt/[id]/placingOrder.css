@@ -22,23 +22,40 @@
     font-size: 14px;
 }
 .firstInfoContainer{
-    width: calc(100% - 5px);
+    width: calc(100% - 7.5px);
     display: flex;
     flex-direction: column;
     font-size: 14px;
     flex-wrap: wrap;
-    margin: 5px 5px 5px 0;
+    margin: 5px 7.5px 5px 0;
 }
 .firstInfoContainer:last-child{
-    width: calc(100% - 5px);
+    width: calc(100% - 7.5px);
     display: flex;
     flex-direction: column;
     font-size: 14px;
     flex-wrap: wrap;
-    margin: 5px 0 5px 5px;
+    margin: 5px 0 5px 7.5px;
+}
+.firstInfoUrl{
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    display: flex;
+    padding: 5px;
+    flex-direction: row;
+    margin-top: 5px;
+    justify-content: space-between;
+    align-items: center;
+    height: 44px;
+}
+.firstInfoUrlInput{
+    border: none;
+    margin-bottom: 0;
+    height: 38px;
 }
 .firstInfoBlock{
     width: calc(100%);
+    background-color: rgba(255, 255, 255, 0.8);
     display: flex;
     flex-direction: column;
     border: 1px solid #dedede;
@@ -47,6 +64,28 @@
     line-height: 22px;
     font-size: 14px;
     flex-wrap: wrap;
+}
+.trackingInfoBlock{
+    width: calc(100%);
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    padding: 8px;
+    margin-top: 15px;
+    line-height: 22px;
+    font-size: 14px;
+    flex-wrap: wrap;
+}
+.trackingInfoBlock h3{
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.firstInfoInput{
+    border: none;
+    height: 100%;
 }
 .firstInfoBlock h3{
     font-size: 17px;
@@ -65,13 +104,14 @@
 .placingOrderInfoBlock{
     width: calc(100%);
     display: flex;
+    background-color: rgba(255, 255, 255, 0.8);
     flex-direction: column;
     border: 1px solid #dedede;
     border-radius: 8px;
     padding: 8px 8px 10px;
     font-size: 14px;
     flex-wrap: wrap;
-    margin: 5px 0 10px;
+    margin: 15px 0 10px;
 }
 .placingOrderInfoBlock h4{
     font-weight: bold;
@@ -144,11 +184,12 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid #dedede;
     border-radius: 8px;
     height: 100px;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 .check-cart-item:last-child{
     margin-bottom: 0;
@@ -182,6 +223,13 @@
     align-items: flex-start;
     width: 200px;
 }
+.orderBtnBlock{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
 .orderStatusItem{
     margin: 0 0 10px 0;
 }
@@ -205,15 +253,21 @@
     width: 140px;
 }
 .products-value-block{
-    width: calc(100% - 100px);
+    width: calc(100%);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin-bottom: 50px;
-    margin-top: 6px;
-    margin-right: 3px;
     overflow-y: scroll;
-    max-height: 320px;
+    max-height: 315px;
+}
+.products-value-cont{
+    width: calc(100% + 7.5px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-right: 2px;
 }
 .order-input-title{
     margin-bottom: 3px;
@@ -328,10 +382,32 @@
     appearance: none;
     color: #111111;
 }
+.placingOrderPdfButton{
+    border-radius: 10px;
+    width: calc(100% - 5px);
+    height: 50px;
+    background-color: #fafafa;
+    color: #111111;
+    padding: 0 10px;
+    outline: none;
+    border: 2px solid #111111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 70px;
+    margin-left: 5px;
+}
+.placingOrderPdfButton img{
+    width: 20px;
+    margin-left: 5px;
+    margin-top: 2px;
+}
 .placingOrderBlockButton{
     border-radius: 10px;
-    margin-top: 10px;
-    width: calc(100%);
+    width: calc(100% - 5px);
     height: 50px;
     background-color: #111111;
     color: #fafafa;
@@ -345,6 +421,7 @@
     cursor: pointer;
     font-weight: 600;
     margin-bottom: 70px;
+    margin-right: 5px;
 }
 .errorMessage{
     text-align: center;

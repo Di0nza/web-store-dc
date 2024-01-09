@@ -146,8 +146,8 @@ const ProductContainer = ({ product }) => {
         navigator.clipboard.writeText(currentUrl).then(() => {
             setInputCurrentUrl('Скопировано!')
         }).catch(err => console.error('Could not copy text: ', err));
-
     };
+
     let socialMediaLogos = [
         {
             name: 'Telegram',

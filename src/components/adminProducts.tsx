@@ -5,7 +5,10 @@ import {Button} from "@/components/ui/button";
 import {getAllProductsAdmin} from "@/services/getData";
 import {Trash} from "lucide-react";
 import {ActionToolTip} from "@/components/ActionToolTip";
+import deleteProduct from '../img/delete.png'
 import './componentsStyles.css'
+import Image from "next/image";
+import {fromDate} from "next-auth/core/lib/utils";
 
 
 type AdminProductsProps = {
@@ -52,25 +55,23 @@ export const AdminProducts = ({search}) => {
                     Добавить Товар
                 </Button>
             </div>
-            <div className='products-block' style={{marginTop: "20px"}}>
+            <div className='admin-products-block'>
                 {products.map((product: any) => (
                     <div key={product._id}
-                         className='product-item'
+                         className='admin-product-item'
                          onClick={() => onOpen("editProduct", {product})}
                          style={{cursor:"pointer"}}
                     >
                         <div className='product-overlay'>
-                            <div className="deleteBtnBlock">
+                            <div className="deleteBtnBlock" onClick={(e) => onActionDelete(e, "deleteProduct", product)}>
                             <ActionToolTip label="Удалить">
-                                    <Trash
-                                        onClick={(e) => onActionDelete(e, "deleteProduct", product)}
-                                        className="group-hover:block w-6 h-6 text-zinc-800 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"
-                                    />
+                                    <Image
+                                        src={deleteProduct} alt={'x'}></Image>
                             </ActionToolTip>
                             </div>
                         </div>
                         <div className='product-info'>
-                            <img className='product-img' src={product.pictures[0]} alt={product.title}></img>
+                            <img className='admin-product-img' src={product.pictures[0]} alt={product.title}></img>
                             <p className='product-title'>{product.title}</p>
                             <p className='product-category'>{product.category}</p>
                         </div>

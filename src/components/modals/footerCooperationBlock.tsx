@@ -1,7 +1,7 @@
 "use client";
 import React, {useState} from 'react';
 import axios from "axios";
-import '../app/profile/profileStyles.css'
+import '../../app/profile/profileStyles.css'
 import Image from "next/image";
 import close from "@/img/close.png";
 

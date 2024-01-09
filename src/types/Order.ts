@@ -7,6 +7,8 @@ export interface IOrder {
     country: string,
     house: string,
     apartment: string,
+    street: string,
+    additionalInformation: string,
     deliveryMethod: string,
     paymentState: string,
     promotionalCode: string,
