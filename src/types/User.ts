@@ -1,9 +1,10 @@
 export interface IUser {
-    username: string;
+    name: string;
     email: string;
     password: string;
-    isVerified: boolean;
+    emailVerified: Date;
     isAdmin: boolean;
+    accounts:[object],
     createdAt: Date;
     forgotPasswordToken: string;
     forgotPasswordTokenExpiry: string;

@@ -50,7 +50,7 @@ const Navigation = ({navLinks}: Props) => {
     };
 
     useEffect(() => {
-        getUserDetails();
+        //getUserDetails();
     }, []);
 
     const handleLinkClick = (event) => {

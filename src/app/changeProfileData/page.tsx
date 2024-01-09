@@ -49,7 +49,7 @@ export default function ChangeProfileData() {
     };
 
     useEffect(() => {
-        getUserDetails();
+        //getUserDetails();
     }, []);
 
     return (

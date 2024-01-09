@@ -6,6 +6,9 @@ import {Footer} from "@/components/Footer";
 // @ts-ignore
 import {OrderProvider} from "@/orderContext/store";
 import {ModalProvider} from "@/components/providers/modalProvider";
+import {SessionProvider} from "next-auth/react";
+import {auth} from "@/auth";
+
 const inter = Inter({subsets: ['latin']})
 
 export const metadata: Metadata = {
@@ -18,20 +21,25 @@ export const metadata: Metadata = {
     icons: 'https://res.cloudinary.com/maticht12345/image/upload/v1701277508/Letter_-_16_wds2cz.png',
 }
 
-export default function RootLayout({children}: { children: React.ReactNode }) {
+export default async function RootLayout({children}: { children: React.ReactNode }) {
+
+    const session = await auth();
+
     return (
-        <html lang="en">
-        <ModalProvider/>
+        <SessionProvider session={session}>
+            <html lang="en">
+            <ModalProvider/>
             <OrderProvider>
                 <body className={inter.className}>
-                    <Header/>
-                        <main className='home-container'>
+                <Header/>
+                <main className='home-container'>
 
-                            {children}
-                        </main>
-                    <Footer/>
+                    {children}
+                </main>
+                <Footer/>
                 </body>
             </OrderProvider>
-        </html>
+            </html>
+        </SessionProvider>
     )
 }

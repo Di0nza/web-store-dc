@@ -7,7 +7,7 @@ export async function GET(
 ) {
     try {
         const product = await Product.findById(params.productId);
-        console.log(product)
+        //console.log(product)
         product.views += 1;
         const updatedProduct = await product.save();
 

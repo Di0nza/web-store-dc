@@ -45,7 +45,7 @@ export default function ProfilePage() {
     };
 
     useEffect(() => {
-        getUserDetails();
+        //getUserDetails();
     }, []);
 
     const logout = async () => {
@@ -84,7 +84,7 @@ export default function ProfilePage() {
                     <p>Заказы</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </Link>
-                <Link href={'/adminPromocodes'} className='additionalProfileLink'>
+                <Link href={`${pathname}/promocodes`} className='additionalProfileLink'>
                     <p>Промокоды</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </Link>

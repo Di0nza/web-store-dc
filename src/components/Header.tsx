@@ -40,7 +40,7 @@ const Header = () => {
     };
 
     useEffect(() => {
-        getUserDetails();
+        //getUserDetails();
     }, []);
 
     return (

@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 import {IUser} from "@/types/User"
 
 const userSchema = new mongoose.Schema<IUser>({
-    username: {
+    name: {
         type: String,
-        required: [true, "Please provide a username"],
+        required: [true, "Please provide a name"],
         unique: true,
     },
     email: {
@@ -16,9 +16,9 @@ const userSchema = new mongoose.Schema<IUser>({
         type: String,
         required: [true, "Please provide a password"],
     },
-    isVerified: {
-        type: Boolean,
-        default: false,
+    emailVerified: {
+        type: Date,
+        default: null
     },
     isAdmin: {
         type: Boolean,
@@ -28,12 +28,15 @@ const userSchema = new mongoose.Schema<IUser>({
         type: Date,
         default: Date.now,
     },
+    // accounts: [{
+    //    type: mongoose.Schema.Types.ObjectId, ref: 'Account'
+    // }],
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
     verifyToken: String,
     verifyTokenExpiry: Date,
 })
 
-const User = mongoose.models.users || mongoose.model("users", userSchema);
+const User = mongoose.models?.users || mongoose.model("users", userSchema);
 
 export default User;

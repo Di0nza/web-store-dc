@@ -1,6 +1,4 @@
 import mongoose from 'mongoose';
-require("dotenv").config();
-
 
 export async function connect() {
     try {

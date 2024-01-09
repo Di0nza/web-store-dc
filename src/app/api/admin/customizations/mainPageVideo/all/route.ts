@@ -10,7 +10,7 @@ export async function GET(
 
         const videos = await MainPageVideo.find();
 
-        console.log(videos)
+        //console.log(videos)
 
         return NextResponse.json({
             message:"Video fetch successfully",

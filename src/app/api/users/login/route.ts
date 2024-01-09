@@ -1,55 +1,74 @@
 import {connect} from "@/db/db";
 import User from "@/models/userModel";
-import { NextRequest, NextResponse } from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import {ITokenData} from "@/types/TokenData";
+import * as z from "zod";
+import {signIn} from "@/auth";
+import {LoginSchema} from "@/types/authSchemas";
+import {DEFAULT_LOGIN_REDIRECT} from "@/routes";
+import {AuthError} from "next-auth";
+import {isRedirectError} from "next/dist/client/components/redirect";
+import {RedirectErrorBoundary} from "next/dist/client/components/redirect-boundary";
+import {generateVerificationToken} from "@/lib/tokens";
+import {getUserByEmail} from "@/services/users";
+import {sendVerificationEmail} from "@/lib/mail";
 
 connect()
 
-export async function POST(request:NextRequest){
+export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json()
-        const {email, password} = reqBody;
+        const validateFields = LoginSchema.safeParse(reqBody);
         console.log(reqBody);
-
-        //check if user exists
-        const user = await User.findOne({email})
-        if(!user){
-            return NextResponse.json({error: "User does not exist"}, {status: 400})
+        if (!validateFields.success) {
+            return NextResponse.json({error: "Неправильные поля"})
         }
-        console.log("user exists");
+        const {email, password} = validateFields.data;
 
+        const existingUser = await getUserByEmail(email);
 
-        //check if password is correct
-        const validPassword = await bcryptjs.compare(password, user.password)
+        if (!existingUser) {
+            return NextResponse.json({error: "Пользователя с такой почтой не существует"});
+        }
+        if (!existingUser.email || !existingUser.password) {
+            return NextResponse.json({error: "Аккаунт для этой почты был зарегистрирован с помощью Google"});
+        }
+
+        const validPassword = await bcryptjs.compare(password, existingUser.password)
         if(!validPassword){
-            return NextResponse.json({error: "Invalid password"}, {status: 400})
+            return NextResponse.json({error: "Неверный пароль"})
         }
-        console.log(user);
 
-        //create token data
-        const tokenData:ITokenData = {
-            id: user._id,
-            username: user.username,
-            email: user.email,
-            isAdmin: user.isAdmin
+        if (!existingUser.emailVerified) {
+            const verificationToken = await generateVerificationToken(email);
+            await sendVerificationEmail(verificationToken.email, verificationToken.token);
+            return NextResponse.json({success: "Необходимо завершить регистрацию. Письмо для подтверждения выслано на почту"});
         }
-        //create token
-        const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, {expiresIn: "1d"})
 
-        const response = NextResponse.json({
-            message: "Login successful",
-            success: true,
-            isAdmin: user.isAdmin
+        await signIn("credentials", {
+            email,
+            password,
+            //redirectTo: `${request.headers.get("origin")}${DEFAULT_LOGIN_REDIRECT}`
         })
-        response.cookies.set("token", token, {
-            httpOnly: true,
+    } catch (error) {
+        if (error instanceof AuthError) {
+            switch (error.type) {
+                case "CredentialsSignin":
+                    return NextResponse.json({error: "Неверный логин или пароль"});
+                default:
+                    return NextResponse.json({error: "Что-то пошло не так"});
 
-        })
-        return response;
+            }
+        }
+        if (isRedirectError(error)) {
 
-    } catch (error: any) {
+        } else {
+
+        }
+        throw error;
         return NextResponse.json({error: error.message}, {status: 500})
     }
+
 }

@@ -8,7 +8,7 @@ export async function GET(
 
         const photos = await MainPagePhoto.find({active:true});
 
-        console.log(photos)
+        //console.log(photos)
         return NextResponse.json({
             message:"Video fetch successfully",
             success: true,

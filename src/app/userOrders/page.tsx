@@ -27,7 +27,7 @@ export default function UserOrders() {
     };
 
     useEffect(() => {
-        getUserDetails();
+        //getUserDetails();
     }, []);
 
     const getUserOrders = async () => {

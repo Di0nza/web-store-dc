@@ -32,12 +32,12 @@ export const getDataBySearch = async (search: string) => {
     try {
         const data = await axios.get("/api/admin/products");
         const products = data.data.products as IProduct[];
-        console.log(products)
+        //console.log(products)
         const foundProducts = products.filter(product =>
             product.title.toLowerCase().includes(search.toLowerCase()) ||
             product.description.toLowerCase().includes(search.toLowerCase())
         );
-        console.log(foundProducts)
+        //console.log(foundProducts)
         return foundProducts;
     } catch (error) {
         console.error('Error fetching data:', error);

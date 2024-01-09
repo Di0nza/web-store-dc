@@ -141,13 +141,13 @@ export async function GET(
 ) {
     try {
         const product = await Product.findById(params.productId);
-        console.log(product)
+        //console.log(product)
 
         if (!product) {
             return NextResponse.json({error: "No such product"}, {status: 400})
         }
 
-        console.log(product)
+        //console.log(product)
 
         return NextResponse.json({
             message:"Product found successfully",

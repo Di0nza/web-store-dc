@@ -2,52 +2,49 @@ import {connect} from "@/db/db";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
-import jwt from "jsonwebtoken";
-import {ITokenData} from "@/types/TokenData";
+import {SignUpSchema} from "@/types/authSchemas";
+import {getUserByEmail} from "@/services/users";
+import {generateVerificationToken} from "@/lib/tokens";
+import {sendVerificationEmail} from "@/lib/mail";
 
-connect()
+connect();
 
 export async function POST(request: NextRequest){
     try {
         const reqBody = await request.json()
-        const {username, email, password, createdAt} = reqBody
-
+        const validateFields = SignUpSchema.safeParse(reqBody);
         console.log(reqBody);
+        if(!validateFields.success){
+            return NextResponse.json({error:"Некорректные поля"})
+        }
 
-        const user = await User.findOne({email})
+        const {name, email, password} = validateFields.data;
+
+        const user = await getUserByEmail(email);
         if(user){
-            return NextResponse.json({error: "User already exists"}, {status: 400})
+            return NextResponse.json({error: "Пользователь с таким Email уже существует"})
         }
 
         const salt = await bcryptjs.genSalt(10)
         const hashedPassword = await bcryptjs.hash(password, salt)
 
         const newUser = new User({
-            username,
+            name,
             email,
             password: hashedPassword,
-            createdAt: createdAt,
+            createdAt: Date.now(),
         })
 
         const savedUser = await newUser.save()
         console.log(savedUser);
 
-        const tokenData: ITokenData = {
-            id: savedUser._id,
-            username: savedUser.username,
-            email: savedUser.email,
-            isAdmin: savedUser.isAdmin
-        }
+        const verificationToken = await generateVerificationToken(email);
+        await sendVerificationEmail(verificationToken.email, verificationToken.token)
 
-        const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, {expiresIn: "1d"})
         const response = NextResponse.json({
-            message: "User created successfully",
-            success: true,
+            message: "Письмо для подтверждения регистрации выслано на почту",
+            success: "Письмо для подтверждения регистрации выслано на почту",
             savedUser
-        })
-
-        response.cookies.set("token", token, {
-            httpOnly: true,
         })
 
         return response;

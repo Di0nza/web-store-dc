@@ -39,7 +39,7 @@ const Footer = () => {
         }
     };
     useEffect(() => {
-        getUserDetails()
+        //getUserDetails()
         console.log(userData);
     }, []);
     return (

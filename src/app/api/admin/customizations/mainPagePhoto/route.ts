@@ -3,11 +3,14 @@ import MainPageVideo from "@/models/mainPagePhotoModel";
 import {ITokenData} from "@/types/TokenData";
 import {getDataFromToken} from "@/helpers/getDataFromToken";
 import MainPagePhoto from "@/models/mainPagePhotoModel";
+import {currentRole} from "@/lib/auth";
 
 export async function POST(
     request: NextRequest,
 ) {
     try {
+
+
 
         const tokenData: ITokenData = getDataFromToken(request);
         console.log(tokenData)

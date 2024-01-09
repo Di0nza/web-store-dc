@@ -13,7 +13,7 @@ const Page = () => {
     }, [])
 
     useEffect(()=>{
-        console.log(products)
+        //console.log(products)
     },[products])
 
     return (

@@ -108,7 +108,7 @@ export const EditProductModal = () => {
         const convertedFile = await convertBase64(files?.[0]) as File;
         setSelectedPicturesFiles([...selectedPicturesFiles, convertedFile]);
         setSelectedPictures((prevPictures) => [...prevPictures, ...newPictures]);
-        console.log(selectedPictures)
+        //console.log(selectedPictures)
     };
 
     const handleSelectPicture = (index) => {
@@ -170,8 +170,8 @@ export const EditProductModal = () => {
 
     const isLoading = form.formState.isSubmitting;
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values);
-        console.log(selectedPicturesFiles);
+        //console.log(values);
+        //console.log(selectedPicturesFiles);
         try {
             const formData = new FormData();
 

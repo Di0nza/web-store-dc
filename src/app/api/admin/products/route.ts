@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
 
         const data = await request.formData();
 
-        console.log(data)
+        //console.log(data)
 
         const title = data.get('title');
         const product = await Product.findOne({title});
@@ -95,7 +95,7 @@ export async function POST(request: NextRequest) {
         })
 
         const savedProduct = await newProduct.save();
-        console.log(savedProduct);
+        //console.log(savedProduct);
 
 
         return NextResponse.json({

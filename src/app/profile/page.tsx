@@ -7,6 +7,8 @@ import Image from "next/image";
 import googleLogo from "@/img/pngwinggoogleLogo.png";
 import './profileStyles.css'
 import arrowB from '../../img/arrowB.png'
+import {signOut} from "next-auth/react";
+import {useCurrentUser} from "@/hooks/useCurrentUser";
 
 interface UserData {
     username: string;
@@ -17,6 +19,7 @@ interface UserData {
 export default function ProfilePage() {
     const router = useRouter();
     const [userData, setUserData] = useState<UserData | null>(null);
+    const user = useCurrentUser();
 
     const getUserDetails = async () => {
         try {
@@ -29,14 +32,16 @@ export default function ProfilePage() {
     };
 
     useEffect(() => {
-        getUserDetails();
+        console.log(user)
+        //getUserDetails();
     }, []);
 
     const logout = async () => {
         try {
-            await axios.get('/api/users/logout');
-            router.push('/');
-            window.location.reload();
+            await signOut()
+            // await axios.get('/api/users/logout');
+            // router.push('/');
+            // window.location.reload();
         } catch (error: any) {
             console.log(error.message);
         }
