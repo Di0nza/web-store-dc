@@ -3,19 +3,21 @@ import MainPageVideo from "@/models/mainPagePhotoModel";
 import {ITokenData} from "@/types/TokenData";
 import {getDataFromToken} from "@/helpers/getDataFromToken";
 import MainPagePhoto from "@/models/mainPagePhotoModel";
-import {currentRole} from "@/lib/auth";
+import {currentUser, isAdmin} from "@/lib/auth";
 
 export async function POST(
     request: NextRequest,
 ) {
     try {
 
+        const user = await currentUser();
 
+        if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
 
-        const tokenData: ITokenData = getDataFromToken(request);
-        console.log(tokenData)
-        if (tokenData.isAdmin === false) {
-            return NextResponse.json({error: "Access denied"}, {status: 403})
+        if(user?.isAdmin === false){
+            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
         }
 
         const reqBody = await request.json()
@@ -42,6 +44,16 @@ export async function GET(
     request: NextRequest,
 ) {
     try {
+
+        const user = await currentUser();
+
+        if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        if(user?.isAdmin === false){
+            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
+        }
 
         const photos = await MainPagePhoto.find();
 

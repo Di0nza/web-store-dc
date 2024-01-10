@@ -2,10 +2,18 @@ import {connect} from "@/db/db";
 import Order from "@/models/orderModel";
 import Product from "@/models/productModel"
 import {NextRequest, NextResponse} from "next/server";
+import {currentUser} from "@/lib/auth";
 connect()
 
 export async function POST(request: NextRequest) {
     try {
+
+        const user = await currentUser();
+
+        if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
         const reqBody = await request.json()
         const {
             name,
@@ -30,6 +38,10 @@ export async function POST(request: NextRequest) {
             trackingCode,
             trackingLink,
         } = reqBody
+
+        if(user.email !== email){
+            return NextResponse.json({error: "Forbidden. You don't have this rights."}, {status: 403})
+        }
 
         console.log(reqBody);
 
@@ -87,11 +99,24 @@ interface IParams {
 
 export async function GET(request: NextRequest) {
     try {
+        const user = await currentUser();
+
+        if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
         const {id} = request.query;
         const order = await Order.findById(id);
+
         if (!order) {
             return NextResponse.json({ error: "Order not found" }, { status: 404 });
         }
+
+        if(user.email !== order.email && user.isAdmin !== true){
+            return NextResponse.json({error: "Forbidden. You don't have this rights."}, {status: 403})
+        }
+
+
         return NextResponse.json({
             message: "Order retrieved successfully",
             order
@@ -103,6 +128,17 @@ export async function GET(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
     try {
+
+        const user = await currentUser();
+
+        if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        if(user?.isAdmin === false){
+            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
+        }
+
         const reqBody = await request.json();
         const orderId = reqBody.id;
         const existingOrder = await Order.findById(orderId);
@@ -141,6 +177,17 @@ export async function PUT(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
     try {
+
+        const user = await currentUser();
+
+        if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        if(user?.isAdmin === false){
+            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
+        }
+
         const reqBody = await request.json()
         const { orderId } = reqBody
         const deletedOrder = await Order.findByIdAndDelete(orderId)

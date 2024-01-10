@@ -5,6 +5,7 @@ import {IProduct} from "@/types/Product";
 import {ITokenData} from "@/types/TokenData";
 import {getDataFromToken} from "@/helpers/getDataFromToken";
 import {log} from "util";
+import {currentUser, isAdmin} from "@/lib/auth";
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
@@ -23,12 +24,16 @@ connect()
 
 export async function POST(request: NextRequest) {
     try {
-        const tokenData: ITokenData = getDataFromToken(request);
-        console.log(tokenData)
-        if (tokenData.isAdmin === false) {
-            return NextResponse.json({error: "Access denied"}, {status: 403})
+
+        const user = await currentUser();
+
+        if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
+        if(user?.isAdmin === false){
+            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
+        }
 
         const data = await request.formData();
 
@@ -111,10 +116,15 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
     try {
-        const tokenData: ITokenData = getDataFromToken(request);
 
-        if (tokenData.isAdmin === false) {
-            return NextResponse.json({error: "Access denied"}, {status: 403})
+        const user = await currentUser();
+
+        if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        if(user?.isAdmin === false){
+            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
         }
 
         const reqBody: IProduct = await request.json()
@@ -137,6 +147,17 @@ export async function DELETE(request: NextRequest) {
 
 export async function GET(){
     try{
+
+        const user = await currentUser();
+
+        if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        if(user?.isAdmin === false){
+            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
+        }
+
         const products:IProduct[] = await Product.find();
         return NextResponse.json({
             message: "All products",

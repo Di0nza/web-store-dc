@@ -25,7 +25,7 @@ export default function ChangeProfileData() {
             if (name.trim() !== '' && name !== (userData?.name ?? '')) {
                 updatedData.name = name;
             }
-            if (email.trim() !== '' && email !== (userData?.email ?? '')) {
+            if (email.trim() !== '') {
                 updatedData.email = email;
             }
             if (Object.keys(updatedData).length === 0) {
@@ -38,20 +38,8 @@ export default function ChangeProfileData() {
         }
     };
 
-    const getUserDetails = async () => {
-        try {
-            const res = await axios.get<{ data: UserData }>('/api/users/userdata');
-            console.log(res.data.data.name);
-            setUserData(res.data.data);
-            setName(res.data.data.name);
-            setEmail(res.data.data.email);
-        } catch (error: any) {
-            console.log(error.message);
-        }
-    };
 
     useEffect(() => {
-        //getUserDetails();
         setUserData(user);
         setName(user.name);
         setEmail(user.email);

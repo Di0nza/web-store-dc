@@ -1,11 +1,23 @@
 import { connect } from "@/db/db";
 import Order from "@/models/orderModel";
 import { NextRequest, NextResponse } from "next/server";
+import {currentUser} from "@/lib/auth";
 
 connect();
 
 export async function GET(request: NextRequest) {
     try {
+
+        const user = await currentUser();
+
+        if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        if(user?.isAdmin === false){
+            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
+        }
+
         const allOrders = await Order.find({});
         return NextResponse.json({
             message: "All orders retrieved successfully",

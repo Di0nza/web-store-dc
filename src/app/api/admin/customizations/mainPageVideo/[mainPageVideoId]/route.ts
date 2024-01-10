@@ -5,6 +5,7 @@ import {IProduct} from "@/types/Product";
 import {ITokenData} from "@/types/TokenData";
 import {getDataFromToken} from "@/helpers/getDataFromToken";
 import MainPageVideo from "@/models/mainPageVideoModel";
+import {currentUser, isAdmin} from "@/lib/auth";
 
 
 export async function PATCH(
@@ -13,11 +14,14 @@ export async function PATCH(
 ) {
     try {
 
-        const tokenData: ITokenData = getDataFromToken(request);
-        console.log(tokenData)
+        const user = await currentUser();
 
-        if (tokenData.isAdmin == false) {
-            return NextResponse.json({error: "Access denied"}, {status: 403})
+        if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        if(user?.isAdmin === false){
+            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
         }
 
         const video = await MainPageVideo.findByIdAndUpdate(params.mainPageVideoId, {
@@ -46,10 +50,15 @@ export async function DELETE(
     {params}: { params: { mainPageVideoId: string } }
 ) {
     try {
-        const tokenData: ITokenData = getDataFromToken(request);
-        console.log(tokenData)
-        if (tokenData.isAdmin === false) {
-            return NextResponse.json({error: "Access denied"}, {status: 403})
+
+        const user = await currentUser();
+
+        if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        if(user?.isAdmin === false){
+            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
         }
 
         const video = await MainPageVideo.findByIdAndDelete(params.mainPageVideoId);

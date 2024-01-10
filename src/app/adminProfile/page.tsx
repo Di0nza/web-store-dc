@@ -8,6 +8,7 @@ import googleLogo from "@/img/pngwinggoogleLogo.png";
 import './profileStyles.css'
 import arrowB from '../../img/arrowB.png'
 import {useCurrentUser} from "@/hooks/useCurrentUser";
+import {RoleGate} from "@/components/auth/RoleGate";
 
 
 interface UserData {
@@ -62,55 +63,56 @@ export default function ProfilePage() {
     };
 
     return (
-        <div className='profileBlock'>
-            <h2>{"Личный кабинет администратора"}</h2>
-            {userData && (
-                <>
-                    <p className='profileHelloText'>Здравсвуйте, Админ {userData.name}</p>
-                    <p  className='createdDate'>Дата создания аккаунта: {new Date(userData.createdAt).toLocaleString()}</p>
-                </>
-            )}
-            <div className='profileLinkBlock'>
-                <Link href={'/changeProfileData'} className='additionalProfileLink'>
-                    <p>Изменить данные профиля</p>
-                    <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
-                </Link>
-                <Link  href={`${pathname}/customizations`}  className='additionalProfileLink'>
-                    <p>Стилизация</p>
-                    <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
-                </Link>
-                <Link href={`${pathname}/products`} className='additionalProfileLink'>
-                    <p>Товары</p>
-                    <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
-                </Link>
-                <Link href={`allAdminOrders`} className='additionalProfileLink'>
-                    <p>Заказы</p>
-                    <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
-                </Link>
-                <Link href={`${pathname}/promocodes`} className='additionalProfileLink'>
-                    <p>Промокоды</p>
-                    <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
-                </Link>
-                <Link href={'/adminStatistics'} className='additionalProfileLink'>
-                    <p>Статистика</p>
-                    <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
-                </Link>
-                <Link href={'/allAdminMessages'} className='additionalProfileLink'>
-                    <p>Сообщения</p>
-                    <div className='messagesBlock'>
-                        <div className='messagesBlockCount'>
-                            <p>{userOrders?.length}</p>
+            <div className='profileBlock'>
+                <h2>{"Личный кабинет администратора"}</h2>
+                {userData && (
+                    <>
+                        <p className='profileHelloText'>Здравсвуйте, Админ {userData.name}</p>
+                        <p className='createdDate'>Дата создания
+                            аккаунта: {new Date(userData.createdAt).toLocaleString()}</p>
+                    </>
+                )}
+                <div className='profileLinkBlock'>
+                    <Link href={'/changeProfileData'} className='additionalProfileLink'>
+                        <p>Изменить данные профиля</p>
+                        <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
+                    </Link>
+                    <Link href={`${pathname}/customizations`} className='additionalProfileLink'>
+                        <p>Стилизация</p>
+                        <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
+                    </Link>
+                    <Link href={`${pathname}/products`} className='additionalProfileLink'>
+                        <p>Товары</p>
+                        <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
+                    </Link>
+                    <Link href={`allAdminOrders`} className='additionalProfileLink'>
+                        <p>Заказы</p>
+                        <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
+                    </Link>
+                    <Link href={`${pathname}/promocodes`} className='additionalProfileLink'>
+                        <p>Промокоды</p>
+                        <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
+                    </Link>
+                    <Link href={'/adminStatistics'} className='additionalProfileLink'>
+                        <p>Статистика</p>
+                        <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
+                    </Link>
+                    <Link href={'/allAdminMessages'} className='additionalProfileLink'>
+                        <p>Сообщения</p>
+                        <div className='messagesBlock'>
+                            <div className='messagesBlockCount'>
+                                <p>{userOrders?.length}</p>
+                            </div>
+                            <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                         </div>
+                    </Link>
+                    <div className='additionalProfileLink' onClick={logout}>
+                        <p>Выйти из аккаунта</p>
                         <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                     </div>
-                </Link>
-                <div className='additionalProfileLink' onClick={logout}>
-                    <p>Выйти из аккаунта</p>
-                    <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </div>
-            </div>
 
-        </div>
+            </div>
     );
 }
 

@@ -2,6 +2,7 @@ import styles from './page.module.css'
 import {VideoPreview} from "../components/videoPreview";
 import {HomeImageSlider} from "../components/HomeImageSlider";
 import OwnDesignOrder from "@/components/ownDesignOrder";
+import {NewCollection} from "@/components/NewCollection";
 
 export default function Home() {
     return (
@@ -22,6 +23,7 @@ export default function Home() {
                 <HomeImageSlider/>
                 <OwnDesignOrder/>
             </div>
+            <NewCollection/>
         </main>
     );
 }

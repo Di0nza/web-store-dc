@@ -1,10 +1,22 @@
 import {connect} from "@/db/db";
 import Order from "@/models/orderModel";
 import {NextRequest, NextResponse} from "next/server";
+import {currentUser} from "@/lib/auth";
 connect()
 
 export async function PUT(request: NextRequest) {
     try {
+
+        const user = await currentUser();
+
+        if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        if(user?.isAdmin === false){
+            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
+        }
+
         const reqBody = await request.json();
         const orderId = reqBody.id;
         const { trackingCode, trackingLink } = reqBody;

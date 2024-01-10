@@ -14,6 +14,14 @@ export const publicRoutes = [
     "/api/users/signup",
 ]
 
+
+
+export const adminRoutes = [
+    "/adminProfile/products"
+]
+
+/**ВСЕ ОСТАЛЬНЫЕ РОУТЫ СЧИТАЮТСЯ ПРИВАТНЫМИ*/
+
 export const authRoutes = [
     "/login",
     //"/signup",
@@ -24,3 +32,5 @@ export const authRoutes = [
 export const apiAuthPrefix = "/api/auth"
 
 export const DEFAULT_LOGIN_REDIRECT = "/profile"
+
+/**ВСЕ ОСТАЛЬНЫЕ РОУТЫ СЧИТАЮТСЯ ПРИВАТНЫМИ, ТО ЕСТЬ НЕЗАЛОГИНЕННЫЙ ПОЛЬЗОВАТЕЛЬ ТУДА НЕ ПОПАДЕТ*/

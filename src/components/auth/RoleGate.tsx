@@ -1,6 +1,6 @@
 "use client"
 
-import {useCurrentRole} from "@/hooks/useCurrentUser";
+import {useCurrentRole} from "@/hooks/useCurrentRole";
 import {FormError} from "@/components/auth/FormError";
 
 interface RoleGateProps {

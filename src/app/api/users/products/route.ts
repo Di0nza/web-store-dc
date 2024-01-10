@@ -2,6 +2,7 @@ import {connect} from "@/db/db";
 import Product from "@/models/productModel";
 import {NextRequest, NextResponse} from "next/server";
 import {IProduct} from "@/types/Product";
+import {currentUser, isAdmin} from "@/lib/auth";
 
 export async function GET(){
     try{
