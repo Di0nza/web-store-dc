@@ -29,8 +29,16 @@ export const authRoutes = [
 
 ]
 
+export const adminEmails = [
+    "dimonza49@gmail.com"
+]
+
 export const apiAuthPrefix = "/api/auth"
 
-export const DEFAULT_LOGIN_REDIRECT = "/profile"
+export const DEFAULT_USER_LOGIN_REDIRECT = "/profile"
+
+export const DEFAULT_ADMIN_LOGIN_REDIRECT = "/adminProfile"
+
+
 
 /**ВСЕ ОСТАЛЬНЫЕ РОУТЫ СЧИТАЮТСЯ ПРИВАТНЫМИ, ТО ЕСТЬ НЕЗАЛОГИНЕННЫЙ ПОЛЬЗОВАТЕЛЬ ТУДА НЕ ПОПАДЕТ*/

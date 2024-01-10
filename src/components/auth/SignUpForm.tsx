@@ -12,7 +12,7 @@ import Image from "next/image";
 import googleLogo from "@/img/pngwinggoogleLogo.png";
 import '@/app/pagesStyle.css'
 import {signIn} from "next-auth/react"
-import {DEFAULT_LOGIN_REDIRECT} from "@/routes";
+import {DEFAULT_USER_LOGIN_REDIRECT} from "@/routes";
 import {SignUpSchema} from "@/types/authSchemas";
 import {FormError} from "@/components/auth/FormError";
 import {FormSuccess} from "@/components/auth/FormSuccess";
@@ -70,7 +70,7 @@ export const SignUpForm = () => {
 
     const googleAuth = () => {
         signIn("google", {
-            callbackUrl: DEFAULT_LOGIN_REDIRECT
+            callbackUrl: DEFAULT_USER_LOGIN_REDIRECT
         })
     }
 

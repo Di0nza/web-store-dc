@@ -2,8 +2,8 @@
 import '../profile/profileStyles.css'
 import {useEffect, useState} from "react";
 import {getAllProductsUser, getData} from '@/services/getData'
-import {Products} from "@/components/Products";
-import {ProductsSearch} from "@/components/ProductsSearch";
+import {Products} from "@/components/product/Products";
+import {ProductsSearch} from "@/components/product/ProductsSearch";
 
 export default function Store() {
     const [products, setProducts] = useState<any[]>([]);

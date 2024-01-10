@@ -1,12 +1,12 @@
 'use client'
 import React, {useState, useEffect} from 'react';
-import styles from '../app/page.module.css'
+import styles from '../../app/page.module.css'
 import Image from "next/image";
-import arrowW from '../img/arrowW.png'
-import sliderImg1 from '../img/homeSlider/00751.jpg';
-import sliderImg2 from '../img/homeSlider/00757.jpg';
-import sliderImg3 from '../img/homeSlider/00755.jpg';
-import sliderImg4 from '../img/homeSlider/00763.jpg';
+import arrowW from '../../img/arrowW.png'
+import sliderImg1 from '../../img/homeSlider/00751.jpg';
+import sliderImg2 from '../../img/homeSlider/00757.jpg';
+import sliderImg3 from '../../img/homeSlider/00755.jpg';
+import sliderImg4 from '../../img/homeSlider/00763.jpg';
 import {getActivePhotos, getAllPhotos} from "@/services/MainPagePhotoFunctions";
 
 const HomeImageSlider = () => {

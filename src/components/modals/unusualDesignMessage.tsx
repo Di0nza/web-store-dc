@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {useParams} from "next/navigation";
 import Image from "next/image";
-import close from '../img/close.png'
+import close from '../../img/close.png'
 
 const UnusualDesignMessage = ({show, onHide, item}) => {
     const [value, setValue] = useState('');

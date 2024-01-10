@@ -2,10 +2,10 @@ import NextAuth from "next-auth";
 
 import authConfig from "@/auth.config";
 import {
-    DEFAULT_LOGIN_REDIRECT,
+    DEFAULT_USER_LOGIN_REDIRECT,
     apiAuthPrefix,
     authRoutes,
-    publicRoutes, adminRoutes,
+    publicRoutes, adminRoutes, DEFAULT_ADMIN_LOGIN_REDIRECT, adminEmails,
 } from "@/routes";
 import {NextResponse} from "next/server";
 import {isAdmin} from "@/lib/auth";
@@ -16,9 +16,9 @@ export default auth(async (req) => {
     const {nextUrl} = req;
     // console.log("ROUTE:", nextUrl.pathname)
     const isLoggedIn = !!req.auth;
-    const isAdmin = req.auth?.user?.isAdmin;
+    const isAdmin = adminEmails.includes(req.auth?.user?.email);
 
-    // console.log(isLoggedIn)
+    console.log("АДМИН:", isAdmin)
 
     const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
     const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
@@ -31,7 +31,11 @@ export default auth(async (req) => {
     //
     if (isAuthRoute) {
         if (isLoggedIn) {
-            return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+
+            if(isAdmin === true){
+                return NextResponse.redirect(new URL(DEFAULT_ADMIN_LOGIN_REDIRECT, nextUrl));
+            }
+            return NextResponse.redirect(new URL(DEFAULT_USER_LOGIN_REDIRECT, nextUrl));
         }
         return null;
     }

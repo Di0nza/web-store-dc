@@ -13,7 +13,7 @@ import {ResetPasswordSchema} from "@/types/authSchemas";
 import {zodResolver} from "@hookform/resolvers/zod";
 import axios from "axios";
 import {signIn} from "next-auth/react";
-import {DEFAULT_LOGIN_REDIRECT} from "@/routes";
+import {DEFAULT_USER_LOGIN_REDIRECT} from "@/routes";
 
 export const ResetPasswordForm = () => {
 

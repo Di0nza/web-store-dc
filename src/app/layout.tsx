@@ -1,13 +1,14 @@
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
 import './globals.css'
-import {Header} from "@/components/Header";
-import {Footer} from "@/components/Footer";
+import {Header} from "@/components/navigation/Header";
+import {Footer} from "@/components/navigation/Footer";
 // @ts-ignore
 import {OrderProvider} from "@/orderContext/store";
 import {ModalProvider} from "@/components/providers/modalProvider";
 import {SessionProvider} from "next-auth/react";
 import {auth} from "@/auth";
+import {Toaster} from "@/components/ui/sonner";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -33,8 +34,8 @@ export default async function RootLayout({children}: { children: React.ReactNode
                 <body className={inter.className}>
                 <Header/>
                 <main className='home-container'>
-
                     {children}
+                    <Toaster/>
                 </main>
                 <Footer/>
                 </body>

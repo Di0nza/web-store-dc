@@ -1,32 +1,38 @@
 "use client"
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useTransition} from 'react';
 import {Button} from "@/components/ui/button";
 import {CldUploadButton} from 'next-cloudinary';
-import axios from "axios";
-import {useRouter} from "next/navigation";
 import {getVideo, postVideo} from "@/services/MainPageVideoFunctions";
 import {ModalType, useModal} from "@/hooks/useModalStore"
-import Image from "next/image";
 import {ActionToolTip} from "@/components/ActionToolTip";
 import {Trash} from "lucide-react";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 import {getAllPhotos, patchPhoto, postPhoto} from "@/services/MainPagePhotoFunctions";
-import sliderImg1 from "@/img/homeSlider/00751.jpg";
-import sliderImg2 from "@/img/homeSlider/00757.jpg";
-import sliderImg3 from "@/img/homeSlider/00755.jpg";
-import sliderImg4 from "@/img/homeSlider/00763.jpg";
-
+import {getNewCollectionAdmin, patchNewCollection} from "@/services/NewCollectionFunctions";
+import {useForm} from "react-hook-form";
+import * as z from "zod";
+import {LoginSchema} from "@/types/authSchemas";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
+import '@/app/adminProfile/(adminPanel)/promocodes/adminPromocodes.css'
+import {Label} from "@/components/ui/label";
+import {Switch} from "@/components/ui/switch";
+import {INewCollection} from "@/types/NewCollection";
+import axios from "axios";
 
 const Page = () => {
 
-    const [showCloudinaryUploader, setShowCloudinaryUploader] = useState(false);
     const [mainVideoPublicUrl, setMainVideoPublicUrl] = useState("")
     const [videoSrc, setVideoSrc] = useState("")
-    const router = useRouter();
 
 
     const [mainPhotoPublicUrl, setMainPhotoPublicUrl] = useState("")
     const [images, setImages] = useState([]);
+
+    const [newCollectionVideoPublicUrl, setNewCollectionPublicUrl] = useState("");
+    const [newCollection, setNewCollection] = useState<INewCollection>();
+    const [isPending, startTransition] = useTransition();
 
 
     const {isOpen, onClose, type, data, onOpen} = useModal();
@@ -34,8 +40,10 @@ const Page = () => {
     useEffect(() => {
         getVideo().then((data) => setVideoSrc(data.data.video.url));
         getAllPhotos().then((data) => setImages(data.data.photos));
+        getNewCollectionAdmin().then((data)=> setNewCollection(data.data.newCollection));
         console.log(data)
-    }, [data]); // Update products when `updated` state changes
+    }, [data]);
+
 
     type UploadResult = {
         info: {
@@ -70,12 +78,27 @@ const Page = () => {
         }
     }, [mainPhotoPublicUrl])
 
+    // useEffect(() => {
+    //     console.log(newCollectionVideoPublicUrl)
+    //     try {
+    //         if (newCollectionVideoPublicUrl) {
+    //             patchNewCollection({secure_url: newCollectionVideoPublicUrl}).then((data) => {
+    //                 setNewCollectionPublicUrl("");
+    //                 setNewCollectionVideoSrc(newCollectionVideoPublicUrl);
+    //             });
+    //         }
+    //     } catch (error: any) {
+    //         console.log(error.message);
+    //     }
+    // }, [newCollectionVideoPublicUrl])
+
+
     const updateActiveImages = async (id) => {
         try {
             const updatedImage = await patchPhoto(id);
             const updatedImageIndex = images.findIndex(image => image._id === id);
 
-            if(updatedImageIndex !== -1){
+            if (updatedImageIndex !== -1) {
                 const updatedImagesArr = [...images];
                 updatedImagesArr[updatedImageIndex] = updatedImage.data.photo;
                 setImages(updatedImagesArr);
@@ -94,6 +117,46 @@ const Page = () => {
         e.stopPropagation();
         onOpen(action, {photo});
     }
+
+    const NewCollectionSchema = z.object({
+        title: z.string().min(1, {
+            message: "Введите название коллекции",
+        }),
+        videoUrl: z.optional(z.string().min(1, {
+        })),
+        active: z.boolean(),
+    });
+
+
+    const form = useForm<z.infer<typeof NewCollectionSchema>>({
+        resolver: zodResolver(NewCollectionSchema),
+        defaultValues: {
+            title: newCollection?.title,
+            videoUrl: newCollection?.videoUrl,
+            active: newCollection?.active
+        },
+    });
+
+    useEffect(() => {
+        if (newCollection) {
+            form.setValue("title", newCollection.title);
+            form.setValue("videoUrl", newCollection.videoUrl);
+            form.setValue("active", newCollection.active)
+        }
+    }, [newCollection, form])
+
+    const onSubmit = async (values: z.infer<typeof NewCollectionSchema>) => {
+
+
+        startTransition(async () => {
+           await patchNewCollection({title: values.title, videoUrl: newCollection?.videoUrl || "hjgjhvbh", active: values.active})
+                .then(async (data) => {
+                    console.log(data)
+                    setNewCollection(data.data.newCollection)
+                    //window.location.reload();
+                });
+        });
+    };
 
     return (
         <div className="store-container">
@@ -143,7 +206,96 @@ const Page = () => {
                         <AccordionItem value="item-1">
                             <AccordionTrigger className="text-lg">Новая коллекция</AccordionTrigger>
                             <AccordionContent>
-                                НОВАЯ КОЛЛЕКЦИЯ
+                                <div className="flex flex-row">
+                                    {videoSrc ?
+                                        <div>
+                                            <video
+                                                key={newCollection?.videoUrl}
+                                                className="h-60 w-120 rounded mt-3"
+                                                controls
+                                                muted
+                                                loop
+                                            >
+                                                <source src={newCollection?.videoUrl} type="video/mp4"/>
+                                                Your browser does not support the video tag.
+                                            </video>
+                                            <CldUploadButton
+                                                className="mt-5 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
+                                                uploadPreset="qiladgcy"
+                                                onUpload={(result: UploadResult) => {
+                                                    setNewCollection((prevCollection) => ({
+                                                        ...prevCollection,
+                                                        videoUrl: result.info.secure_url
+                                                    }));
+
+                                                }}>
+                                                Изменить видео для новой коллекции
+                                            </CldUploadButton>
+                                        </div>
+                                        : <div className="h-60 w-120 mt-3"></div>}
+
+                                    <div className="flex flex-col justify-center ml-10 space-y-2">
+
+                                        <Form {...form}>
+                                            <form
+                                                onSubmit={form.handleSubmit(onSubmit)}
+                                                className="space-y-6"
+                                            >
+                                                <>
+                                                    <FormField
+                                                        control={form.control}
+                                                        name="title"
+                                                        render={({field}) => (
+                                                            <FormItem>
+                                                                <FormLabel>Название новой коллекции</FormLabel>
+                                                                <FormControl>
+                                                                    <Input
+                                                                        disabled={isPending}
+                                                                        {...field}
+                                                                        placeholder="Введите название"
+                                                                    />
+                                                                </FormControl>
+                                                                <FormMessage/>
+                                                            </FormItem>
+                                                        )}
+                                                    />
+                                                    <FormField
+                                                        control={form.control}
+                                                        name="active"
+                                                        render={({field}) => (
+                                                            <FormItem>
+                                                                <FormControl>
+                                                                    <div className="flex items-center space-x-2">
+                                                                        <Label htmlFor="airplane-mode">Показывать на
+                                                                            главном экране</Label>
+                                                                        <Switch
+                                                                            disabled={isPending}
+                                                                            checked={field.value}
+                                                                            onCheckedChange={field.onChange}
+                                                                        />
+                                                                    </div>
+                                                                </FormControl>
+                                                            </FormItem>
+                                                        )}
+                                                    />
+
+                                                    <Button
+                                                        disabled={isPending}
+                                                        type="submit"
+                                                        className="w-full"
+                                                        onClick={()=>onSubmit}
+                                                    >
+                                                        Сохранить
+                                                    </Button>
+                                                </>
+                                            </form>
+
+                                        </Form>
+
+
+
+                                    </div>
+                                </div>
                             </AccordionContent>
                         </AccordionItem>
                     </Accordion>

@@ -7,7 +7,7 @@ import {ITokenData} from "@/types/TokenData";
 import * as z from "zod";
 import {signIn} from "@/auth";
 import {LoginSchema} from "@/types/authSchemas";
-import {DEFAULT_LOGIN_REDIRECT} from "@/routes";
+import {DEFAULT_USER_LOGIN_REDIRECT} from "@/routes";
 import {AuthError} from "next-auth";
 import { isRedirectError } from "next/dist/client/components/redirect";
 import {RedirectErrorBoundary} from "next/dist/client/components/redirect-boundary";

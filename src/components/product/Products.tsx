@@ -1,11 +1,11 @@
-import '../app/profile/profileStyles.css'
+import '../../app/profile/profileStyles.css'
 import Link from "next/link";
 import Image from "next/image";
 import favorites from "@/img/favorite.png";
 import unFavorites from "@/img/unfavorite.png";
 import React, {useEffect, useState} from "react";
 import {usePathname} from "next/navigation";
-import './componentsStyles.css'
+import '../componentsStyles.css'
 import axios from "axios";
 
 type Props = {

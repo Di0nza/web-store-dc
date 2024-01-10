@@ -12,7 +12,14 @@
   object-fit: cover;
   object-position: center 1px;
 }
+.videoPlayerNewCollection {
+  width: 100vw;
+  max-width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
 .videoContainer {
+  width: 100%;
   position: relative;
   font-family: "Century Gothic", serif;
 }
@@ -30,6 +37,10 @@
 }
 .textLogo{
   margin-left: 4px;
+  width: 100px;
+}
+.textLogoNewCollection{
+  margin-left: 10px;
   width: 100px;
 }
 .homeDescriptionBlock{
@@ -172,62 +183,4 @@
 .arrowLeft:hover,
 .arrowRight:hover {
   background-color: rgba(255, 255, 255, 1);
-}
-
-.marquee {
-  --gap: 1rem;
-  position: relative;
-  display: flex;
-  overflow: hidden;
-  user-select: none;
-  gap: var(--gap);
-}
-
-.marquee__content {
-  flex-shrink: 0;
-  display: flex;
-  justify-content: space-around;
-  gap: var(--gap);
-  min-width: 100%;
-}
-
-@keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-100% - var(--gap)));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee__content {
-    animation-play-state: paused !important;
-  }
-}
-
-/* Reverse animation */
-.marquee--reverse .marquee__content {
-  animation-direction: reverse;
-}
-
-/* Attempt to size parent based on content. Keep in mind that the parent width is equal to both content containers that stretch to fill the parent. */
-.marquee--fit-content {
-  max-width: fit-content;
-}
-
-/* A fit-content sizing fix: Absolute position the duplicate container. This will set the size of the parent wrapper to a single child container. Shout out to Olavi's article that had this solution 👏 @link: https://olavihaapala.fi/2021/02/23/modern-marquee.html  */
-.marquee--pos-absolute .marquee__content:last-child {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-@keyframes scroll-abs {
-  from {
-    transform: translateX(calc(100% + var(--gap)));
-  }
-  to {
-    transform: translateX(0);
-  }
 }

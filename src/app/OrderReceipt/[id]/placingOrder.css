@@ -65,6 +65,11 @@
     font-size: 14px;
     flex-wrap: wrap;
 }
+.firstInfoBlock p{
+    width: calc(100%);
+    display: flex;
+    flex-wrap: wrap;
+}
 .trackingInfoBlock{
     width: calc(100%);
     background-color: rgba(255, 255, 255, 0.8);

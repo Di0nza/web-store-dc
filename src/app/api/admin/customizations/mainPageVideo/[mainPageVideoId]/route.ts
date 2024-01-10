@@ -28,12 +28,11 @@ export async function PATCH(
             active:true
         });
 
-        await MainPageVideo.updateMany({_id: {$ne: video._id}}, {active:false});
-
         if (!video) {
             return NextResponse.json({error: "No such video"}, {status: 400})
         }
 
+        await MainPageVideo.updateMany({_id: {$ne: video._id}}, {active:false});
 
         return NextResponse.json({
             message: "New active video updated successfully",
