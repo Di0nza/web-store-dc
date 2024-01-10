@@ -1,7 +1,9 @@
 import styles from './page.module.css'
-import {VideoPreview} from "../components/videoPreview";
-import {HomeImageSlider} from "../components/HomeImageSlider";
-import OwnDesignOrder from "@/components/ownDesignOrder";
+import {VideoPreview} from "../components/homeScreen/videoPreview";
+import {HomeImageSlider} from "../components/homeScreen/HomeImageSlider";
+import OwnDesignOrder from "@/components/homeScreen/ownDesignOrder";
+import {NewCollection} from "@/components/homeScreen/newСollection";
+import {BestProducts} from "@/components/homeScreen/BestProducts";
 
 export default function Home() {
     return (
@@ -18,6 +20,8 @@ export default function Home() {
                     где каждая покупка становится вашим неповторимым посланием
                     миру и частью вашей истории.</p>
             </div>
+            <NewCollection/>
+            <BestProducts/>
             <div className={styles.homeOrderSliderBlock}>
                 <HomeImageSlider/>
                 <OwnDesignOrder/>

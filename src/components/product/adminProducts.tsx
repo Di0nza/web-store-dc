@@ -5,8 +5,8 @@ import {Button} from "@/components/ui/button";
 import {getAllProductsAdmin} from "@/services/getData";
 import {Trash} from "lucide-react";
 import {ActionToolTip} from "@/components/ActionToolTip";
-import deleteProduct from '../img/delete.png'
-import './componentsStyles.css'
+import deleteProduct from '../../img/delete.png'
+import '../componentsStyles.css'
 import Image from "next/image";
 import {fromDate} from "next-auth/core/lib/utils";
 

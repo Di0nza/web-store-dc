@@ -1,9 +1,9 @@
 'use client';
-import '../app/profile/profileStyles.css'
+import '../../app/profile/profileStyles.css'
 import Link from "next/link";
 import {FormEventHandler, useState} from "react";
-import {getDataBySearch} from "../services/getData";
-import searchIco from '../img/searchIco.png'
+import {getDataBySearch} from "../../services/getData";
+import searchIco from '../../img/searchIco.png'
 import Image from "next/image";
 
 type Props = {

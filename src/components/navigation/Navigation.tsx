@@ -2,15 +2,15 @@
 import React, {useState, useEffect} from 'react';
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import './componentsStyles.css'
+import '../componentsStyles.css'
 import Image from "next/image";
-import headerLogo from '../img/headerLogo.png';
-import cartLogo from '../img/cart.svg'
-import cartLogoB from '../img/cartB.svg'
-import close from '../img/close.png'
-import deleteItem from '../img/delete.png'
-import plus from '../img/plus.png'
-import minus from '../img/minus.png'
+import headerLogo from '../../img/headerLogo.png';
+import cartLogo from '../../img/cart.svg'
+import cartLogoB from '../../img/cartB.svg'
+import close from '../../img/close.png'
+import deleteItem from '../../img/delete.png'
+import plus from '../../img/plus.png'
+import minus from '../../img/minus.png'
 import axios from "axios";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
 

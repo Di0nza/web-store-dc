@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import moment from 'moment';
-import './componentsStyles.css';
+import '../componentsStyles.css';
 
 const OrdersChart = ({ userOrders }) => {
     const chartContainer = useRef(null);

@@ -7,10 +7,10 @@ import './statisticsStyles.css'
 import views from "@/img/eye.svg";
 import favorites from "@/img/favorite.png";
 import Image from "next/image";
-import OrdersChart from "@/components/OrdersChart";
+import OrdersChart from "@/components/charts/OrdersChart";
 import {getAllProductsUser} from "@/services/getData";
-import ProductRadialChart from "@/components/ProductRadialChart";
-import ProductViewsFavorites from "@/components/ProductViewsFavorites";
+import ProductRadialChart from "@/components/charts/ProductRadialChart";
+import ProductViewsFavorites from "@/components/product/ProductViewsFavorites";
 
 export default function AdminStatistics() {
     const router = useRouter();

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import './componentsStyles.css';
+import '../componentsStyles.css';
 
 const ProductRadialChart = ({ product }) => {
     const chartRef = useRef(null);

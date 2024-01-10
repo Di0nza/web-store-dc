@@ -1,13 +1,14 @@
 "use client";
 import Link from "next/link";
-import './componentsStyles.css'
+import '../componentsStyles.css'
 import Image from "next/image";
-import headerLogo from '../img/headerLogo.png';
+import headerLogo from '../../img/headerLogo.png';
 import React, {useEffect, useState} from "react";
 import {Navigation} from "./Navigation";
 import axios from "axios";
 import arrowB from "@/img/arrowB.png";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
+import {useCurrentUser} from "@/hooks/useCurrentUser";
 
 interface UserData {
     isAdmin: boolean;
@@ -18,6 +19,7 @@ interface UserData {
 
 const Header = () => {
     const [userData, setUserData] = useState<UserData | null>(null);
+    const user = useCurrentUser();
     // @ts-ignore
     const {sessionTime, setSessionTime} = useOrderContext();
     const navItems = [
@@ -44,6 +46,7 @@ const Header = () => {
 
     useEffect(() => {
         getUserDetails();
+        setUserData(user);
     }, [sessionTime]);
 
     return (

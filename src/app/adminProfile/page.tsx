@@ -67,7 +67,7 @@ export default function ProfilePage() {
             {userData && (
                 <>
                     <p className='profileHelloText'>Здравсвуйте, Админ {userData.name}</p>
-                    <p  className='createdDate'>Дата создания аккаунта: {new Date(userData.createdAt).toLocaleString()}</p>
+                    <p  className='createdDate'>Дата создания аккаунта: {new Date(userData.emailVerified).toLocaleString()}</p>
                 </>
             )}
             <div className='profileLinkBlock'>

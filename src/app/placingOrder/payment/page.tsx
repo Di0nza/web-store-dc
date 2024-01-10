@@ -5,7 +5,7 @@ import React, {useEffect, useState} from "react";
 import {Metadata} from "next";
 import axios from "axios";
 import {usePathname, useRouter} from "next/navigation";
-import OrderNavBarContainer from "@/components/OrderNavBarContainer";
+import OrderNavBarContainer from "@/components/navigation/OrderNavBarContainer";
 import {useOrderContext} from "@/orderContext/store";
 
 interface UserData {

@@ -3,8 +3,9 @@ import '../placingOrder.css'
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {usePathname, useRouter} from "next/navigation";
-import OrderNavBarContainer from "@/components/OrderNavBarContainer";
+import OrderNavBarContainer from "@/components/navigation/OrderNavBarContainer";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
+import {useCurrentUser} from "@/hooks/useCurrentUser";
 
 interface UserData {
     name: string;
@@ -33,7 +34,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const [selectedDelivery, setSelectedDelivery] = useState(null);
     // @ts-ignore
     const { name, email, telephone, zip, setZip, city, setCity, country, setCountry, house, setHouse, apartment, setApartment, street, setStreet, additionalInformation, setAdditionalInformation, deliveryMethod, setDeliveryMethod, promotionalCode, totalCost, totalNumber, createdBy, products} = useOrderContext();
-
+    const user = useCurrentUser();
     const handleDeliverySelection = (method) => {
         setSelectedDelivery(method);
         setDeliveryMethod(method);
@@ -65,6 +66,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     };
     useEffect(() => {
         //getUserDetails();
+        setUserData(user);
     }, []);
 
     return (

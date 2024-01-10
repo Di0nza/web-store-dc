@@ -1,7 +1,7 @@
 "use client"
 import React, {useEffect, useState} from 'react';
-import {AdminProducts} from "@/components/adminProducts";
-import {ProductsSearch} from "@/components/ProductsSearch";
+import {AdminProducts} from "@/components/product/adminProducts";
+import {ProductsSearch} from "@/components/product/ProductsSearch";
 import {getAllProductsAdmin, getData} from "@/services/getData";
 import '../../profileStyles.css'
 import axios from "axios";

@@ -12,11 +12,13 @@ import vklogo from '../img/shearIcons/vklogo.png';
 import tglogo from '../img/shearIcons/tglogo.png';
 import instlogo from '../img/shearIcons/viberlogo.png';
 import wtplogo from '../img/shearIcons/wtplogo.png';
-import UnusualDesignMessage from "@/components/unusualDesignMessage";
+import UnusualDesignMessage from "@/components/modals/unusualDesignMessage";
 import axios from "axios";
 import './componentsStyles.css'
 import ProductSizeTable from "@/components/modals/ProductSizeTable";
 import BigPhotosSlider from "@/components/modals/BigPhotosSlider";
+import {OrderProvider, useOrderContext} from "@/orderContext/store";
+import {BestProducts} from "@/components/homeScreen/BestProducts";
 
 
 function Images(props: { onClick: () => Window, src: any, alt: string, style: { cursor: string; width: string } }) {
@@ -35,6 +37,8 @@ const ProductContainer = ({ product }) => {
     const wrapperRef = useRef(null);
     const [isSizeTableOpen, setIsSizeTableOpen] = useState(false);
     const [isPhotosSliderOpen, setIsPhotosSliderOpen] = useState(false);
+    // @ts-ignore
+    const {sessionTime, setSessionTime} = useOrderContext();
 
     const closeSizeTable = () => {
         setIsSizeTableOpen(false);
@@ -93,6 +97,7 @@ const ProductContainer = ({ product }) => {
             const updatedStoredCartItems = JSON.parse(localStorage.getItem('cart')) || [];
             setCartItems(updatedStoredCartItems);
             console.log('Обновленные данные корзины из localStorage:', updatedStoredCartItems);
+            setSessionTime(Date.now());
             window.location.reload();
         } else {
             alert('Пожалуйста, выберите размер');
@@ -196,123 +201,135 @@ const ProductContainer = ({ product }) => {
 
 
     return (
-        <div className='product-container' style={{marginBottom:'50px', minHeight:'100vh'}}>
-            <div className='product-container-slider'>
-                <img onClick={togglePhotosSlider} className='product-container-slider-preview' src={currentImage} alt={product.title} />
-                <div className='product-thumbnails'>
-                    {product.pictures.map((image, index) => (
-                        <img
-                            key={index}
-                            className={`product-thumbnail ${image === currentImage ? 'selected' : ''}`}
-                            src={image}
-                            alt={`Thumbnail ${index}`}
-                            onClick={() => changeImage(image)}
-                        />
-                    ))}
-                </div>
-            </div>
-            <div className='product-info-block'>
-                <div>
-                    <div className='product-info-block-head'>
-                        <div>
-                            <h3>{product.title}</h3>
-                            <p className='product-info-price'>${product.price}.00</p>
+        <OrderProvider>
+            <div style={{marginBottom: '50px', minHeight: '100vh'}}>
+                <div className='product-container'>
+                    <div className='product-container-slider'>
+                        <img onClick={togglePhotosSlider} className='product-container-slider-preview'
+                             src={currentImage}
+                             alt={product.title}/>
+                        <div className='product-thumbnails'>
+                            {product.pictures.map((image, index) => (
+                                <img
+                                    key={index}
+                                    className={`product-thumbnail ${image === currentImage ? 'selected' : ''}`}
+                                    src={image}
+                                    alt={`Thumbnail ${index}`}
+                                    onClick={() => changeImage(image)}
+                                />
+                            ))}
                         </div>
-                        <div className={'cart-items-btns-container'}>
-                            <div className={'cart-items-btns-block'}>
-                                <div className='error-button' onClick={() => setSendUnusualDesign(true)}>
-                                    <Image className='error-button-image' src={unusualDesign} alt='!' />
+                    </div>
+                    <div className='product-info-block'>
+                        <div>
+                            <div className='product-info-block-head'>
+                                <div>
+                                    <h3>{product.title}</h3>
+                                    <p className='product-info-price'>${product.price}.00</p>
                                 </div>
-                                <div className='favorite-button' onClick={() => handleToggleFavorite(product._id)}>
-                                    <Image className='favorite-button-image' src={!isFavorite ? favorites : unFavorites} alt='Favorite' />
-                                </div>
-                                <div className='shear-button' onClick={copyLinkAndShowMessage}>
-                                    <Image className='shear-button-image' src={shearLink} alt='+' />
-                                </div>
-                            </div>
-                            {showCopiedMessage && (
-                                <div className="shearLinkContainer" ref={wrapperRef}>
-                                    <div>
-
-                                        <div className="copiedMessage">
+                                <div className={'cart-items-btns-container'}>
+                                    <div className={'cart-items-btns-block'}>
+                                        <div className='error-button' onClick={() => setSendUnusualDesign(true)}>
+                                            <Image className='error-button-image' src={unusualDesign} alt='!'/>
+                                        </div>
+                                        <div className='favorite-button'
+                                             onClick={() => handleToggleFavorite(product._id)}>
+                                            <Image className='favorite-button-image'
+                                                   src={!isFavorite ? favorites : unFavorites} alt='Favorite'/>
+                                        </div>
+                                        <div className='shear-button' onClick={copyLinkAndShowMessage}>
+                                            <Image className='shear-button-image' src={shearLink} alt='+'/>
+                                        </div>
+                                    </div>
+                                    {showCopiedMessage && (
+                                        <div className="shearLinkContainer" ref={wrapperRef}>
                                             <div>
-                                                <div className={'inputCurrentUrl'} style={{
 
-                                                }}>
-                                                    <input type="text" value={inputCurrentUrl}/>
-                                                    <div className={'inputCurrentBtn'}>
-                                                        <Image className={'inputCurrentBtnImg'} src={shearLogo} onClick={copyLinkToClipboard} alt={'+'}/>
+                                                <div className="copiedMessage">
+                                                    <div>
+                                                        <div className={'inputCurrentUrl'} style={{}}>
+                                                            <input type="text" value={inputCurrentUrl}/>
+                                                            <div className={'inputCurrentBtn'}>
+                                                                <Image className={'inputCurrentBtnImg'} src={shearLogo}
+                                                                       onClick={copyLinkToClipboard} alt={'+'}/>
+                                                            </div>
+                                                        </div>
+                                                        <div style={{
+                                                            display: 'flex',
+                                                            flexDirection: 'row',
+                                                            justifyContent: 'space-between',
+                                                            marginTop: "10px",
+                                                            marginBottom: "5px"
+                                                        }}>
+                                                            {socialMediaLogos.map((platform, index) => (
+                                                                <Image
+                                                                    key={index}
+                                                                    style={{width: '24px', cursor: 'pointer'}}
+                                                                    src={platform.logo}
+                                                                    alt={platform.name}
+                                                                    onClick={() => window.open(platform.url, '_blank')}
+                                                                />
+                                                            ))}
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div style={{
-                                                    display: 'flex',
-                                                    flexDirection: 'row',
-                                                    justifyContent: 'space-between',
-                                                    marginTop: "10px",
-                                                    marginBottom: "5px"
-                                                }}>
-                                                    {socialMediaLogos.map((platform, index) => (
-                                                        <Image
-                                                            key={index}
-                                                            style={{width: '24px', cursor: 'pointer'}}
-                                                            src={platform.logo}
-                                                            alt={platform.name}
-                                                            onClick={() => window.open(platform.url, '_blank')}
-                                                        />
-                                                    ))}
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    )}
+                                    <UnusualDesignMessage
+                                        show={sendUnusualDesign}
+                                        onHide={() => setSendUnusualDesign(false)}
+                                        item={product}
+                                    />
                                 </div>
-                            )}
-                            <UnusualDesignMessage
-                                show={sendUnusualDesign}
-                                onHide={() => setSendUnusualDesign(false)}
-                                item={product}
-                            />
-                        </div>
 
-                    </div>
+                            </div>
 
 
-                    <div className='product-additionalInformation-block'>
-                        <h3>{product.description}</h3>
-                        <div className='product-sizes-cont'>
-                            <div className='product-sizes-block'>
-                                {product.sizes.map((size, index) => (
-                                    <div
-                                        key={index}
-                                        className={`product-size ${selectedSize === size.size ? 'selected-size' : ''}`}
-                                        onClick={() => parseInt(size.amount) !== 0 && handleSizeSelection(size.size)}
-                                        style={{ opacity: parseInt(size.amount) === 0 ? 0.2 : 1, cursor: parseInt(size.amount) === 0 ? 'not-allowed' : 'pointer' }}
-                                    >
-                                        {size.size}
+                            <div className='product-additionalInformation-block'>
+                                <h3>{product.description}</h3>
+                                <div className='product-sizes-cont'>
+                                    <div className='product-sizes-block'>
+                                        {product.sizes.map((size, index) => (
+                                            <div
+                                                key={index}
+                                                className={`product-size ${selectedSize === size.size ? 'selected-size' : ''}`}
+                                                onClick={() => parseInt(size.amount) !== 0 && handleSizeSelection(size.size)}
+                                                style={{
+                                                    opacity: parseInt(size.amount) === 0 ? 0.2 : 1,
+                                                    cursor: parseInt(size.amount) === 0 ? 'not-allowed' : 'pointer'
+                                                }}
+                                            >
+                                                {size.size}
+                                            </div>
+                                        ))}
                                     </div>
+                                    <p onClick={toggleSizeTable} className='product-sizes-table'>Узнать свой рамер</p>
+                                </div>
+                                {product.additionalInformation.map((info, index) => (
+                                    <div>
+                                        <b>{info.title}:</b>
+                                        <p key={index}> {info.description}</p>
+                                    </div>
+
                                 ))}
                             </div>
-                            <p onClick={toggleSizeTable} className='product-sizes-table'>Узнать свой рамер</p>
+                            {isSizeTableOpen && (
+                                <ProductSizeTable onClose={closeSizeTable}/>
+                            )}
+                            {isPhotosSliderOpen && (
+                                <BigPhotosSlider product={product} onClose={closePhotosSlider}/>
+                            )}
                         </div>
-                        {product.additionalInformation.map((info, index) => (
-                            <div>
-                                <b>{info.title}:</b>
-                                <p key={index}> {info.description}</p>
-                            </div>
-
-                        ))}
+                        <div className='product-btn' onClick={handleAddToCart}>
+                            {selectedSize ? "Добавить в корзину" : "Выберите размер"}
+                        </div>
                     </div>
-                    {isSizeTableOpen && (
-                        <ProductSizeTable onClose={closeSizeTable}/>
-                    )}
-                    {isPhotosSliderOpen && (
-                        <BigPhotosSlider product={product} onClose={closePhotosSlider}/>
-                    )}
                 </div>
-                <div className='product-btn' onClick={handleAddToCart}>
-                    {selectedSize ? "Добавить в корзину" : "Выберите размер"}
-                </div>
+                <br/>
+                <BestProducts/>
             </div>
-        </div>
+        </OrderProvider>
     );
 };
 

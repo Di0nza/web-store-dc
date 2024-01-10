@@ -12,7 +12,14 @@
   object-fit: cover;
   object-position: center 1px;
 }
+.videoPlayerNewCollection {
+  width: 100vw;
+  max-width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
 .videoContainer {
+  width: 100%;
   position: relative;
   font-family: "Century Gothic", serif;
 }
@@ -30,6 +37,10 @@
 }
 .textLogo{
   margin-left: 4px;
+  width: 100px;
+}
+.textLogoNewCollection{
+  margin-left: 10px;
   width: 100px;
 }
 .homeDescriptionBlock{

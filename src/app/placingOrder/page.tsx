@@ -5,7 +5,8 @@ import {Metadata} from "next";
 import axios from "axios";
 import {usePathname, useRouter} from "next/navigation";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
-import OrderNavBarContainer from "@/components/OrderNavBarContainer";
+import OrderNavBarContainer from "@/components/navigation/OrderNavBarContainer";
+import {useCurrentUser} from "@/hooks/useCurrentUser";
 
 interface UserData {
     name: string;
@@ -29,6 +30,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const [selectedDelivery, setSelectedDelivery] = useState(null);
     // @ts-ignore
     const {name, setName, email, setEmail, telephone, setTelephone} = useOrderContext();
+    const user = useCurrentUser();
 
     const createOrder = async () => {
         try {
@@ -54,6 +56,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     };
     useEffect(() => {
         //getUserDetails();
+        setUserData(user);
     }, []);
 
     return (
@@ -65,12 +68,14 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                 <input
                     type="text"
                     value={userData.name}
+                    placeholder={'Иван Иванов'}
                     onChange={(e) => setUserData({...userData, name: e.target.value})}
                 />
                 <label className={'order-input-title'}>Почта</label>
                 <input
                     type="email"
                     value={userData.email}
+                    placeholder={'someemail@gmail.com'}
                     onChange={(e) => setUserData({...userData, email: e.target.value})}
                 />
                 <label className={'order-input-title'}>Телефон <p>(необязательно)</p></label>
