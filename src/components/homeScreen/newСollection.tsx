@@ -40,13 +40,13 @@ const NewCollection = async () => {
                     <source src={collection.videoUrl} type="video/mp4"/>
                     Your browser does not support the video tag.
                 </video>
-                {/*<div className={styles.overlay}>*/}
-                {/*    <Image src={HomeScreenLogo} alt="Logo" className={styles.logo}/>*/}
-                {/*    <div className={styles.text}>*/}
-                {/*        <Image className={styles.textLogoNewCollection} src={textLogo} alt={'MaryDeniz'}></Image>*/}
-                {/*        <p></p>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+                <div className={styles.overlay}>
+                    {/*<Image src={HomeScreenLogo} alt="Logo" className={styles.logo}/>*/}
+                    <div className={styles.text}>
+                        {/*<Image className={styles.textLogoNewCollection} src={textLogo} alt={'MaryDeniz'}></Image>*/}
+                        <p>{collection.title}</p>
+                    </div>
+                </div>
             </div>
             <div className="NewCollectionContainer">
                 <Marquee speed={110} direction={'right'} autoFill={true}>
