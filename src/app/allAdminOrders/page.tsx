@@ -1,11 +1,13 @@
 "use client";
 import axios from "axios";
-import React, {useEffect, useState} from "react";
+import React, {FormEventHandler, useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import Link from "next/link";
 import './orderStyles.css'
 import deleteItem from "@/img/delete.png";
 import Image from "next/image";
+import searchIco from "@/img/searchIco.png";
+import {getDataBySearch} from "@/services/getData";
 
 export default function UserOrders() {
     const router = useRouter();
@@ -18,6 +20,20 @@ export default function UserOrders() {
     const [formattedDateTime, setFormattedDateTime] = useState('');
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [orderIdToDelete, setOrderIdToDelete] = useState(null);
+    const [search, setSearch] = useState('');
+
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+        event.preventDefault();
+        const products = await getDataBySearch(search);
+        if (search.trim() === '') {
+            setFilteredOrders(userOrders);
+            setSelectedCategory(null);
+            setSelectedMainCategory('Показать всех');
+        } else {
+            const filteredResults = filteredOrders.filter(order => order._id.includes(search));
+            setFilteredOrders(filteredResults);
+        }
+    };
 
     const getUserOrders = async () => {
         try {
@@ -81,7 +97,7 @@ export default function UserOrders() {
     ];
     const handleDateCategoryFilter = (sortingType) => {
         if (filteredOrders) {
-            let sortedOrders = [...filteredOrders]; // Создаем копию заказов для изменения сортировки
+            let sortedOrders = [...filteredOrders];
 
             switch (sortingType) {
                 case 'dateAscending':
@@ -210,7 +226,7 @@ export default function UserOrders() {
                                 style={{opacity:item.orderStatus.slice().reverse().find(status => status.selected)?.title === "Получен покупателем" ? '0.4' : '1'}}>
                                     <div className={'order-header'}>
                                         <p className={'mini-admin-item-info-head'}><b>Заказ
-                                            #{item._id.toString().substring(0, 7)}</b></p>
+                                            #{item._id.toString().slice(-7)}</b></p>
                                         <Image onClick={(event) => openConfirmationModal(item._id, event)} className={'order-item-delete-img'} src={deleteItem} alt={'x'}></Image>
                                     </div>
                                     {item.orderStatus && (
@@ -231,54 +247,64 @@ export default function UserOrders() {
                             </Link>
                         ))}
                     </div>
-                    <div className='filterBlock'>
-                        <h4>Сортировка заказов</h4>
-                        {categories && (
-                            <div className='profileBlockOrderFiltersColumn'>
-                                <div className='profileBlockOrderFilters'>
-                                    <div className={`blockCategory ${selectedMainCategory === 'Показать всех' ? 'selected' : ''}`}
-                                         onClick={showAllMessages}>
-                                        Показать всех
-                                    </div>
-                                    <div className={`blockCategory ${selectedMainCategory === 'Только активные' ? 'selected' : ''}`}
-                                         onClick={showOnlyActiveMessages}>
-                                        Только активные
-                                    </div>
-                                    <div className={`blockCategory ${selectedMainCategory === 'Только неактивные' ? 'selected' : ''}`}
-                                         onClick={showOnlyInactiveMessages}>
-                                        Только неактивные
-                                    </div>
-                                </div>
-                                <div className='profileBlockOrderFilters'>
-                                    <div onClick={() => handleDateCategoryFilter('dateAscending')}
-                                         className={`blockCategory ${selectedDateCategory === 'dateAscending' ? 'selected' : ''}`}>
-                                        Дата: по возрастанию
-                                    </div>
-                                    <div onClick={() => handleDateCategoryFilter('dateDescending')}
-                                        className={`blockCategory ${selectedDateCategory === 'dateDescending'  ? 'selected' : ''}`}>
-                                        Дата: по убыванию
-                                    </div>
-                                    <div onClick={() => handleDateCategoryFilter('statusAscending')}
-                                        className={`blockCategory ${selectedDateCategory === 'statusAscending'  ? 'selected' : ''}`}>
-                                        Статус: по возрастанию
-                                    </div>
-                                    <div onClick={() => handleDateCategoryFilter('statusDescending')}
-                                         className={`blockCategory ${selectedDateCategory === 'statusDescending'  ? 'selected' : ''}`}>
-                                        Статус: по убыванию
-                                    </div>
-                                </div>
-                                <div className='profileBlockOrderFilters'>
-                                    {categories.map((category, index) => (
-                                        <div
-                                            className={`blockCategory ${selectedCategory === category ? 'selected' : ''}`}
-                                            key={index}
-                                            onClick={() => handleCategoryFilter(category)}>
-                                            {category}
+                    <div>
+                        <div className='filterSearchBlock'>
+                            <input type='search' placeholder='Поиск' value={search} onChange={event => setSearch(event.target.value)}/>
+                            <div onClick={handleSubmit} className='filterSearchBtn'><Image src={searchIco} alt={"Искать"}/></div>
+                        </div>
+
+                        <div className='filterBlock'>
+                            <h4>Сортировка заказов</h4>
+                            {categories && (
+                                <div className='profileBlockOrderFiltersColumn'>
+                                    <div className='profileBlockOrderFilters'>
+                                    <div
+                                            className={`blockCategory ${selectedMainCategory === 'Показать всех' ? 'selected' : ''}`}
+                                            onClick={showAllMessages}>
+                                            Показать всех
                                         </div>
-                                    ))}
+                                        <div
+                                            className={`blockCategory ${selectedMainCategory === 'Только активные' ? 'selected' : ''}`}
+                                            onClick={showOnlyActiveMessages}>
+                                            Только активные
+                                        </div>
+                                        <div
+                                            className={`blockCategory ${selectedMainCategory === 'Только неактивные' ? 'selected' : ''}`}
+                                            onClick={showOnlyInactiveMessages}>
+                                            Только неактивные
+                                        </div>
+                                    </div>
+                                    <div className='profileBlockOrderFilters'>
+                                        <div onClick={() => handleDateCategoryFilter('dateAscending')}
+                                             className={`blockCategory ${selectedDateCategory === 'dateAscending' ? 'selected' : ''}`}>
+                                            Дата: сначала старые
+                                        </div>
+                                        <div onClick={() => handleDateCategoryFilter('dateDescending')}
+                                             className={`blockCategory ${selectedDateCategory === 'dateDescending' ? 'selected' : ''}`}>
+                                            Дата: сначала новые
+                                        </div>
+                                        <div onClick={() => handleDateCategoryFilter('statusAscending')}
+                                             className={`blockCategory ${selectedDateCategory === 'statusAscending' ? 'selected' : ''}`}>
+                                            Статус: по возрастанию
+                                        </div>
+                                        <div onClick={() => handleDateCategoryFilter('statusDescending')}
+                                             className={`blockCategory ${selectedDateCategory === 'statusDescending' ? 'selected' : ''}`}>
+                                            Статус: по убыванию
+                                        </div>
+                                    </div>
+                                    <div className='profileBlockOrderFilters'>
+                                        {categories.map((category, index) => (
+                                            <div
+                                                className={`blockCategory ${selectedCategory === category ? 'selected' : ''}`}
+                                                key={index}
+                                                onClick={() => handleCategoryFilter(category)}>
+                                                {category}
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
                 </div>
             )}

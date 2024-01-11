@@ -7,6 +7,7 @@ import axios from "axios";
 import {usePathname, useRouter} from "next/navigation";
 import OrderNavBarContainer from "@/components/navigation/OrderNavBarContainer";
 import {useOrderContext} from "@/orderContext/store";
+import {useCurrentUser} from "@/hooks/useCurrentUser";
 
 interface UserData {
     name: string;
@@ -95,8 +96,10 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
             console.log(error.message);
         }
     };
+    const user = useCurrentUser();
     useEffect(() => {
         //getUserDetails();
+        setUserData(user);
     }, []);
 
     return (

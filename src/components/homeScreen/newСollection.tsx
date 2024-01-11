@@ -44,7 +44,7 @@ const NewCollection = async () => {
                     {/*<Image src={HomeScreenLogo} alt="Logo" className={styles.logo}/>*/}
                     <div className={styles.text}>
                         {/*<Image className={styles.textLogoNewCollection} src={textLogo} alt={'MaryDeniz'}></Image>*/}
-                        <p>{collection.title}</p>
+                        <p className="NewCollectionText">{collection.title}</p>
                     </div>
                 </div>
             </div>

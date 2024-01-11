@@ -10,6 +10,7 @@ import './cart.css'
 import axios from "axios";
 import arrowIco from "@/img/arrowW.png";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
+import {useCurrentUser} from "@/hooks/useCurrentUser";
 
 
 type NavLink = {
@@ -39,6 +40,7 @@ export default function Cart() {
     const [discountError, setDiscountError] = useState('');
     const [promoList, setPromoList] = useState(null);
     const [discountName, setDiscountName] = useState(0);
+    const user = useCurrentUser();
     const [order, setOrder] = useState({
         name: '',
         email: '',
@@ -71,13 +73,14 @@ export default function Cart() {
         }
     };
     useEffect(() => {
-        getUserDetails();
+        setUserData(user);
     }, []);
 
     const getPromoCodes = async () => {
         try {
-            const res = await axios.get(`/api/admin/promoCode`);
+            const res = await axios.get(`/api/users/promoCode`);
             setPromoList(res.data.promo);
+            console.log(res.data)
         } catch (error: any) {
             console.log(error.message);
         }
@@ -89,7 +92,7 @@ export default function Cart() {
 
     const applyPromoCode = (e) => {
         e.preventDefault();
-        const foundPromoCode = promoList.find(
+        const foundPromoCode = promoList?.find(
             (item) => item.title === promoCode
         );
         console.log(foundPromoCode);

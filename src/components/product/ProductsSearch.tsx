@@ -19,7 +19,7 @@ const ProductsSearch = ({onSearch}: Props) => {
     }
 
     return (
-        <form className='products-search-block' onSubmit={handleSubmit}>
+        <form className='products-search-form' onSubmit={handleSubmit}>
             <input type='search' placeholder='Поиск' value={search} onChange={event => setSearch(event.target.value)}/>
             <button type='submit'><Image src={searchIco} alt={"Искать"}/></button>
         </form>

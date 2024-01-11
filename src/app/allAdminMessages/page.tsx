@@ -109,7 +109,7 @@ export default function allAdminMessages() {
 
                                 </div>
                                 <div className={'mini-cart-item-close-block'} onClick={() => {deleteMessage(item._id)}}>
-                                    <Image className="shearContainerCloseImg" src={close} alt={'x'}></Image>
+                                    <Image className="shearMessageCloseImg" src={close} alt={'x'}></Image>
                                 </div>
                             </div>
                             <div className={'mini-admin-cart-footer'}>

@@ -105,7 +105,7 @@ export const LoginForm = () => {
                                     name="email"
                                     render={({field}) => (
                                         <FormItem>
-                                            <FormLabel>Email</FormLabel>
+                                            <FormLabel style={{fontWeight: '600'}}>Email</FormLabel>
                                             <FormControl>
                                                 <Input
                                                     {...field}
@@ -123,7 +123,7 @@ export const LoginForm = () => {
                                     name="password"
                                     render={({field}) => (
                                         <FormItem>
-                                            <FormLabel>Пароль</FormLabel>
+                                            <FormLabel style={{fontWeight: '600'}}>Пароль</FormLabel>
                                             <FormControl>
                                                 <Input
                                                     {...field}
@@ -150,11 +150,12 @@ export const LoginForm = () => {
                             </>
 
                         </div>
-
-                        <FormError message={error || urlError}/>
-                        <FormSuccess message={success}/>
-
+                        <div style={{margin: '5px 0 10px 0'}}>
+                            <FormError message={error || urlError}/>
+                            <FormSuccess message={success}/>
+                        </div>
                         <Button
+                            style={{marginTop: '6px'}}
                             disabled={isPending}
                             type="submit"
                             className="w-full"
@@ -165,7 +166,7 @@ export const LoginForm = () => {
                 </Form>
                 <div className='googleLogin' onClick={() => googleAuth()}>
                     <p>Войти с помощью <Image className='Google-logo' src={googleLogo}
-                                                         alt={'Google'}></Image>
+                                              alt={'Google'}></Image>
                     </p>
                 </div>
             </div>

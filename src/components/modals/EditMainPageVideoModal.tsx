@@ -9,6 +9,9 @@ import {Input} from "@/components/ui/input";
 import {Textarea} from "@/components/ui/textarea";
 import {Button} from "@/components/ui/button";
 import {ActionToolTip} from "@/components/ActionToolTip";
+import deleteIco from '@/img/delete.png';
+import '../componentsStyles.css'
+import Image from "next/image";
 
 export const EditMainPageVideoModal = () => {
 
@@ -36,8 +39,8 @@ export const EditMainPageVideoModal = () => {
     return (
         <Dialog open={isModalOpen} onOpenChange={onClose}>
             <DialogContent className="bg-white text-black p-0 overflow-hidden"
-                           style={{fontFamily: "Century Gothic", backgroundColor: '#fafafa', maxWidth: '800px'}}>
-                <DialogHeader className="pt-8 px6 ml-6">
+                           style={{fontFamily: "Century Gothic", backgroundColor: '#fafafa', maxWidth: '700px'}}>
+                <DialogHeader className="pt-6 px4 ml-6">
                     <DialogTitle className="text-2xl text-left font-bold">
                         Все видеобаннеры
                     </DialogTitle>
@@ -49,7 +52,7 @@ export const EditMainPageVideoModal = () => {
                     {videos?.map((video) => (
                         <div key={video._id} className={`relative w-full mb-4`}>
                             <video
-                                className={`w-full p-0.5 rounded ${video.active ? 'border-4 border-solid border-green-500' : ''} cursor-pointer`}
+                                className={`w-full p-2 rounded-3xl ${video.active ? 'border-2 border-solid border-green-500' : 'p-3.5'} cursor-pointer `}
                                 controls={false}
                                 muted
                                 loop
@@ -59,13 +62,10 @@ export const EditMainPageVideoModal = () => {
                                 <source src={video.url} type="video/mp4"/>
                                 Your browser does not support the video tag.
                             </video>
-                            <div className="absolute rounded top-3 right-3">
-                                <ActionToolTip label="Удалить" >
-                                    <div className="bg-white p-1 rounded">
-                                        <Trash
-                                            onClick={(e) => onActionDelete(e, "deleteMainPageVideo", video)}
-                                            className="group-hover:block w-6 h-6 text-zinc-800 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"
-                                        />
+                            <div className="absolute rounded top-5 right-5">
+                                <ActionToolTip label="Удалить">
+                                    <div onClick={(e) => onActionDelete(e, "deleteMainPageVideo", video)} className="bg-white p-1 rounded delete-home-btn">
+                                        <Image src={deleteIco} alt={'x'}></Image>
                                     </div>
                                 </ActionToolTip>
                             </div>

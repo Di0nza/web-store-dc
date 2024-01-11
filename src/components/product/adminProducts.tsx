@@ -50,7 +50,7 @@ export const AdminProducts = ({search}) => {
 
     return (
         <>
-            <div>
+            <div className='admin-products-header'>
                 <Button className="addItemBtn" variant="ghost" onClick={(e) => onActionCreate(e, "createProduct")}>
                     Добавить Товар
                 </Button>

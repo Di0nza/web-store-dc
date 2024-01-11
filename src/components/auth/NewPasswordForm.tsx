@@ -69,11 +69,11 @@ export const NewPasswordForm = () => {
     return (
         <div className="max-h-screen h-[150%] w-full max-w-[600px] flex flex-col mx-auto pt-16 pb-24">
             <div className="flex justify-center">
-                <Card className="w-[400px] shadow-md">
-                    <CardHeader>
+                <Card className="w-[400px]">
+                    <CardHeader style={{fontSize:'22px', fontWeight:'600', padding:'15px'}}>
                         Введите новый пароль
                     </CardHeader>
-                    <CardContent>
+                    <CardContent style={{padding:'0 15px 10px 15px'}}>
                         <Form {...form}>
                             <form
                                 onSubmit={form.handleSubmit(onSubmit)}
@@ -86,9 +86,10 @@ export const NewPasswordForm = () => {
                                             name="password"
                                             render={({field}) => (
                                                 <FormItem>
-                                                    <FormLabel>Пароль</FormLabel>
+                                                    <FormLabel style={{fontWeight:'600'}}>Пароль</FormLabel>
                                                     <FormControl>
                                                         <Input
+                                                            style={{padding:'10px 12px', height:'40px', borderRadius:'8px'}}
                                                             {...field}
                                                             disabled={isPending}
                                                             placeholder="******"
@@ -102,11 +103,12 @@ export const NewPasswordForm = () => {
 
                                     </>
                                 </div>
-
-                                <FormError message={error}/>
-                                <FormSuccess message={success}/>
-
+                                <div style={{margin:'15px 0 0 0'}}>
+                                    <FormError  message={error}/>
+                                    <FormSuccess message={success}/>
+                                </div>
                                 <Button
+                                    style={{margin:'15px 0 0 0', height:'40px', borderRadius:'8px', fontWeight:'600'}}
                                     disabled={isPending}
                                     type="submit"
                                     className="w-full"
@@ -117,9 +119,10 @@ export const NewPasswordForm = () => {
                         </Form>
                     </CardContent>
 
-                    <CardFooter>
+                    <CardFooter style={{padding:'0 0 10px 0'}}>
                         <Button
                             variant="link"
+
                             className="font-normal w-full"
                             size="sm"
                         >

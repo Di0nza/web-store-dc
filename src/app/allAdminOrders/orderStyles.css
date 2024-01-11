@@ -52,6 +52,47 @@
     padding: 4px 9px;
     cursor: pointer;
 }
+.filterSearchBlock{
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    justify-content: space-between;
+    width: calc(100%);
+    max-width: 390px;
+    margin: 10px 0 0 0;
+    border: 1px solid #dadada;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 5px 5px 5px 10px;
+}
+.filterSearchBlock input{
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    justify-content: space-between;
+    width: calc(100%);
+    max-width: 320px;
+    border: 0;
+    outline: none;
+    font-size: 13px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+.filterSearchBtn{
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #111111;
+    cursor: pointer;
+}
+.filterSearchBtn img{
+    width: 18px;
+    height: 18px;
+}
 .filterBlock{
     display: flex;
     flex-direction: column;
@@ -199,23 +240,23 @@
     font-size: 14px;
     font-weight: 600;
 }
-.adminOrdersBlock input{
-    width: calc(100%);
-    height: 50px;
-    font-size: 14px;
-    border-radius: 10px;
-    border: 1px solid #afafaf;
-    background-color: #ffffff;
-    padding: 11px 10px 9px;
-    outline: none;
-    color: #111111;
-    margin-bottom: 10px;
-}
-.adminOrdersBlock input::-webkit-search-cancel-button {
-    -webkit-appearance: none;
-    appearance: none;
-    color: #111111;
-}
+/*.adminOrdersBlock input{*/
+/*    width: calc(100%);*/
+/*    height: 50px;*/
+/*    font-size: 14px;*/
+/*    border-radius: 10px;*/
+/*    border: 1px solid #afafaf;*/
+/*    background-color: #ffffff;*/
+/*    padding: 11px 10px 9px;*/
+/*    outline: none;*/
+/*    color: #111111;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+/*.adminOrdersBlock input::-webkit-search-cancel-button {*/
+/*    -webkit-appearance: none;*/
+/*    appearance: none;*/
+/*    color: #111111;*/
+/*}*/
 .profileLinkBlock{
     margin-top: 15px;
     border: 1px solid #d5d5d5;
@@ -332,7 +373,7 @@
 .products-search-block{
     width: 400px;
     display: flex;
-    background-color: #fafafa;
+    background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid #dedede;
     height: 46px;
     border-radius: 10px;

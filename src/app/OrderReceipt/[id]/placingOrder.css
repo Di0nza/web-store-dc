@@ -60,15 +60,19 @@
     flex-direction: column;
     border: 1px solid #dedede;
     border-radius: 8px;
-    padding: 8px;
-    line-height: 22px;
+    padding: 10px;
+    line-height: 20px;
     font-size: 14px;
     flex-wrap: wrap;
 }
 .firstInfoBlock p{
     width: calc(100%);
     display: flex;
+    margin: 3px 0;
     flex-wrap: wrap;
+}
+.firstInfoBlock b{
+    margin-right: 5px;
 }
 .trackingInfoBlock{
     width: calc(100%);
@@ -87,6 +91,9 @@
     font-size: 17px;
     font-weight: 600;
     margin-bottom: 10px;
+}
+.trackingInfoBlock p{
+    margin: 3px 0;
 }
 .firstInfoInput{
     border: none;

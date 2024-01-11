@@ -30,7 +30,7 @@ const Header = () => {
     ];
     const navAdminItems = [
         {label: 'Стилизация', href: '/adminProfile/customizations'},
-        {label: 'Товары', href: '/adminProfile/products'},
+        {label: 'Товары', href: '/adminProducts'},
         {label: 'Заказы', href: '/allAdminOrders'},
         {label: 'Профиль', href: '/adminProfile'},
     ];

@@ -113,7 +113,7 @@
 .products-search-block{
     width: 400px;
     display: flex;
-    background-color: #fafafa;
+    background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid #dedede;
     height: 46px;
     border-radius: 10px;

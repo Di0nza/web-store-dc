@@ -63,6 +63,15 @@
     right: 0;
     align-self: flex-end;
 }
+.contacts-social-links{
+    display: flex;
+    margin: 0 0 15px;
+    flex-direction: row;
+}
+.contacts-social-links img{
+    width: 28px;
+    cursor: pointer;
+}
 .title {
     font-size: 25px;
     font-weight: 600;

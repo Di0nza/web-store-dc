@@ -11,7 +11,10 @@ import checkOrderStatusB from "@/img/checkOrderStatusB.png";
 import pdfLogo from "@/img/pdfLogo.png";
 import shearLogo from "@/img/shearlogo.png";
 import { jsPDF } from 'jspdf';
-import headerLogo  from "@/img/headerLogo.png";
+import headerLogo  from "@/img/pdfLogo.jpg";
+import {useCurrentUser} from "@/hooks/useCurrentUser";
+import 'jspdf-autotable';
+import {amiriFont} from "@/fonts/amiriFont";
 
 interface orderData {
     name: string;
@@ -36,6 +39,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const [orderData, setOrderData] = useState(null);
     const [copied, setCopied] = useState(false);
     const [selectedDelivery, setSelectedDelivery] = useState(null);
+    const user = useCurrentUser();
 
     const handleDeliverySelection = (method) => {
         setSelectedDelivery(method);
@@ -44,6 +48,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         try {
             const res = await axios.get<{ data: orderData }>(`/api/users/getAllOrders`);
             let foundOrder: any;
+            // @ts-ignore
             foundOrder = res.data.orders.find(order => order._id === id);
             setOrderData(foundOrder);
         } catch (error: any) {
@@ -114,48 +119,37 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
 
     const generatePDF = () => {
         const doc = new jsPDF();
-        const pdfTitle = 'Order' + orderData?._id;
-        const pdfContent = 'Thank you for your order!';
-        const pdfContent3 = 'Order Amount: ' + orderData?.totalCost + ' USD';
-        const pdfContent4 = 'Payment Method: ' + orderData?.paymentState;
-        const pdfContent7 = 'Promo Code: ' + orderData?.promotionalCode;
-        const pdfContent5 = 'Order Date: ' + formattedDateTime;
-        const pdfContent6 = 'Delivery Method: ' + orderData?.deliveryMethod;
+        doc.addFileToVFS("Amiri-Regular.ttf", amiriFont);
+        doc.addFont("Amiri-Regular.ttf", "Amiri", "normal");
+        doc.setFont("Amiri");
 
+        const pdfTitle = `Заказ #${orderData?._id.toString()}`;
+        const pdfContent = 'Спасибо за ваш заказ!';
+        const pdfContent3 =
+            `Сумма заказа: ${orderData?.totalCost.toFixed(2)}$ - (${orderData?.promotionalCode ? orderData?.promotionalCode : 0}%) (${orderData?.paymentState})`;
+        const pdfContent5 = 'Дата оформления: ' + formattedDateTime;
+        const pdfContent6 = 'Способ доставки: ' + orderData?.deliveryMethod;
         const data = [
-            `Name: ${orderData.name}`,
+            `Имя: ${orderData.name}`,
             `Email: ${orderData.email}`,
-            `Phone: ${orderData.telephone}`,
-            `Zip Code: ${orderData.zip}`,
-            `City: ${orderData.city}`,
-            `Country: ${orderData.country}`,
-            `House: ${orderData.house}`,
-            `Apartment: ${orderData.apartment}`,
+            `Телефон: ${orderData.telephone}`,
+            `Пункт назвачения: ${orderData?.country}, ${orderData?.city},ул. ${orderData?.street},(д.${orderData?.house},кв.${orderData?.apartment}),${orderData?.zip}`,
         ];
-
         doc.setFontSize(18);
-        doc.text('MaiDeniz', 10, 20);
-        doc.setFontSize(18);
-        doc.text(pdfTitle, 10, 40);
+        doc.text(pdfTitle, 10, 20);
         doc.setFontSize(12);
-        doc.text(pdfContent, 10, 50);
-        doc.text(pdfContent7, 10, 60);
-        doc.text(pdfContent3, 10, 70);
-        doc.text(pdfContent4, 10, 80);
-        doc.text(pdfContent5, 10, 90);
-        doc.text(pdfContent6, 10, 100);
-
-        let verticalPosition = 110;
+        doc.text(pdfContent, 10, 30);
+        doc.text(pdfContent3, 10, 40);
+        doc.text(pdfContent6, 10, 50);
+        doc.text('MariDeniz', 180, 280);
+        doc.text(pdfContent5, 10, 280);
+        let verticalPosition = 70;
         data.forEach((line) => {
             doc.setFontSize(12);
             doc.text(line, 10, verticalPosition);
             verticalPosition += 10;
         });
-
-        const imgData = 'data:image/jpeg;base64,...';
-        doc.addImage(imgData, 'JPEG', 15, 140, 180, 120);
-
-        doc.save('check.pdf');
+        doc.save(`order${orderData?._id.toString().substring(7)}.pdf`);
     };
 
 
@@ -165,7 +159,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                 <div>
                     <h2>{"Спасибо за ваш заказ!"}</h2>
                     <h4 className='placingOrderBlockTitle'><b>{orderData?.totalNumber}</b> товаров на
-                        сумму <b>${orderData?.totalCost}</b> ({orderData?.paymentState})</h4>
+                        сумму <b>${orderData?.totalCost.toFixed(2)}</b> ({orderData?.paymentState})</h4>
                 </div>
             </div>
             <div>
@@ -179,6 +173,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                                 кв.{orderData?.apartment}), {orderData?.zip}</p>
                             <p><b>Дата создания:</b> {formattedDateTime}</p>
                             <p><b>Дополнительная информация:</b> {orderData?.additionalInformation}</p>
+                            <p><b>Код для получения товара:</b> {orderData?._id.toString()}</p>
                         </div>
                         <div>
                             <div className='placingOrderInfoBlock'>
@@ -232,6 +227,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                             <div className='trackingInfoBlock'>
                                 <h3>Трекинг заказа</h3>
                                 <p><b>Сайт отслеживания:</b> {orderData?.trackingLink}</p>
+                                <b>Трекер-код</b>
                                 <div className={'firstInfoUrl'}>
                                     <input
                                         className={'firstInfoUrlInput'}

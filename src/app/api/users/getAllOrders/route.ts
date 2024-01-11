@@ -10,13 +10,13 @@ export async function GET(request: NextRequest) {
 
         const user = await currentUser();
 
-        if(!user){
-            return NextResponse.json({error: "Unauthorized."}, {status: 401})
-        }
-
-        if(user?.isAdmin === false){
-            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
-        }
+        // if(!user){
+        //     return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        // }
+        //
+        // if(user?.isAdmin === false){
+        //     return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
+        // }
 
         const allOrders = await Order.find({});
         return NextResponse.json({

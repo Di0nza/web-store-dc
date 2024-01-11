@@ -10,6 +10,10 @@ import FooterCooperationBlock from "@/components/modals/footerCooperationBlock";
 import FooterErrorBlock from "@/components/modals/footerErrorBlock";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
 import {useCurrentUser} from "@/hooks/useCurrentUser";
+import instLogo from "@/img/shearIcons/instlogo.png";
+import pnstlogo from "@/img/shearIcons/pnstlogo.png";
+import vklogo from "@/img/shearIcons/vklogo.png";
+import fblogo from "@/img/shearIcons/fblogo.png";
 interface UserData {
     isAdmin: boolean;
     name: string;
@@ -44,6 +48,7 @@ const Footer = () => {
         }
     };
     useEffect(() => {
+        // @ts-ignore
         setUserData(user);
         console.log(userData);
     }, [sessionTime]);
@@ -77,7 +82,7 @@ const Footer = () => {
                                     <div className='footer-navigation-block'>
                                         <Link href={'/adminProfile'}>Профиль</Link>
                                         <Link href={'/allAdminOrders'}>Заказы</Link>
-                                        <Link href={'/adminProfile/products'}>Товары</Link>
+                                        <Link href={'/adminProducts'}>Товары</Link>
                                     </div>
                                 ) : (
                                     <div className='footer-navigation-block'>
@@ -107,16 +112,33 @@ const Footer = () => {
                                 )
                             }
                         </div>
-                        <Link className='footer-info-title' href={userData?.isAdmin ? '/adminProfile' : '/'}>
-                            <Image className='footer-title-textLogo' src={textLogo} alt={'MaryDeniz'}></Image>
-                            <Image className='footer-title-logo' src={headerLogo} alt={'MaryDeniz'}></Image>
-                        </Link>
+                        <div className='footer-info-social-block'>
+                            <Link className='footer-info-title' href={userData?.isAdmin ? '/adminProfile' : '/'}>
+                                <Image className='footer-title-textLogo' src={textLogo} alt={'MaryDeniz'}></Image>
+                                <Image className='footer-title-logo' src={headerLogo} alt={'MaryDeniz'}></Image>
+                            </Link>
+                            <div className='footer-social-links'>
+                                <div className='footer-social-links-block'>
+                                    <Image src={instLogo} alt={'inst'}/>
+                                </div>
+                                <div className='footer-social-links-block'>
+                                    <Image src={pnstlogo} alt={'inst'}/>
+                                </div>
+                                <div className='footer-social-links-block'>
+                                    <Image src={vklogo} alt={'inst'}/>
+                                </div>
+                                <div className='footer-social-links-block'>
+                                    <Image src={fblogo} alt={'inst'}/>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div className='footer-error-block'>
-                        <p>Помогите сделать наш сервис лучше</p>
+                        {/*<p>Помогите сделать наш сервис лучше</p>*/}
                         <div className='footer-btns-block'>
                             <button className='footer-error-btn' onClick={toggleFooterErrorBlock}>
-                                <p>Сообщить об ошоибке</p>
+                                <p>Сообщить об ошибке</p>
                             </button>
                             <button className='footer-cooperation-btn' onClick={toggleFooterCooperationBlock}>
                                 <p>Предложение о сотрудничестве</p>

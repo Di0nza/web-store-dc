@@ -115,9 +115,9 @@ export const SignUpForm = () => {
                             <FormField
                                 control={form.control}
                                 name="name"
-                                render={({ field }) => (
+                                render={({field}) => (
                                     <FormItem>
-                                        <FormLabel>Имя</FormLabel>
+                                        <FormLabel style={{fontWeight: '600'}}>Имя</FormLabel>
                                         <FormControl>
                                             <Input
                                                 {...field}
@@ -125,16 +125,16 @@ export const SignUpForm = () => {
                                                 placeholder="John Doe"
                                             />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage/>
                                     </FormItem>
                                 )}
                             />
                             <FormField
                                 control={form.control}
                                 name="email"
-                                render={({ field }) => (
+                                render={({field}) => (
                                     <FormItem>
-                                        <FormLabel>Email</FormLabel>
+                                        <FormLabel style={{fontWeight: '600'}}>Email</FormLabel>
                                         <FormControl>
                                             <Input
                                                 {...field}
@@ -143,16 +143,16 @@ export const SignUpForm = () => {
                                                 type="email"
                                             />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage/>
                                     </FormItem>
                                 )}
                             />
                             <FormField
                                 control={form.control}
                                 name="password"
-                                render={({ field }) => (
+                                render={({field}) => (
                                     <FormItem>
-                                        <FormLabel>Пароль</FormLabel>
+                                        <FormLabel style={{fontWeight: '600'}}>Пароль</FormLabel>
                                         <FormControl>
                                             <Input
                                                 {...field}
@@ -161,7 +161,7 @@ export const SignUpForm = () => {
                                                 type="password"
                                             />
                                         </FormControl>
-                                        <FormMessage />
+                                        <FormMessage/>
 
 
                                     </FormItem>
@@ -170,11 +170,12 @@ export const SignUpForm = () => {
                         </>
                         {/*)}*/}
                     </div>
-
-                    <FormError message={error} />
-                    <FormSuccess message={success} />
-
+                    <div style={{margin: '20px 0 0 0'}}>
+                        <FormError message={error}/>
+                        <FormSuccess message={success}/>
+                    </div>
                     <Button
+                        style={{margin: '10px 0 0 0'}}
                         disabled={isPending}
                         type="submit"
                         className="w-full"
@@ -183,8 +184,8 @@ export const SignUpForm = () => {
                     </Button>
                 </form>
             </Form>
-            <div className='googleLogin' onClick={()=>googleAuth()}>
-                <p>Авторизироваться с помощью <Image className='Google-logo' src={googleLogo} alt={'Google'}></Image></p>
+            <div className='googleLogin' onClick={() => googleAuth()}>
+                <p>Зарегистрироваться с помощью <Image className='Google-logo' src={googleLogo} alt={'Google'}></Image></p>
             </div>
         </div>
     )

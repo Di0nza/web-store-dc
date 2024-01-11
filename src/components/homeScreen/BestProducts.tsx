@@ -28,7 +28,7 @@ const BestProducts = () => {
         <OrderProvider>
             <div className='best-product-block'>
                 <div className='best-product-head'>
-                    <h3>Оцените наши товары</h3>
+                    <h3>Наши товары</h3>
                     <p>Исследуйте уникальные товары, которые подчеркнут ваш стиль. Новая коллекция уже ждёт вас!</p>
                 </div>
                 <div className='best-product-items-body'>
@@ -36,7 +36,7 @@ const BestProducts = () => {
                         {products.map((product: any) => (
                             <div key={product._id} className='best-product-item'>
                                 <Link href={`store/${product._id}`}>
-                                    <div className='product-info'>
+                                    <div className='best-product-info'>
                                         <img className='best-product-img' src={product.pictures[0]}
                                              alt={product.title}></img>
                                         <p className='product-title'>{product.title}</p>

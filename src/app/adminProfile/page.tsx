@@ -67,7 +67,7 @@ export default function ProfilePage() {
             {userData && (
                 <>
                     <p className='profileHelloText'>Здравсвуйте, Админ {userData.name}</p>
-                    <p  className='createdDate'>Дата создания аккаунта: {new Date(userData.emailVerified).toLocaleString()}</p>
+                    <p  className='createdDate'>Дата создания аккаунта: {new Date(userData?.emailVerified).toLocaleString()}</p>
                 </>
             )}
             <div className='profileLinkBlock'>
@@ -79,7 +79,7 @@ export default function ProfilePage() {
                     <p>Стилизация</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </Link>
-                <Link href={`${pathname}/products`} className='additionalProfileLink'>
+                <Link href={`adminProducts`} className='additionalProfileLink'>
                     <p>Товары</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </Link>

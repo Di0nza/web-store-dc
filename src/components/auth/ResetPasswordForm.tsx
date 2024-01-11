@@ -66,7 +66,7 @@ export const ResetPasswordForm = () => {
 
     return (
         <div className='signUpBlock'>
-            <h2>{"Восстановление пароля"}</h2>
+            <h2 style={{ marginBottom: '15px'}}>{"Восстановление пароля"}</h2>
 
             <Form {...form}>
                 <form
@@ -80,7 +80,7 @@ export const ResetPasswordForm = () => {
                                 name="email"
                                 render={({field}) => (
                                     <FormItem>
-                                        <FormLabel>Email</FormLabel>
+                                        <FormLabel style={{fontWeight:'600'}}>Email</FormLabel>
                                         <FormControl>
                                             <Input
                                                 {...field}
@@ -101,6 +101,7 @@ export const ResetPasswordForm = () => {
                     <FormSuccess message={success}/>
 
                     <Button
+                        style={{marginTop:'20px'}}
                         disabled={isPending}
                         type="submit"
                         className="w-full"

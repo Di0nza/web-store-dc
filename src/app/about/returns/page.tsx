@@ -2,9 +2,20 @@
 import '../AboutStyles.css'
 import aboutBg from "@/img/aboutBg.png";
 import Image from "next/image";
+import React, {useState} from "react";
+import FooterErrorBlock from "@/components/modals/footerErrorBlock";
+
 export default function Returns() {
+    const [isFooterErrorBlockOpen, setIsFooterErrorBlockOpen] = useState(false);
+    const toggleFooterErrorBlock = () => {
+        setIsFooterErrorBlockOpen(!isFooterErrorBlockOpen);
+    };
+
     return (
         <div className={'contacts'}>
+            {isFooterErrorBlockOpen && (
+                <FooterErrorBlock/>
+            )}
             <Image className={'contacts-bg-img'} src={aboutBg} alt={''}/>
             <h2 className={'title'}>Возврат</h2>
             <div className={'description-block'}>
@@ -26,6 +37,14 @@ export default function Returns() {
                     неподходящего
                     качества товара.
                 </p>
+                <div className='footer-error-block'>
+                    <p>Необходим возврат товара ?</p>
+                    <div className='footer-btns-block'>
+                        <button className='footer-error-btn' onClick={toggleFooterErrorBlock}>
+                            <p>Сообщить о возврате</p>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -76,13 +76,13 @@ const BigPhotosSlider = ({ product, onClose }) => {
     const changeImage = (newImage) => {
         setGlassVisible(true);
         setCurrentImage(() => {
-            magnify(imgRef.current, 3.5);
+            magnify(imgRef.current, 4);
             return newImage;
         });
     };
 
     useEffect(() => {
-        magnify(imgRef.current, 3.5);
+        magnify(imgRef.current, 4);
     }, [currentImage]);
 
     return (
@@ -115,7 +115,7 @@ const BigPhotosSlider = ({ product, onClose }) => {
                                     />
                                 ))}
                             </div>
-                            <p>Чтобы детальнее рассмотреть фотографии, наведите курсор на изображение. Для отключения лупы нажмите по изображению, для включения нажмите повторно</p>
+                            <p>Чтобы детальнее рассмотреть фотографии, наведите курсор на изображение. Для отключения лупы нажмите на изображение, для включения нажмите повторно</p>
                         </div>
                         <span className='big-photo-close' onClick={onClose}>&times;</span>
                     </div>

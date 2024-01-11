@@ -137,7 +137,7 @@
     width: calc(100%);
     max-width: 390px;
     margin: 10px 0 0 0;
-    border: 1px solid #dedede;
+    border: 1px solid #dadada;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     padding: 10px;
@@ -408,7 +408,7 @@
 .products-search-block{
     width: 400px;
     display: flex;
-    background-color: #fafafa;
+    background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid #dedede;
     height: 46px;
     border-radius: 10px;
@@ -571,7 +571,7 @@
 }
 .favorite-button-image{
     width: 20px;
-    height: 25px;
+    height: 20px;
 }
 .product-info-block p{
     margin: 5px 0;

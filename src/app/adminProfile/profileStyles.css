@@ -102,8 +102,9 @@
 }
 .store-head-block{
     width: 100%;
-    margin: 25px 0 0px;
+    margin: 25px 0 0;
     display: flex;
+    height: 70px;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
@@ -128,7 +129,7 @@
 .products-search-block{
     width: 400px;
     display: flex;
-    background-color: #fafafa;
+    background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid #dedede;
     height: 46px;
     border-radius: 10px;

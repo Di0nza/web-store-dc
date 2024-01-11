@@ -19,7 +19,10 @@ import '@/app/adminProfile/(adminPanel)/promocodes/adminPromocodes.css'
 import {Label} from "@/components/ui/label";
 import {Switch} from "@/components/ui/switch";
 import {INewCollection} from "@/types/NewCollection";
+import fakeLogo from '@/img/HomeScreenLogo.png';
 import axios from "axios";
+import Image from "next/image";
+import deleteIco from "@/img/delete.png";
 
 const Page = () => {
 
@@ -38,7 +41,7 @@ const Page = () => {
     const {isOpen, onClose, type, data, onOpen} = useModal();
 
     useEffect(() => {
-        getVideo().then((data) => setVideoSrc(data.data.video.url));
+        getVideo().then((data) => setVideoSrc(data.data.video?.url));
         getAllPhotos().then((data) => setImages(data.data.photos));
         getNewCollectionAdmin().then((data)=> setNewCollection(data.data.newCollection));
         console.log(data)
@@ -161,190 +164,317 @@ const Page = () => {
     return (
         <div className="store-container">
             <div className="text-xl font-semibold mt-10">Страница стилизации главного экрана</div>
-            <div className="mt-5 flex flex-col space-y-10 w-full">
-
-                <div>
-                    <Accordion type="single" collapsible>
-                        <AccordionItem value="item-1">
-                            <AccordionTrigger className="text-lg">Видеобаннер</AccordionTrigger>
-                            <AccordionContent>
-                                <div className="flex flex-row">
-                                    {videoSrc ? <video
-                                            key={videoSrc}
-                                            className="h-60 w-120 rounded mt-3"
-                                            controls
-                                            muted
-                                            loop
-                                        >
-                                            <source src={videoSrc} type="video/mp4"/>
-                                            Your browser does not support the video tag.
-                                        </video>
-                                        : <div className="h-60 w-120 mt-3"></div>}
-                                    <div className="flex flex-col justify-center ml-10 space-y-2">
-                                        <CldUploadButton
-                                            className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
-                                            uploadPreset="qiladgcy"
-                                            onUpload={(result: UploadResult) => {
-                                                setMainVideoPublicUrl(result.info.secure_url)
-                                            }}>
-                                            Добавить новый баннер
-                                        </CldUploadButton>
-                                        <Button onClick={() => onOpen("editMainPageVideo", {reload: "reload"})}>
-                                            Посмотреть существующие баннеры
-                                        </Button>
-
-                                    </div>
-                                </div>
-                            </AccordionContent>
-                        </AccordionItem>
-                    </Accordion>
+            <div className="editing-home-page">
+                <div className="fake-home-header">
+                    <div className="fake-home-header-logo">
+                        <Image src={fakeLogo} alt={'Logo'}></Image>
+                    </div>
+                    <div className="fake-home-header-text"></div>
                 </div>
-
-
-                <div>
-                    <Accordion type="single" collapsible>
-                        <AccordionItem value="item-1">
-                            <AccordionTrigger className="text-lg">Новая коллекция</AccordionTrigger>
-                            <AccordionContent>
-                                <div className="flex flex-row">
-                                    {videoSrc ?
-                                        <div>
-                                            <video
-                                                key={newCollection?.videoUrl}
-                                                className="h-60 w-120 rounded mt-3"
-                                                controls
-                                                muted
-                                                loop
-                                            >
-                                                <source src={newCollection?.videoUrl} type="video/mp4"/>
+                <div className="fake-home-video-preview">
+                    <div className="fake-home-video-container">
+                        <div>
+                            <Image src={fakeLogo} alt={'Logo'}></Image>
+                            <div className="fake-home-video-text"></div>
+                            <div className="fake-home-video-text"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <Accordion type="single" collapsible>
+                            <AccordionItem value="item-1" style={{borderBottom: 'none'}}>
+                                <AccordionTrigger
+                                    className="text-lg editing-block-header">Изменение видеобаннера</AccordionTrigger>
+                                <AccordionContent>
+                                    <div className="flex flex-col" style={{padding: '0'}}>
+                                        {videoSrc ?
+                                            <video key={videoSrc} className="home-video-preview" controls muted loop>
+                                                <source src={videoSrc} type="video/mp4"/>
                                                 Your browser does not support the video tag.
                                             </video>
+                                            : <div className="none-home-video-preview">Видеобаннеров нет</div>
+                                        }
+                                        <div className="home-video-btn-block">
                                             <CldUploadButton
-                                                className="mt-5 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
+                                                className={'home-video-btn'}
                                                 uploadPreset="qiladgcy"
                                                 onUpload={(result: UploadResult) => {
-                                                    setNewCollection((prevCollection) => ({
-                                                        ...prevCollection,
-                                                        videoUrl: result.info.secure_url
-                                                    }));
-
+                                                    setMainVideoPublicUrl(result.info.secure_url)
                                                 }}>
-                                                Изменить видео для новой коллекции
+                                                Добавить новый баннер
                                             </CldUploadButton>
+                                            <Button className={'home-video-btn'}
+                                                    onClick={() => onOpen("editMainPageVideo", {reload: "reload"})}>
+                                                Посмотреть существующие баннеры
+                                            </Button>
                                         </div>
-                                        : <div className="h-60 w-120 mt-3"></div>}
-
-                                    <div className="flex flex-col justify-center ml-10 space-y-2">
-
-                                        <Form {...form}>
-                                            <form
-                                                onSubmit={form.handleSubmit(onSubmit)}
-                                                className="space-y-6"
-                                            >
-                                                <>
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="title"
-                                                        render={({field}) => (
-                                                            <FormItem>
-                                                                <FormLabel>Название новой коллекции</FormLabel>
-                                                                <FormControl>
-                                                                    <Input
-                                                                        disabled={isPending}
-                                                                        {...field}
-                                                                        placeholder="Введите название"
-                                                                    />
-                                                                </FormControl>
-                                                                <FormMessage/>
-                                                            </FormItem>
-                                                        )}
-                                                    />
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="active"
-                                                        render={({field}) => (
-                                                            <FormItem>
-                                                                <FormControl>
-                                                                    <div className="flex items-center space-x-2">
-                                                                        <Label htmlFor="airplane-mode">Показывать на
-                                                                            главном экране</Label>
-                                                                        <Switch
-                                                                            disabled={isPending}
-                                                                            checked={field.value}
-                                                                            onCheckedChange={field.onChange}
-                                                                        />
-                                                                    </div>
-                                                                </FormControl>
-                                                            </FormItem>
-                                                        )}
-                                                    />
-
-                                                    <Button
-                                                        disabled={isPending}
-                                                        type="submit"
-                                                        className="w-full"
-                                                        onClick={()=>onSubmit}
-                                                    >
-                                                        Сохранить
-                                                    </Button>
-                                                </>
-                                            </form>
-
-                                        </Form>
-
-
-
                                     </div>
-                                </div>
-                            </AccordionContent>
-                        </AccordionItem>
-                    </Accordion>
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
+                    </div>
                 </div>
-
-
-                <div>
-                    <Accordion type="single" collapsible>
-                        <AccordionItem value="item-1">
-                            <AccordionTrigger className="text-lg">Слайдер фотографий</AccordionTrigger>
-                            <AccordionContent>
-                                <CldUploadButton
-                                    className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2"
-                                    uploadPreset="qiladgcy"
-                                    onUpload={(result: UploadResult) => {
-                                        setMainPhotoPublicUrl(result.info.secure_url)
-                                    }}>
-                                    Добавить новое фото
-                                </CldUploadButton>
-
-                                <div className="p-6 grid grid-cols-2 md:grid-cols-4 gap-3">
-                                    {images.map((image, index) => (
-                                        <div key={image._id}
-                                             className={`relative p-1 rounded ${image.active ? 'border-2 border-solid border-green-500' : ''} cursor-pointer`}>
-                                            <img
-                                                className="h-72 object-cover z-4 transition-opacity duration-500 ease-in-out current"
-                                                src={image.url}
-                                                alt={`Slide ${index}`}
-                                                onClick={() => updateActiveImages(image._id)}
-                                            />
-                                            <div className="absolute rounded top-3 right-3">
-                                                <ActionToolTip label="Удалить">
-                                                    <div className="bg-white p-1 rounded">
-                                                        <Trash
-                                                            onClick={(e) => onActionDelete(e, "deleteMainPagePhoto", image)}
-                                                            className="group-hover:block w-6 h-6 text-zinc-800 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"
-                                                        />
-                                                    </div>
-                                                </ActionToolTip>
+                <div className="fake-home-text-info">
+                    <div className="fake-text-info-text"></div>
+                    <div className="fake-text-info-text"></div>
+                    <div className="fake-text-info-text"></div>
+                    <div className="fake-text-info-text"></div>
+                </div>
+                <div className="fake-home-video-preview">
+                    <div className="fake-new-collection-container">
+                        {/*<div className="fake-new-running-line">*/}
+                        {/*    <Image src={fakeLogo} alt={'Logo'}></Image>*/}
+                        {/*    <Image src={fakeLogo} alt={'Logo'}></Image>*/}
+                        {/*    <Image src={fakeLogo} alt={'Logo'}></Image>*/}
+                        {/*    <Image src={fakeLogo} alt={'Logo'}></Image>*/}
+                        {/*    <Image src={fakeLogo} alt={'Logo'}></Image>*/}
+                        {/*    <Image src={fakeLogo} alt={'Logo'}></Image>*/}
+                        {/*</div>*/}
+                        <div className="fake-new-running-line">
+                            <div className="fake-running-line-text"></div>
+                            <div className="fake-running-line-text"></div>
+                            <div className="fake-running-line-text"></div>
+                            <div className="fake-running-line-text"></div>
+                            <div className="fake-running-line-text"></div>
+                            <div className="fake-running-line-text"></div>
+                        </div>
+                        <div>
+                            <div className="fake-new-collection-text"></div>
+                        </div>
+                        <div className="fake-new-running-line">
+                            <div className="fake-running-line-text"></div>
+                            <div className="fake-running-line-text"></div>
+                            <div className="fake-running-line-text"></div>
+                            <div className="fake-running-line-text"></div>
+                            <div className="fake-running-line-text"></div>
+                            <div className="fake-running-line-text"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <Accordion type="single" collapsible>
+                            <AccordionItem value="item-1" style={{borderBottom: 'none'}}>
+                                <AccordionTrigger className="text-lg editing-block-header">Новая
+                                    коллекция</AccordionTrigger>
+                                <AccordionContent>
+                                    <div className="flex flex-col">
+                                        {videoSrc ?
+                                            <div>
+                                                <video
+                                                    key={newCollection?.videoUrl}
+                                                    className="home-video-preview"
+                                                    controls
+                                                    muted
+                                                    loop
+                                                >
+                                                    <source src={newCollection?.videoUrl} type="video/mp4"/>
+                                                    Your browser does not support the video tag.
+                                                </video>
                                             </div>
+                                            : <div className="none-home-video-preview">Видеобаннеров нет</div>}
+
+                                        <div className="flex flex-col justify-center space-y-2">
+                                            <Form {...form}>
+                                                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                                                    <div>
+                                                        <div className="new-collection-edit-container">
+                                                            <div className="new-collection-switch-block">
+                                                                <p>Показывать на главном экране</p>
+                                                                <FormField
+                                                                    control={form.control}
+                                                                    name="active"
+                                                                    render={({field}) => (
+                                                                        <FormItem>
+                                                                            <FormControl
+                                                                                className="w-full flex items-center justify-between content-center">
+                                                                                <div>
+                                                                                    <Switch
+                                                                                        disabled={isPending}
+                                                                                        checked={field.value}
+                                                                                        onCheckedChange={field.onChange}
+                                                                                    />
+                                                                                </div>
+                                                                            </FormControl>
+                                                                        </FormItem>
+                                                                    )}
+                                                                />
+                                                            </div>
+                                                            <div className="new-collection-input-block">
+                                                                <FormField
+                                                                    control={form.control}
+                                                                    name="title"
+                                                                    render={({field}) => (
+                                                                        <FormItem>
+                                                                            <FormLabel style={{fontWeight: '600'}}>Название
+                                                                                новой коллекции</FormLabel>
+                                                                            <FormControl style={{
+                                                                                height: '47px',
+                                                                                boxShadow: 'none'
+                                                                            }}>
+                                                                                <Input
+                                                                                    style={{padding: '15px 10px'}}
+                                                                                    className="new-collection-input"
+                                                                                    disabled={isPending}
+                                                                                    {...field}
+                                                                                    placeholder="Введите название"
+                                                                                />
+                                                                            </FormControl>
+                                                                            <FormMessage/>
+                                                                        </FormItem>
+                                                                    )}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div className="home-video-btn-block" style={{margin: '0'}}>
+                                                            <CldUploadButton
+                                                                className={'home-video-btn'}
+                                                                uploadPreset="qiladgcy"
+                                                                onUpload={(result: UploadResult) => {
+                                                                    setNewCollection((prevCollection) => ({
+                                                                        ...prevCollection,
+                                                                        videoUrl: result.info.secure_url
+                                                                    }));
+
+                                                                }}>
+                                                                Изменить видео для новой коллекции
+                                                            </CldUploadButton>
+                                                            <Button
+                                                                disabled={isPending}
+                                                                type="submit"
+                                                                className={'home-video-btn'}
+                                                                onClick={() => onSubmit}
+                                                            >
+                                                                Сохранить
+                                                            </Button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </Form>
                                         </div>
-                                    ))}
-                                </div>
-                            </AccordionContent>
-                        </AccordionItem>
-                    </Accordion>
+                                    </div>
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
+                    </div>
                 </div>
+                <div className="fake-home-top-products">
+                    <div className="fake-home-top-products-title">
+                        <div className="fake-home-top-products-title-text"></div>
+                        <div className="fake-home-top-products-title-text"></div>
+                    </div>
+                    <div className="fake-home-top-products-body">
+                        <div>
+                            <div className="top-products-body-image"></div>
+                            <div className="top-products-body-title"></div>
+                            <div className="top-products-body-text"></div>
+                        </div>
+                        <div>
+                            <div className="top-products-body-image"></div>
+                            <div className="top-products-body-title"></div>
+                            <div className="top-products-body-text"></div>
+                        </div>
+                        <div>
+                            <div className="top-products-body-image"></div>
+                            <div className="top-products-body-title"></div>
+                            <div className="top-products-body-text"></div>
+                        </div>
+                        <div>
+                            <div className="top-products-body-image"></div>
+                            <div className="top-products-body-title"></div>
+                            <div className="top-products-body-text"></div>
+                        </div>
+                    </div>
+                    <div className="fake-home-top-products-footer">
+                        <div className="fake-text-info-text"></div>
+                    </div>
+                </div>
+                <div className="fake-home-video-preview">
+                    <div className="fake-new-slider-container">
+                        <div className="fake-new-slider-block">
+                            <div className="fake-new-slider-form"></div>
+                            <div className="fake-new-slider-form"></div>
+                            <div className="fake-new-slider-form"></div>
+                            <div className="fake-new-slider-form"></div>
+                            <div className="fake-new-slider-form"></div>
+                        </div>
+                        <div className="fake-new-slider-block">
+                            <div className="fake-new-slider"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <Accordion type="single" collapsible>
+                            <AccordionItem value="item-1" style={{borderBottom: 'none'}}>
+                                <AccordionTrigger className="text-lg editing-block-header">Слайдер
+                                    фотографий</AccordionTrigger>
+                                <AccordionContent>
 
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 slider-images-block">
+                                        {images.map((image, index) => (
+                                            <div key={image._id}
+                                                 className={`relative p-1 rounded-xl ${image.active ? 'border-2 border-solid border-green-500' : ''} cursor-pointer`}>
+                                                <img
+                                                    className="h-72 object-cover z-4 rounded-xl transition-opacity duration-500 ease-in-out current"
+                                                    src={image.url}
+                                                    alt={`Slide ${index}`}
+                                                    onClick={() => updateActiveImages(image._id)}
+                                                />
+                                                <div className="absolute rounded top-3 right-3">
+                                                    <ActionToolTip label="Удалить">
+                                                        <div
+                                                            onClick={(e) => onActionDelete(e, "deleteMainPagePhoto", image)}
+                                                            className="bg-white p-1 rounded delete-home-btn">
+                                                            <Image src={deleteIco} alt={'x'}></Image>
+                                                        </div>
+                                                    </ActionToolTip>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="home-slider-btn-block" style={{margin: '0'}}>
+                                        <CldUploadButton
+                                            className={'home-slider-btn'}
+                                            uploadPreset="qiladgcy"
+                                            onUpload={(result: UploadResult) => {
+                                                setMainPhotoPublicUrl(result.info.secure_url)
+                                            }}>
+                                            Добавить новое фото
+                                        </CldUploadButton>
+                                    </div>
+                                </AccordionContent>
+                            </AccordionItem>
+                        </Accordion>
+                    </div>
+                </div>
+                <div className="fake-home-footer">
+                    <div className="fake-home-footer-info">
+                        <div className="fake-home-footer-info-nav">
+                            <div>
+                                <div className="fake-home-footer-nav"></div>
+                                <div className="fake-home-footer-nav"></div>
+                                <div className="fake-home-footer-nav"></div>
+                            </div>
+                            <div>
+                                <div className="fake-home-footer-nav"></div>
+                                <div className="fake-home-footer-nav"></div>
+                                <div className="fake-home-footer-nav"></div>
+                            </div>
+                            <div>
+                                <div className="fake-home-footer-nav"></div>
+                                <div className="fake-home-footer-nav"></div>
+                            </div>
+                        </div>
+                        <div className="fake-home-links-logo">
+                            <Image src={fakeLogo} alt={'Logo'}></Image>
+                            <div className="fake-home-links"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="fake-home-footer-info">
+                            <div className="fake-home-footer-btn"></div>
+                            <div className="fake-home-footer-btn"></div>
+                        </div>
 
+                    </div>
+                    <div className="fake-home-footer-policy"></div>
+                </div>
             </div>
         </div>
     );

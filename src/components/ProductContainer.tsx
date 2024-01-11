@@ -20,6 +20,7 @@ import BigPhotosSlider from "@/components/modals/BigPhotosSlider";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
 import {BestProducts} from "@/components/homeScreen/BestProducts";
 import {toast} from "sonner";
+import instLogo from "@/img/shearIcons/instlogo.png";
 
 
 function Images(props: { onClick: () => Window, src: any, alt: string, style: { cursor: string; width: string } }) {
@@ -245,7 +246,7 @@ const ProductContainer = ({ product }) => {
                                         <div className='error-button' onClick={() => setSendUnusualDesign(true)}>
                                             <Image className='error-button-image' src={unusualDesign} alt='!'/>
                                         </div>
-                                        <div className='favorite-button'
+                                        <div className='favorite-button-block'
                                              onClick={() => handleToggleFavorite(product._id)}>
                                             <Image className='favorite-button-image'
                                                    src={!isFavorite ? favorites : unFavorites} alt='Favorite'/>
@@ -257,7 +258,6 @@ const ProductContainer = ({ product }) => {
                                     {showCopiedMessage && (
                                         <div className="shearLinkContainer" ref={wrapperRef}>
                                             <div>
-
                                                 <div className="copiedMessage">
                                                     <div>
                                                         <div className={'inputCurrentUrl'} style={{}}>
@@ -267,21 +267,16 @@ const ProductContainer = ({ product }) => {
                                                                        onClick={copyLinkToClipboard} alt={'+'}/>
                                                             </div>
                                                         </div>
-                                                        <div style={{
-                                                            display: 'flex',
-                                                            flexDirection: 'row',
-                                                            justifyContent: 'space-between',
-                                                            marginTop: "10px",
-                                                            marginBottom: "5px"
-                                                        }}>
+                                                        <div  className='social-links-block'>
                                                             {socialMediaLogos.map((platform, index) => (
-                                                                <Image
-                                                                    key={index}
-                                                                    style={{width: '24px', cursor: 'pointer'}}
-                                                                    src={platform.logo}
-                                                                    alt={platform.name}
-                                                                    onClick={() => window.open(platform.url, '_blank')}
-                                                                />
+                                                                <div className='footer-social-links-block' onClick={() => window.open(platform.url, '_blank')}>
+                                                                    <Image
+                                                                        key={index}
+                                                                        src={platform.logo}
+                                                                        alt={platform.name}
+                                                                    />
+                                                                </div>
+
                                                             ))}
                                                         </div>
                                                     </div>

@@ -13,6 +13,7 @@ import plus from '../../img/plus.png'
 import minus from '../../img/minus.png'
 import axios from "axios";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
+import {useCurrentUser} from "@/hooks/useCurrentUser";
 
 type NavLink = {
     label: string;
@@ -44,13 +45,13 @@ const Navigation = ({navLinks}: Props) => {
     const [cartItems, setCartItems] = useState([]);
     const [userData, setUserData] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
+    const user = useCurrentUser();
 
     const getUserDetails = async () => {
         try {
             const res = await axios.get('/api/users/userdata');
             console.log(res.data.data.name);
             setUserData(res.data.data);
-            setIsAdmin(res.data.data.isAdmin);
         } catch (error: any) {
             console.log(error.message);
         }
@@ -58,6 +59,8 @@ const Navigation = ({navLinks}: Props) => {
 
     useEffect(() => {
         getUserDetails();
+        setUserData(user);
+        setIsAdmin(user?.isAdmin);
 
     }, [sessionTime]);
 
