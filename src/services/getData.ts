@@ -35,7 +35,9 @@ export const getDataBySearch = async (search: string) => {
         //console.log(products)
         const foundProducts = products.filter(product =>
             product.title.toLowerCase().includes(search.toLowerCase()) ||
-            product.description.toLowerCase().includes(search.toLowerCase())
+            product.description.toLowerCase().includes(search.toLowerCase()) ||
+            product.category.toLowerCase().includes(search.toLowerCase()) ||
+            product?.collection.toLowerCase().includes(search.toLowerCase())
         );
         //console.log(foundProducts)
         return foundProducts;

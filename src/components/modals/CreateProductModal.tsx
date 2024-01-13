@@ -32,6 +32,7 @@ import {useModal} from "@/hooks/useModalStore"
 import {useEffect, useState} from "react";
 import {X} from "lucide-react"
 import {Textarea} from "@/components/ui/textarea";
+import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 
 const validSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 const additionalInformation = ['Материал', 'Уход', '', ''];
@@ -45,6 +46,10 @@ const formSchema = z.object({
     }),
     category: z.string().min(1, {
         message: 'Необходимо ввести категорию товара.',
+    }),
+    collection: z.string(),
+    sex: z.enum(["Унисекс", "М", "Ж"], {
+        required_error: "Необходимо выбрать один из представленных типов.",
     }),
     price: z
         .string().min(1, {
@@ -201,6 +206,8 @@ export const CreateProductModal = () => {
             title: "",
             description: "",
             category: "",
+            collection: "",
+            sex: "",
             price: "",
             sizes: [
                 {size: "XS", amount: null},
@@ -379,6 +386,26 @@ export const CreateProductModal = () => {
                                 </FormField>
                                 <FormField
                                     control={form.control}
+                                    name="collection"
+                                    render={({field}) => (
+                                        <FormItem>
+                                            <FormLabel className="mt-0 text-xs font-bold">
+                                                Коллекция
+                                            </FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    disabled={isLoading}
+                                                    className="text-black bg-white"
+                                                    placeholder="Введите название коллекции"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}>
+                                </FormField>
+                                <FormField
+                                    control={form.control}
                                     name="price"
                                     render={({field}) => (
                                         <FormItem>
@@ -398,6 +425,49 @@ export const CreateProductModal = () => {
                                         </FormItem>
                                     )}
 
+                                />
+
+                                <FormField
+                                    control={form.control}
+                                    name="sex"
+                                    render={({ field }) => (
+                                        <FormItem >
+                                            <FormLabel className="mt-0 text-xs font-bold">Пол</FormLabel>
+                                            <FormControl>
+                                                <RadioGroup
+                                                    onValueChange={field.onChange}
+                                                    defaultValue={field.value}
+                                                    className="flex flex-row"
+                                                >
+                                                    <FormItem className="flex items-center space-x-2 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="М" />
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal">
+                                                            М
+                                                        </FormLabel>
+                                                    </FormItem>
+                                                    <FormItem className="flex items-center space-x-2 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="Ж" />
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal">
+                                                            Ж
+                                                        </FormLabel>
+                                                    </FormItem>
+                                                    <FormItem className="flex items-center space-x-2 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="Унисекс" />
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal">
+                                                            Унисекс
+                                                        </FormLabel>
+                                                    </FormItem>
+                                                </RadioGroup>
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
                                 />
 
 

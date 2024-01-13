@@ -47,7 +47,9 @@ export async function POST(request: NextRequest) {
 
         const description = data.get('description');
         const price = data.get('price');
-        const category = data.get('category')
+        const category = data.get('category');
+        const collection = data.get('collection');
+        const sex = data.get('sex');
         const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => ({
             size: size,
             amount: data.get(size),
@@ -94,6 +96,8 @@ export async function POST(request: NextRequest) {
             description: description,
             price:price,
             category:category,
+            collection: collection,
+            sex:sex,
             sizes: sizes,
             pictures: picturesNames,
             additionalInformation: additionalInformation

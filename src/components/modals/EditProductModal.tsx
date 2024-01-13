@@ -32,6 +32,7 @@ import {useEffect, useState} from "react";
 import {X} from "lucide-react"
 import {Textarea} from "@/components/ui/textarea";
 import {IProduct} from "@/types/Product";
+import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group";
 
 const validSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 const additionalInformation = [1, 1, 1, 1];
@@ -45,6 +46,10 @@ const formSchema = z.object({
     }),
     category: z.string().min(1, {
         message: 'Необходимо ввести категорию товара.',
+    }),
+    collection: z.string(),
+    sex: z.enum(["Унисекс", "М", "Ж"], {
+        required_error: "Необходимо выбрать один из представленных типов.",
     }),
     price: z
         .string().min(1, {
@@ -151,6 +156,8 @@ export const EditProductModal = () => {
             description: "",
             price: "",
             category: "",
+            collection: "",
+            sex: "",
             sizes: [
                 {size: "XS", amount: null},
                 {size: "S", amount: null},
@@ -223,6 +230,8 @@ export const EditProductModal = () => {
             form.setValue("description", product.description);
             form.setValue("price", product.price);
             form.setValue("category", product.category);
+            form.setValue("collection", product?.collection);
+            form.setValue("sex", product?.sex);
             form.setValue("sizes.0.amount", product.sizes[0].amount);
             form.setValue("sizes.1.amount", product.sizes[1].amount);
             form.setValue("sizes.2.amount", product.sizes[2].amount);
@@ -240,7 +249,8 @@ export const EditProductModal = () => {
 
     return (
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
-            <DialogContent className="bg-white text-black p-0 overflow-hidden" style={{fontFamily: "Century Gothic", backgroundColor:'#fafafa', maxWidth:'800px'}}>
+            <DialogContent className="bg-white text-black p-0 overflow-hidden"
+                           style={{fontFamily: "Century Gothic", backgroundColor: '#fafafa', maxWidth: '800px'}}>
                 <DialogHeader className="pt-8 px6 ml-6">
                     <DialogTitle className="text-2xl text-left font-bold">
                         Отредактируйте товар
@@ -349,6 +359,26 @@ export const EditProductModal = () => {
                                 </FormField>
                                 <FormField
                                     control={form.control}
+                                    name="collection"
+                                    render={({field}) => (
+                                        <FormItem>
+                                            <FormLabel className="mt-0 text-xs font-bold">
+                                                Коллекция
+                                            </FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    disabled={isLoading}
+                                                    className="text-black bg-white"
+                                                    placeholder="Введите название коллекции"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}>
+                                </FormField>
+                                <FormField
+                                    control={form.control}
                                     name="price"
                                     render={({field}) => (
                                         <FormItem>
@@ -368,6 +398,49 @@ export const EditProductModal = () => {
                                         </FormItem>
                                     )}
 
+                                />
+
+                                <FormField
+                                    control={form.control}
+                                    name="sex"
+                                    render={({field}) => (
+                                        <FormItem>
+                                            <FormLabel className="mt-0 text-xs font-bold">Пол</FormLabel>
+                                            <FormControl>
+                                                <RadioGroup
+                                                    onValueChange={field.onChange}
+                                                    defaultValue={field.value}
+                                                    className="flex flex-row"
+                                                >
+                                                    <FormItem className="flex items-center space-x-2 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="М"/>
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal">
+                                                            М
+                                                        </FormLabel>
+                                                    </FormItem>
+                                                    <FormItem className="flex items-center space-x-2 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="Ж"/>
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal">
+                                                            Ж
+                                                        </FormLabel>
+                                                    </FormItem>
+                                                    <FormItem className="flex items-center space-x-2 space-y-0">
+                                                        <FormControl>
+                                                            <RadioGroupItem value="Унисекс"/>
+                                                        </FormControl>
+                                                        <FormLabel className="font-normal">
+                                                            Унисекс
+                                                        </FormLabel>
+                                                    </FormItem>
+                                                </RadioGroup>
+                                            </FormControl>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}
                                 />
 
 
@@ -427,9 +500,9 @@ export const EditProductModal = () => {
                                      style={{marginTop: "40px"}}>
                                     Дополнительная информация о товаре
                                 </div>
-                                <div style={{marginBottom:'15px', paddingBottom:'20px'}}>
+                                <div style={{marginBottom: '15px', paddingBottom: '20px'}}>
                                     {additionalInformation.map((info, index) => (
-                                        <div key={index} style={{marginBottom:'15px'}}>
+                                        <div key={index} style={{marginBottom: '15px'}}>
                                             <FormField
                                                 control={form.control}
                                                 name={`additionalInformation.${index}.title`}

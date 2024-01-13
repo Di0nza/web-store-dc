@@ -5,6 +5,7 @@ import {IProduct} from "@/types/Product";
 import {ITokenData} from "@/types/TokenData";
 import {getDataFromToken} from "@/helpers/getDataFromToken";
 import {currentUser, isAdmin} from "@/lib/auth";
+
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
@@ -27,11 +28,11 @@ export async function PATCH(
 
         const user = await currentUser();
 
-        if(!user){
+        if (!user) {
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
-        if(user?.isAdmin === false){
+        if (user?.isAdmin === false) {
             return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
         }
 
@@ -43,6 +44,8 @@ export async function PATCH(
         const description = data.get('description');
         const price = data.get('price');
         const category = data.get('category');
+        const collection = data.get('collection');
+        const sex = data.get('sex');
         const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => ({
             size: size,
             amount: data.get(size),
@@ -73,10 +76,10 @@ export async function PATCH(
         for (const key of data.keys()) {
             if (key.startsWith('picturesFiles[')) {
                 const value = data.get(key) as File;
-                    await cloudinary.uploader.upload(value, opts, { folder: 'my-folder' })
-                        .then((res)=> picturesNames.push(res.secure_url))
+                await cloudinary.uploader.upload(value, opts, {folder: 'my-folder'})
+                    .then((res) => picturesNames.push(res.secure_url))
 
-            } else if (key.startsWith('picturesString[')){
+            } else if (key.startsWith('picturesString[')) {
                 const value = data.get(key)
                 picturesNames.push(value)
             }
@@ -86,10 +89,12 @@ export async function PATCH(
             title: title,
             description: description,
             category: category,
+            collection: collection,
+            sex: sex,
             price: price,
             sizes: sizes,
             pictures: picturesNames,
-            additionalInformation:additionalInformation
+            additionalInformation: additionalInformation
         });
         if (!product) {
             return NextResponse.json({error: "No such product"}, {status: 400})
@@ -121,11 +126,11 @@ export async function DELETE(
 
         const user = await currentUser();
 
-        if(!user){
+        if (!user) {
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
-        if(user?.isAdmin === false){
+        if (user?.isAdmin === false) {
             return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
         }
 
@@ -136,7 +141,7 @@ export async function DELETE(
         }
 
         return NextResponse.json({
-            message:"Product deleted successfully",
+            message: "Product deleted successfully",
             success: true,
             product
         })
@@ -153,11 +158,11 @@ export async function GET(
 
         const user = await currentUser();
 
-        if(!user){
+        if (!user) {
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
-        if(user?.isAdmin === false){
+        if (user?.isAdmin === false) {
             return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
         }
 
@@ -171,7 +176,7 @@ export async function GET(
         //console.log(product)
 
         return NextResponse.json({
-            message:"Product found successfully",
+            message: "Product found successfully",
             success: true,
             product
         })

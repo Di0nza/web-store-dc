@@ -8,6 +8,8 @@ const productSchema = mongoose.models.Product ?
         title: {type: String, required: true},
         description: {type: String, required: true},
         category: {type: String, required: true},
+        collection: {type: String},
+        sex: {type: String, required: true},
         price: {type: String, required: true},
         favorites: {type: Number, default: 0},
         views: {type: Number, default: 0},
