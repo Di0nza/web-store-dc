@@ -84,7 +84,7 @@ export const SignUpForm = () => {
     return (
         <div className='signUpBlock'>
             <h2>{"Регистрация"}</h2>
-            <p className='signUpBlockText'>Уже есть аккаунт? <Link className='loginLink' href="/login">Авторизируйтесь</Link></p>
+            <p className='signUpBlockText'>Уже есть аккаунт? <Link className='loginLink' href="/login">Войти</Link></p>
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}

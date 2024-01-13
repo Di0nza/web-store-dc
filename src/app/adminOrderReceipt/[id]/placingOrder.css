@@ -247,7 +247,8 @@
     flex-direction: column;
     justify-content: flex-start;
     overflow-y: scroll;
-    max-height: 313px;
+    padding: 3px 0;
+    max-height: 315px;
 }
 .products-value-cont{
     width: calc(100% + 7.5px);

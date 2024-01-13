@@ -102,7 +102,11 @@
   object-fit: cover;
   filter: blur(8px);
   }
-
+.slideImgBlock{
+  width: 335px;
+  max-width: 100%;
+  height: 500px;
+}
 .slideImg{
   width: 335px;
   max-width: 100%;
@@ -183,4 +187,138 @@
 .arrowLeft:hover,
 .arrowRight:hover {
   background-color: rgba(255, 255, 255, 1);
+}
+.slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.slideContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+
+.blurContainer {
+  width: 100vw;
+  height: 100%;
+  z-index: 0;
+}
+
+.blurBackground {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(8px);
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.5s ease;
+}
+
+.slideImg {
+  width: 335px;
+  max-width: 100%;
+  height: 500px;
+  object-fit: cover;
+  z-index: 1;
+  position: relative;
+  transition: opacity 0.5s ease;
+}
+
+.slide-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slide-img.previous {
+  opacity: 0;
+  z-index: -1;
+}
+
+.slide-img.current {
+  opacity: 1;
+  z-index: 1;
+}
+
+.sliderOverlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 15px;
+  width: 325px;
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.arrowSlider {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #dedede;
+}
+
+.arrowSliderImg {
+  width: 10px;
+  margin-left: 1px;
+}
+
+.lastArrowSliderImg {
+  transform: rotate(-180deg);
+  width: 10px;
+  margin-right: 1px;
+}
+
+.arrowRight,
+.arrowLeft {
+  width: 20px;
+  height: 20px;
+  background-color: rgb(255, 255, 255);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.arrowRight:hover,
+.arrowLeft:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.arrowRight::before,
+.arrowLeft::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  clip-path: polygon(0 0, 100% 50%, 0% 100%);
+}
+
+.arrowRight {
+  clip-path: polygon(0 0, 100% 50%, 0% 100%);
+}
+
+.arrowLeft {
+  clip-path: polygon(0% 50%, 100% 0, 100% 100%);
+}
+.fade {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
 }

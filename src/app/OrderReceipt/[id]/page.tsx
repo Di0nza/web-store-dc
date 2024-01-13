@@ -141,7 +141,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         doc.text(pdfContent, 10, 30);
         doc.text(pdfContent3, 10, 40);
         doc.text(pdfContent6, 10, 50);
-        doc.text('MariDeniz', 180, 280);
+        doc.text('MariDeniz', 170, 280);
         doc.text(pdfContent5, 10, 280);
         let verticalPosition = 70;
         data.forEach((line) => {

@@ -11,6 +11,7 @@ import close from '../../img/close.png'
 import deleteItem from '../../img/delete.png'
 import plus from '../../img/plus.png'
 import minus from '../../img/minus.png'
+import profileIco from '../../img/profile.png'
 import axios from "axios";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
 import {useCurrentUser} from "@/hooks/useCurrentUser";
@@ -131,6 +132,42 @@ const Navigation = ({navLinks}: Props) => {
                 <Link href={userData?.isAdmin ? '/adminProfile' : '/'}>
                     <Image className='header-logo' src={headerLogo} alt={'MaryDeniz'}></Image>
                 </Link>
+                <div className='header-links-block-mobile'>{
+                    isAdmin ? (
+                        <div>
+                            <Link href={'adminProfile'}>
+                                <Image className={'profileIco'} src={profileIco} alt={'user'}></Image>
+                            </Link>
+                        </div>
+                    ) : (
+                        <div className='header-links-user'>
+                            <div>
+                                {pathname === '/cart' ? (
+                                    <div className={"cartNavLink"}>
+                                        <Image className={"cartLogo"} src={cartLogo} alt={'cart'}></Image>
+                                        <p>{cartItems.length}</p>
+                                    </div>
+                                ) : (
+                                    <div
+                                        onClick={handleLinkClick}
+                                        className={isModalOpen ? "cartNavLink" : 'inactiveCartNavLink'}
+                                    >
+                                        <Image
+                                            className={"cartLogo"}
+                                            src={isModalOpen ? cartLogo : cartLogoB}
+                                            alt={'cart'}
+                                        ></Image>
+                                        <p>{cartItems.length}</p>
+                                    </div>
+                                )}
+                            </div>
+                            <Link href={'profile'} className={'profileIcoBlock'} style={{marginLeft:'10px'}}>
+                                <Image className={'profileIco'} src={profileIco} alt={'user'}></Image>
+                            </Link>
+                        </div>
+                    )
+                }
+                </div>
                 <div className='header-links-block'>
                     {navLinks.map((link) => {
                         const isActive = pathname === link.href;
@@ -156,21 +193,26 @@ const Navigation = ({navLinks}: Props) => {
                             )
                         ) : (
                             isAdmin ? (
-                                <Link
-                                    key={link.label}
-                                    href={link.href}
-                                    className={pathname === link.href ? "activeNavLink" : ''}
-                                >
-                                    {link.label}
-                                </Link>
+                                <div>
+                                    <Link
+                                        key={link.label}
+                                        href={link.href}
+                                        className={pathname === link.href ? "activeNavLink" : ''}
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </div>
+
                             ) : (
-                                <Link
-                                    key={link.label}
-                                    href={link.href}
-                                    className={pathname.startsWith(link.href) ? "activeNavLink" : ''}
-                                >
-                                    {link.label}
-                                </Link>
+                                <div>
+                                    <Link
+                                        key={link.label}
+                                        href={link.href}
+                                        className={pathname.startsWith(link.href) ? "activeNavLink" : ''}
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </div>
                             )
                         );
                     })}
@@ -229,10 +271,10 @@ const Navigation = ({navLinks}: Props) => {
                                     </div>
                                 ))}
                             </div>
+                            <Link className={'go-to-cart'} href={'/cart'} onClick={closeModal}>
+                                Перейти к корзине
+                            </Link>
                         </div>
-                        <Link className={'go-to-cart'} href={'/cart'} onClick={closeModal}>
-                            Перейти к корзине
-                        </Link>
                     </div>
                 )}
             </nav>

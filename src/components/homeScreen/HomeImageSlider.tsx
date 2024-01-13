@@ -10,9 +10,27 @@ import sliderImg4 from '../../img/homeSlider/00763.jpg';
 import {getActivePhotos, getAllPhotos} from "@/services/MainPagePhotoFunctions";
 
 const HomeImageSlider = () => {
-    const [images, setImages] = useState([]);//[sliderImg1,sliderImg2,sliderImg3,sliderImg4,];
+    const [images, setImages] = useState([]); //[sliderImg1,sliderImg2,sliderImg3,sliderImg4,];
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
     const [slideAnimation, setSlideAnimation] = useState('');
+
+    useEffect(() => {
+        getActivePhotos().then((data) => {
+            setImages(data?.data?.photos);
+            console.log(data?.data?.photos);
+        });
+    }, []);
+
+    useEffect(() => {
+        if (images?.length !== 0) {
+            const interval = setInterval(() => {
+                nextSlide();
+            }, 3000);
+
+            return () => clearInterval(interval);
+        }
+    }, [currentImageIndex, images]);
 
     const nextSlide = () => {
         setSlideAnimation('slide-left');
@@ -32,29 +50,16 @@ const HomeImageSlider = () => {
         }, 100);
     };
 
-    useEffect(() => {
-        getActivePhotos().then((data) => {
-            setImages(data?.data?.photos);
-            console.log(data?.data?.photos)
-        })
-    }, [])
-
-    useEffect(() => {
-        if(images?.length !== 0) {
-            const interval = setInterval(() => {
-                nextSlide();
-            }, 3000);
-
-            return () => clearInterval(interval);
-        }
-    }, [currentImageIndex, images]);
-
     return images ? (
-        <div className={styles.slider}>
+        <div
+            className={styles.slider}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
             <div className={styles.slideContainer}>
                 <div className={styles.blurContainer}>
                     <Image
-                        className={styles.blurBackground}
+                        className={`${styles.blurBackground} ${styles[slideAnimation]} ${styles.fade}`}
                         src={images[currentImageIndex]?.url}
                         alt="Blurred Background"
                         layout="fill"
@@ -62,21 +67,23 @@ const HomeImageSlider = () => {
                         quality={100}
                     />
                 </div>
-                    <img
-                        className={`${styles.slideImg} ${slideAnimation === 'slide-left' ? 'previous' : 'current'}`}
-                        src={images[currentImageIndex]?.url}
-                        alt={`Slide ${currentImageIndex}`}
-                    />
-                <div className={styles.sliderOverlay}>
-                    <div className={styles.arrowSlider} onClick={prevSlide}>
-                        <Image className={styles.lastArrowSliderImg} src={arrowW} alt={'<'}/>
+                <img
+                    className={`${styles.slideImg} ${slideAnimation === 'slide-left' ? 'previous' : 'current'} ${styles.fade}`}
+                    src={images[currentImageIndex]?.url}
+                    alt={`Slide ${currentImageIndex}`}
+                />
+                {isHovered && (
+                    <div className={styles.sliderOverlay}>
+                        <div className={styles.arrowSlider} onClick={prevSlide}>
+                            <Image className={styles.lastArrowSliderImg} src={arrowW} alt={'<'} />
+                        </div>
+                        <div className={styles.arrowSlider} onClick={nextSlide}>
+                            <Image className={styles.arrowSliderImg} src={arrowW} alt={'>'} />
+                        </div>
                     </div>
-                    <div className={styles.arrowSlider} onClick={nextSlide}>
-                        <Image className={styles.arrowSliderImg} src={arrowW} alt={'>'}/>
-                    </div>
-                </div>
+                )}
             </div>
         </div>
-    ) : null
-}
+    ) : null;
+};
 export {HomeImageSlider}

@@ -269,7 +269,7 @@ export default function UserOrders() {
                         ))}
                     </div>
                     <div>
-                        <div className='filterSearchBlock'>
+                        <div className='filterSearchBlock' style={{marginTop:'10px'}}>
                             <input type='search' placeholder='Поиск' value={search}
                                    onChange={event => setSearch(event.target.value)}/>
                             <div onClick={handleSubmit} className='filterSearchBtn'>
