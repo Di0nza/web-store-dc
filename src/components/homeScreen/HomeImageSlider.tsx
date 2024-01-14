@@ -51,37 +51,60 @@ const HomeImageSlider = () => {
     };
 
     return images ? (
-        <div
-            className={styles.slider}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
-            <div className={styles.slideContainer}>
-                <div className={styles.blurContainer}>
-                    <Image
-                        className={`${styles.blurBackground} ${styles[slideAnimation]} ${styles.fade}`}
-                        src={images[currentImageIndex]?.url}
-                        alt="Blurred Background"
-                        layout="fill"
-                        objectFit="cover"
-                        quality={100}
-                    />
-                </div>
+        <div>
+            <div
+                className={styles.mobileSliderBlock}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}>
                 <img
-                    className={`${styles.slideImg} ${slideAnimation === 'slide-left' ? 'previous' : 'current'} ${styles.fade}`}
+                    className={styles.mobileSlideImg}
                     src={images[currentImageIndex]?.url}
                     alt={`Slide ${currentImageIndex}`}
                 />
                 {isHovered && (
-                    <div className={styles.sliderOverlay}>
+                    <div className={styles.mobileSliderOverlay}>
                         <div className={styles.arrowSlider} onClick={prevSlide}>
-                            <Image className={styles.lastArrowSliderImg} src={arrowW} alt={'<'} />
+                            <Image className={styles.lastArrowSliderImg} src={arrowW} alt={'<'}/>
                         </div>
                         <div className={styles.arrowSlider} onClick={nextSlide}>
-                            <Image className={styles.arrowSliderImg} src={arrowW} alt={'>'} />
+                            <Image className={styles.arrowSliderImg} src={arrowW} alt={'>'}/>
                         </div>
                     </div>
                 )}
+            </div>
+            <div
+                className={styles.slider}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+
+                <div className={styles.slideContainer}>
+                    <div className={styles.blurContainer}>
+                        <Image
+                            className={styles.blurBackground}
+                            src={images[currentImageIndex]?.url}
+                            alt="Blurred Background"
+                            layout="fill"
+                            objectFit="cover"
+                            quality={100}
+                        />
+                    </div>
+                    <img
+                        className={styles.slideImg}
+                        src={images[currentImageIndex]?.url}
+                        alt={`Slide ${currentImageIndex}`}
+                    />
+                    {isHovered && (
+                        <div className={styles.sliderOverlay}>
+                            <div className={styles.arrowSlider} onClick={prevSlide}>
+                                <Image className={styles.lastArrowSliderImg} src={arrowW} alt={'<'}/>
+                            </div>
+                            <div className={styles.arrowSlider} onClick={nextSlide}>
+                                <Image className={styles.arrowSliderImg} src={arrowW} alt={'>'}/>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     ) : null;

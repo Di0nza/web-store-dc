@@ -53,13 +53,17 @@ export default function ProfilePage() {
             <h2>{"Личный кабинет"}</h2>
             {userData && (
                 <>
-                    <p className='profileHelloText'>Здравсвуйте, {userData.name}</p>
-                    <p  className='createdDate'>Дата создания аккаунта: {new Date(userData.emailVerified).toLocaleString()}</p>
+                    <p className='profileHelloText'>Здравсвуйте, {userData?.name}</p>
+                    <p  className='createdDate'>Дата создания аккаунта: {new Date(userData?.emailVerified).toLocaleString()}</p>
                 </>
             )}
             <div className='profileLinkBlock'>
                 <Link href={'/changeProfileData'} className='additionalProfileLink'>
                     <p>Изменить данные профиля</p>
+                    <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
+                </Link>
+                <Link href={'/store'} className='additionalProfileLink'>
+                    <p>Магазин</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </Link>
                 <Link href={'/userOrders'} className='additionalProfileLink'>
@@ -72,6 +76,10 @@ export default function ProfilePage() {
                 </Link>
                 <Link href={'/favorites'} className='additionalProfileLink'>
                     <p>Избранные</p>
+                    <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
+                </Link>
+                <Link href={'/about'} className='additionalProfileLink'>
+                    <p>О Нас</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </Link>
                 <div className='additionalProfileLink' onClick={logout}>

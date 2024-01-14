@@ -66,9 +66,9 @@ const Footer = () => {
                         <div className='footer-navigation-container'>
                             {userData?.isAdmin ? (
                                     <div className='footer-navigation-block'>
-                                        <Link href={'/changeProfileData'}>Изменение данных</Link>
+                                        <Link href={'/changeProfileData'}>Изменение</Link>
                                         <Link href={'/allAdminMessages'}>Сообщения</Link>
-                                        <Link href={'/adminProfile/customizations'}>Изменение главной</Link>
+                                        <Link href={'/adminProfile/customizations'}>Стилизация</Link>
                                     </div>
                                 ) : (
                                     <div className='footer-navigation-block'>
@@ -106,7 +106,7 @@ const Footer = () => {
                                     </div>
                                 ) : (
                                     <div className='footer-navigation-block'>
-                                        <Link href={'/about'}>Магазин</Link>
+                                        <Link href={'/store'}>Магазин</Link>
                                         <Link href={'/cart'}>Корзина</Link>
                                     </div>
                                 )
@@ -132,7 +132,6 @@ const Footer = () => {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div className='footer-error-block'>
                         {/*<p>Помогите сделать наш сервис лучше</p>*/}

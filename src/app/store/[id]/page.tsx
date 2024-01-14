@@ -12,19 +12,19 @@ type Props = {
     }
 };
 
-export async function generateMetadata({params: {id}}: Props): Promise<Metadata> {
-    const product = await getProductById(id) as IProduct;
-
-    return {
-        title: product.title,
-        description: product.description,
-        keywords: ['Clothing', 'fashion', 'women\'s clothing', 'men\'s clothing'],
-        openGraph: {
-            images: product.pictures[0],
-        },
-        icons: 'https://res.cloudinary.com/maticht12345/image/upload/v1701277508/Letter_-_16_wds2cz.png',
-    }
-}
+// export async function generateMetadata({params: {id}}: Props): Promise<Metadata> {
+//     const product = await getProductById(id) as IProduct;
+//
+//     return {
+//         title: product.title,
+//         description: product.description,
+//         keywords: ['Clothing', 'fashion', 'women\'s clothing', 'men\'s clothing'],
+//         openGraph: {
+//             images: product.pictures[0],
+//         },
+//         icons: 'https://res.cloudinary.com/maticht12345/image/upload/v1701277508/Letter_-_16_wds2cz.png',
+//     }
+// }
 
 async function getProductById(id){
     try {
