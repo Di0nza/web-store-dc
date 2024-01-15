@@ -4,6 +4,7 @@ import {getDataFromToken} from "@/helpers/getDataFromToken";
 import Product from "@/models/productModel";
 import MainPageVideo from "@/models/mainPageVideoModel";
 import {currentUser, isAdmin} from "@/lib/auth";
+import User from "@/models/userModel";
 
 export async function POST(
     request: NextRequest,
@@ -13,6 +14,12 @@ export async function POST(
         const user = await currentUser();
 
         if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
@@ -51,6 +58,12 @@ export async function GET(
         const user = await currentUser();
 
         if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 

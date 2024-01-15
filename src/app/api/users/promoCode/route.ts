@@ -2,6 +2,7 @@ import {connect} from "@/db/db";
 import PromoCode from "@/models/promoCodeModel";
 import {NextRequest, NextResponse} from "next/server";
 import {currentUser, isAdmin} from "@/lib/auth";
+import User from "@/models/userModel";
 connect()
 
 
@@ -9,6 +10,11 @@ export async function GET(request: NextRequest) {
     try {
         const user = await currentUser();
         // if(!user){
+        //     return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        // }
+        // const userDB = await User.findById(user.id)
+        //
+        // if(!userDB){
         //     return NextResponse.json({error: "Unauthorized."}, {status: 401})
         // }
         const allPromoCodes = await PromoCode.find({});

@@ -18,7 +18,7 @@ export default auth(async (req) => {
     const isLoggedIn = !!req.auth;
     const isAdmin = adminEmails.includes(req.auth?.user?.email);
 
-    console.log("АДМИН:", isAdmin)
+    //console.log("АДМИН:", isAdmin)
 
     const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
     const isPublicRoute = publicRoutes.includes(nextUrl.pathname);

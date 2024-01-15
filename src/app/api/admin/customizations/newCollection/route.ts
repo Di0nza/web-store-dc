@@ -4,6 +4,7 @@ import NewCollection from "@/models/newCollectionModel";
 import * as z from "zod";
 import {IProduct} from "@/types/Product";
 import Product from "@/models/productModel";
+import User from "@/models/userModel";
 
 
 const NewCollectionSchema = z.object({
@@ -24,6 +25,12 @@ export async function PATCH(
         const user = await currentUser();
 
         if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
@@ -71,6 +78,12 @@ export async function GET(){
         const user = await currentUser();
 
         if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 

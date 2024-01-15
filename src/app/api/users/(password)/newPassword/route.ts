@@ -6,6 +6,9 @@ import {NewPasswordSchema} from "@/types/authSchemas";
 import bcryptjs from "bcryptjs";
 import ResetPasswordTokenModel from "@/models/resetPasswordTokenModel";
 
+/**Вызывается со страницы, на которой уже пишут новый пароль, с токеном в адресной строке*/
+
+
 export async function POST(request:NextRequest) {
     try {
         const reqBody = await request.json()
@@ -20,6 +23,7 @@ export async function POST(request:NextRequest) {
             return NextResponse.json({error: "Некорректные поля"})
         }
 
+        // @ts-ignore
         const {password, token} = validateFields.data;
 
         const existingToken = await getResetPasswordTokenByToken(token);

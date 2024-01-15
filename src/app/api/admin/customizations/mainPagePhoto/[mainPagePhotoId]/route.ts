@@ -4,6 +4,7 @@ import {ITokenData} from "@/types/TokenData";
 import {getDataFromToken} from "@/helpers/getDataFromToken";
 import MainPagePhoto from "@/models/mainPagePhotoModel";
 import {currentUser, isAdmin} from "@/lib/auth";
+import User from "@/models/userModel";
 
 
 export async function PATCH(
@@ -15,6 +16,12 @@ export async function PATCH(
         const user = await currentUser();
 
         if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
@@ -52,6 +59,12 @@ export async function DELETE(
         const user = await currentUser();
 
         if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 

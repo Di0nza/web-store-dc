@@ -19,6 +19,9 @@ import userModel from "@/models/userModel";
 import verificationTokenModel from "@/models/verificationTokenModel";
 connect()
 
+/**Вызывается на странице, где вводится email, для восстановление пароля*/
+
+
 export async function POST(request:NextRequest) {
     try {
         const reqBody = await request.json()
