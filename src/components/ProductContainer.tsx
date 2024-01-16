@@ -1,5 +1,5 @@
 "use client";
-import React,{useState,useEffect,useRef} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import favorites from '@/img/favorite.png';
 import unFavorites from '@/img/unfavorite.png'
 import Image from "next/image";
@@ -27,7 +27,7 @@ function Images(props: { onClick: () => Window, src: any, alt: string, style: { 
     return null;
 }
 
-const ProductContainer = ({ product }) => {
+const ProductContainer = ({product}) => {
     const [currentImage, setCurrentImage] = useState(product.pictures[0]);
     const [selectedSize, setSelectedSize] = useState(null);
     const [cartItems, setCartItems] = useState([]);
@@ -88,7 +88,8 @@ const ProductContainer = ({ product }) => {
                 action: {
                     label: "Отмена",
                     onClick: () => {
-                        console.log("Убрать товар из корзины")},
+                        console.log("Убрать товар из корзины")
+                    },
                 },
             })
 
@@ -119,7 +120,8 @@ const ProductContainer = ({ product }) => {
     };
 
     enum OptionsType { ADD_TO_FAV = "ADD", DELETE_FROM_FAV = "DEL"}
-    const updateFavoritesAmountInDb = async (id:string, option:OptionsType) =>{
+
+    const updateFavoritesAmountInDb = async (id: string, option: OptionsType) => {
         try {
             const data = {
                 id: id,
@@ -129,6 +131,41 @@ const ProductContainer = ({ product }) => {
         } catch (error) {
             console.error('Error fetching data:', error);
         }
+    }
+
+    const productSizes = (product) => {
+        const productsInBasket = JSON.parse(localStorage.getItem('cart'));
+        const groupedCartItems = productsInBasket.reduce((acc, item) => {
+            if (item.title === product.title) {
+                const key = `${item.title}-${item.size}`;
+                if (!acc[key]) {
+                    acc[key] = {...item, totalPrice: parseFloat(item.price), count: 1};
+                } else {
+                    acc[key].totalPrice += parseFloat(item.price);
+                    acc[key].count += 1;
+                }
+            }
+            return acc;
+        }, {});
+
+        if(!groupedCartItems) return null;
+
+        console.log(groupedCartItems)
+
+        const resultArr = [];
+
+        product.sizes.forEach((item) => {
+            const size = item.size;
+            const amount = item.amount;
+            const countItem = Object.values(groupedCartItems).find((i)=> i.size === size);
+            const count = countItem ? countItem.count : 0;
+            const resultCount = parseInt(amount) - parseInt(count);
+            resultArr.push({size:size, amount:resultCount});
+        })
+
+        console.log(resultArr);
+
+        return resultArr;
     }
 
     const handleToggleFavorite = (productId: string) => {
@@ -267,9 +304,10 @@ const ProductContainer = ({ product }) => {
                                                                        onClick={copyLinkToClipboard} alt={'+'}/>
                                                             </div>
                                                         </div>
-                                                        <div  className='social-links-block'>
+                                                        <div className='social-links-block'>
                                                             {socialMediaLogos.map((platform, index) => (
-                                                                <div className='footer-social-links-block' onClick={() => window.open(platform.url, '_blank')}>
+                                                                <div className='footer-social-links-block'
+                                                                     onClick={() => window.open(platform.url, '_blank')}>
                                                                     <Image
                                                                         key={index}
                                                                         src={platform.logo}
@@ -298,14 +336,14 @@ const ProductContainer = ({ product }) => {
                                 <h3>{product.description}</h3>
                                 <div className='product-sizes-cont'>
                                     <div className='product-sizes-block'>
-                                        {product.sizes.map((size, index) => (
+                                        {productSizes(product).map((size, index) => (
                                             <div
                                                 key={index}
                                                 className={`product-size ${selectedSize === size.size ? 'selected-size' : ''}`}
-                                                onClick={() => parseInt(size.amount) !== 0 && handleSizeSelection(size.size)}
+                                                onClick={() => parseInt(size.amount) <= 0 ? null : handleSizeSelection(size.size)}
                                                 style={{
-                                                    opacity: parseInt(size.amount) === 0 ? 0.2 : 1,
-                                                    cursor: parseInt(size.amount) === 0 ? 'not-allowed' : 'pointer'
+                                                    opacity: parseInt(size.amount) <= 0 ? 0.2 : 1,
+                                                    cursor: parseInt(size.amount) <= 0 ? 'not-allowed' : 'pointer'
                                                 }}
                                             >
                                                 {size.size}

@@ -62,8 +62,8 @@ export const ChangePasswordModal = () => {
 
 
     return (
-        <Dialog open={isModalOpen} onOpenChange={handleClose}>
-            <DialogContent className="bg-white text-black p-0 overflow-hidden"
+        <Dialog  open={isModalOpen} onOpenChange={handleClose}>
+            <DialogContent className="max-h-screen bg-white text-black p-0 overflow-hidden"
                            style={{fontFamily: "Century Gothic", backgroundColor: '#fafafa', maxWidth: '700px'}}>
                 <DialogHeader className="pt-6 px4 ml-6">
                     <DialogTitle className="text-2xl text-left font-bold">
@@ -85,7 +85,7 @@ export const ChangePasswordModal = () => {
                                 name="password"
                                 render={({field}) => (
                                     <FormItem>
-                                        <FormLabel>Пароль</FormLabel>
+                                        <FormLabel>Старый пароль</FormLabel>
                                         <FormControl>
                                             <Input
                                                 {...field}
