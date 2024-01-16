@@ -88,6 +88,17 @@
     padding: 10px;
     margin-bottom: 10px;
 }
+
+.mini-cart-item-disabled{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
 .mini-cart-item:last-child{
     margin-bottom: 0;
 }
@@ -99,6 +110,15 @@
     overflow: hidden;
     backdrop-filter: blur(3px);
 }
+.mini-cart-item-img-disabled{
+    width: 90px;
+    height: 80px;
+    border-radius: 5px;
+    object-fit: cover;
+    overflow: hidden;
+    backdrop-filter: blur(3px);
+    opacity: 0.5;
+}
 .mini-cart-item-info{
     display: flex;
     flex-direction: column;
@@ -106,6 +126,15 @@
     justify-content: space-between;
     width: calc(100% + 20px);
     margin: 0 0 0 10px;
+}
+.mini-cart-item-info-disabled{
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    width: calc(100% + 20px);
+    margin: 0 0 0 10px;
+
 }
 .mini-cart-item-info-head{
     width: 100%;
@@ -118,6 +147,11 @@
     font-weight: 600;
     margin-bottom: 3px;
 }
+.mini-cart-item-title-disabled{
+    font-weight: 600;
+    margin-bottom: 3px;
+    opacity: 0.5;
+}
 .delete-button{
     width: 14px;
     height: 16px;
@@ -129,6 +163,13 @@
     justify-content: space-between;
     align-items: flex-end;
 }
+.mini-cart-footer-disabled{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+}
 .mini-count-pad{
     display: flex;
     flex-direction: row;
@@ -137,11 +178,26 @@
     border: 1px solid #111111;
     padding: 3px 0;
 }
+.mini-count-pad-disabled{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid #111111;
+    padding: 3px 0;
+    opacity: 0.5;
+}
 .mini-count-pad-icon{
     width: 10px;
     height: 10px;
     margin: 0 10px;
     cursor: pointer;
+}
+.mini-count-pad-icon-disabled{
+    width: 10px;
+    height: 10px;
+    margin: 0 10px;
+    opacity: 0.5;
 }
 .count-pad-btn{
     width: 20px;
