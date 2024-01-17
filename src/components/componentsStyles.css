@@ -599,6 +599,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    margin-top: 20px;
     margin-bottom: 50px;
 }
 .admin-product-item{
@@ -626,7 +627,7 @@
 
 @media screen and (max-width: 1000px) {
     .products-list-block{
-        justify-content: space-between;
+        justify-content: center;
     }
     .admin-product-item{
         margin-right: 35px;
@@ -644,6 +645,8 @@
 @media screen and (max-width: 685px) {
     .products-list-block{
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     .admin-product-item{
         margin-right: 0;
@@ -700,6 +703,19 @@
     font-family: "Century Gothic", serif;
     background-color: #fafafa;
     max-width: 800px;
+}
+.changePassContainer{
+    font-family: "Century Gothic", serif;
+    background-color: #fafafa;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 1px 1px 15px rgba(17, 17, 17, 0.07);
+}
+.changePassInput{
+    height: 44px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: none;
 }
 .addProdBlockBody{
     max-height: 63vh;
@@ -1177,6 +1193,13 @@
     }
 }
 @media screen and (max-width: 600px){
+    .changePassContainer{
+        font-family: "Century Gothic", serif;
+        background-color: #fafafa;
+        border-radius: 10px;
+        width: calc(100% - 30px);
+        max-width: calc(100% - 30px);
+    }
     .header-block{
         width: 100%;
         max-width: 100%;

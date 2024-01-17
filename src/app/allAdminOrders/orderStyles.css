@@ -338,14 +338,6 @@
 .store-container h3{
     margin: 0;
 }
-.store-head-block{
-    width: 100%;
-    margin: 25px 0 0px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-}
 .mini-admin-item-info-head{
     font-size: 16px;
     font-weight: 600;

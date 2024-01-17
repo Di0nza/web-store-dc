@@ -180,14 +180,6 @@
     height: 26px;
     margin-left: 10px;
 }
-.store-head-block{
-    width: 100%;
-    margin: 25px 0 0px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-}
 .store-container-title{
     font-weight: 600;
 }

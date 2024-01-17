@@ -531,8 +531,9 @@
 
 .store-head-block{
     width: 100%;
-    margin: 25px 0 0px;
+    margin: 25px 0 0;
     display: flex;
+    height: 70px;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;

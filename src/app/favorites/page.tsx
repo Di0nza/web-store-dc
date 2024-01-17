@@ -27,7 +27,7 @@ export default function Store() {
         <div className='store-container'>
             <div className='store-head-block'>
                 <div>
-                    <h3>Избранные товары</h3>
+                    <h2>Избранные товары</h2>
                     <p className='store-quantity'>Товаров в избранных {filteredProducts.length}</p>
                 </div>
             </div>
