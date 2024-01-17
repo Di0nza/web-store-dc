@@ -9,6 +9,7 @@ import {DeleteProductModal} from "@/components/modals/DeleteProductModal";
 import {EditMainPageVideoModal} from "@/components/modals/EditMainPageVideoModal";
 import {DeleteMainPageVideoModal} from "@/components/modals/DeleteMainPageVideoModal";
 import {DeleteMainPagePhotoModal} from "@/components/modals/DeleteMainPagePhotoModal";
+import {ChangePasswordModal} from "@/components/modals/ChangePasswordModal";
 
 export const ModalProvider = () => {
 
@@ -30,6 +31,7 @@ export const ModalProvider = () => {
             <EditMainPageVideoModal/>
             <DeleteMainPageVideoModal/>
             <DeleteMainPagePhotoModal/>
+            <ChangePasswordModal/>
         </>
     )
 }

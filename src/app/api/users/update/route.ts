@@ -16,6 +16,12 @@ export async function PUT(request: NextRequest) {
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
         const reqBody = await request.json();
         const { name, email } = reqBody;
 
@@ -25,9 +31,11 @@ export async function PUT(request: NextRequest) {
             return NextResponse.json({error: "Forbidden. You don't have this rights."}, {status: 403})
         }
 
+
+
         const updatedUser = await User.findOneAndUpdate(
             { _id: user.id },
-            { name, email },
+            { name },
             { new: true, select: '-password' }
         );
 

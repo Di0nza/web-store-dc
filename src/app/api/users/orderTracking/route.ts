@@ -2,6 +2,7 @@ import {connect} from "@/db/db";
 import Order from "@/models/orderModel";
 import {NextRequest, NextResponse} from "next/server";
 import {currentUser} from "@/lib/auth";
+import User from "@/models/userModel";
 connect()
 
 export async function PUT(request: NextRequest) {
@@ -10,6 +11,12 @@ export async function PUT(request: NextRequest) {
         const user = await currentUser();
 
         if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 

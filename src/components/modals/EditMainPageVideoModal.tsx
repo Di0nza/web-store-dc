@@ -12,6 +12,8 @@ import {ActionToolTip} from "@/components/ActionToolTip";
 import deleteIco from '@/img/delete.png';
 import '../componentsStyles.css'
 import Image from "next/image";
+import {currentUser} from "@/lib/auth";
+import {useCurrentUser} from "@/hooks/useCurrentUser";
 
 export const EditMainPageVideoModal = () => {
 
@@ -19,10 +21,13 @@ export const EditMainPageVideoModal = () => {
     const [videos, setVideos] = useState([])
 
     const isModalOpen = isOpen && type === "editMainPageVideo";
+    const user = useCurrentUser();
 
 
     useEffect(() => {
-        getAllVideos().then((data) => setVideos(data?.data?.videos))
+        if (user.isAdmin) {
+            getAllVideos().then((data) => setVideos(data?.data?.videos))
+        }
     }, [isOpen])
 
 

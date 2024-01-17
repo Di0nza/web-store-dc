@@ -6,6 +6,7 @@ import {ITokenData} from "@/types/TokenData";
 import {getDataFromToken} from "@/helpers/getDataFromToken";
 import {log} from "util";
 import {currentUser, isAdmin} from "@/lib/auth";
+import User from "@/models/userModel";
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
@@ -28,6 +29,12 @@ export async function POST(request: NextRequest) {
         const user = await currentUser();
 
         if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
@@ -127,6 +134,12 @@ export async function DELETE(request: NextRequest) {
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
         if(user?.isAdmin === false){
             return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
         }
@@ -155,6 +168,12 @@ export async function GET(){
         const user = await currentUser();
 
         if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 

@@ -3,6 +3,7 @@ import Order from "@/models/orderModel";
 import Product from "@/models/productModel"
 import {NextRequest, NextResponse} from "next/server";
 import {currentUser} from "@/lib/auth";
+import User from "@/models/userModel";
 connect()
 
 export async function POST(request: NextRequest) {
@@ -11,6 +12,12 @@ export async function POST(request: NextRequest) {
         const user = await currentUser();
 
         if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
@@ -105,6 +112,12 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
         const {id} = request.query;
         const order = await Order.findById(id);
 
@@ -132,6 +145,12 @@ export async function PUT(request: NextRequest) {
         const user = await currentUser();
 
         if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
@@ -181,6 +200,12 @@ export async function DELETE(request: NextRequest) {
         const user = await currentUser();
 
         if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 

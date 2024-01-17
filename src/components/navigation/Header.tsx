@@ -18,7 +18,7 @@ interface UserData {
 }
 
 const Header = () => {
-    const [userData, setUserData] = useState<UserData | null>(null);
+    const [userData, setUserData] = useState(null);
     const user = useCurrentUser();
     // @ts-ignore
     const {sessionTime, setSessionTime} = useOrderContext();
@@ -45,7 +45,7 @@ const Header = () => {
     };
 
     useEffect(() => {
-        getUserDetails();
+        //getUserDetails();
         setUserData(user);
     }, [sessionTime]);
 

@@ -15,6 +15,7 @@ import profileIco from '../../img/profile.png'
 import axios from "axios";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
 import {useCurrentUser} from "@/hooks/useCurrentUser";
+import {toast} from "sonner";
 
 type NavLink = {
     label: string;
@@ -44,6 +45,10 @@ const Navigation = ({navLinks}: Props) => {
     const {sessionTime, setSessionTime} = useOrderContext();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [cartItems, setCartItems] = useState([]);
+    // const [cartItems, setCartItems] = useState(() => {
+    //     const storedData = localStorage.getItem('cart');
+    //     return storedData ? JSON.parse(storedData) : null;});
+
     const [userData, setUserData] = useState(null);
     const [isAdmin, setIsAdmin] = useState(false);
     const user = useCurrentUser();
@@ -59,7 +64,7 @@ const Navigation = ({navLinks}: Props) => {
     };
 
     useEffect(() => {
-        getUserDetails();
+        //getUserDetails();
         setUserData(user);
         setIsAdmin(user?.isAdmin);
 
@@ -73,11 +78,22 @@ const Navigation = ({navLinks}: Props) => {
         setIsModalOpen(false);
     };
 
-    const addToCartLocalStorage = (newItem) => {
-        const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
-        const updatedCartItems = [...storedCartItems, newItem];
-        localStorage.setItem('cart', JSON.stringify(updatedCartItems));
-        setCartItems(updatedCartItems);
+    const addToCartLocalStorage = async (newItem) => {
+
+        console.log("NEW ITEM", newItem);
+        const productsOfNewItemType = Object.values(groupedCartItems).find((item) => item.title === newItem.title && item.size === newItem.size);
+        console.log("COUNT IN BASKET", productsOfNewItemType.count);
+
+        const response = await axios.post(`/api/users/products/checkSize/${newItem.id}`, newItem).then((data) => {
+            if (parseInt(data.data.amount) - productsOfNewItemType.count <= 0) {
+                toast.warning("Таких товаров больше нет в наличии")
+            } else {
+                const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+                const updatedCartItems = [...storedCartItems, newItem];
+                localStorage.setItem('cart', JSON.stringify(updatedCartItems));
+                setCartItems(updatedCartItems);
+            }
+        });
     };
 
     const removeAllFromCartLocalStorage = (removedItem) => {
@@ -114,6 +130,18 @@ const Navigation = ({navLinks}: Props) => {
         const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
         setCartItems(storedCartItems);
     }, []);
+
+    // useEffect(() => {
+    //     const handleStorageChange = () => {
+    //         const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    //         setCartItems(storedCartItems);
+    //         console.log("NAVBAR", storedCartItems)
+    //     };
+    //     window.addEventListener('storage', handleStorageChange);
+    //     return () => {
+    //         window.removeEventListener('storage', handleStorageChange);
+    //     };
+    // }, []);
 
     const groupedCartItems: Record<string, GroupedCartItem> = cartItems.reduce((acc, item) => {
         const key = `${item.title}-${item.size}`;
@@ -161,7 +189,7 @@ const Navigation = ({navLinks}: Props) => {
                                     </div>
                                 )}
                             </div>
-                            <Link href={'profile'} className={'profileIcoBlock'} style={{marginLeft:'10px'}}>
+                            <Link href={'profile'} className={'profileIcoBlock'} style={{marginLeft: '10px'}}>
                                 <Image className={'profileIco'} src={profileIco} alt={'user'}></Image>
                             </Link>
                         </div>
@@ -236,7 +264,7 @@ const Navigation = ({navLinks}: Props) => {
                             </div>
                             <div className={'mini-cart-items-block'}>
                                 {Object.values(groupedCartItems).map((item, index) => (
-                                    <div className={'mini-cart-item'} key={index}>
+                                    <div className={'mini-cart-item'} key={item._id}>
                                         <img
                                             className={'mini-cart-item-img'}
                                             key={index}
