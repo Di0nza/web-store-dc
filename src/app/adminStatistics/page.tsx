@@ -65,7 +65,7 @@ export default function AdminStatistics() {
     }, [])
 
     return (
-        <div className='adminOrdersBlock'>
+        <div className='adminStatisticContainer'>
             <h2>{"Статистика"}</h2>
             <p className='changeBlockText'>{`На данный момент зарегистрировано заказов: ${userOrders?.length}`}</p>
             {userOrders && (
@@ -77,7 +77,7 @@ export default function AdminStatistics() {
                 {products.map((product) => (
                     <div key={product._id} className='productStatistics'>
                         <div className='productStatisticsInfo'>
-                            <img className='product-stat-img' src={product.pictures[0]} alt={product.title}></img>
+                            <img className='product-statistic-img' src={product.pictures[0]} alt={product.title}></img>
                             <div className={'productStatisticsInfoBlock'}>
                                 <div>
                                     <p className='product-title'>{product.title}</p>

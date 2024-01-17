@@ -85,14 +85,7 @@
 .store-container h3{
     margin: 0;
 }
-.store-head-block{
-    width: 100%;
-    margin: 25px 0 0px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-}
+
 .store-container-title{
     font-size: 25px;
     font-weight: 600;
@@ -319,4 +312,15 @@
 .errorMessage{
     font-weight: 500;
     color: #d50404;
+}
+@media screen and (max-width: 600px){
+    .profileBlock{
+        min-height: 100vh;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 25px 15px 0;
+        margin: 0 auto;
+    }
 }

@@ -276,7 +276,7 @@ export const CreateProductModal = () => {
 
     return (
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
-            <DialogContent className="text-black p-0 overflow-hidden" style={{fontFamily: "Century Gothic", backgroundColor:'#fafafa', maxWidth:'800px'}}>
+            <DialogContent className="text-black p-0 overflow-hidden addProdBlock" >
                 <DialogHeader className="pt-8 px6 ml-6">
                     <DialogTitle className="text-2xl text-left font-bold">
                         Создайте товар
@@ -288,7 +288,7 @@ export const CreateProductModal = () => {
                 </DialogHeader>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        <div className="flex flex-row space-y-6 px-6" style={{maxHeight: '63vh', overflowY: 'auto'}}>
+                        <div className="flex flex-row space-y-6 px-6 addProdBlockBody">
                             <div className="flex-1 space-y-6">
                                 <FormField
                                     control={form.control}
@@ -493,7 +493,7 @@ export const CreateProductModal = () => {
                                 />
 
 
-                                <div className="flex flex-row ">
+                                <div className="flex flex-row addProdSizesBlock">
                                     {/* Добавьте этот блок для инпутов размеров */}
 
                                     {validSizes.map((size, index) => (
@@ -503,7 +503,7 @@ export const CreateProductModal = () => {
                                             name={`sizes.${index}.amount`}
                                             render={({field}) => (
                                                 <FormItem className="flex items-center mt-3">
-                                                    <div className={`flex flex-col items-start justify-start ${index === 0 ? "ml-0" : "ml-2"}`}>
+                                                    <div className={`flex flex-col items-start justify-start ${index === 0 ? "ml-0" : "ml-2"} addProdSizesBlockItem`}>
                                                         <FormLabel className="mb-1 mt-0 text-xs font-bold">{size}</FormLabel>
                                                         <FormControl>
                                                             <Input

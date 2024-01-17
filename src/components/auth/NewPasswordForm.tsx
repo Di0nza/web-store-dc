@@ -67,7 +67,7 @@ export const NewPasswordForm = () => {
     };
 
     return (
-        <div className="max-h-screen h-[150%] w-full max-w-[600px] flex flex-col mx-auto pt-16 pb-24">
+        <div className="max-h-screen h-[150%] w-full max-w-[600px] flex flex-col mx-auto pt-16 pb-24 m pr-3 pl-3">
             <div className="flex justify-center">
                 <Card className="w-[400px]">
                     <CardHeader style={{fontSize:'22px', fontWeight:'600', padding:'15px'}}>

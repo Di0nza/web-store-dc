@@ -202,10 +202,10 @@ const Page = () => {
                                                 }}>
                                                 Добавить новый баннер
                                             </CldUploadButton>
-                                            <Button className={'home-video-btn'}
+                                            <CldUploadButton className={'home-video-btn'}
                                                     onClick={() => onOpen("editMainPageVideo", {reload: "reload"})}>
                                                 Посмотреть существующие баннеры
-                                            </Button>
+                                            </CldUploadButton>
                                         </div>
                                     </div>
                                 </AccordionContent>
@@ -361,22 +361,22 @@ const Page = () => {
                         <div className="fake-home-top-products-title-text"></div>
                     </div>
                     <div className="fake-home-top-products-body">
-                        <div>
+                        <div className="fake-home-top-products-body-item">
                             <div className="top-products-body-image"></div>
                             <div className="top-products-body-title"></div>
                             <div className="top-products-body-text"></div>
                         </div>
-                        <div>
+                        <div className="fake-home-top-products-body-item">
                             <div className="top-products-body-image"></div>
                             <div className="top-products-body-title"></div>
                             <div className="top-products-body-text"></div>
                         </div>
-                        <div>
+                        <div className="fake-home-top-products-body-item">
                             <div className="top-products-body-image"></div>
                             <div className="top-products-body-title"></div>
                             <div className="top-products-body-text"></div>
                         </div>
-                        <div>
+                        <div className="fake-home-top-products-body-item">
                             <div className="top-products-body-image"></div>
                             <div className="top-products-body-title"></div>
                             <div className="top-products-body-text"></div>
@@ -406,7 +406,7 @@ const Page = () => {
                                     фотографий</AccordionTrigger>
                                 <AccordionContent>
 
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 slider-images-block">
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 slider-images-block slider-images-item-block">
                                         {images.map((image, index) => (
                                             <div key={image._id}
                                                  className={`relative p-1 rounded-xl ${image.active ? 'border-2 border-solid border-green-500' : ''} cursor-pointer`}>
@@ -446,17 +446,17 @@ const Page = () => {
                 <div className="fake-home-footer">
                     <div className="fake-home-footer-info">
                         <div className="fake-home-footer-info-nav">
-                            <div>
+                            <div className="fake-home-footer-info-nav-block">
                                 <div className="fake-home-footer-nav"></div>
                                 <div className="fake-home-footer-nav"></div>
                                 <div className="fake-home-footer-nav"></div>
                             </div>
-                            <div>
+                            <div className="fake-home-footer-info-nav-block">
                                 <div className="fake-home-footer-nav"></div>
                                 <div className="fake-home-footer-nav"></div>
                                 <div className="fake-home-footer-nav"></div>
                             </div>
-                            <div>
+                            <div className="fake-home-footer-info-nav-block">
                                 <div className="fake-home-footer-nav"></div>
                                 <div className="fake-home-footer-nav"></div>
                             </div>

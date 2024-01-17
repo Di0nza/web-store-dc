@@ -228,7 +228,7 @@ const OrdersChart = ({ userOrders }) => {
             </div>
             <div className={'chartBtnBlock'}>
                 <div className={'chartBtnCategory'}>
-                <div className={selectedStat === 'orders' ? 'selectedChartCategoryBtn' : 'chartCategoryBtn'}
+                    <div className={selectedStat === 'orders' ? 'selectedChartCategoryBtn' : 'chartCategoryBtn'}
                          onClick={() => changeStat('orders')}>Заказы
                     </div>
                     <div className={selectedStat === 'cost' ? 'selectedChartCategoryBtn' : 'chartCategoryBtn'}

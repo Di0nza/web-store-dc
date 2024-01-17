@@ -12,7 +12,7 @@
     flex-direction: column;
     align-content: space-between;
     justify-content: space-between;
-    width: calc(100% + 20px);
+    width: calc(100%);
     border: 1px solid #dedede;
     border-radius: 10px;
     padding: 10px;
@@ -185,29 +185,6 @@
     width: 26px;
     height: 26px;
     margin-left: 10px;
-}
-.store-container{
-    min-height: 100vh;
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding-top: 0px;
-    height: calc(100% - 30px);
-    flex-direction: column;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-.store-container h3{
-    margin: 0;
-}
-.store-head-block{
-    width: 100%;
-    margin: 35px 0 0px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
 }
 .store-container-title{
     font-size: 25px;
@@ -432,4 +409,26 @@
 .errorMessage{
     font-weight: 500;
     color: #d50404;
+}
+@media screen and (max-width: 600px){
+    .profileBlock{
+        min-height: 100vh;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 25px 15px 0;
+        margin: 0 auto;
+    }
+    .mini-order-item-info{
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        justify-content: space-between;
+        width: calc(100% );
+        border: 1px solid #dedede;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
 }
