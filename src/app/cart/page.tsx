@@ -313,6 +313,15 @@ export default function Cart() {
                                             <div>
                                                 <h5 className={'mini-cart-item-title-disabled'}>{item.title}</h5>
                                                 <p key={index} style={{opacity: 0.5}}>{item.size}</p>
+                                                <div
+                                                    className=" mb-2 bg-destructive/15 p-2 rounded-md flex items-center gap-x-2 text-sm text-destructive">
+                                                    <ExclamationTriangleIcon className="h-4 w-4"/>
+                                                    {availableCounts[item.id] === 0 ?
+                                                        <p>Товара нет в наличии</p>
+                                                        :
+                                                        <p>Осталось товаров в наличии: {availableCounts[item.id]}</p>
+                                                    }
+                                                </div>
                                             </div>
                                             <div className="delete-button"
                                                  onClick={() => removeAllFromCartLocalStorage(item)}>
@@ -328,22 +337,13 @@ export default function Cart() {
                                                                availableCounts[item.id] === 0 ? null : handleDecrease(item)
                                                            }}
                                                     ></Image>
-                                                    <p style={{opacity: 0.5}}>{item.count}</p>
+                                                    <p>{item.count}</p>
                                                     <Image src={plus} alt={'+'}
                                                            className='mini-count-pad-icon-disabled'></Image>
                                                 </div>
                                                 {/*<div className="text-sm ml-3">*/}
                                                 {/*    Осталось товаров в наличии: {availableCounts[item.id]}*/}
                                                 {/*</div>*/}
-                                                <div
-                                                    className=" ml-3 bg-destructive/15 p-2 rounded-md flex items-center gap-x-2 text-sm text-destructive">
-                                                    <ExclamationTriangleIcon className="h-4 w-4"/>
-                                                    {availableCounts[item.id] === 0 ?
-                                                        <p>Товара нет в наличии</p>
-                                                        :
-                                                        <p>Осталось товаров в наличии: {availableCounts[item.id]}</p>
-                                                    }
-                                                </div>
                                             </div>
                                             <h5 style={{opacity: 0.5}}>
                                                 ${item.price * item.count}.00

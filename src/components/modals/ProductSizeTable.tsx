@@ -34,7 +34,7 @@ const ProductSizeTable = ({ onClose }) => {
                 <div className="size-chart">
                     <div className="size-column">
                         <div className="size-item">
-                            <p>Размер</p>
+                            <p className="size-item-first">Размер</p>
                             <p>XS</p>
                             <p>S</p>
                             <p>M</p>

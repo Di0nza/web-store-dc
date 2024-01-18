@@ -134,12 +134,26 @@ const ProductContainer = ({product}) => {
     }
 
     const productSizes = (product) => {
+        if (typeof localStorage === 'undefined') {
+            console.error('localStorage is not available');
+            return [];
+        }
+
         const productsInBasket = JSON.parse(localStorage.getItem('cart'));
+
+        if (!productsInBasket) {
+            console.error('Cart is not available in localStorage');
+            return product.sizes.map((item) => ({
+                size: item.size,
+                amount: item.amount,
+            }));
+        }
+
         const groupedCartItems = productsInBasket.reduce((acc, item) => {
             if (item.title === product.title) {
                 const key = `${item.title}-${item.size}`;
                 if (!acc[key]) {
-                    acc[key] = {...item, totalPrice: parseFloat(item.price), count: 1};
+                    acc[key] = { ...item, totalPrice: parseFloat(item.price), count: 1 };
                 } else {
                     acc[key].totalPrice += parseFloat(item.price);
                     acc[key].count += 1;
@@ -148,25 +162,22 @@ const ProductContainer = ({product}) => {
             return acc;
         }, {});
 
-        if(!groupedCartItems) return null;
+        console.log(groupedCartItems);
 
-        console.log(groupedCartItems)
-
-        const resultArr = [];
-
-        product.sizes.forEach((item) => {
+        const resultArr = product.sizes.map((item) => {
             const size = item.size;
             const amount = item.amount;
-            const countItem = Object.values(groupedCartItems).find((i)=> i.size === size);
+            const countItem = groupedCartItems[`${product.title}-${size}`];
             const count = countItem ? countItem.count : 0;
             const resultCount = parseInt(amount) - parseInt(count);
-            resultArr.push({size:size, amount:resultCount});
-        })
+            return { size: size, amount: resultCount };
+        });
 
         console.log(resultArr);
 
         return resultArr;
-    }
+    };
+
 
     const handleToggleFavorite = (productId: string) => {
         let favoritesArray: string[] = [];
@@ -253,13 +264,69 @@ const ProductContainer = ({product}) => {
 
     return (
         <OrderProvider>
-            <div style={{marginBottom: '50px', minHeight: '100vh'}}>
-                <div className='product-container'>
+            <div className='main-product-container'>
+                <div className='product-info-block-head-mobile'>
+                    <div>
+                        <h3>{product.title}</h3>
+                        <p className='product-info-price'>${product.price}.00</p>
+                    </div>
+                    <div className={'cart-items-btns-container'}>
+                        <div className={'cart-items-btns-block'}>
+                            <div className='error-button' onClick={() => setSendUnusualDesign(true)}>
+                                <Image className='error-button-image' src={unusualDesign} alt='!'/>
+                            </div>
+                            <div className='favorite-button-block'
+                                 onClick={() => handleToggleFavorite(product._id)}>
+                                <Image className='favorite-button-image'
+                                       src={!isFavorite ? favorites : unFavorites} alt='Favorite'/>
+                            </div>
+                            <div className='shear-button' onClick={copyLinkAndShowMessage}>
+                                <Image className='shear-button-image' src={shearLink} alt='+'/>
+                            </div>
+                        </div>
+                        {showCopiedMessage && (
+                            <div className="shearLinkContainer" ref={wrapperRef}>
+                                <div>
+                                    <div className="copiedMessage">
+                                        <div>
+                                            <div className={'inputCurrentUrl'} style={{}}>
+                                                <input type="text" value={inputCurrentUrl}/>
+                                                <div className={'inputCurrentBtn'}>
+                                                    <Image className={'inputCurrentBtnImg'} src={shearLogo}
+                                                           onClick={copyLinkToClipboard} alt={'+'}/>
+                                                </div>
+                                            </div>
+                                            <div className='social-links-block'>
+                                                {socialMediaLogos.map((platform, index) => (
+                                                    <div className='footer-social-links-block'
+                                                         onClick={() => window.open(platform.url, '_blank')}>
+                                                        <Image
+                                                            key={index}
+                                                            src={platform.logo}
+                                                            alt={platform.name}
+                                                        />
+                                                    </div>
+
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        <UnusualDesignMessage
+                            show={sendUnusualDesign}
+                            onHide={() => setSendUnusualDesign(false)}
+                            item={product}
+                        />
+                    </div>
+                </div>
+                <div className='product-main-info-container'>
                     <div className='product-container-slider'>
                         <img onClick={togglePhotosSlider} className='product-container-slider-preview'
                              src={currentImage}
                              alt={product.title}/>
-                        <div className='product-thumbnails'>
+                        <div className='product-thumbnails-block'>
                             {product.pictures.map((image, index) => (
                                 <img
                                     key={index}
@@ -271,9 +338,9 @@ const ProductContainer = ({product}) => {
                             ))}
                         </div>
                     </div>
-                    <div className='product-info-block'>
+                    <div className='product-info-container'>
                         <div>
-                            <div className='product-info-block-head'>
+                            <div className='product-info-block-header'>
                                 <div>
                                     <h3>{product.title}</h3>
                                     <p className='product-info-price'>${product.price}.00</p>
@@ -328,20 +395,18 @@ const ProductContainer = ({product}) => {
                                         item={product}
                                     />
                                 </div>
-
                             </div>
-
-
-                            <div className='product-additionalInformation-block'>
+                            <div className='product-additional-info-block'>
                                 <h3>{product.description}</h3>
                                 <div className='product-sizes-cont'>
-                                    <div className='product-sizes-block'>
+                                    <div className='product-sizes-container'>
                                         {productSizes(product).map((size, index) => (
                                             <div
                                                 key={index}
                                                 className={`product-size ${selectedSize === size.size ? 'selected-size' : ''}`}
                                                 onClick={() => parseInt(size.amount) <= 0 ? null : handleSizeSelection(size.size)}
                                                 style={{
+                                                    marginTop:'5px',
                                                     opacity: parseInt(size.amount) <= 0 ? 0.2 : 1,
                                                     cursor: parseInt(size.amount) <= 0 ? 'not-allowed' : 'pointer'
                                                 }}
