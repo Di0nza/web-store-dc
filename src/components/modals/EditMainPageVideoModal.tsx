@@ -25,7 +25,7 @@ export const EditMainPageVideoModal = () => {
 
 
     useEffect(() => {
-        if (user.isAdmin) {
+        if (user?.isAdmin) {
             getAllVideos().then((data) => setVideos(data?.data?.videos))
         }
     }, [isOpen])

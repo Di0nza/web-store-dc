@@ -134,38 +134,43 @@ const ProductContainer = ({product}) => {
     }
 
     const productSizes = (product) => {
+
         const productsInBasket = JSON.parse(localStorage.getItem('cart'));
-        const groupedCartItems = productsInBasket.reduce((acc, item) => {
-            if (item.title === product.title) {
-                const key = `${item.title}-${item.size}`;
-                if (!acc[key]) {
-                    acc[key] = {...item, totalPrice: parseFloat(item.price), count: 1};
-                } else {
-                    acc[key].totalPrice += parseFloat(item.price);
-                    acc[key].count += 1;
+        if(productsInBasket){
+            const groupedCartItems = productsInBasket?.reduce((acc, item) => {
+                if (item.title === product.title) {
+                    const key = `${item.title}-${item.size}`;
+                    if (!acc[key]) {
+                        acc[key] = {...item, totalPrice: parseFloat(item.price), count: 1};
+                    } else {
+                        acc[key].totalPrice += parseFloat(item.price);
+                        acc[key].count += 1;
+                    }
                 }
-            }
-            return acc;
-        }, {});
+                return acc;
+            }, {});
 
-        if(!groupedCartItems) return null;
+            if(!groupedCartItems) return null;
 
-        console.log(groupedCartItems)
+            console.log(groupedCartItems)
 
-        const resultArr = [];
+            const resultArr = [];
 
-        product.sizes.forEach((item) => {
-            const size = item.size;
-            const amount = item.amount;
-            const countItem = Object.values(groupedCartItems).find((i)=> i.size === size);
-            const count = countItem ? countItem.count : 0;
-            const resultCount = parseInt(amount) - parseInt(count);
-            resultArr.push({size:size, amount:resultCount});
-        })
+            product.sizes.forEach((item) => {
+                const size = item.size;
+                const amount = item.amount;
+                const countItem = Object.values(groupedCartItems).find((i)=> i.size === size);
+                const count = countItem ? countItem.count : 0;
+                const resultCount = parseInt(amount) - parseInt(count);
+                resultArr.push({size:size, amount:resultCount});
+            })
 
-        console.log(resultArr);
+            console.log(resultArr);
 
-        return resultArr;
+            return resultArr;
+        }else {
+            return product.sizes;
+        }
     }
 
     const handleToggleFavorite = (productId: string) => {
@@ -336,7 +341,7 @@ const ProductContainer = ({product}) => {
                                 <h3>{product.description}</h3>
                                 <div className='product-sizes-cont'>
                                     <div className='product-sizes-block'>
-                                        {productSizes(product).map((size, index) => (
+                                        {productSizes(product)?.map((size, index) => (
                                             <div
                                                 key={index}
                                                 className={`product-size ${selectedSize === size.size ? 'selected-size' : ''}`}
