@@ -180,29 +180,6 @@
     height: 26px;
     margin-left: 10px;
 }
-.store-container{
-    min-height: 100vh;
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding-top: 0px;
-    height: calc(100% - 30px);
-    flex-direction: column;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-.store-container h3{
-    margin: 0;
-}
-.store-head-block{
-    width: 100%;
-    margin: 25px 0 0px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-}
 .store-container-title{
     font-weight: 600;
 }
@@ -751,14 +728,6 @@
 }
 .store-container h3{
     margin: 0;
-}
-.store-head-block{
-    width: 100%;
-    margin: 25px 0 0px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
 }
 .mini-admin-item-info-head{
     font-size: 16px;

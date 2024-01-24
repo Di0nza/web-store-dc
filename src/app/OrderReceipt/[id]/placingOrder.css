@@ -442,3 +442,44 @@
     font-weight: 500;
     color: #d50404;
 }
+@media screen and (max-width: 1000px) {
+    .bigPlacingOrderBlock{
+        min-height: 100vh;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        padding: 25px 15px 0;
+    }
+}
+@media screen and (max-width: 600px) {
+    .placingOrderBlockRow{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .firstInfoContainer:first-child{
+        width: calc(100%);
+        display: flex;
+        flex-direction: column-reverse;
+        font-size: 14px;
+        flex-wrap: wrap;
+        margin: 5px 0 5px 0;
+    }
+    .placingOrderBlockButton{
+        margin-bottom: 15px;
+    }
+    .placingOrderPdfButton{
+        margin-bottom: 15px;
+    }
+    .firstInfoContainer:last-child{
+        width: calc(100%);
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+        flex-wrap: wrap;
+        margin: 10px 0 5px 0;
+    }
+}

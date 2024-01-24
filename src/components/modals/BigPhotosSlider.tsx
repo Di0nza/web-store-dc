@@ -88,6 +88,9 @@ const BigPhotosSlider = ({ product, onClose }) => {
     return (
         <div className='size-table-modal'>
             <div className='big-photo-modal-content'>
+                <div className='big-photo-mobile-close-block'>
+                    <span className='big-photo-mobile-close' onClick={onClose}>&times;</span>
+                </div>
                 <div className='big-photos-content-info'>
                     <div className='big-photos-container-slider'>
                         <div className='img-magnifier-container' onClick={handleContainerClick}>
@@ -105,7 +108,7 @@ const BigPhotosSlider = ({ product, onClose }) => {
                         </div>
                         <div className={'big-photo-slider-info'}>
                             <div className='big-photo-thumbnails'>
-                            {product.pictures.map((image, index) => (
+                                {product.pictures.map((image, index) => (
                                     <img
                                         key={index}
                                         className={`big-photo-thumbnail ${image === currentImage ? 'selected' : ''}`}
@@ -115,7 +118,9 @@ const BigPhotosSlider = ({ product, onClose }) => {
                                     />
                                 ))}
                             </div>
-                            <p>Чтобы детальнее рассмотреть фотографии, наведите курсор на изображение. Для отключения лупы нажмите на изображение, для включения нажмите повторно</p>
+                            <p>Чтобы детальнее рассмотреть фотографии, наведите курсор на изображение. Для
+                                отключения
+                                лупы нажмите на изображение, для включения нажмите повторно</p>
                         </div>
                         <span className='big-photo-close' onClick={onClose}>&times;</span>
                     </div>

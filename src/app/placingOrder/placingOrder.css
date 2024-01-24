@@ -21,6 +21,12 @@
     font-weight: 400;
     color: #7c7c7c;
 }
+.deliveryMethodBlockFirst{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 .deliveryMethodBlock{
     width: 100%;
     display: flex;
@@ -36,6 +42,18 @@
 .deliveryMethodInput{
     width: calc(50% - 7.5px);
     height: 52px;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 1px solid #d9d9d9;
+    background-color: #ffffff;
+    padding: 6px 10px 6px;
+    outline: none;
+    color: #111111;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.deliveryMethodInputFirst{
+    width: calc(50% - 7.5px);
     font-size: 14px;
     border-radius: 10px;
     border: 1px solid #d9d9d9;
@@ -81,7 +99,6 @@
 }
 .selectedDeliveryMethodInput{
     width: calc(50% - 7.5px);
-    height: 52px;
     font-size: 14px;
     border-radius: 10px;
     border: 2px solid #111111;
@@ -184,4 +201,75 @@
     height: 1.5px;
     margin: 0 10px;
     background-color: #c9c9c9;
+}
+@media screen and (max-width: 600px){
+    .placingOrderBlock{
+        min-height: 100vh;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        padding: 25px 15px 0;
+    }
+}
+@media screen and (max-width: 530px){
+    .deliveryMethodBlockFirst{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .deliveryMethodInputFirst{
+        width: calc(100%);
+        height: 52px;
+        font-size: 14px;
+        border-radius: 10px;
+        border: 1px solid #d9d9d9;
+        background-color: #ffffff;
+        padding: 6px 10px 6px;
+        outline: none;
+        color: #111111;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+    .selectedDeliveryMethodInput{
+        width: calc(100%);
+        height: 52px;
+        font-size: 14px;
+        border-radius: 10px;
+        border: 2px solid #111111;
+        background-color: #ffffff;
+        padding: 6px 10px 6px;
+        outline: none;
+        color: #111111;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 450px){
+    .placingOrderBlock{
+        min-height: 100vh;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        padding: 25px 15px 0;
+    }
+    .deliveryMethodBlock{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .deliveryInputThreeBlocks{
+        width: calc(100%);
+        font-size: 14px;
+        cursor: pointer;
+    }
+    .deliveryInputBlock{
+        width: calc(100%);
+        font-size: 14px;
+        cursor: pointer;
+    }
 }

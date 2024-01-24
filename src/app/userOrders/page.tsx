@@ -3,7 +3,7 @@ import axios from "axios";
 import React, {FormEventHandler, useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import Link from "next/link";
-import './orderStyles.css'
+import '../allAdminOrders/orderStyles.css'
 import {useCurrentUser} from "@/hooks/useCurrentUser";
 import Image from "next/image";
 import searchIco from "@/img/searchIco.png";
@@ -216,7 +216,7 @@ export default function UserOrders() {
     };
 
     return (
-        <div className='profileOrderBlock'>
+        <div className='adminOrdersBlock'>
             {showConfirmation && (
                 <div className="confirmation-modal-overlay">
                     <div className="confirmation-modal">

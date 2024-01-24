@@ -19,7 +19,7 @@ const Page = () => {
 
     return (
         <div>
-            <div className='store-container'>
+            <div className='admin-store-container'>
                 <div className='store-head-block'>
                     <div>
                         <h3 className={'store-head-block-title'}>Каталог товаров</h3>

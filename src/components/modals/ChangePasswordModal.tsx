@@ -63,8 +63,7 @@ export const ChangePasswordModal = () => {
 
     return (
         <Dialog  open={isModalOpen} onOpenChange={handleClose}>
-            <DialogContent className="max-h-screen bg-white text-black p-0 overflow-hidden"
-                           style={{fontFamily: "Century Gothic", backgroundColor: '#fafafa', maxWidth: '700px'}}>
+            <DialogContent className="max-h-screen bg-white text-black p-0 overflow-hidden changePassContainer">
                 <DialogHeader className="pt-6 px4 ml-6">
                     <DialogTitle className="text-2xl text-left font-bold">
                         Смена пароля
@@ -78,17 +77,18 @@ export const ChangePasswordModal = () => {
                         className="space-y-6"
                         onSubmit={form.handleSubmit(onSubmit)}
                     >
-                        <div className="space-y-4 pr-12 pl-12">
+                        <div className="space-y-4 pr-6 pl-6">
 
                             <FormField
                                 control={form.control}
                                 name="password"
                                 render={({field}) => (
                                     <FormItem>
-                                        <FormLabel>Старый пароль</FormLabel>
+                                        <FormLabel style={{fontWeight:'600'}}>Старый пароль</FormLabel>
                                         <FormControl>
                                             <Input
                                                 {...field}
+                                                className={'changePassInput'}
                                                 placeholder="******"
                                                 type="password"
                                                 disabled={isPending}
@@ -103,10 +103,11 @@ export const ChangePasswordModal = () => {
                                 name="newPassword"
                                 render={({field}) => (
                                     <FormItem>
-                                        <FormLabel>Новый пароль</FormLabel>
+                                        <FormLabel style={{fontWeight:'600'}}>Новый пароль</FormLabel>
                                         <FormControl>
                                             <Input
                                                 {...field}
+                                                className={'changePassInput'}
                                                 placeholder="******"
                                                 type="password"
                                                 disabled={isPending}

@@ -7,6 +7,19 @@
     padding: 25px 0 0 0;
     margin: 0 auto;
 }
+.adminStatisticContainer{
+    min-height: 100vh;
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 0 0 0;
+    margin: 0 auto;
+}
+.adminStatisticContainer h2{
+    font-size: 25px;
+    font-weight: 600;
+}
 .adminOrdersBlock h2{
     font-size: 25px;
     font-weight: 600;
@@ -17,7 +30,7 @@
     justify-content: space-between;
 }
 .orderStatisticBlock{
-    width: calc(100% - 30px);
+    width: calc(100%);
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -36,7 +49,7 @@
     max-width: 250px;
 }
 .productsStatisticBlock{
-    width: calc(100% - 30px);
+    width: calc(100%);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -358,29 +371,6 @@
     height: 26px;
     margin-left: 10px;
 }
-.store-container{
-    min-height: 100vh;
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding-top: 0px;
-    height: calc(100% - 30px);
-    flex-direction: column;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-.store-container h3{
-    margin: 0;
-}
-.store-head-block{
-    width: 100%;
-    margin: 25px 0 0px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-}
 .mini-admin-item-info-head{
     font-size: 16px;
     font-weight: 600;
@@ -417,6 +407,13 @@
 .products-search-block img{
     width: 17px;
     height: 17px;
+}
+.product-statistic-img {
+    height: 250px;
+    border-radius: 10px;
+    margin: 5px 15px 5px 0;
+    object-fit: cover;
+    overflow: hidden;
 }
 .products-search-block input{
     width: calc(100% - 42px);
@@ -613,4 +610,44 @@
 .errorMessage{
     font-weight: 500;
     color: #d50404;
+}
+@media screen and (max-width: 1000px) {
+    .adminStatisticContainer{
+        min-height: 100vh;
+        width: calc(100%);
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 25px 15px 0;
+        margin: 0;
+    }
+}
+@media screen and (max-width: 800px) {
+    .productStatisticBlock{
+        width: 100%;
+        max-width: 150px;
+    }
+}
+@media screen and (max-width: 700px) {
+    .productStatisticBlock{
+        display: none;
+    }
+    .productSizeBlock{
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+@media screen and (max-width: 350px) {
+    .productStatisticsInfo{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .product-statistic-img {
+        height: 250px;
+        border-radius: 10px;
+        margin: 5px 0 5px 0;
+        object-fit: cover;
+        overflow: hidden;
+    }
 }

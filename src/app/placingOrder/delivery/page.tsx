@@ -75,16 +75,16 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                 <OrderNavBarContainer/>
                 <h2>{"Оформление заказа"}</h2>
                 <label className={'order-input-title'}>Способ доставки</label>
-                <div className={'deliveryMethodBlock'}>
+                <div className={'deliveryMethodBlockFirst'}>
                     <div
-                        className={deliveryMethod === 'Самовывоз' ? 'selectedDeliveryMethodInput' : 'deliveryMethodInput'}
+                        className={deliveryMethod === 'Самовывоз' ? 'selectedDeliveryMethodInput' : 'deliveryMethodInputFirst'}
                         onClick={() => setDeliveryMethod('Самовывоз')}
                     >
                         <p className={'deliveryMethodInputTitle'}>Самовывоз</p>
                         <p className={'deliveryMethodInputText'}>Херсонская ул., 20, Санкт-Петербург</p>
                     </div>
                     <div
-                        className={deliveryMethod === 'Доставка' ? 'selectedDeliveryMethodInput' : 'deliveryMethodInput'}
+                        className={deliveryMethod === 'Доставка' ? 'selectedDeliveryMethodInput' : 'deliveryMethodInputFirst'}
                         onClick={() => setDeliveryMethod('Доставка')}
                     >
                         <p className={'deliveryMethodInputTitle'}>Доставка</p>

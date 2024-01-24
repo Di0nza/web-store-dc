@@ -55,7 +55,7 @@ async function getProductById(id){
 export default async function oneProduct({params: {id}}: Props) {
     const product = await getProductById(id);
     return (
-        <div className='store-container'>
+        <div className='product-store-container'>
             {product && <ProductContainer product={product} />}
         </div>
     )
