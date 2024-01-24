@@ -56,8 +56,9 @@
     font-size: 13px;
 }
 .cart-items-block{
-    padding: 0;
     margin-bottom: 60px;
+    max-height:  450px;
+    padding-bottom: 10px;
     overflow: scroll;
     width: calc(100% - 400px);
 }

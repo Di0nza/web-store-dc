@@ -14,6 +14,45 @@
 .placingOrderBlockTitle{
     margin-bottom: 15px;
 }
+.OrderTotalCostBlock{
+    display: flex;
+    flex-direction: row;
+    padding: 0 10px;
+    justify-content: space-between;
+}
+.OrderTotalCostBlockHead{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 10px 5px;
+    border-bottom: 1px solid rgba(218, 218, 218, 0.4);
+    margin-bottom: 5px;
+}
+.OrderTotalCostBlockBottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 10px 0;
+    border-top: 1px solid rgba(218, 218, 218, 0.4);
+    margin-top: 5px;
+    margin-bottom: 7px;
+}
+.OrderTotalBlockTitles{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 14px;
+}
+.OrderTotalBlockValues{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 14px;
+}
 .placingOrderTracking{
     display: flex;
     align-items: flex-end;
@@ -65,6 +104,9 @@
     font-size: 14px;
     flex-wrap: wrap;
 }
+.firstInfoContactBlock{
+     margin-top: 15px;
+ }
 .firstInfoBlock p{
     width: calc(100%);
     display: flex;
@@ -94,6 +136,22 @@
 }
 .trackingInfoBlock p{
     margin: 3px 0;
+}
+.OrderTotalCost{
+    width: calc(100%);
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    line-height: 22px;
+    font-size: 14px;
+    flex-wrap: wrap;
+}
+.OrderTotalCost h3{
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 .firstInfoInput{
     border: none;

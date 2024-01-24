@@ -63,8 +63,8 @@
   width: 100%;
 }
 .logo {
-  width: 264px;
-  height: 142px;
+  width: 220px;
+  height: 118px;
 }
 
 .text {
@@ -391,8 +391,8 @@
     object-fit: cover;
   }
   .logo {
-    width: 224px;
-    height: 117px;
+    width: 220px;
+    height: 118px;
   }
 }
 @media screen and (max-width: 670px){

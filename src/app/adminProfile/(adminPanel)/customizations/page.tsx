@@ -202,10 +202,10 @@ const Page = () => {
                                                 }}>
                                                 Добавить новый баннер
                                             </CldUploadButton>
-                                            <CldUploadButton className={'home-video-btn'}
+                                            <Button className={'home-video-btn'}
                                                              onClick={() => onOpen("editMainPageVideo", {reload: "reload"})}>
                                                 Посмотреть существующие баннеры
-                                            </CldUploadButton>
+                                            </Button>
                                         </div>
                                     </div>
                                 </AccordionContent>

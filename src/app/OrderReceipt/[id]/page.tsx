@@ -2,16 +2,13 @@
 import './placingOrder.css'
 import Link from "next/link";
 import React, {useEffect, useRef, useState} from "react";
-import {Metadata} from "next";
 import axios from "axios";
 import Image from "next/image";
-import deleteItem from "@/img/delete.png";
 import checkOrderStatusW from "@/img/checkOrderStatusW.png";
 import checkOrderStatusB from "@/img/checkOrderStatusB.png";
 import pdfLogo from "@/img/pdfLogo.png";
 import shearLogo from "@/img/shearlogo.png";
-import { jsPDF } from 'jspdf';
-import headerLogo  from "@/img/pdfLogo.jpg";
+import {jsPDF} from 'jspdf';
 import {useCurrentUser} from "@/hooks/useCurrentUser";
 import 'jspdf-autotable';
 import {amiriFont} from "@/fonts/amiriFont";
@@ -38,6 +35,10 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const [formattedDateTime, setFormattedDateTime] = useState('');
     const [orderData, setOrderData] = useState(null);
     const [copied, setCopied] = useState(false);
+    const [orderTotal, setOrderTotal] = useState(0);
+    const [vat, setVat] = useState(0);
+    const [orderTotalWithoutVat, setOrderTotalWithoutVat] = useState(0);
+    const [discountedTotal, setDiscountedTotal] = useState(0);
     const [selectedDelivery, setSelectedDelivery] = useState(null);
     const user = useCurrentUser();
 
@@ -135,23 +136,59 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
             `Телефон: ${orderData.telephone}`,
             `Пункт назвачения: ${orderData?.country}, ${orderData?.city},ул. ${orderData?.street},(д.${orderData?.house},кв.${orderData?.apartment}),${orderData?.zip}`,
         ];
+        const pdfContentBlock1 = `Сумма заказа: ${orderTotal.toFixed(2)}$`;
+        const pdfContentBlock2 = `НДС (+23%): ${orderTotalWithoutVat.toFixed(2)} + ${vat.toFixed(2)}$`;
+        const pdfContentBlock3 = `Просокод (-${orderData?.promotionalCode}%): ${discountedTotal}$`;
+        const pdfContentBlock4 = `Итого: ${orderData?.totalCost.toFixed(2)}$`;
+
         doc.setFontSize(18);
         doc.text(pdfTitle, 10, 20);
         doc.setFontSize(12);
-        doc.text(pdfContent, 10, 30);
-        doc.text(pdfContent3, 10, 40);
-        doc.text(pdfContent6, 10, 50);
-        doc.text('MariDeniz', 170, 280);
-        doc.text(pdfContent5, 10, 280);
-        let verticalPosition = 70;
+        doc.text(pdfContent, 10, 40);
+        doc.text(pdfContent3, 10, 50);
+        doc.text(pdfContent6, 10, 60);
+        let verticalPosition = 80;
         data.forEach((line) => {
             doc.setFontSize(12);
             doc.text(line, 10, verticalPosition);
             verticalPosition += 10;
         });
+        doc.text(pdfContentBlock1, 10, 130);
+        doc.text(pdfContentBlock2, 10, 140);
+        doc.text(pdfContentBlock3, 10, 150);
+        doc.text(pdfContentBlock4, 10, 160);
+        doc.text('MariDeniz', 170, 280);
+        doc.text(pdfContent5, 10, 280);
         doc.save(`order${orderData?._id.toString().substring(7)}.pdf`);
     };
 
+    useEffect(() => {
+        if (orderData && orderData.products && orderData.products.length > 0) {
+            const calculatedOrderTotal = calculateOrderTotal(orderData.products);
+            const calculatedVat = 0.23 * calculatedOrderTotal;
+            const calculatedOrderTotalWithoutVat = calculatedOrderTotal - calculatedVat;
+
+            setOrderTotal(calculatedOrderTotal);
+            setVat(calculatedVat);
+            setOrderTotalWithoutVat(calculatedOrderTotalWithoutVat);
+        }
+    }, [orderData]);
+
+    useEffect(() => {
+        if (orderTotal && orderData && orderData.promotionalCode) {
+            const discountPercentage = Number(orderData.promotionalCode);
+            const discountedAmount = (orderTotal * (discountPercentage / 100)).toFixed(2);
+            // @ts-ignore
+            setDiscountedTotal(discountedAmount);
+        }
+    }, [orderTotal, orderData]);
+
+    function calculateOrderTotal(products) {
+        if (!products || products.length === 0) {
+            return 0;
+        }
+        return products.reduce((total, item) => total + Number(item.price), 0);
+    }
 
     return (
         <div className='bigPlacingOrderBlock'>
@@ -175,6 +212,87 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                             <p><b>Дополнительная информация:</b> {orderData?.additionalInformation}</p>
                             <p><b>Код для получения товара:</b> {orderData?._id.toString()}</p>
                         </div>
+                        <div className='firstInfoBlock firstInfoContactBlock'>
+                            <h3>Контактные данные</h3>
+                            <p><b>Имя:</b> {orderData?.name}</p>
+                            <p><b>Email:</b> {orderData?.email}</p>
+                            <p><b>Телефон:</b> {orderData?.telephone}</p>
+                        </div>
+                        <div className='products-value-cont'>
+                            <div className='products-value-block'>
+                                {orderData?.products.map((item, index) => (
+                                    <div className={'check-cart-item'} key={index}>
+                                        <img
+                                            className={'mini-cart-item-img'}
+                                            key={index}
+                                            src={item.image}
+                                            alt={`Thumbnail ${index}`}
+                                        />
+                                        <div className={'mini-cart-item-info'}>
+                                            <div className={'mini-cart-item-info-head'}>
+                                                <div>
+                                                    <h5 className={'mini-cart-item-title'}>{item.title}</h5>
+                                                    <p key={index}>{item.size}</p>
+                                                </div>
+                                            </div>
+                                            <div className={'mini-cart-footer'}>
+                                                <h5>
+                                                    ${item.price}.00
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                    <div className={'firstInfoContainer'}>
+                        <div className='OrderTotalCost'>
+                            <div className={'OrderTotalCostBlockHead'}>
+                                <div className={'OrderTotalBlockTitles'}>
+                                    <b>Сумма заказа:</b>
+                                </div>
+                                <div className={'OrderTotalBlockValues'}>
+                                    <p>${orderTotal.toFixed(2)}</p>
+                                </div>
+                            </div>
+                            <div className={'OrderTotalCostBlock'}>
+                                <div className={'OrderTotalBlockTitles'}>
+                                    <b>НДС (+23%):</b>
+                                    <b>Просокод (-{orderData?.promotionalCode}%):</b>
+                                </div>
+                                <div className={'OrderTotalBlockValues'}>
+                                    <p>${orderTotalWithoutVat.toFixed(2)} + ${vat.toFixed(2)}</p>
+                                    <p>${discountedTotal}</p>
+                                </div>
+                            </div>
+                            <div className={'OrderTotalCostBlockBottom'}>
+                                <div className={'OrderTotalBlockTitles'}>
+                                    <b>Итого:</b>
+                                </div>
+                                <div className={'OrderTotalBlockValues'}>
+                                    <p>${orderData?.totalCost.toFixed(2)}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {orderData?.trackingCode && (
+                            <div className='trackingInfoBlock'>
+                                <h3>Трекинг заказа</h3>
+                                <p><b>Сайт отслеживания:</b> {orderData?.trackingLink}</p>
+                                <b>Трекер-код</b>
+                                <div className={'firstInfoUrl'}>
+                                    <input
+                                        className={'firstInfoUrlInput'}
+                                        style={{border: 'none', marginBottom: '0', height: '38px'}}
+                                        value={copied ? 'Скопировано!' : orderData?.trackingCode}>
+                                    </input>
+                                    <div className={'inputCurrentBtn'}>
+                                        <Image className={'inputCurrentBtnImg'} src={shearLogo}
+                                               onClick={copyLinkToClipboard} alt={'+'}/>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                         <div>
                             <div className='placingOrderInfoBlock'>
                                 <h3>Статус заказа:</h3>
@@ -215,59 +333,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className={'firstInfoContainer'}>
-                        <div className='firstInfoBlock'>
-                            <h3>Контактные данные</h3>
-                            <p><b>Имя:</b> {orderData?.name}</p>
-                            <p><b>Email:</b> {orderData?.email}</p>
-                            <p><b>Телефон:</b> {orderData?.telephone}</p>
-                        </div>
-                        {orderData?.trackingCode && (
-                            <div className='trackingInfoBlock'>
-                                <h3>Трекинг заказа</h3>
-                                <p><b>Сайт отслеживания:</b> {orderData?.trackingLink}</p>
-                                <b>Трекер-код</b>
-                                <div className={'firstInfoUrl'}>
-                                    <input
-                                        className={'firstInfoUrlInput'}
-                                        style={{border: 'none', marginBottom: '0', height: '38px'}}
-                                        value={copied ? 'Скопировано!' : orderData?.trackingCode}>
-                                    </input>
-                                    <div className={'inputCurrentBtn'}>
-                                        <Image className={'inputCurrentBtnImg'} src={shearLogo}
-                                               onClick={copyLinkToClipboard} alt={'+'}/>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                        <div className='products-value-cont'>
-                            <div className='products-value-block'>
-                                {orderData?.products.map((item, index) => (
-                                    <div className={'check-cart-item'} key={index}>
-                                        <img
-                                            className={'mini-cart-item-img'}
-                                            key={index}
-                                            src={item.image}
-                                            alt={`Thumbnail ${index}`}
-                                        />
-                                        <div className={'mini-cart-item-info'}>
-                                            <div className={'mini-cart-item-info-head'}>
-                                                <div>
-                                                    <h5 className={'mini-cart-item-title'}>{item.title}</h5>
-                                                    <p key={index}>{item.size}</p>
-                                                </div>
-                                            </div>
-                                            <div className={'mini-cart-footer'}>
-                                                <h5>
-                                                    ${item.price}.00
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

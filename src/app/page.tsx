@@ -1,13 +1,15 @@
 import styles from './page.module.css'
-import {VideoPreview} from "../components/homeScreen/videoPreview";
-import {HomeImageSlider} from "../components/homeScreen/HomeImageSlider";
+import {VideoPreview} from "@/components/homeScreen/videoPreview";
+import {HomeImageSlider} from "@/components/homeScreen/HomeImageSlider";
 import OwnDesignOrder from "@/components/homeScreen/ownDesignOrder";
 import {NewCollection} from "@/components/homeScreen/newСollection";
 import {BestProducts} from "@/components/homeScreen/BestProducts";
+import SplashScreen from "@/components/SplashScreen/SplashScreen";
 
 export default function Home() {
     return (
         <main className={styles.main}>
+            <SplashScreen />
             <VideoPreview/>
             <div className={styles.homeDescriptionBlock}>
                 <p>Добро пожаловать в уникальный мир рок-панк стиля,

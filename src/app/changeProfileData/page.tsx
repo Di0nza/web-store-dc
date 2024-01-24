@@ -54,12 +54,12 @@ export default function ChangeProfileData() {
         <div className='profileBlock'>
             <h2>{"Изменение данных профиля"}</h2>
             {userData?.isOAuth === false ?
-                <div className="flex flex-row items-center mt-4 mb-6 ">
+                <div className="flex flex-row items-center mb-2 ">
                     <div className="text-black text-sm">
                         Хотите
                     </div>
                     <div
-                        className='mr-1 ml-1 text-black text-sm hover:underline cursor-pointer font-bold'
+                        className='mr-1 ml-1 text-black text-sm cursor-pointer font-bold'
                         onClick={() => onOpen("changePassword")}
                     >
                         Изменить пароль
