@@ -19,15 +19,15 @@ export default {
                     if (validateFields.success) {
                         const {email, password} = validateFields.data;
                         console.log("Я тут", email, password);
-                        // const user = await getUserByEmail(email);
-                        // if (!user || !user?.password) {
-                        //     return null;
-                        // }
-                        //
-                        // const validPassword = await bcryptjs.compare(password, user?.password)
-                        // if (validPassword) {
-                        //     return user;
-                        // }
+                        const user = await getUserByEmail(email);
+                        if (!user || !user?.password) {
+                            return null;
+                        }
+
+                        const validPassword = await bcryptjs.compare(password, user?.password)
+                        if (validPassword) {
+                            return user;
+                        }
                     }
                     return null;
                 }catch (e){
