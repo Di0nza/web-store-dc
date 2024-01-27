@@ -2,6 +2,7 @@ import User from "@/models/userModel";
 import {connect} from "@/db/db";
 import Account from "@/models/accountModel";
 import mongoose from "mongoose";
+
 connect();
 
 export const getUserByEmail = async (email:string) => {
@@ -22,8 +23,8 @@ export const getUserById = async (id:string) => {
 
 export const getAccountById = async (userId:string) => {
     try{
-        const account = await Account.findOne({userId: new mongoose.Types.ObjectId(userId)});
-        return account;
+        // @ts-ignore
+        return await Account.findOne({userId: new mongoose.Types.ObjectId(userId)});
     }catch{
         return null;
     }
