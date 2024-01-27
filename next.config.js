@@ -13,6 +13,13 @@ const nextConfig = {
     future: {
         webpack5: true
     },
+    // webpack(config, { isServer, dev }) {
+    //     config.experiments = { asyncWebAssembly: true };
+    //     config.output.webassemblyModuleFilename =
+    //         isServer && !dev ? "../static/wasm/[id].wasm" : "static/wasm/[id].wasm";
+    //     config.optimization.moduleIds = "named";
+    //     return config;
+    // },
     webpack: (config) => {
         config.experiments = {
             topLevelAwait: true
