@@ -274,6 +274,9 @@ export const CreateProductModal = () => {
         }
     }
 
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
     return (
         <>
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
