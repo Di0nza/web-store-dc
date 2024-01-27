@@ -298,7 +298,7 @@ const ProductContainer = ({product}) => {
                                             </div>
                                             <div className='social-links-block'>
                                                 {socialMediaLogos.map((platform, index) => (
-                                                    <div className='footer-social-links-block'
+                                                    <div key={index} className='footer-social-links-block'
                                                          onClick={() => window.open(platform.url, '_blank')}>
                                                         <Image
                                                             key={index}
@@ -367,16 +367,16 @@ const ProductContainer = ({product}) => {
                                                         <div className={'inputCurrentUrl'} style={{}}>
                                                             <input type="text" value={inputCurrentUrl}/>
                                                             <div className={'inputCurrentBtn'}>
-                                                                <Image className={'inputCurrentBtnImg'} src={shearLogo}
+                                                                <Image key={"shear"} className={'inputCurrentBtnImg'} src={shearLogo}
                                                                        onClick={copyLinkToClipboard} alt={'+'}/>
                                                             </div>
                                                         </div>
                                                         <div className='social-links-block'>
                                                             {socialMediaLogos.map((platform, index) => (
-                                                                <div className='footer-social-links-block'
+                                                                <div key={index} className='footer-social-links-block'
                                                                      onClick={() => window.open(platform.url, '_blank')}>
                                                                     <Image
-                                                                        key={index}
+                                                                        key={"platform"}
                                                                         src={platform.logo}
                                                                         alt={platform.name}
                                                                     />
@@ -418,7 +418,7 @@ const ProductContainer = ({product}) => {
                                     <p onClick={toggleSizeTable} className='product-sizes-table'>Узнать свой рамер</p>
                                 </div>
                                 {product.additionalInformation.map((info, index) => (
-                                    <div>
+                                    <div key={index}>
                                         <b>{info.title}:</b>
                                         <p key={index}> {info.description}</p>
                                     </div>

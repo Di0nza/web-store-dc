@@ -2,10 +2,11 @@ import NextAuth from "next-auth"
 import {MongoDBAdapter} from "@auth/mongodb-adapter";
 import authConfig from "@/auth.config";
 import clientPromise from "@/lib/mongodb";
-import {getAccountById, getUserById} from "@/services/users";
+import {getAccountById, getUserByEmail, getUserById} from "@/services/users";
 import User from "@/models/userModel";
 
 
+// @ts-ignore
 export const {
     handlers: {GET, POST},
     auth,
@@ -35,7 +36,7 @@ export const {
 
             return true;
         },
-        async session({token, session}) {
+        async session({session, token} : { session: any; token?: any }) {
             if (token.sub && session.user) {
                 session.user.id = token.sub
             }
@@ -72,5 +73,5 @@ export const {
     },
     adapter: MongoDBAdapter(clientPromise),
     session: {strategy: "jwt"},
-    ...authConfig,
+    ...authConfig
 });

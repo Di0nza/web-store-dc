@@ -56,6 +56,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     };
     useEffect(() => {
         //getUserDetails();
+        // @ts-ignore
         setUserData(user);
     }, []);
 

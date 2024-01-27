@@ -18,7 +18,7 @@ interface UserData {
 
 export default function ProfilePage() {
     const router = useRouter();
-    const [userData, setUserData] = useState<UserData | null>(null);
+    const [userData, setUserData] = useState(null);
     const user = useCurrentUser();
 
     const getUserDetails = async () => {

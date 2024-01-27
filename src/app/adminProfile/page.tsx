@@ -13,13 +13,13 @@ import {useCurrentUser} from "@/hooks/useCurrentUser";
 interface UserData {
     name: string;
     email: string;
-    createdAt?: string;
+    createdAt?: Date;
 }
 
 export default function ProfilePage() {
     const router = useRouter();
     const pathname = usePathname();
-    const [userData, setUserData] = useState<UserData | null>(null);
+    const [userData, setUserData] = useState(null);
     const [userOrders, setUserOrders] = useState(null);
     const user = useCurrentUser();
     const getUserOrders = async () => {

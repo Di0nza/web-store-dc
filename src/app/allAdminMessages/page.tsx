@@ -9,7 +9,7 @@ import close from "@/img/close.png";
 interface MessageData {
     messageId: string;
 }
-export default function allAdminMessages() {
+export default function AllAdminMessages() {
     const router = useRouter();
     const [userOrders, setUserOrders] = useState(null);
     const [filteredOrders, setFilteredOrders] = useState(null);

@@ -21,7 +21,7 @@ interface UserData {
     createdAt?: string;
 }
 const Footer = () => {
-    const [userData, setUserData] = useState<UserData | null>(null);
+    const [userData, setUserData] = useState(null);
     const [isFooterErrorBlockOpen, setIsFooterErrorBlockOpen] = useState(false);
     const [isFooterCooperationBlockOpen, setIsFooterCooperationBlockOpen] = useState(false);
     // @ts-ignore

@@ -99,7 +99,7 @@ export default function AdminStatistics() {
                                     <p className='product-price'>${product.price}.00</p>
                                     <div className={'productSizeBlock'}>
                                         {product.sizes.map((size, index) => (
-                                            <div className={'productSize'}>
+                                            <div key={index}  className={'productSize'}>
                                                 <b key={index}>{size.size}:</b>
                                                 <p key={index}>{size.amount}</p>
                                             </div>

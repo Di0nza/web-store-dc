@@ -197,7 +197,7 @@ const Page = () => {
                                             <CldUploadButton
                                                 className={'home-video-btn'}
                                                 uploadPreset="qiladgcy"
-                                                onUpload={(result: UploadResult) => {
+                                                onUpload={(result: any) => {
                                                     setMainVideoPublicUrl(result.info.secure_url)
                                                 }}>
                                                 Добавить новый баннер
@@ -327,7 +327,7 @@ const Page = () => {
                                                             <CldUploadButton
                                                                 className={'home-video-btn'}
                                                                 uploadPreset="qiladgcy"
-                                                                onUpload={(result: UploadResult) => {
+                                                                onUpload={(result: any) => {
                                                                     setNewCollection((prevCollection) => ({
                                                                         ...prevCollection,
                                                                         videoUrl: result.info.secure_url
@@ -432,7 +432,7 @@ const Page = () => {
                                         <CldUploadButton
                                             className={'home-slider-btn'}
                                             uploadPreset="qiladgcy"
-                                            onUpload={(result: UploadResult) => {
+                                            onUpload={(result: any) => {
                                                 setMainPhotoPublicUrl(result.info.secure_url)
                                             }}>
                                             Добавить новое фото

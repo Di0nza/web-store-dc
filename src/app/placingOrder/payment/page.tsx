@@ -22,7 +22,7 @@ type Props = {
 export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const router = useRouter();
     const pathname = usePathname();
-    const [userData, setUserData] = useState<UserData | null>(null);
+    const [userData, setUserData] = useState(null);
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [order, setOrder] = useState({
         name: '',

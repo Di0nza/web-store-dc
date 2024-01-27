@@ -104,40 +104,40 @@ interface IParams {
 }
 
 
-export async function GET(request: NextRequest) {
-    try {
-        const user = await currentUser();
-
-        if(!user){
-            return NextResponse.json({error: "Unauthorized."}, {status: 401})
-        }
-
-        const userDB = await User.findById(user.id)
-
-        if(!userDB){
-            return NextResponse.json({error: "Unauthorized."}, {status: 401})
-        }
-
-        const {id} = request.query;
-        const order = await Order.findById(id);
-
-        if (!order) {
-            return NextResponse.json({ error: "Order not found" }, { status: 404 });
-        }
-
-        if(user.email !== order.email && user.isAdmin !== true){
-            return NextResponse.json({error: "Forbidden. You don't have this rights."}, {status: 403})
-        }
-
-
-        return NextResponse.json({
-            message: "Order retrieved successfully",
-            order
-        });
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-}
+// export async function GET(request: NextRequest) {
+//     try {
+//         const user = await currentUser();
+//
+//         if(!user){
+//             return NextResponse.json({error: "Unauthorized."}, {status: 401})
+//         }
+//
+//         const userDB = await User.findById(user.id)
+//
+//         if(!userDB){
+//             return NextResponse.json({error: "Unauthorized."}, {status: 401})
+//         }
+//
+//         const {id} = request.query;
+//         const order = await Order.findById(id);
+//
+//         if (!order) {
+//             return NextResponse.json({ error: "Order not found" }, { status: 404 });
+//         }
+//
+//         if(user.email !== order.email && user.isAdmin !== true){
+//             return NextResponse.json({error: "Forbidden. You don't have this rights."}, {status: 403})
+//         }
+//
+//
+//         return NextResponse.json({
+//             message: "Order retrieved successfully",
+//             order
+//         });
+//     } catch (error: any) {
+//         return NextResponse.json({ error: error.message }, { status: 500 });
+//     }
+// }
 
 export async function PUT(request: NextRequest) {
     try {

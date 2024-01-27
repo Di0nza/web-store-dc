@@ -34,6 +34,7 @@ const ProductRadialChart = ({ product }) => {
                     ],
                 },
                 options: {
+                    // @ts-ignore
                     scale: {
                         pointLabels: {
                             fontSize: 10,

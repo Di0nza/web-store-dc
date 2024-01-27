@@ -18,7 +18,7 @@ interface UserData {
 
 export default function UserOrders() {
     const router = useRouter();
-    const [userData, setUserData] = useState<UserData | null>(null);
+    const [userData, setUserData] = useState(null);
     const user = useCurrentUser();
     const [userOrders, setUserOrders] = useState(null);
     const [filteredOrders, setFilteredOrders] = useState(null);
@@ -120,10 +120,10 @@ export default function UserOrders() {
 
             switch (sortingType) {
                 case 'dateAscending':
-                    sortedOrders.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+                    sortedOrders.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
                     break;
                 case 'dateDescending':
-                    sortedOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                    sortedOrders.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
                     break;
                 case 'statusAscending':
                     sortedOrders.sort((a, b) => {
@@ -272,7 +272,7 @@ export default function UserOrders() {
                         <div className='filterSearchBlock' style={{marginTop:'10px'}}>
                             <input type='search' placeholder='Поиск' value={search}
                                    onChange={event => setSearch(event.target.value)}/>
-                            <div onClick={handleSubmit} className='filterSearchBtn'>
+                            <div onClick={()=>handleSubmit} className='filterSearchBtn'>
                                 <Image src={searchIco} alt={"Искать"}/>
                             </div>
                         </div>

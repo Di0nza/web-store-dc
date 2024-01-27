@@ -7,7 +7,7 @@ import './adminPromocodes.css'
 import Image from "next/image";
 
 
-export default function adminPromocodes() {
+export default function AdminPromocodes() {
     const router = useRouter();
     const [promoList, setPromoList] = useState(null);
     const [promoCode, setPromoCode] = useState({
@@ -100,7 +100,7 @@ export default function adminPromocodes() {
             {promoList && (
                 <div className='promocodesProfileBlock'>
                     {promoList?.map((item, index) => (
-                        <div className={'promocodes-item-info'}>
+                        <div key={item._id} className={'promocodes-item-info'}>
                             <div className={'promocodes-item-info-block'}>
                                 <label className={'toggleSwitch'}>
                                     <input
