@@ -38,7 +38,7 @@ export async function POST(request:NextRequest) {
 
         console.log(validateFields)
 
-        if(!validateFields){
+        if(!validateFields.success){
             return NextResponse.json({error: "Некорректные поля"})
         }
 

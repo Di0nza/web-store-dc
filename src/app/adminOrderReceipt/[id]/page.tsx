@@ -35,7 +35,9 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const [orderData, setOrderData] = useState(null);
     const getUserDetails = async () => {
         try {
-            const res = await axios.get<{ data: orderData }>(`/api/users/getAllOrders`);
+
+            const res = await axios.get(`/api/users/getAllOrders`);
+            // const res = await axios.get<{ data: orderData }>(`/api/users/getAllOrders`);
             let foundOrder: any;
             foundOrder = res.data.orders.find(order => order._id === id);
             setOrderData(foundOrder);
@@ -148,7 +150,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                                 <h3>Статус заказа:</h3>
                                 <p className='placingOrderAdvice'>
                                     Лучше редактировать статус заказа после реального изменения статуса заказа.
-                                    Если "Доставка", то указать, что товар в пути лучше только после добавления
+                                    Если &quot;Доставка&quot;, то указать, что товар в пути лучше только после добавления
                                     трек-кода</p>
                                 <div className={'orderStatusBtnsBlock'}>
                                     {statuses.map((status, index) => (

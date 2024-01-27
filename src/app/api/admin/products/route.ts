@@ -64,8 +64,8 @@ export async function POST(request: NextRequest) {
 
         const additionalInformation = [];
 
-        for (const key of data.keys()) {
-            if (key.startsWith('additionalInformation')) {
+        data.forEach((value, key) => {
+            if (typeof key === 'string' && key.startsWith('additionalInformation')) {
                 const [index, field] = key
                     .match(/additionalInformation\[(\d+)\]\.(title|description)/)
                     .slice(1);
@@ -74,9 +74,9 @@ export async function POST(request: NextRequest) {
                     additionalInformation[index] = {};
                 }
 
-                additionalInformation[index][field] = data.get(key);
+                additionalInformation[index][field] = value;
             }
-        }
+        });
 
         console.log(additionalInformation)
         console.log("Title:", title);
@@ -86,15 +86,15 @@ export async function POST(request: NextRequest) {
 
         const promises = [];
         // @ts-ignore
-        for (const key of data.keys()) {
-            if (key.startsWith('picturesFiles[')) {
-                const value = data.get(key) as File;
-                    promises.push(
-                        cloudinary.uploader.upload(value, opts, { folder: 'my-folder' })
-                            .then((res)=> res.secure_url)
-                    );
+        data.forEach((value, key) => {
+            if (typeof key === 'string' && key.startsWith('picturesFiles[')) {
+                const fileValue = value as File;
+                promises.push(
+                    cloudinary.uploader.upload(fileValue, opts, { folder: 'my-folder' })
+                        .then((res) => res.secure_url)
+                );
             }
-        }
+        });
 
         const picturesNames = await Promise.all(promises);
 

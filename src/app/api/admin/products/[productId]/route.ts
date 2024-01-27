@@ -80,17 +80,17 @@ export async function PATCH(
 
         const promises = [];
         // @ts-ignore
-        for (const key of data.keys()) {
-            if (key.startsWith('picturesFiles[')) {
-                const value = data.get(key) as File;
-                await cloudinary.uploader.upload(value, opts, {folder: 'my-folder'})
-                    .then((res) => picturesNames.push(res.secure_url))
-
-            } else if (key.startsWith('picturesString[')) {
-                const value = data.get(key)
-                picturesNames.push(value)
+        data.forEach(async (value, key) => {
+            if (typeof key === 'string') {
+                if (key.startsWith('picturesFiles[')) {
+                    const fileValue = value as File;
+                    await cloudinary.uploader.upload(fileValue, opts, { folder: 'my-folder' })
+                        .then((res) => picturesNames.push(res.secure_url));
+                } else if (key.startsWith('picturesString[')) {
+                    picturesNames.push(value as string);
+                }
             }
-        }
+        });
 
         const product = await Product.findByIdAndUpdate(params.productId, {
             title: title,

@@ -275,6 +275,7 @@ export const CreateProductModal = () => {
     }
 
     return (
+        <>
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
             <DialogContent className="text-black p-0 overflow-hidden addProdBlock" >
                 <DialogHeader className="pt-8 px6 ml-6">
@@ -287,11 +288,13 @@ export const CreateProductModal = () => {
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
+                    {/*@ts-ignore*/}
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                         <div className="flex flex-row space-y-6 px-6 addProdBlockBody">
                             <div className="flex-1 space-y-6">
                                 <FormField
                                     control={form.control}
+                                    /*@ts-ignore*/
                                     name="pictures"
                                     render={({field}) => (
                                         <FormItem className="addImagesConteiner">
@@ -578,5 +581,6 @@ export const CreateProductModal = () => {
                 </Form>
             </DialogContent>
         </Dialog>
+        </>
     )
 }

@@ -21,7 +21,7 @@ type Props = {
 export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const router = useRouter();
     const pathname = usePathname();
-    const [userData, setUserData] = useState<UserData | null>(null);
+    const [userData, setUserData] = useState(null);
     const [orderData, setOrderData] = useState({
         zip: '298312',
         house: '23',

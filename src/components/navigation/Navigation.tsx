@@ -264,7 +264,7 @@ const Navigation = ({navLinks}: Props) => {
                             </div>
                             <div className={'mini-cart-items-block'}>
                                 {Object.values(groupedCartItems).map((item, index) => (
-                                    <div className={'mini-cart-item'} key={item._id}>
+                                    <div className={'mini-cart-item'} key={index}>
                                         <img
                                             className={'mini-cart-item-img'}
                                             key={index}

@@ -259,11 +259,13 @@ export const EditProductModal = () => {
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
+                    {/*@ts-ignore*/}
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                         <div className="flex flex-row space-y-6 px-6 addProdBlockBody">
                             <div className="flex-1 space-y-6">
                                 <FormField
                                     control={form.control}
+                                    /*@ts-ignore*/
                                     name="pictures"
                                     render={({field}) => (
                                         <FormItem className="addImagesConteiner">
