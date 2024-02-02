@@ -20,11 +20,11 @@ export const getUserById = async (id:string) => {
     }
 }
 
-export const getAccountById = async (userId:string) => {
-    try{
-        const account = await Account.findOne({userId: new mongoose.Types.ObjectId(userId)});
-        return account;
-    }catch{
-        return null;
-    }
-}
+// export const getAccountById = async (userId:string) => {
+//     try{
+//         const account = await Account.findOne({userId: new mongoose.Types.ObjectId(userId)});
+//         return account;
+//     }catch{
+//         return null;
+//     }
+// }

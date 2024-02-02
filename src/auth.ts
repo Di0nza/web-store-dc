@@ -1,9 +1,9 @@
 import NextAuth from "next-auth"
-import {MongoDBAdapter} from "@auth/mongodb-adapter";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import authConfig from "@/auth.config";
 import clientPromise from "@/lib/mongodb";
-import {getAccountById, getUserByEmail, getUserById} from "@/services/users";
 import User from "@/models/userModel";
+import {db} from "@/lib/db";
 
 
 // @ts-ignore
@@ -19,8 +19,9 @@ export const {
     },
     events: {
         async linkAccount({user}) {
-            await User.findByIdAndUpdate(user.id, {
-                emailVerified: new Date()
+            await db.users.update({
+                where: { id: user.id },
+                data: { emailVerified: new Date() }
             })
         }
     },
@@ -30,7 +31,9 @@ export const {
                 return true;
             }
 
-            const existingUser = await getUserById(user.id);
+            const id = user.id;
+
+            const existingUser  = await db.users.findUnique({ where: { id } });
 
             if (!existingUser?.emailVerified) return false;
 
@@ -56,9 +59,13 @@ export const {
         async jwt({token}) {
             if (!token.sub) return token
 
-            const existingUser = await getUserById(token.sub);
+            const id = token.sub;
 
-            const account = await getAccountById(token.sub)
+            const existingUser  = await db.users.findUnique({ where: { id } });
+
+            const account = await db.accounts.findFirst({
+                where: { id }
+            });
 
             if (!existingUser) return token;
 
@@ -71,7 +78,7 @@ export const {
             return token;
         }
     },
-    adapter: MongoDBAdapter(clientPromise),
+    adapter: PrismaAdapter(db),
     session: {strategy: "jwt"},
     ...authConfig
 });
