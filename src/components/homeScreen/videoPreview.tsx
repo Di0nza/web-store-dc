@@ -8,15 +8,15 @@ import {connect} from "@/db/db";
 
 connect();
 
-async function getVideo() {
-    const video = await MainPageVideo.findOne({active: true});
-    return video.url as string;
-}
-
 
 const VideoPreview = async () => {
+    const getVideo = async () => {
+        const video = await MainPageVideo.findOne({ active: true });
+        return video.url as string;
+    };
 
-    const videoSrc = await getVideo()
+    const videoSrc = await getVideo();
+
 
     return (
         <div className={styles.videoContainer}>

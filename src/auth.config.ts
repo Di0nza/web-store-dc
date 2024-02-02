@@ -21,11 +21,11 @@ export default {
                         const {email, password} = validateFields.data;
                         console.log("Я тут", email, password);
                         const user = await db.users.findUnique({ where: { email } });
-                        if (!user || !user.password) {
+                        if (!user || !user?.password) {
                             return null;
                         }
 
-                        const validPassword = await bcryptjs.compare(password, user.password)
+                        const validPassword = await bcryptjs.compare(password, user?.password)
                         if (validPassword) {
                             return user;
                         }

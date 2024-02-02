@@ -2,6 +2,7 @@ import User from "@/models/userModel";
 import {connect} from "@/db/db";
 import Account from "@/models/accountModel";
 import mongoose from "mongoose";
+
 connect();
 
 export const getUserByEmail = async (email:string) => {
