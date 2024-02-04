@@ -19,7 +19,7 @@ export const {
     },
     events: {
         async linkAccount({user}) {
-            await db.users.update({
+            await db.user.update({
                 where: { id: user.id },
                 data: { emailVerified: new Date() }
             })
@@ -33,7 +33,7 @@ export const {
 
             const id = user.id;
 
-            const existingUser  = await db.users.findUnique({ where: { id } });
+            const existingUser  = await db.user.findUnique({ where: { id } });
 
             if (!existingUser?.emailVerified) return false;
 
@@ -61,9 +61,9 @@ export const {
 
             const id = token.sub;
 
-            const existingUser  = await db.users.findUnique({ where: { id } });
+            const existingUser  = await db.user.findUnique({ where: { id } });
 
-            const account = await db.accounts.findFirst({
+            const account = await db.account.findFirst({
                 where: { id }
             });
 
