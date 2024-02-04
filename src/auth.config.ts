@@ -38,4 +38,5 @@ export default {
             }
         })
     ],
+    secret: "6b50f23c169987e10b348b18479312c8",
 } satisfies NextAuthConfig
