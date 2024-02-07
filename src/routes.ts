@@ -29,7 +29,6 @@ export const publicRoutes = [
 ]
 
 export const adminRoutes = [
-    "/adminProfile/products",
     "/adminProducts",
     "/allAdminMessages",
     "/adminProfile/products",
@@ -38,6 +37,8 @@ export const adminRoutes = [
     "/adminProfile",
     "/adminStatistics",
     "/allAdminOrders",
+    "/api/users/logout"
+
 ]
 
 /**ВСЕ ОСТАЛЬНЫЕ РОУТЫ СЧИТАЮТСЯ ПРИВАТНЫМИ*/
