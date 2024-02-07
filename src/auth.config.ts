@@ -5,6 +5,7 @@ import Google from "next-auth/providers/google"
 import {LoginSchema} from "@/types/authSchemas";
 import {getUserByEmail} from "@/services/users";
 import bcryptjs from "bcryptjs";
+import {db} from "@/lib/db";
 
 export default {
     providers: [
@@ -19,7 +20,7 @@ export default {
                     if (validateFields.success) {
                         const {email, password} = validateFields.data;
                         console.log("Я тут", email, password);
-                        const user = await getUserByEmail(email);
+                        const user = await db.user.findUnique({ where: { email } });
                         if (!user || !user?.password) {
                             return null;
                         }
@@ -37,4 +38,5 @@ export default {
             }
         })
     ],
+    secret: "6b50f23c169987e10b348b18479312c8",
 } satisfies NextAuthConfig
