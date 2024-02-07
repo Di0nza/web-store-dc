@@ -24,7 +24,7 @@ export default function ProfilePage() {
     const user = useCurrentUser();
     const getUserOrders = async () => {
         try {
-            const res = await axios.get(`/api/users/messages`);
+            const res = await axios.get(`/api/admin/messages`);
             setUserOrders(res.data.messages);
             console.log(res.data.messages)
         } catch (error: any) {

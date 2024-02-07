@@ -51,13 +51,11 @@ export default function UserOrders() {
 
     const getUserOrders = async () => {
         try {
-            const res = await axios.get(`/api/users/getAllOrders`);
-            const filteredOrders = res.data.orders.filter(order => {
-                // @ts-ignore
-                return order.createdBy === user._id;
+            const res = await axios.get(`/api/users/getAllOrders`).then((data) => {
+                setUserOrders(data.data.orders);
+                setFilteredOrders(data.data.orders);
             });
-            setUserOrders(filteredOrders);
-            setFilteredOrders(filteredOrders);
+
         } catch (error: any) {
             console.log(error.message);
         }
@@ -67,7 +65,7 @@ export default function UserOrders() {
         event.preventDefault();
         try {
             const response = await axios.delete(`/api/users/order`, {
-                data: { orderId }
+                data: {orderId}
             });
             console.log(response.data.message);
             setShowConfirmation(false);
@@ -230,7 +228,8 @@ export default function UserOrders() {
                                 className="cancel-order-delete"
                                 onClick={(event) =>
                                     deleteOrder(orderIdToDelete, event)
-                                }>Удалить</div>
+                                }>Удалить
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -247,8 +246,11 @@ export default function UserOrders() {
                                     <div className={'order-header'}>
                                         <p className={'mini-admin-item-info-head'}><b>Заказ
                                             #{item._id.toString().slice(-7)}</b></p>
-                                        <Image onClick={(event) => openConfirmationModal(item._id, event)}
-                                               className={'order-item-delete-img'} src={deleteItem} alt={'x'}></Image>
+                                        {item.orderStatus.slice().reverse().find(status => status.selected)?.title === "Получен покупателем" && (
+                                            <Image onClick={(event) => openConfirmationModal(item._id, event)}
+                                                   className={'order-item-delete-img'} src={deleteItem}
+                                                   alt={'x'}></Image>
+                                        )}
                                     </div>
                                     {item.orderStatus && (
                                         <p className={'mini-cart-item-order-status'}>
@@ -269,10 +271,10 @@ export default function UserOrders() {
                         ))}
                     </div>
                     <div>
-                        <div className='filterSearchBlock' style={{marginTop:'10px'}}>
+                        <div className='filterSearchBlock' style={{marginTop: '10px'}}>
                             <input type='search' placeholder='Поиск' value={search}
                                    onChange={event => setSearch(event.target.value)}/>
-                            <div onClick={()=>handleSubmit} className='filterSearchBtn'>
+                            <div onClick={() => handleSubmit} className='filterSearchBtn'>
                                 <Image src={searchIco} alt={"Искать"}/>
                             </div>
                         </div>
