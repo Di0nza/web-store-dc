@@ -22,7 +22,6 @@ export const publicRoutes = [
     "/cart",
     "/favorites",
     "/privacyPolice",
-    "/profile",
     "/api/users/messages",
     "/api/users/promoCode",
 

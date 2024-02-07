@@ -106,7 +106,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                 title: statusTitle,
                 createdDate: Date.now(),
             };
-            const res = await axios.put(`/api/admin/order`, updatedStatus);
+            const res = await axios.put(`/api/admin/orders`, updatedStatus);
             console.log(res.data.updatedOrder.orderStatus)
             window.location.reload();
         } catch (error) {

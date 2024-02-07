@@ -49,7 +49,7 @@ export default function UserOrders() {
     const deleteOrder = async (orderId, event) => {
         event.preventDefault();
         try {
-            const response = await axios.delete(`/api/admin/order`, {
+            const response = await axios.delete(`/api/admin/orders`, {
                 data: {orderId}
             });
             console.log(response.data.message);
