@@ -8,6 +8,7 @@ import googleLogo from "@/img/pngwinggoogleLogo.png";
 import './profileStyles.css'
 import arrowB from '../../img/arrowB.png'
 import {useCurrentUser} from "@/hooks/useCurrentUser";
+import {signOut} from "next-auth/react";
 
 
 interface UserData {
@@ -24,6 +25,7 @@ export default function ProfilePage() {
     const user = useCurrentUser();
     const getUserOrders = async () => {
         try {
+            await signOut();
             const res = await axios.get(`/api/admin/messages`);
             setUserOrders(res.data.messages);
             console.log(res.data.messages)
@@ -53,8 +55,9 @@ export default function ProfilePage() {
 
     const logout = async () => {
         try {
+
             await axios.get('/api/users/logout');
-            router.push('/');
+            router.push('/login');
             window.location.reload();
         } catch (error: any) {
             console.log(error.message);
