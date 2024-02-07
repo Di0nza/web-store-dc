@@ -25,7 +25,6 @@ export default function ProfilePage() {
     const user = useCurrentUser();
     const getUserOrders = async () => {
         try {
-            await signOut();
             const res = await axios.get(`/api/admin/messages`);
             setUserOrders(res.data.messages);
             console.log(res.data.messages)
@@ -55,7 +54,7 @@ export default function ProfilePage() {
 
     const logout = async () => {
         try {
-
+            await signOut();
             await axios.get('/api/users/logout');
             router.push('/login');
             window.location.reload();
