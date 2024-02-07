@@ -30,7 +30,7 @@ export const authRoutes = [
 ]
 
 export const adminEmails = [
-    "dimonza49@gmail.com",
+    "dimonza49@gmail.com","matveytreyvas@gmail.com"
 ]
 
 export const apiAuthPrefix = "/api/auth"
