@@ -12,6 +12,7 @@ import {jsPDF} from 'jspdf';
 import {useCurrentUser} from "@/hooks/useCurrentUser";
 import 'jspdf-autotable';
 import {amiriFont} from "@/fonts/amiriFont";
+import {FormError} from "@/components/auth/FormError";
 
 interface orderData {
     name: string;
@@ -41,21 +42,26 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const [discountedTotal, setDiscountedTotal] = useState(0);
     const [selectedDelivery, setSelectedDelivery] = useState(null);
     const user = useCurrentUser();
+    const [error, setError] = useState();
 
     const handleDeliverySelection = (method) => {
         setSelectedDelivery(method);
     };
     const getUserDetails = async () => {
         try {
-            const res = await axios.get<{ data: orderData }>(`/api/users/getAllOrders`);
-            let foundOrder: any;
-            // @ts-ignore
-            foundOrder = res.data.orders.find(order => order._id === id);
-            setOrderData(foundOrder);
+            const res = await axios.get(`/api/users/order/${id}`).then((data)=> {
+                console.log(data)
+                if(data.data.error){
+                    setError(data.data.error)
+                }
+                setOrderData(data.data.order);
+            });
+
         } catch (error: any) {
             console.log(error.message);
         }
     };
+
     useEffect(() => {
         getUserDetails();
     }, []);
@@ -190,153 +196,155 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         return products.reduce((total, item) => total + Number(item.price), 0);
     }
 
-    return (
-        <div className='bigPlacingOrderBlock'>
-            <div className='placingOrderBlockRow'>
-                <div>
-                    <h2>{"Спасибо за ваш заказ!"}</h2>
-                    <h4 className='placingOrderBlockTitle'><b>{orderData?.totalNumber}</b> товаров на
-                        сумму <b>${orderData?.totalCost.toFixed(2)}</b> ({orderData?.paymentState})</h4>
-                </div>
-            </div>
+    if (error){
+        return (<FormError message={error}/>);
+    }
+    return (<div className='bigPlacingOrderBlock'>
+        <div className='placingOrderBlockRow'>
             <div>
-                <div className='placingOrderBlockRow'>
-                    <div className={'firstInfoContainer'}>
-                        <div className='firstInfoBlock'>
-                            <h3>Информация о доставке</h3>
-                            <p><b>Способ доставки:</b> {orderData?.deliveryMethod}</p>
-                            <p><b>Адрес:</b> {orderData?.country}, {orderData?.city},
-                                ул. {orderData?.street},(д.{orderData?.house},
-                                кв.{orderData?.apartment}), {orderData?.zip}</p>
-                            <p><b>Дата создания:</b> {formattedDateTime}</p>
-                            <p><b>Дополнительная информация:</b> {orderData?.additionalInformation}</p>
-                            <p><b>Код для получения товара:</b> {orderData?._id.toString()}</p>
-                        </div>
-                        <div className='firstInfoBlock firstInfoContactBlock'>
-                            <h3>Контактные данные</h3>
-                            <p><b>Имя:</b> {orderData?.name}</p>
-                            <p><b>Email:</b> {orderData?.email}</p>
-                            <p><b>Телефон:</b> {orderData?.telephone}</p>
-                        </div>
-                        <div className='products-value-cont'>
-                            <div className='products-value-block'>
-                                {orderData?.products.map((item, index) => (
-                                    <div className={'check-cart-item'} key={index}>
-                                        <img
-                                            className={'mini-cart-item-img'}
-                                            key={index}
-                                            src={item.image}
-                                            alt={`Thumbnail ${index}`}
-                                        />
-                                        <div className={'mini-cart-item-info'}>
-                                            <div className={'mini-cart-item-info-head'}>
-                                                <div>
-                                                    <h5 className={'mini-cart-item-title'}>{item.title}</h5>
-                                                    <p key={index}>{item.size}</p>
-                                                </div>
-                                            </div>
-                                            <div className={'mini-cart-footer'}>
-                                                <h5>
-                                                    ${item.price}.00
-                                                </h5>
+                <h2>{"Спасибо за ваш заказ!"}</h2>
+                <h4 className='placingOrderBlockTitle'><b>{orderData?.totalNumber}</b> товаров на
+                    сумму <b>${orderData?.totalCost.toFixed(2)}</b> ({orderData?.paymentState})</h4>
+            </div>
+        </div>
+        <div>
+            <div className='placingOrderBlockRow'>
+                <div className={'firstInfoContainer'}>
+                    <div className='firstInfoBlock'>
+                        <h3>Информация о доставке</h3>
+                        <p><b>Способ доставки:</b> {orderData?.deliveryMethod}</p>
+                        <p><b>Адрес:</b> {orderData?.country}, {orderData?.city},
+                            ул. {orderData?.street},(д.{orderData?.house},
+                            кв.{orderData?.apartment}), {orderData?.zip}</p>
+                        <p><b>Дата создания:</b> {formattedDateTime}</p>
+                        <p><b>Дополнительная информация:</b> {orderData?.additionalInformation}</p>
+                        <p><b>Код для получения товара:</b> {orderData?._id.toString()}</p>
+                    </div>
+                    <div className='firstInfoBlock firstInfoContactBlock'>
+                        <h3>Контактные данные</h3>
+                        <p><b>Имя:</b> {orderData?.name}</p>
+                        <p><b>Email:</b> {orderData?.email}</p>
+                        <p><b>Телефон:</b> {orderData?.telephone}</p>
+                    </div>
+                    <div className='products-value-cont'>
+                        <div className='products-value-block'>
+                            {orderData?.products.map((item, index) => (
+                                <div className={'check-cart-item'} key={index}>
+                                    <img
+                                        className={'mini-cart-item-img'}
+                                        key={index}
+                                        src={item.image}
+                                        alt={`Thumbnail ${index}`}
+                                    />
+                                    <div className={'mini-cart-item-info'}>
+                                        <div className={'mini-cart-item-info-head'}>
+                                            <div>
+                                                <h5 className={'mini-cart-item-title'}>{item.title}</h5>
+                                                <p key={index}>{item.size}</p>
                                             </div>
                                         </div>
+                                        <div className={'mini-cart-footer'}>
+                                            <h5>
+                                                ${item.price}.00
+                                            </h5>
+                                        </div>
                                     </div>
-                                ))}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+                <div className={'firstInfoContainer'}>
+                    <div className='OrderTotalCost'>
+                        <div className={'OrderTotalCostBlockHead'}>
+                            <div className={'OrderTotalBlockTitles'}>
+                                <b>Сумма заказа:</b>
+                            </div>
+                            <div className={'OrderTotalBlockValues'}>
+                                <p>${orderTotal.toFixed(2)}</p>
+                            </div>
+                        </div>
+                        <div className={'OrderTotalCostBlock'}>
+                            <div className={'OrderTotalBlockTitles'}>
+                                <b>НДС (+23%):</b>
+                                <b>Просокод (-{orderData?.promotionalCode}%):</b>
+                            </div>
+                            <div className={'OrderTotalBlockValues'}>
+                                <p>${orderTotalWithoutVat.toFixed(2)} + ${vat.toFixed(2)}</p>
+                                <p>${discountedTotal}</p>
+                            </div>
+                        </div>
+                        <div className={'OrderTotalCostBlockBottom'}>
+                            <div className={'OrderTotalBlockTitles'}>
+                                <b>Итого:</b>
+                            </div>
+                            <div className={'OrderTotalBlockValues'}>
+                                <p>${orderData?.totalCost.toFixed(2)}</p>
                             </div>
                         </div>
                     </div>
-                    <div className={'firstInfoContainer'}>
-                        <div className='OrderTotalCost'>
-                            <div className={'OrderTotalCostBlockHead'}>
-                                <div className={'OrderTotalBlockTitles'}>
-                                    <b>Сумма заказа:</b>
-                                </div>
-                                <div className={'OrderTotalBlockValues'}>
-                                    <p>${orderTotal.toFixed(2)}</p>
-                                </div>
-                            </div>
-                            <div className={'OrderTotalCostBlock'}>
-                                <div className={'OrderTotalBlockTitles'}>
-                                    <b>НДС (+23%):</b>
-                                    <b>Просокод (-{orderData?.promotionalCode}%):</b>
-                                </div>
-                                <div className={'OrderTotalBlockValues'}>
-                                    <p>${orderTotalWithoutVat.toFixed(2)} + ${vat.toFixed(2)}</p>
-                                    <p>${discountedTotal}</p>
-                                </div>
-                            </div>
-                            <div className={'OrderTotalCostBlockBottom'}>
-                                <div className={'OrderTotalBlockTitles'}>
-                                    <b>Итого:</b>
-                                </div>
-                                <div className={'OrderTotalBlockValues'}>
-                                    <p>${orderData?.totalCost.toFixed(2)}</p>
+                    {orderData?.trackingCode && (
+                        <div className='trackingInfoBlock'>
+                            <h3>Трекинг заказа</h3>
+                            <p><b>Сайт отслеживания:</b> {orderData?.trackingLink}</p>
+                            <b>Трекер-код</b>
+                            <div className={'firstInfoUrl'}>
+                                <input
+                                    className={'firstInfoUrlInput'}
+                                    style={{border: 'none', marginBottom: '0', height: '38px'}}
+                                    value={copied ? 'Скопировано!' : orderData?.trackingCode}>
+                                </input>
+                                <div className={'inputCurrentBtn'}>
+                                    <Image className={'inputCurrentBtnImg'} src={shearLogo}
+                                           onClick={copyLinkToClipboard} alt={'+'}/>
                                 </div>
                             </div>
                         </div>
-                        {orderData?.trackingCode && (
-                            <div className='trackingInfoBlock'>
-                                <h3>Трекинг заказа</h3>
-                                <p><b>Сайт отслеживания:</b> {orderData?.trackingLink}</p>
-                                <b>Трекер-код</b>
-                                <div className={'firstInfoUrl'}>
-                                    <input
-                                        className={'firstInfoUrlInput'}
-                                        style={{border: 'none', marginBottom: '0', height: '38px'}}
-                                        value={copied ? 'Скопировано!' : orderData?.trackingCode}>
-                                    </input>
-                                    <div className={'inputCurrentBtn'}>
-                                        <Image className={'inputCurrentBtnImg'} src={shearLogo}
-                                               onClick={copyLinkToClipboard} alt={'+'}/>
-                                    </div>
+                    )}
+                    <div>
+                        <div className='placingOrderInfoBlock'>
+                            <h3>Статус заказа:</h3>
+                            <div className={'orderStatusBlock'}>
+                                <div className="orderStatusLine">
+                                    {statuses.map((status, index) => (
+                                        <div key={index}
+                                             style={{backgroundColor: getStatusColor(index, status.selected)}}>
+                                            {status.selected ? (
+                                                <Image className="statusLineCheckImg" src={checkOrderStatusB}
+                                                       alt="Selected"/>) : (
+                                                <Image className="statusLineCheckImg" src={checkOrderStatusW}
+                                                       alt="Selected"/>)}
+                                        </div>
+                                    ))}
                                 </div>
-                            </div>
-                        )}
-                        <div>
-                            <div className='placingOrderInfoBlock'>
-                                <h3>Статус заказа:</h3>
-                                <div className={'orderStatusBlock'}>
-                                    <div className="orderStatusLine">
-                                        {statuses.map((status, index) => (
-                                            <div key={index}
-                                                 style={{backgroundColor: getStatusColor(index, status.selected)}}>
-                                                {status.selected ? (
-                                                    <Image className="statusLineCheckImg" src={checkOrderStatusB}
-                                                           alt="Selected"/>) : (
-                                                    <Image className="statusLineCheckImg" src={checkOrderStatusW}
-                                                           alt="Selected"/>)}
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <div className={'orderStatusTitleBlock'}>
-                                        {statuses.map((status, index) => (
-                                            <div className={'orderStatusItem'} key={index}
-                                                 style={{color: getStatusColor(index, status.selected)}}>
-                                                <p style={{fontWeight: getStatusWeight(index, status.selected)}}
-                                                   className={'orderStatusTitle'}>{status.title}</p>
-                                                {status.createdDate !== '' ? (
-                                                    <p className={'orderStatusTime'}>{formatTimestampToDate(status.createdDate)}</p>) : (
-                                                    <p className={'orderStatusTime'}>Пока неизвестно</p>)}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={'orderBtnBlock'}>
-                                <Link href={'/'} className={'placingOrderBlockButton'}>
-                                    {"На главную"}
-                                </Link>
-                                <div className={'placingOrderPdfButton'} onClick={generatePDF}>
-                                    <p>{"Скачать чек"}</p>
-                                    <Image src={pdfLogo} alt={'PDF'}></Image>
+                                <div className={'orderStatusTitleBlock'}>
+                                    {statuses.map((status, index) => (
+                                        <div className={'orderStatusItem'} key={index}
+                                             style={{color: getStatusColor(index, status.selected)}}>
+                                            <p style={{fontWeight: getStatusWeight(index, status.selected)}}
+                                               className={'orderStatusTitle'}>{status.title}</p>
+                                            {status.createdDate !== '' ? (
+                                                <p className={'orderStatusTime'}>{formatTimestampToDate(status.createdDate)}</p>) : (
+                                                <p className={'orderStatusTime'}>Пока неизвестно</p>)}
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
+                        <div className={'orderBtnBlock'}>
+                            <Link href={'/'} className={'placingOrderBlockButton'}>
+                                {"На главную"}
+                            </Link>
+                            <div className={'placingOrderPdfButton'} onClick={generatePDF}>
+                                <p>{"Скачать чек"}</p>
+                                <Image src={pdfLogo} alt={'PDF'}></Image>
+                            </div>
+                        </div>
+                    </div>
 
-                    </div>
                 </div>
             </div>
         </div>
-    )
+    </div>
+    );
 }

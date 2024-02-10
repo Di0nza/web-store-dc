@@ -5,7 +5,13 @@ import {
     DEFAULT_USER_LOGIN_REDIRECT,
     apiAuthPrefix,
     authRoutes,
-    publicRoutes, adminRoutes, DEFAULT_ADMIN_LOGIN_REDIRECT, adminEmails,
+    publicRoutes,
+    adminRoutes,
+    DEFAULT_ADMIN_LOGIN_REDIRECT,
+    adminEmails,
+    apiAdminPrefix,
+    storePrefix,
+    apiPublicProductPrefix,
 } from "@/routes";
 import {NextResponse} from "next/server";
 import {isAdmin} from "@/lib/auth";
@@ -21,8 +27,14 @@ export default auth(async (req) => {
     //console.log("АДМИН:", isAdmin)
 
     const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
+    const isApiAdminRoute = nextUrl.pathname.startsWith(apiAdminPrefix);
+    const isApiPublicProductRoute = nextUrl.pathname.startsWith(apiPublicProductPrefix);
+
+    // const isApiPublicRoute = nextUrl.pathname.startsWith(apiPublicPrefix);
+
+    const isStore = nextUrl.pathname.startsWith(storePrefix);
     const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
-    const isAdminRoute = adminRoutes.includes(nextUrl.pathname)
+    const isAdminRoute = adminRoutes.includes(nextUrl.pathname);
     const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
     if (isApiAuthRoute) {
@@ -40,11 +52,11 @@ export default auth(async (req) => {
         return null;
     }
 
-    if (!isLoggedIn && !isPublicRoute) {
+    if (!isLoggedIn && !isPublicRoute && !isStore && !isApiPublicProductRoute){
         return NextResponse.redirect(new URL("/login", nextUrl));
     }
 
-    if (isAdminRoute){
+    if (isAdminRoute || isApiAdminRoute){
         if(!isLoggedIn){
             return NextResponse.redirect(new URL("/login", nextUrl));
         }

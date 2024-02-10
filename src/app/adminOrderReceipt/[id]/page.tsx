@@ -36,13 +36,12 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const getUserDetails = async () => {
         try {
 
-            const res = await axios.get(`/api/users/getAllOrders`);
-            // const res = await axios.get<{ data: orderData }>(`/api/users/getAllOrders`);
-            let foundOrder: any;
-            foundOrder = res.data.orders.find(order => order._id === id);
-            setOrderData(foundOrder);
-            setTrackingCode(foundOrder.trackingCode);
-            setTrackingLink(foundOrder.trackingLink);
+            const res = await axios.get(`/api/admin/orders/${id}`).then((data)=>{
+                console.log(data)
+                setOrderData(data.data.order);
+                setTrackingCode(data.data.order.trackingCode);
+                setTrackingLink(data.data.order.trackingLink);
+            });
         } catch (error: any) {
             console.log(error.message);
         }
@@ -107,7 +106,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                 title: statusTitle,
                 createdDate: Date.now(),
             };
-            const res = await axios.put(`/api/users/order`, updatedStatus);
+            const res = await axios.put(`/api/admin/orders`, updatedStatus);
             console.log(res.data.updatedOrder.orderStatus)
             window.location.reload();
         } catch (error) {
@@ -121,7 +120,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                 trackingCode: trackingCode,
                 trackingLink: trackingLink
             };
-            const res = await axios.put(`/api/users/orderTracking`, updatedStatus);
+            const res = await axios.put(`/api/admin/orderTracking`, updatedStatus);
             console.log(res.data.updatedOrder);
             window.location.reload();
         } catch (error) {

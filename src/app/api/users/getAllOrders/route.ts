@@ -11,21 +11,18 @@ export async function GET(request: NextRequest) {
 
         const user = await currentUser();
 
-        // if(!user){
-        //     return NextResponse.json({error: "Unauthorized."}, {status: 401})
-        // }
-        //
-        // const userDB = await User.findById(user.id)
-        //
-        // if(!userDB){
-        //     return NextResponse.json({error: "Unauthorized."}, {status: 401})
-        // }
-        //
-        // if(user?.isAdmin === false){
-        //     return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
-        // }
+        if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
 
-        const allOrders = await Order.find({});
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        const allOrders = await Order.find({email: userDB.email});
+
         return NextResponse.json({
             message: "All orders retrieved successfully",
             orders: allOrders

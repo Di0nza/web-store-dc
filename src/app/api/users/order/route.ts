@@ -99,101 +99,6 @@ export async function POST(request: NextRequest) {
     }
 }
 
-interface IParams {
-    orderId?: string;
-}
-
-
-// export async function GET(request: NextRequest) {
-//     try {
-//         const user = await currentUser();
-//
-//         if(!user){
-//             return NextResponse.json({error: "Unauthorized."}, {status: 401})
-//         }
-//
-//         const userDB = await User.findById(user.id)
-//
-//         if(!userDB){
-//             return NextResponse.json({error: "Unauthorized."}, {status: 401})
-//         }
-//
-//         const {id} = request.query;
-//         const order = await Order.findById(id);
-//
-//         if (!order) {
-//             return NextResponse.json({ error: "Order not found" }, { status: 404 });
-//         }
-//
-//         if(user.email !== order.email && user.isAdmin !== true){
-//             return NextResponse.json({error: "Forbidden. You don't have this rights."}, {status: 403})
-//         }
-//
-//
-//         return NextResponse.json({
-//             message: "Order retrieved successfully",
-//             order
-//         });
-//     } catch (error: any) {
-//         return NextResponse.json({ error: error.message }, { status: 500 });
-//     }
-// }
-
-export async function PUT(request: NextRequest) {
-    try {
-
-        const user = await currentUser();
-
-        if(!user){
-            return NextResponse.json({error: "Unauthorized."}, {status: 401})
-        }
-
-        const userDB = await User.findById(user.id)
-
-        if(!userDB){
-            return NextResponse.json({error: "Unauthorized."}, {status: 401})
-        }
-
-        if(user?.isAdmin === false){
-            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
-        }
-
-        const reqBody = await request.json();
-        const orderId = reqBody.id;
-        const existingOrder = await Order.findById(orderId);
-        if (!existingOrder) {
-            return NextResponse.json({ message: "Order not found" }, { status: 404 });
-        }
-        const { title, createdDate } = reqBody;
-        const statusToUpdate = existingOrder.orderStatus.find(status => status.title === title);
-
-        if (!statusToUpdate) {
-            return NextResponse.json({ message: "Status not found" }, { status: 404 });
-        }
-        statusToUpdate.createdDate = createdDate;
-        statusToUpdate.selected = true;
-        let updated = false;
-        for (let i = existingOrder.orderStatus.indexOf(statusToUpdate) - 1; i >= 0; i--) {
-            if (!existingOrder.orderStatus[i].selected && !existingOrder.orderStatus[i].createdDate) {
-                existingOrder.orderStatus[i].createdDate = createdDate;
-                existingOrder.orderStatus[i].selected = true;
-                updated = true;
-            } else {
-                break;
-            }
-        }
-        existingOrder.markModified('orderStatus');
-        const updatedOrder = await existingOrder.save();
-
-        return NextResponse.json({
-            message: "Order updated successfully",
-            updatedOrder
-        });
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-}
-
 export async function DELETE(request: NextRequest) {
     try {
 
@@ -209,16 +114,25 @@ export async function DELETE(request: NextRequest) {
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
-        if(user?.isAdmin === false){
-            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
-        }
-
         const reqBody = await request.json()
         const { orderId } = reqBody
-        const deletedOrder = await Order.findByIdAndDelete(orderId)
-        if (!deletedOrder) {
-            return NextResponse.json({ message: "PromoCode not found" }, { status: 404 })
+        const order = await Order.findById(orderId)
+
+        if (!order) {
+            return NextResponse.json({ message: "Order not found" }, { status: 404 })
         }
+
+        if(order.email !== userDB.email){
+            return NextResponse.json({error: "Forbidden. You do not have access to this action."}, {status: 403});
+        }
+
+        if(order.orderStatus.slice().reverse().find(status => status.selected)?.title !== "Получен покупателем"){
+            return NextResponse.json({error: "Forbidden. You do not have access to this action."}, {status: 403});
+
+        }
+
+        const deletedOrder = await Order.findByIdAndDelete(orderId);
+
         return NextResponse.json({
             message: "Order deleted successfully",
             promo: deletedOrder
@@ -227,6 +141,5 @@ export async function DELETE(request: NextRequest) {
         return NextResponse.json({ error: error.message }, { status: 500 })
     }
 }
-
 
 

@@ -41,11 +41,12 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({error: "Неверный пароль"})
         }
 
-        if (!existingUser.emailVerified) {
-            const verificationToken = await generateVerificationToken(email);
-            await sendVerificationEmail(verificationToken.email, verificationToken.token);
-            return NextResponse.json({success: "Необходимо завершить регистрацию. Письмо для подтверждения выслано на почту"});
-        }
+        //TODO Не забыть раскомментировать
+        // if (!existingUser.emailVerified) {
+        //     const verificationToken = await generateVerificationToken(email);
+        //     await sendVerificationEmail(verificationToken.email, verificationToken.token);
+        //     return NextResponse.json({success: "Необходимо завершить регистрацию. Письмо для подтверждения выслано на почту"});
+        // }
 
         await signIn("credentials", {
             email,

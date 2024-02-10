@@ -11,6 +11,7 @@ import OrdersChart from "@/components/charts/OrdersChart";
 import {getAllProductsUser} from "@/services/getData";
 import ProductRadialChart from "@/components/charts/ProductRadialChart";
 import ProductViewsFavorites from "@/components/product/ProductViewsFavorites";
+import {RoleGate} from "@/components/auth/RoleGate";
 
 export default function AdminStatistics() {
     const router = useRouter();
@@ -22,7 +23,7 @@ export default function AdminStatistics() {
 
     const getUserOrders = async () => {
         try {
-            const res = await axios.get(`/api/users/getAllOrders`);
+            const res = await axios.get(`/api/admin/orders`);
             setUserOrders(res.data.orders);
             setFilteredOrders(res.data.orders);
         } catch (error: any) {
@@ -65,60 +66,63 @@ export default function AdminStatistics() {
     }, [])
 
     return (
-        <div className='adminStatisticContainer'>
-            <h2>{"Статистика"}</h2>
-            <p className='changeBlockText'>{`На данный момент зарегистрировано заказов: ${userOrders?.length}`}</p>
-            {userOrders && (
-                <div className='orderStatisticBlock'>
-                    <OrdersChart userOrders={userOrders}/>
-                </div>
-            )}
-            <div className='productsStatisticBlock'>
-                {products.map((product) => (
-                    <div key={product._id} className='productStatistics'>
-                        <div className='productStatisticsInfo'>
-                            <img className='product-statistic-img' src={product.pictures[0]} alt={product.title}></img>
-                            <div className={'productStatisticsInfoBlock'}>
-                                <div>
-                                    <p className='product-title'>{product.title}</p>
-                                    <p className='product-category'>{product.category}</p>
-                                    <div>
-                                        <div className={'viewsBlock'}>
-                                            <Image src={views} alt={''}></Image>
-                                            <b>Просмотры: </b>
-                                            <p>{product.views}</p>
-                                        </div>
-                                        <div className={'viewsBlock'}>
-                                            <Image src={favorites} alt={''}></Image>
-                                            <b>Избранные: </b>
-                                            <p>{product.favorites}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <p className='product-price'>${product.price}.00</p>
-                                    <div className={'productSizeBlock'}>
-                                        {product.sizes.map((size, index) => (
-                                            <div key={index}  className={'productSize'}>
-                                                <b key={index}>{size.size}:</b>
-                                                <p key={index}>{size.amount}</p>
-                                            </div>
-
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        {/*<div className='productStatisticViewsFavorites'>*/}
-                        {/*    <ProductViewsFavorites product={product}/>*/}
-                        {/*</div>*/}
-                        <div className='productStatisticBlock'>
-                            <ProductRadialChart product={product}/>
-                        </div>
+        <RoleGate isAdmin={true}>
+            <div className='adminStatisticContainer'>
+                <h2>{"Статистика"}</h2>
+                <p className='changeBlockText'>{`На данный момент зарегистрировано заказов: ${userOrders?.length}`}</p>
+                {userOrders && (
+                    <div className='orderStatisticBlock'>
+                        <OrdersChart userOrders={userOrders}/>
                     </div>
-                ))}
+                )}
+                <div className='productsStatisticBlock'>
+                    {products.map((product) => (
+                        <div key={product._id} className='productStatistics'>
+                            <div className='productStatisticsInfo'>
+                                <img className='product-statistic-img' src={product.pictures[0]}
+                                     alt={product.title}></img>
+                                <div className={'productStatisticsInfoBlock'}>
+                                    <div>
+                                        <p className='product-title'>{product.title}</p>
+                                        <p className='product-category'>{product.category}</p>
+                                        <div>
+                                            <div className={'viewsBlock'}>
+                                                <Image src={views} alt={''}></Image>
+                                                <b>Просмотры: </b>
+                                                <p>{product.views}</p>
+                                            </div>
+                                            <div className={'viewsBlock'}>
+                                                <Image src={favorites} alt={''}></Image>
+                                                <b>Избранные: </b>
+                                                <p>{product.favorites}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p className='product-price'>${product.price}.00</p>
+                                        <div className={'productSizeBlock'}>
+                                            {product.sizes.map((size, index) => (
+                                                <div key={index} className={'productSize'}>
+                                                    <b key={index}>{size.size}:</b>
+                                                    <p key={index}>{size.amount}</p>
+                                                </div>
+
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {/*<div className='productStatisticViewsFavorites'>*/}
+                            {/*    <ProductViewsFavorites product={product}/>*/}
+                            {/*</div>*/}
+                            <div className='productStatisticBlock'>
+                                <ProductRadialChart product={product}/>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
-        </div>
+        </RoleGate>
     );
 }

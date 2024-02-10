@@ -8,6 +8,7 @@ import deleteItem from "@/img/delete.png";
 import Image from "next/image";
 import searchIco from "@/img/searchIco.png";
 import {getDataBySearch} from "@/services/getData";
+import {RoleGate} from "@/components/auth/RoleGate";
 
 export default function UserOrders() {
     const router = useRouter();
@@ -37,7 +38,8 @@ export default function UserOrders() {
 
     const getUserOrders = async () => {
         try {
-            const res = await axios.get(`/api/users/getAllOrders`);
+            const res = await axios.get(`/api/admin/orders`);
+            console.log(res)
             setUserOrders(res.data.orders);
             setFilteredOrders(res.data.orders);
         } catch (error: any) {
@@ -47,8 +49,8 @@ export default function UserOrders() {
     const deleteOrder = async (orderId, event) => {
         event.preventDefault();
         try {
-            const response = await axios.delete(`/api/users/order`, {
-                data: { orderId }
+            const response = await axios.delete(`/api/admin/orders`, {
+                data: {orderId}
             });
             console.log(response.data.message);
             setShowConfirmation(false);
@@ -196,118 +198,126 @@ export default function UserOrders() {
     };
 
     return (
-        <div className='adminOrdersBlock'>
-            {showConfirmation && (
-                <div className="confirmation-modal-overlay">
-                    <div className="confirmation-modal">
-                        <h2>Подтвердите удаление</h2>
-                        <p>Вы уверены, что хотите удалить заказ <b>{orderIdToDelete}</b>?</p>
-                        <div className="order-delete-btns">
-                            <div className="confirm-order-delete" onClick={() => cancelDeleteOrder()}
-                                 >Отмена
+        <RoleGate isAdmin={true}>
+            <div className='adminOrdersBlock'>
+                {showConfirmation && (
+                    <div className="confirmation-modal-overlay">
+                        <div className="confirmation-modal">
+                            <h2>Подтвердите удаление</h2>
+                            <p>Вы уверены, что хотите удалить заказ <b>{orderIdToDelete}</b>?</p>
+                            <div className="order-delete-btns">
+                                <div className="confirm-order-delete" onClick={() => cancelDeleteOrder()}
+                                >Отмена
+                                </div>
+                                <div
+                                    className="cancel-order-delete"
+                                    onClick={(event) =>
+                                        deleteOrder(orderIdToDelete, event)
+                                    }>Удалить
+                                </div>
                             </div>
-                            <div
-                                className="cancel-order-delete"
-                                onClick={(event) =>
-                                    deleteOrder(orderIdToDelete, event)
-                            }>Удалить</div>
                         </div>
                     </div>
-                </div>
-            )}
-            <h2>{"Все заказы"}</h2>
-            <p className='changeBlockText'>{`В обработке находятся ${userOrders?.length} заказов`}</p>
-            {userOrders && (
-                <div className='orderFilterBlock'>
-                    <div className='ordersProfileBlock'>
-                        {filteredOrders?.map((item, index) => (
-                            <Link href={`/adminOrderReceipt/${item._id}`} key={index}>
-                                <div className={'mini-order-item-info'}
-                                style={{opacity:item.orderStatus.slice().reverse().find(status => status.selected)?.title === "Получен покупателем" ? '0.4' : '1'}}>
-                                    <div className={'order-header'}>
-                                        <p className={'mini-admin-item-info-head'}><b>Заказ
-                                            #{item._id.toString().slice(-7)}</b></p>
-                                        <Image onClick={(event) => openConfirmationModal(item._id, event)} className={'order-item-delete-img'} src={deleteItem} alt={'x'}></Image>
-                                    </div>
-                                    {item.orderStatus && (
-                                        <p className={'mini-cart-item-order-status'}>
-                                            Статус
-                                            заказа: <b>{item.orderStatus.slice().reverse().find(status => status.selected)?.title}</b>
-                                        </p>
-                                    )}
-                                    <div className={'mini-order-footer'}>
-                                        <p className={'mini-cart-item-date'}>{formatTimestampToDate(item.orderStatus.slice().reverse().find(status => status.selected)?.createdDate)}</p>
-                                        <div className={'mini-cart-footer-right'}>
-                                            <h5 className={'mini-cart-item-cost'}>Стоимость: <b>${item.totalCost.toFixed(2)}</b>
-                                            </h5>
-                                            <p className={'mini-cart-item-date'}>{formatDateTime(item.createdAt)}</p>
+                )}
+                <h2>{"Все заказы"}</h2>
+                <p className='changeBlockText'>{`В обработке находятся ${userOrders?.length} заказов`}</p>
+                {userOrders && (
+                    <div className='orderFilterBlock'>
+                        <div className='ordersProfileBlock'>
+                            {filteredOrders?.map((item, index) => (
+                                <Link href={`/adminOrderReceipt/${item._id}`} key={index}>
+                                    <div className={'mini-order-item-info'}
+                                         style={{opacity: item.orderStatus.slice().reverse().find(status => status.selected)?.title === "Получен покупателем" ? '0.4' : '1'}}>
+                                        <div className={'order-header'}>
+                                            <p className={'mini-admin-item-info-head'}><b>Заказ
+                                                #{item._id.toString().slice(-7)}</b></p>
+                                            <Image onClick={(event) => openConfirmationModal(item._id, event)}
+                                                   className={'order-item-delete-img'} src={deleteItem}
+                                                   alt={'x'}></Image>
                                         </div>
-                                    </div>
-                                </div>
-                            </Link>
-                        ))}
-                    </div>
-                    <div>
-                        <div className='filterSearchBlock'>
-                            <input type='search' placeholder='Поиск' value={search} onChange={event => setSearch(event.target.value)}/>
-                            <div onClick={()=>handleSubmit} className='filterSearchBtn'><Image src={searchIco} alt={"Искать"}/></div>
-                        </div>
-
-                        <div className='filterBlock'>
-                            <h4>Сортировка заказов</h4>
-                            {categories && (
-                                <div className='profileBlockOrderFiltersColumn'>
-                                    <div className='profileBlockOrderFilters'>
-                                    <div
-                                            className={`blockCategory ${selectedMainCategory === 'Показать всех' ? 'selected' : ''}`}
-                                            onClick={showAllMessages}>
-                                            Показать всех
-                                        </div>
-                                        <div
-                                            className={`blockCategory ${selectedMainCategory === 'Только активные' ? 'selected' : ''}`}
-                                            onClick={showOnlyActiveMessages}>
-                                            Только активные
-                                        </div>
-                                        <div
-                                            className={`blockCategory ${selectedMainCategory === 'Только неактивные' ? 'selected' : ''}`}
-                                            onClick={showOnlyInactiveMessages}>
-                                            Только неактивные
-                                        </div>
-                                    </div>
-                                    <div className='profileBlockOrderFilters'>
-                                        <div onClick={() => handleDateCategoryFilter('dateAscending')}
-                                             className={`blockCategory ${selectedDateCategory === 'dateAscending' ? 'selected' : ''}`}>
-                                            Дата: сначала старые
-                                        </div>
-                                        <div onClick={() => handleDateCategoryFilter('dateDescending')}
-                                             className={`blockCategory ${selectedDateCategory === 'dateDescending' ? 'selected' : ''}`}>
-                                            Дата: сначала новые
-                                        </div>
-                                        <div onClick={() => handleDateCategoryFilter('statusAscending')}
-                                             className={`blockCategory ${selectedDateCategory === 'statusAscending' ? 'selected' : ''}`}>
-                                            Статус: по возрастанию
-                                        </div>
-                                        <div onClick={() => handleDateCategoryFilter('statusDescending')}
-                                             className={`blockCategory ${selectedDateCategory === 'statusDescending' ? 'selected' : ''}`}>
-                                            Статус: по убыванию
-                                        </div>
-                                    </div>
-                                    <div className='profileBlockOrderFilters'>
-                                        {categories.map((category, index) => (
-                                            <div
-                                                className={`blockCategory ${selectedCategory === category ? 'selected' : ''}`}
-                                                key={index}
-                                                onClick={() => handleCategoryFilter(category)}>
-                                                {category}
+                                        {item.orderStatus && (
+                                            <p className={'mini-cart-item-order-status'}>
+                                                Статус
+                                                заказа: <b>{item.orderStatus.slice().reverse().find(status => status.selected)?.title}</b>
+                                            </p>
+                                        )}
+                                        <div className={'mini-order-footer'}>
+                                            <p className={'mini-cart-item-date'}>{formatTimestampToDate(item.orderStatus.slice().reverse().find(status => status.selected)?.createdDate)}</p>
+                                            <div className={'mini-cart-footer-right'}>
+                                                <h5 className={'mini-cart-item-cost'}>Стоимость: <b>${item.totalCost.toFixed(2)}</b>
+                                                </h5>
+                                                <p className={'mini-cart-item-date'}>{formatDateTime(item.createdAt)}</p>
                                             </div>
-                                        ))}
+                                        </div>
                                     </div>
+                                </Link>
+                            ))}
+                        </div>
+                        <div>
+                            <div className='filterSearchBlock'>
+                                <input type='search' placeholder='Поиск' value={search}
+                                       onChange={event => setSearch(event.target.value)}/>
+                                <div onClick={() => handleSubmit} className='filterSearchBtn'><Image src={searchIco}
+                                                                                                     alt={"Искать"}/>
                                 </div>
-                            )}
+                            </div>
+
+                            <div className='filterBlock'>
+                                <h4>Сортировка заказов</h4>
+                                {categories && (
+                                    <div className='profileBlockOrderFiltersColumn'>
+                                        <div className='profileBlockOrderFilters'>
+                                            <div
+                                                className={`blockCategory ${selectedMainCategory === 'Показать всех' ? 'selected' : ''}`}
+                                                onClick={showAllMessages}>
+                                                Показать всех
+                                            </div>
+                                            <div
+                                                className={`blockCategory ${selectedMainCategory === 'Только активные' ? 'selected' : ''}`}
+                                                onClick={showOnlyActiveMessages}>
+                                                Только активные
+                                            </div>
+                                            <div
+                                                className={`blockCategory ${selectedMainCategory === 'Только неактивные' ? 'selected' : ''}`}
+                                                onClick={showOnlyInactiveMessages}>
+                                                Только неактивные
+                                            </div>
+                                        </div>
+                                        <div className='profileBlockOrderFilters'>
+                                            <div onClick={() => handleDateCategoryFilter('dateAscending')}
+                                                 className={`blockCategory ${selectedDateCategory === 'dateAscending' ? 'selected' : ''}`}>
+                                                Дата: сначала старые
+                                            </div>
+                                            <div onClick={() => handleDateCategoryFilter('dateDescending')}
+                                                 className={`blockCategory ${selectedDateCategory === 'dateDescending' ? 'selected' : ''}`}>
+                                                Дата: сначала новые
+                                            </div>
+                                            <div onClick={() => handleDateCategoryFilter('statusAscending')}
+                                                 className={`blockCategory ${selectedDateCategory === 'statusAscending' ? 'selected' : ''}`}>
+                                                Статус: по возрастанию
+                                            </div>
+                                            <div onClick={() => handleDateCategoryFilter('statusDescending')}
+                                                 className={`blockCategory ${selectedDateCategory === 'statusDescending' ? 'selected' : ''}`}>
+                                                Статус: по убыванию
+                                            </div>
+                                        </div>
+                                        <div className='profileBlockOrderFilters'>
+                                            {categories.map((category, index) => (
+                                                <div
+                                                    className={`blockCategory ${selectedCategory === category ? 'selected' : ''}`}
+                                                    key={index}
+                                                    onClick={() => handleCategoryFilter(category)}>
+                                                    {category}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
-        </div>
+                )}
+            </div>
+        </RoleGate>
     );
 }

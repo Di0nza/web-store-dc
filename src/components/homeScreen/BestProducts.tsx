@@ -37,7 +37,7 @@ const BestProducts = () => {
                         <div className='best-product-items-block'>
                             {products.map((product: any) => (
                                 <div key={product._id} className='best-product-item'>
-                                    <Link href={`store/${product._id}`}>
+                                    <Link href={`/store/${product._id}`}>
                                         <div className='best-product-info'>
                                             <img className='best-product-img' src={product.pictures[0]}
                                                  alt={product.title}></img>

@@ -6,9 +6,12 @@ import Link from "next/link";
 import './orderStyles.css'
 import Image from "next/image";
 import close from "@/img/close.png";
+import {RoleGate} from "@/components/auth/RoleGate";
+
 interface MessageData {
     messageId: string;
 }
+
 export default function AllAdminMessages() {
     const router = useRouter();
     const [userOrders, setUserOrders] = useState(null);
@@ -18,7 +21,7 @@ export default function AllAdminMessages() {
 
     const getUserOrders = async () => {
         try {
-            const res = await axios.get(`/api/users/messages`);
+            const res = await axios.get(`/api/admin/messages`);
             setUserOrders(res.data.messages);
         } catch (error: any) {
             console.log(error.message);
@@ -72,7 +75,7 @@ export default function AllAdminMessages() {
             const messageData: MessageData = {
                 messageId: messageId,
             };
-            const response = await axios.delete("/api/users/messages", { data: messageData });
+            const response = await axios.delete("/api/admin/messages", {data: messageData});
             console.log(response.data.messages?._id);
             window.location.reload();
         } catch (error) {
@@ -81,49 +84,53 @@ export default function AllAdminMessages() {
     };
 
     return (
-        <div className='profileBlock'>
-            <h2>{"Сообщения"}</h2>
-            <p className='changeBlockText'>{`Увас ${userOrders?.length} сообщений!`}</p>
-            {categories && (
-                <div className='profileBlockCategories'>
-                    <div className={`blockCategory ${!selectedCategory ? 'selected' : ''}`}
-                         onClick={showAllMessages}>
-                        Показать всех
+        <RoleGate isAdmin={true}>
+            <div className='profileBlock'>
+                <h2>{"Сообщения"}</h2>
+                <p className='changeBlockText'>{`Увас ${userOrders?.length} сообщений!`}</p>
+                {categories && (
+                    <div className='profileBlockCategories'>
+                        <div className={`blockCategory ${!selectedCategory ? 'selected' : ''}`}
+                             onClick={showAllMessages}>
+                            Показать всех
+                        </div>
+                        {categories.map((category, index) => (
+                            <div className={`blockCategory ${selectedCategory === category ? 'selected' : ''}`}
+                                 key={index}
+                                 onClick={() => handleCategoryFilter(category)}>
+                                {category}
+                            </div>
+                        ))}
                     </div>
-                    {categories.map((category, index) => (
-                        <div className={`blockCategory ${selectedCategory === category ? 'selected' : ''}`}
-                             key={index}
-                             onClick={() => handleCategoryFilter(category)}>
-                            {category}
-                        </div>
-                    ))}
-                </div>
-            )}
-            {userOrders && (
-                <div className='orderProfileBlock'>
-                    {(filteredOrders || userOrders)?.map((item, index) => (
-                        <div key={index} className={'mini-order-item-info'}>
-                            <div className={'mini-cart-item-info-head'}>
-                                <div>
-                                    <h4 className={'mini-cart-item-title'}>{item.title}</h4>
+                )}
+                {userOrders && (
+                    <div className='orderProfileBlock'>
+                        {(filteredOrders || userOrders)?.map((item, index) => (
+                            <div key={index} className={'mini-order-item-info'}>
+                                <div className={'mini-cart-item-info-head'}>
+                                    <div>
+                                        <h4 className={'mini-cart-item-title'}>{item.title}</h4>
 
+                                    </div>
+                                    <div className={'mini-cart-item-close-block'} onClick={() => {
+                                        deleteMessage(item._id)
+                                    }}>
+                                        <Image className="shearMessageCloseImg" src={close} alt={'x'}></Image>
+                                    </div>
                                 </div>
-                                <div className={'mini-cart-item-close-block'} onClick={() => {deleteMessage(item._id)}}>
-                                    <Image className="shearMessageCloseImg" src={close} alt={'x'}></Image>
+                                <div className={'mini-admin-cart-footer'}>
+                                    <p className={'messages-category-block'}>{item.category}</p>
+                                    <h5 className={'messages-category-sender'}>
+                                        <b>Отправитель:</b> {item.authorsContact}
+                                    </h5>
+                                    <p className={'messages-category-sender'}>{(item.message)}</p>
+                                    <p className={'mini-cart-item-date'}>{formatTimestampToDate(item.createdAt)}</p>
                                 </div>
                             </div>
-                            <div className={'mini-admin-cart-footer'}>
-                                <p className={'messages-category-block'}>{item.category}</p>
-                                <h5 className={'messages-category-sender'}>
-                                    <b>Отправитель:</b> {item.authorsContact}
-                                </h5>
-                                <p className={'messages-category-sender'}>{(item.message)}</p>
-                                <p className={'mini-cart-item-date'}>{formatTimestampToDate(item.createdAt)}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+        </RoleGate>
     );
 }
