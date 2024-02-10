@@ -13,6 +13,7 @@ export default function Returns() {
     };
 
     return (
+
         <div className={'contacts'}>
             {isFooterErrorBlockOpen && (
                 <FooterErrorBlock onClose={toggleFooterErrorBlock}/>
