@@ -25,10 +25,10 @@ export default function Contacts() {
     return (
         <div className={'contacts'}>
             {isFooterErrorBlockOpen && (
-                <FooterErrorBlock/>
+                <FooterErrorBlock onClose={toggleFooterErrorBlock}/>
             )}
             {isFooterCooperationBlockOpen && (
-                <FooterCooperationBlock/>
+                <FooterCooperationBlock onClose={toggleFooterCooperationBlock}/>
             )}
             <Image className={'contacts-bg-img'} src={aboutBg} alt={''}/>
             <h2 className={'title'}>Контакты</h2>
