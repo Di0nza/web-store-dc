@@ -1373,6 +1373,7 @@
     }
     .addProdBlockBody{
         display: flex;
+
         flex-direction: column !important;
     }
     .big-photos-content-info{
