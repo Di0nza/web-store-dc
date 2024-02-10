@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -90,13 +91,13 @@ body {
   /*min-height: 100vh;*/
   margin: 0;
   overflow-x: hidden;
-  font-family: "Century Gothic", serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 body {
   color: #111111;
   background: rgb(241, 241, 241);
-  font-family: "Century Gothic", serif;
+  font-family: 'Raleway', sans-serif;
 
 }
 ::-webkit-scrollbar {
@@ -132,7 +133,7 @@ a {
   min-height: 100vh;
   height: 100%;
   background-color: #fafafa;
-  font-family: "Century Gothic", serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {

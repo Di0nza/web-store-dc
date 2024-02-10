@@ -6,7 +6,7 @@
     margin: 0 auto;
     color: #111111;
     width: 100%;
-    font-family: "Century Gothic", serif;
+    font-family: 'Raleway', sans-serif;
     background-color: #fafafa;
     border-bottom: 1px solid #dedede;
     height: 60px;
@@ -16,7 +16,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-family: "Century Gothic", serif;
+    font-family: 'Raleway', sans-serif;
     justify-content: center;
     margin: 0 auto;
     color: #111111;
@@ -479,7 +479,7 @@
 }
 .deleteModalBlock{
     max-width: 450px;
-    font-family: "Century Gothic", serif;
+    font-family: 'Raleway', sans-serif;
     background-color: #fafafa;
 }
 .admin-products-header{
@@ -716,12 +716,12 @@
     align-content: flex-start;
 }
 .addProdBlock{
-    font-family: "Century Gothic", serif;
+    font-family: 'Raleway', sans-serif;
     background-color: #fafafa;
     max-width: 800px;
 }
 .changePassContainer{
-    font-family: "Century Gothic", serif;
+    font-family: 'Raleway', sans-serif;
     background-color: #fafafa;
     width: 100%;
     max-width: 600px;
@@ -1362,7 +1362,7 @@
 }
 @media screen and (max-width: 800px){
     .addProdBlock{
-        font-family: "Century Gothic", serif;
+        font-family: 'Raleway', sans-serif;
         background-color: #fafafa;
         max-width: 100%;
         width: calc(100% - 30px);
@@ -1448,7 +1448,7 @@
 }
 @media screen and (max-width: 600px){
     .changePassContainer{
-        font-family: "Century Gothic", serif;
+        font-family: 'Raleway', sans-serif;
         background-color: #fafafa;
         border-radius: 10px;
         width: calc(100% - 30px);

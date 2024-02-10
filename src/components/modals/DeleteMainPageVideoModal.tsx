@@ -46,7 +46,7 @@ export const DeleteMainPageVideoModal = () => {
 
     return (
         <Dialog open={isModalOpen} onOpenChange={onClose}>
-            <DialogContent className="bg-white text-black p-0 overflow-hidden deleteModalBlock" style={{fontFamily: "Century Gothic", backgroundColor:'#fafafa', maxWidth:'450px'}}>
+            <DialogContent className="bg-white text-black p-0 overflow-hidden deleteModalBlock" style={{fontFamily: "Raleway", backgroundColor:'#fafafa', maxWidth:'450px'}}>
                 <DialogHeader className="pt-8 px-6">
                     <DialogTitle className="text-2xl text-left font-bold">
                         Удаление видеобаннера
