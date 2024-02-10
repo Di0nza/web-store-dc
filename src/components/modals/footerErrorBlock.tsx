@@ -5,7 +5,7 @@ import '../../app/profile/profileStyles.css'
 import Image from "next/image";
 import close from "@/img/close.png";
 
-const FooterErrorBlock = () => {
+const FooterErrorBlock = ({onClose}) => {
     const [orderTitle, setOrderTitle] = useState('');
     const [message, setMessage] = useState({
         title: '',
@@ -26,7 +26,7 @@ const FooterErrorBlock = () => {
             };
             const response = await axios.post("/api/users/messages", messageData);
             console.log(response.data.messages._id);
-            window.location.reload();
+            onClose();
         } catch (error:any) {
             console.log(error.message);
         }
@@ -49,7 +49,7 @@ const FooterErrorBlock = () => {
                     <p className="shearContainerTitle">
                         Сообщение об ошибке
                     </p>
-                    <button onClick={() => window.location.reload()}>
+                    <button onClick={() => onClose()}>
                         <Image className="shearContainerCloseImg" src={close} alt={'x'}></Image>
                     </button>
                 </header>

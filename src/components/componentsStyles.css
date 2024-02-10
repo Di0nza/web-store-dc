@@ -734,6 +734,10 @@
     box-shadow: none;
 }
 .addProdBlockBody{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 20px;
     max-height: 63vh;
     overflow-y: auto;
 }
@@ -1369,7 +1373,7 @@
     }
     .addProdBlockBody{
         display: flex;
-        flex-direction: column;
+        flex-direction: column !important;
     }
     .big-photos-content-info{
         height: 100%;

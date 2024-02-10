@@ -54,11 +54,15 @@ export default function ProfilePage() {
             {userData && (
                 <>
                     <p className='profileHelloText'>Здравсвуйте, {userData?.name}</p>
-                    <p  className='createdDate'>Дата создания аккаунта: {new Date(userData?.emailVerified).toLocaleString()}</p>
+                    {/*{!userData?.emailVerified ? (*/}
+                    {/*    <p  className='createdDate'>Дата создания аккаунта: {new Date(userData?.createdAt).toLocaleString()}</p>*/}
+                    {/*) : (*/}
+                    {/*    <p className='createdDate'>Дата создания аккаунта: {new Date(userData?.emailVerified).toLocaleString()}</p>*/}
+                    {/*)}*/}
                 </>
             )}
             <div className='profileLinkBlock'>
-                <Link href={'/changeProfileData'} className='additionalProfileLink'>
+            <Link href={'/changeProfileData'} className='additionalProfileLink'>
                     <p>Изменить данные профиля</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </Link>

@@ -57,10 +57,10 @@ const Footer = () => {
             <footer className='footer-container'>
                 <div className='footer-block'>
                     {isFooterErrorBlockOpen && (
-                        <FooterErrorBlock/>
+                        <FooterErrorBlock onClose={toggleFooterErrorBlock}/>
                     )}
                     {isFooterCooperationBlockOpen && (
-                        <FooterCooperationBlock/>
+                        <FooterCooperationBlock onClose={toggleFooterCooperationBlock}/>
                     )}
                     <div className='footer-info-block'>
                         <div className='footer-navigation-container'>

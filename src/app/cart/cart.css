@@ -58,9 +58,8 @@
 .cart-items-block{
     margin-bottom: 60px;
     max-height:  450px;
-    padding-bottom: 10px;
     overflow: scroll;
-    width: calc(100% - 400px);
+    width: calc(100% - 405px);
 }
 /*.cart-items-block::-webkit-scrollbar {*/
 /*    width: 12px;*/

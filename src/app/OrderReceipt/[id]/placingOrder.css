@@ -124,7 +124,7 @@
     border: 1px solid #dedede;
     border-radius: 8px;
     padding: 8px;
-    margin-top: 15px;
+    margin-bottom: 15px;
     line-height: 22px;
     font-size: 14px;
     flex-wrap: wrap;
@@ -145,6 +145,7 @@
     border: 1px solid #dedede;
     border-radius: 8px;
     line-height: 22px;
+    margin-bottom: 15px;
     font-size: 14px;
     flex-wrap: wrap;
 }
@@ -181,7 +182,7 @@
     padding: 8px 8px 10px;
     font-size: 14px;
     flex-wrap: wrap;
-    margin: 15px 0 10px;
+    margin: 0 0 15px;
 }
 .placingOrderInfoBlock h4{
     font-weight: bold;
@@ -521,10 +522,10 @@
     .firstInfoContainer:first-child{
         width: calc(100%);
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
         font-size: 14px;
         flex-wrap: wrap;
-        margin: 5px 0 5px 0;
+        margin: 5px 0 0 0;
     }
     .placingOrderBlockButton{
         margin-bottom: 15px;
@@ -538,6 +539,6 @@
         flex-direction: column;
         font-size: 14px;
         flex-wrap: wrap;
-        margin: 10px 0 5px 0;
+        margin: 0 0 5px 0;
     }
 }

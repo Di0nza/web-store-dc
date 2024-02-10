@@ -293,7 +293,7 @@ export const CreateProductModal = () => {
                 <Form {...form}>
                     {/*@ts-ignore*/}
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        <div className="flex flex-row space-y-6 px-6 addProdBlockBody">
+                        <div className="addProdBlockBody">
                             <div className="flex-1 space-y-6">
                                 <FormField
                                     control={form.control}
@@ -349,7 +349,7 @@ export const CreateProductModal = () => {
                                     )}
                                 ></FormField>
                             </div>
-                            <div className="flex-1 space-y-3 mt-0">
+                            <div className="flex-1 space-y-3 mt-0 pr-2">
                                 <FormField
                                     control={form.control}
                                     name="title"

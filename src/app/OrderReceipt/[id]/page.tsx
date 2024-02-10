@@ -255,6 +255,53 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                     </div>
                 </div>
                 <div className={'firstInfoContainer'}>
+                    <div className='placingOrderInfoBlock'>
+                        <h3>Статус заказа:</h3>
+                        <div className={'orderStatusBlock'}>
+                            <div className="orderStatusLine">
+                                {statuses.map((status, index) => (
+                                    <div key={index}
+                                         style={{backgroundColor: getStatusColor(index, status.selected)}}>
+                                        {status.selected ? (
+                                            <Image className="statusLineCheckImg" src={checkOrderStatusB}
+                                                   alt="Selected"/>) : (
+                                            <Image className="statusLineCheckImg" src={checkOrderStatusW}
+                                                   alt="Selected"/>)}
+                                    </div>
+                                ))}
+                            </div>
+                            <div className={'orderStatusTitleBlock'}>
+                                {statuses.map((status, index) => (
+                                    <div className={'orderStatusItem'} key={index}
+                                         style={{color: getStatusColor(index, status.selected)}}>
+                                        <p style={{fontWeight: getStatusWeight(index, status.selected)}}
+                                           className={'orderStatusTitle'}>{status.title}</p>
+                                        {status.createdDate !== '' ? (
+                                            <p className={'orderStatusTime'}>{formatTimestampToDate(status.createdDate)}</p>) : (
+                                            <p className={'orderStatusTime'}>Пока неизвестно</p>)}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                    {orderData?.trackingCode && (
+                        <div className='trackingInfoBlock'>
+                            <h3>Трекинг заказа</h3>
+                            <p><b>Сайт отслеживания:</b> {orderData?.trackingLink}</p>
+                            <b>Трекер-код</b>
+                            <div className={'firstInfoUrl'}>
+                                <input
+                                    className={'firstInfoUrlInput'}
+                                    style={{border: 'none', marginBottom: '0', height: '38px'}}
+                                    value={copied ? 'Скопировано!' : orderData?.trackingCode}>
+                                </input>
+                                <div className={'inputCurrentBtn'}>
+                                    <Image className={'inputCurrentBtnImg'} src={shearLogo}
+                                           onClick={copyLinkToClipboard} alt={'+'}/>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                     <div className='OrderTotalCost'>
                         <div className={'OrderTotalCostBlockHead'}>
                             <div className={'OrderTotalBlockTitles'}>
@@ -283,54 +330,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                             </div>
                         </div>
                     </div>
-                    {orderData?.trackingCode && (
-                        <div className='trackingInfoBlock'>
-                            <h3>Трекинг заказа</h3>
-                            <p><b>Сайт отслеживания:</b> {orderData?.trackingLink}</p>
-                            <b>Трекер-код</b>
-                            <div className={'firstInfoUrl'}>
-                                <input
-                                    className={'firstInfoUrlInput'}
-                                    style={{border: 'none', marginBottom: '0', height: '38px'}}
-                                    value={copied ? 'Скопировано!' : orderData?.trackingCode}>
-                                </input>
-                                <div className={'inputCurrentBtn'}>
-                                    <Image className={'inputCurrentBtnImg'} src={shearLogo}
-                                           onClick={copyLinkToClipboard} alt={'+'}/>
-                                </div>
-                            </div>
-                        </div>
-                    )}
                     <div>
-                        <div className='placingOrderInfoBlock'>
-                            <h3>Статус заказа:</h3>
-                            <div className={'orderStatusBlock'}>
-                                <div className="orderStatusLine">
-                                    {statuses.map((status, index) => (
-                                        <div key={index}
-                                             style={{backgroundColor: getStatusColor(index, status.selected)}}>
-                                            {status.selected ? (
-                                                <Image className="statusLineCheckImg" src={checkOrderStatusB}
-                                                       alt="Selected"/>) : (
-                                                <Image className="statusLineCheckImg" src={checkOrderStatusW}
-                                                       alt="Selected"/>)}
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className={'orderStatusTitleBlock'}>
-                                    {statuses.map((status, index) => (
-                                        <div className={'orderStatusItem'} key={index}
-                                             style={{color: getStatusColor(index, status.selected)}}>
-                                            <p style={{fontWeight: getStatusWeight(index, status.selected)}}
-                                               className={'orderStatusTitle'}>{status.title}</p>
-                                            {status.createdDate !== '' ? (
-                                                <p className={'orderStatusTime'}>{formatTimestampToDate(status.createdDate)}</p>) : (
-                                                <p className={'orderStatusTime'}>Пока неизвестно</p>)}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
                         <div className={'orderBtnBlock'}>
                             <Link href={'/'} className={'placingOrderBlockButton'}>
                                 {"На главную"}
@@ -341,10 +341,9 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
+        </div>
     );
 }
