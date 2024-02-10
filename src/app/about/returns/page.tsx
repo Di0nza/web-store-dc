@@ -4,6 +4,7 @@ import aboutBg from "@/img/aboutBg.png";
 import Image from "next/image";
 import React, {useState} from "react";
 import FooterErrorBlock from "@/components/modals/footerErrorBlock";
+import FooterCooperationBlock from "@/components/modals/footerCooperationBlock";
 
 export default function Returns() {
     const [isFooterErrorBlockOpen, setIsFooterErrorBlockOpen] = useState(false);
@@ -14,7 +15,7 @@ export default function Returns() {
     return (
         <div className={'contacts'}>
             {isFooterErrorBlockOpen && (
-                <FooterErrorBlock/>
+                <FooterErrorBlock onClose={toggleFooterErrorBlock}/>
             )}
             <Image className={'contacts-bg-img'} src={aboutBg} alt={''}/>
             <h2 className={'title'}>Возврат</h2>
