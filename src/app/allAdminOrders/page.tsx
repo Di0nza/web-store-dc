@@ -13,7 +13,7 @@ import {RoleGate} from "@/components/auth/RoleGate";
 export default function UserOrders() {
     const router = useRouter();
     const [userOrders, setUserOrders] = useState(null);
-    const [filteredOrders, setFilteredOrders] = useState(null);
+    const [filteredOrders, setFilteredOrders] = useState(userOrders);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedMainCategory, setSelectedMainCategory] = useState('Показать всех');
@@ -23,15 +23,13 @@ export default function UserOrders() {
     const [orderIdToDelete, setOrderIdToDelete] = useState(null);
     const [search, setSearch] = useState('');
 
-    const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
-        event.preventDefault();
-        const products = await getDataBySearch(search);
+    const handleSubmit = async () => {
         if (search.trim() === '') {
             setFilteredOrders(userOrders);
             setSelectedCategory(null);
             setSelectedMainCategory('Показать всех');
         } else {
-            const filteredResults = filteredOrders.filter(order => order._id.includes(search));
+            const filteredResults = userOrders.filter(order => order._id.includes(search));
             setFilteredOrders(filteredResults);
         }
     };
@@ -197,6 +195,7 @@ export default function UserOrders() {
         return `${formattedDate.getDate()} ${monthInRussian} ${formattedDate.getFullYear()} ${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
     };
 
+    // @ts-ignore
     return (
         <RoleGate isAdmin={true}>
             <div className='adminOrdersBlock'>
@@ -255,10 +254,16 @@ export default function UserOrders() {
                         </div>
                         <div>
                             <div className='filterSearchBlock'>
-                                <input type='search' placeholder='Поиск' value={search}
-                                       onChange={event => setSearch(event.target.value)}/>
-                                <div onClick={() => handleSubmit} className='filterSearchBtn'><Image src={searchIco}
-                                                                                                     alt={"Искать"}/>
+                                <input
+                                    type='search'
+                                    placeholder='Поиск'
+                                    value={search}
+                                    onChange={event => setSearch(event.target.value)}
+                                />
+                                <div onClick={() => {
+                                    handleSubmit();
+                                }} className='filterSearchBtn'>
+                                    <Image src={searchIco} alt={"Искать"}/>
                                 </div>
                             </div>
 

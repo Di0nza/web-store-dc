@@ -1,11 +1,165 @@
-.profileBlock{
+.messagesContainer{
     min-height: 100vh;
     width: 100%;
-    max-width: 600px;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
     padding: 25px 0 0 0;
     margin: 0 auto;
+}
+.messagesContainer h1{
+    font-size: 25px;
+    font-weight: bold;
+}
+.messagesSortContainer{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+}
+.msgBlockCategories{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+.msgBlockCategories:last-child{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 15px;
+}
+.mini-msg-item-info{
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    width: calc(100%);
+    border: 1px solid #dedede;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.filterSearchMsgBlock{
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    justify-content: space-between;
+    width: calc(100% - 20px);
+    min-width: 390px;
+    margin: 10px 0 0 10px;
+    border: 1px solid #dadada;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 5px 5px 5px 10px;
+}
+.filterSearchMsgBlock input{
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    justify-content: space-between;
+    width: calc(100%);
+    max-width: 320px;
+    border: 0;
+    outline: none;
+    font-size: 13px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+.filterMsgBlock{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: calc(100% - 20px);
+    min-width: 390px;
+    margin: 10px 0 0 10px;
+    border: 1px solid #dedede;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 10px;
+}
+.filterMsgBlock h4{
+    font-size: 17px;
+    font-weight: 600;
+}
+.confirmation-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(241, 241, 241, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+.order-delete-btns{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.cancel-order-delete{
+    background-color: #111111;
+    padding: 5px 15px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    color: #fafafa;
+    cursor: pointer;
+}
+.confirm-order-delete{
+    border: 2px solid #111111;
+    padding: 3px 13px;
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    border-radius: 8px;
+    color: #111111;
+    cursor: pointer;
+}
+.confirmation-modal {
+    width: 100%;
+    max-width: 450px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #dadada;
+}
+.confirmation-modal p{
+    margin-bottom: 20px;
+}
+.confirmation-modal button {
+    margin-right: 10px;
+}
+.order-item-delete-img{
+    width: 14px;
+    height: 18px;
+    margin-left: 10px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+.filterSearchBtn{
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #111111;
+    cursor: pointer;
+}
+.filterSearchBtn img{
+    width: 18px;
+    height: 18px;
 }
 .mini-order-item-info{
     display: flex;
@@ -18,7 +172,9 @@
     padding: 10px;
     margin-bottom: 10px;
 }
-.orderProfileBlock{
+.messagesProfileBlock{
+    width: calc(100% - 20px);
+    max-width: 580px;
     margin: 10px 0 30px;
 }
 .mini-cart-item-date{
@@ -326,13 +482,7 @@
     justify-content: flex-start;
     flex-wrap: wrap;
 }
-.product-sizes-block{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin: 10px 0;
-}
+
 .product-size{
     display: flex;
     justify-content: center;

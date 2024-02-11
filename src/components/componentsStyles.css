@@ -302,7 +302,7 @@
     height: 25px;
 }
 .product-sizes-table{
-    width: 118px;
+    width: 110px;
     color: #606060;
     padding: 0 0 0 0;
     margin-bottom: 10px;
@@ -310,7 +310,15 @@
     display: flex;
     flex-wrap: nowrap;
     cursor: pointer;
-    border-bottom: 1px solid #606060;
+    border-bottom: 1px solid rgba(96, 96, 96, 0.5);
+}
+.product-sizes-block{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 10px 0;
 }
 .product-sizes-container{
     display: flex;

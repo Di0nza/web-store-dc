@@ -16,6 +16,7 @@ import axios from "axios";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
 import {useCurrentUser} from "@/hooks/useCurrentUser";
 import {toast} from "sonner";
+import {log} from "util";
 
 type NavLink = {
     label: string;
@@ -62,13 +63,18 @@ const Navigation = ({navLinks}: Props) => {
             console.log(error.message);
         }
     };
+    const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
     useEffect(() => {
         //getUserDetails();
         setUserData(user);
         setIsAdmin(user?.isAdmin);
 
-    }, [sessionTime]);
+        // Проверка, чтобы избежать бесконечной рекурсии
+        if (JSON.stringify(cartItems) !== JSON.stringify(storedCartItems)) {
+            setCartItems(storedCartItems);
+        }
+    }, [storedCartItems, cartItems]);
 
     const handleLinkClick = (event) => {
         event.preventDefault();
@@ -122,26 +128,19 @@ const Navigation = ({navLinks}: Props) => {
     };
     const handleIncrease = (item) => {
         addToCartLocalStorage(item);
+
     };
     const handleDecrease = (item) => {
         removeFromCartLocalStorage(item);
     };
     useEffect(() => {
         const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
-        setCartItems(storedCartItems);
-    }, []);
+        const updatedCartItems = [...storedCartItems];
 
-    // useEffect(() => {
-    //     const handleStorageChange = () => {
-    //         const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
-    //         setCartItems(storedCartItems);
-    //         console.log("NAVBAR", storedCartItems)
-    //     };
-    //     window.addEventListener('storage', handleStorageChange);
-    //     return () => {
-    //         window.removeEventListener('storage', handleStorageChange);
-    //     };
-    // }, []);
+        localStorage.setItem('cart', JSON.stringify(updatedCartItems));
+        setCartItems(updatedCartItems);
+        console.log(sessionTime);
+    }, [sessionTime]);
 
     const groupedCartItems: Record<string, GroupedCartItem> = cartItems.reduce((acc, item) => {
         const key = `${item.title}-${item.size}`;

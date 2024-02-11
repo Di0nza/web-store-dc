@@ -66,7 +66,7 @@ const ProductContainer = ({product}) => {
             const productId = product._id;
             setIsFavorite(favoritesArray.includes(productId));
         }
-    }, []);
+    }, [sessionTime]);
 
     useEffect(()=>{
         console.log(product)
@@ -105,15 +105,20 @@ const ProductContainer = ({product}) => {
 
             const updatedCartItems = [...cartItems, newItem];
             setCartItems(updatedCartItems);
-
+            const sessionDate = Date.now().toString();
+            console.log(sessionDate);
+            setSessionTime(prevSessionTime => {
+                console.log(prevSessionTime);
+                return sessionDate;
+            });
             localStorage.setItem('cart', JSON.stringify(updatedCartItems));
             console.log('Товар успешно добавлен в корзину:', newItem);
             setSelectedSize(null);
             const updatedStoredCartItems = JSON.parse(localStorage.getItem('cart')) || [];
             setCartItems(updatedStoredCartItems);
             console.log('Обновленные данные корзины из localStorage:', updatedStoredCartItems);
-            setSessionTime(Date.now());
-            window.location.reload();
+
+
         } else {
             toast.warning('Пожалуйста, выберите размер');
         }

@@ -41,6 +41,8 @@
     margin-bottom: 10px;
 }
 .orderProfileBlock{
+    width: calc(100% - 20px);
+    max-width: 580px;
     margin: 10px 0 30px;
 }
 .orderFilterBlock{
@@ -302,13 +304,6 @@
     flex-direction: row;
     justify-content: flex-start;
     flex-wrap: wrap;
-}
-.product-sizes-block{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin: 10px 0 5px;
 }
 .product-size{
     display: flex;
@@ -876,13 +871,6 @@
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-}
-.product-sizes-block{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin: 10px 0;
 }
 .product-size{
     display: flex;

@@ -33,7 +33,7 @@ export const OrderProvider = ({children}) => {
     const [createdAt, setCreatedAt] = useState(Date.now());
     const [products, setProducts] = useState([]);
     const [tokenReload, setTokenReload] = useState(false);
-    const [sessionTime, setSessionTime] = useState(Date.now());
+    const [sessionTime, setSessionTime] = useState('');
 
     return (
         <OrderContext.Provider

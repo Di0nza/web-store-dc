@@ -233,13 +233,6 @@
     justify-content: flex-start;
     flex-wrap: wrap;
 }
-.product-sizes-block{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin: 10px 0;
-}
 .product-size{
     display: flex;
     justify-content: center;

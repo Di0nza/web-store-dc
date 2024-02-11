@@ -82,7 +82,6 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
             console.log(response.data.savedOrder._id);
             router.push(`/OrderReceipt/${response.data.savedOrder._id}`);
             localStorage.removeItem('cart');
-            setSessionTime(Date.now());
         } catch (error:any) {
             console.log(error.message);
         }

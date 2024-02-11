@@ -331,13 +331,6 @@
 .product-thumbnail:hover {
     opacity: 0.7;
 }
-.product-sizes-block{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    margin: 10px 0 5px;
-}
 .product-size{
     display: flex;
     justify-content: center;
@@ -458,8 +451,8 @@
     cursor: pointer;
 }
 .shearMessageCloseImg{
-    width: 12px !important;
-    height: 12px;
+    width: 13px !important;
+    height: 16px;
     cursor: pointer;
 }
 .shearContainerOptionsBlock{
