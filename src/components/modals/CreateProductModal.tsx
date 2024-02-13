@@ -87,7 +87,7 @@ export const CreateProductModal = () => {
     const isModalOpen = isOpen && type === "createProduct";
 
     const [selectedPictures, setSelectedPictures] = useState([]);
-    const [selectedPicturesFiles, setSelectedPicturesFiles] = useState<File[]>([]);
+    const [selectedPicturesFiles, setSelectedPicturesFiles] = useState([]);
 
     const convertBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -109,9 +109,14 @@ export const CreateProductModal = () => {
         const newPictures = Array.from(files).map((file: File) =>
             URL.createObjectURL(file)
         );
-        //const compressedImage = await compressImage(files?.[0])
-        const convertedFile = await convertBase64(files?.[0]) as File;
-        setSelectedPicturesFiles([...selectedPicturesFiles, convertedFile]);
+        const convertedFiles = [];
+        const newPicturesPromises = Array.from(files).map(async (file) => {
+            const convertedFile = await convertBase64(file) as File;
+            convertedFiles.push(convertedFile)
+        });
+        await Promise.all(newPicturesPromises);
+        // setSelectedPicturesFiles([...selectedPicturesFiles, ...convertedFiles]);
+        setSelectedPicturesFiles([...selectedPicturesFiles, ...files]);
         setSelectedPictures((prevPictures) => [...prevPictures, ...newPictures]);
         console.log(selectedPictures)
     };
@@ -258,11 +263,10 @@ export const CreateProductModal = () => {
                 formData.append(`picturesFiles[${index}]`, file);
             });
 
-            await axios.post("/api/admin/products", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data", // Указываем, что это форма для передачи файлов
-                },
-            });
+            await fetch("/api/admin/products", {
+                method:"POST",
+                body: formData
+            })
 
             form.reset();
             setSelectedPictures([]);

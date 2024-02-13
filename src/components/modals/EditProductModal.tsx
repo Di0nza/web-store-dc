@@ -105,15 +105,14 @@ export const EditProductModal = () => {
         });
     };
 
-    const handlePictureChange = async (event) => {
+    const handlePictureChange = (event) => {
         const files = event.target.files;
         const newPictures = Array.from(files).map((file: File) =>
             URL.createObjectURL(file)
         );
-        const convertedFile = await convertBase64(files?.[0]) as File;
-        setSelectedPicturesFiles([...selectedPicturesFiles, convertedFile]);
+        setSelectedPicturesFiles([...selectedPicturesFiles, ...files]);
         setSelectedPictures((prevPictures) => [...prevPictures, ...newPictures]);
-        //console.log(selectedPictures)
+        console.log(selectedPictures)
     };
 
     const handleSelectPicture = (index) => {
@@ -200,19 +199,18 @@ export const EditProductModal = () => {
             });
 
             selectedPicturesFiles.forEach((file, index) => {
-                if (file.length > 1000) {
+                if (file instanceof File) {
+                    console.log("тут")
                     formData.append(`picturesFiles[${index}]`, file);
                 } else {
                     formData.append(`picturesString[${index}]`, file);
                 }
             });
 
-            await axios.patch(`/api/admin/products/${product._id}`, formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            });
-
+            await fetch(`/api/admin/products/${product._id}`, {
+                method:"PATCH",
+                body: formData
+            })
 
             form.reset();
             setSelectedPictures([]);

@@ -4,10 +4,11 @@ import {NextRequest, NextResponse} from "next/server";
 import {IProduct} from "@/types/Product";
 import {ITokenData} from "@/types/TokenData";
 import {getDataFromToken} from "@/helpers/getDataFromToken";
-import {log} from "util";
 import {currentUser, isAdmin} from "@/lib/auth";
 import User from "@/models/userModel";
 const cloudinary = require('cloudinary').v2;
+const streamifier = require('streamifier');
+
 
 cloudinary.config({
     cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -28,17 +29,17 @@ export async function POST(request: NextRequest) {
 
         const user = await currentUser();
 
-        if(!user){
+        if (!user) {
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
         const userDB = await User.findById(user.id)
 
-        if(!userDB){
+        if (!userDB) {
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
-        if(user?.isAdmin === false){
+        if (user?.isAdmin === false) {
             return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
         }
 
@@ -85,33 +86,43 @@ export async function POST(request: NextRequest) {
         console.log("Sizes:", sizes);
 
         const promises = [];
-        // @ts-ignore
-        data.forEach((value, key) => {
+
+        for (const [key, value] of data.entries()) {
             if (typeof key === 'string' && key.startsWith('picturesFiles[')) {
                 const fileValue = value as File;
-                promises.push(
-                    cloudinary.uploader.upload(fileValue, opts, { folder: 'my-folder' })
-                        .then((res) => res.secure_url)
-                );
+                const bytes = await fileValue.arrayBuffer();
+                const buffer = Buffer.from(bytes)
+                const uploadPromise = new Promise((resolve, reject) => {
+                    let cld_upload_stream = cloudinary.uploader.upload_stream({folder: 'my-folder'}, function (error, result) {
+                        if (error) {
+                            reject(error);
+                        } else {
+                            resolve(result.secure_url);
+                        }
+                    });
+
+                    streamifier.createReadStream(buffer).pipe(cld_upload_stream);
+                });
+                promises.push(uploadPromise);
             }
-        });
+        }
 
         const picturesNames = await Promise.all(promises);
 
         const newProduct = new Product({
             title: title,
             description: description,
-            price:price,
-            category:category,
+            price: price,
+            category: category,
             collection: collection,
-            sex:sex,
+            sex: sex,
             sizes: sizes,
             pictures: picturesNames,
             additionalInformation: additionalInformation
         })
 
         const savedProduct = await newProduct.save();
-        //console.log(savedProduct);
+
 
 
         return NextResponse.json({
@@ -130,17 +141,17 @@ export async function DELETE(request: NextRequest) {
 
         const user = await currentUser();
 
-        if(!user){
+        if (!user) {
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
         const userDB = await User.findById(user.id)
 
-        if(!userDB){
+        if (!userDB) {
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
-        if(user?.isAdmin === false){
+        if (user?.isAdmin === false) {
             return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
         }
 
@@ -162,26 +173,26 @@ export async function DELETE(request: NextRequest) {
     }
 }
 
-export async function GET(){
-    try{
+export async function GET() {
+    try {
 
         const user = await currentUser();
 
-        if(!user){
+        if (!user) {
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
         const userDB = await User.findById(user.id)
 
-        if(!userDB){
+        if (!userDB) {
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
 
-        if(user?.isAdmin === false){
+        if (user?.isAdmin === false) {
             return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
         }
 
-        const products:IProduct[] = await Product.find();
+        const products: IProduct[] = await Product.find();
         return NextResponse.json({
             message: "All products",
             success: true,

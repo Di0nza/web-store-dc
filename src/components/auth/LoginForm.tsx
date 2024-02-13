@@ -21,6 +21,7 @@ import {useSearchParams} from "next/navigation";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
 import {useCurrentUser} from "@/hooks/useCurrentUser";
 import {useCurrentRole} from "@/hooks/useCurrentRole";
+import {currentUser} from "@/lib/auth";
 
 export const LoginForm = () => {
     const router = useRouter();
@@ -29,7 +30,7 @@ export const LoginForm = () => {
     const [isPending, startTransition] = useTransition();
     const searchParams = useSearchParams();
     const urlError = searchParams.get("error") === "OAuthAccountNotLinked"
-    ? "Этот адрес электронной почты уже занят, если он ваш, попробуйте другой способ авторизации" : "";
+        ? "Этот адрес электронной почты уже занят, если он ваш, попробуйте другой способ авторизации" : "";
 
 
     const form = useForm<z.infer<typeof LoginSchema>>({
@@ -49,11 +50,12 @@ export const LoginForm = () => {
 
 
         startTransition(async () => {
-            const response = await axios.post("/api/users/login", values)
+            await axios.post("/api/users/login", values)
                 .then(async (data) => {
                     console.log(data)
                     if (data.data.error) {
                         //form.reset();
+                        console.log(data.data.error)
                         setError(data.data.error);
                     } else if (data.data.success) {
                         form.reset();
@@ -69,7 +71,10 @@ export const LoginForm = () => {
                     }
 
                 })
-                .catch(() => setError("Что-то пошло не так :("));
+                .catch((e) => {
+                    console.log(e)
+                    setError("Что-то пошло не так :(")
+                });
         });
     };
 

@@ -8,6 +8,7 @@ import {currentUser, isAdmin} from "@/lib/auth";
 import User from "@/models/userModel";
 
 const cloudinary = require('cloudinary').v2;
+const streamifier = require('streamifier');
 
 cloudinary.config({
     cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
@@ -75,22 +76,31 @@ export async function PATCH(
             }
         }
 
-
         const picturesNames = [];
 
-        const promises = [];
-        // @ts-ignore
-        data.forEach(async (value, key) => {
+        for (const [key, value] of data.entries()) {
             if (typeof key === 'string') {
                 if (key.startsWith('picturesFiles[')) {
                     const fileValue = value as File;
-                    await cloudinary.uploader.upload(fileValue, opts, { folder: 'my-folder' })
-                        .then((res) => picturesNames.push(res.secure_url));
+                    const bytes = await fileValue.arrayBuffer();
+                    const buffer = Buffer.from(bytes)
+                    const uploadPromise = new Promise((resolve, reject) => {
+                        let cld_upload_stream = cloudinary.uploader.upload_stream({folder: 'my-folder'}, function (error, result) {
+                            if (error) {
+                                reject(error);
+                            } else {
+                                resolve(result.secure_url);
+                            }
+                        });
+
+                        streamifier.createReadStream(buffer).pipe(cld_upload_stream);
+                    });
+                   picturesNames.push(await uploadPromise)
                 } else if (key.startsWith('picturesString[')) {
                     picturesNames.push(value as string);
                 }
             }
-        });
+        }
 
         const product = await Product.findByIdAndUpdate(params.productId, {
             title: title,
@@ -103,10 +113,10 @@ export async function PATCH(
             pictures: picturesNames,
             additionalInformation: additionalInformation
         });
+
         if (!product) {
             return NextResponse.json({error: "No such product"}, {status: 400})
         }
-
 
         console.log("Title:", title);
         console.log("Description:", description);
