@@ -93,6 +93,10 @@ export default function ProfilePage() {
                     <p>Промокоды</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </Link>
+                <Link href={`${pathname}/articles`} className='additionalProfileLink'>
+                    <p>Статьи</p>
+                    <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
+                </Link>
                 <Link href={'/adminStatistics'} className='additionalProfileLink'>
                     <p>Статистика</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
