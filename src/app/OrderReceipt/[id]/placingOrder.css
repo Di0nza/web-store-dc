@@ -477,6 +477,31 @@
     margin-left: 5px;
     margin-top: 2px;
 }
+
+.placingOrderQRButton{
+    border-radius: 10px;
+    width: calc(100% - 5px);
+    height: 50px;
+    background-color: #fafafa;
+    color: #111111;
+    padding: 0 10px;
+    outline: none;
+    border: 2px solid #111111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 70px;
+    margin-left: 5px;
+}
+.placingOrderQRButton img{
+    width: 30px;
+    margin-left: 5px;
+    margin-top: 2px;
+}
+
 .placingOrderBlockButton{
     border-radius: 10px;
     width: calc(100% - 5px);
@@ -531,6 +556,9 @@
         margin-bottom: 15px;
     }
     .placingOrderPdfButton{
+        margin-bottom: 15px;
+    }
+    .placingOrderQRButton{
         margin-bottom: 15px;
     }
     .firstInfoContainer:last-child{
