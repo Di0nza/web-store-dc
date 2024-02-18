@@ -7,12 +7,33 @@ import Image from "next/image";
 import checkOrderStatusW from "@/img/checkOrderStatusW.png";
 import checkOrderStatusB from "@/img/checkOrderStatusB.png";
 import pdfLogo from "@/img/pdfLogo.png";
+import qrlogo from "@/img/qrlogo.webp"
 import shearLogo from "@/img/shearlogo.png";
 import {jsPDF} from 'jspdf';
 import {useCurrentUser} from "@/hooks/useCurrentUser";
 import 'jspdf-autotable';
 import {amiriFont} from "@/fonts/amiriFont";
 import {FormError} from "@/components/auth/FormError";
+import {
+    Drawer, DrawerClose,
+    DrawerContent,
+    DrawerDescription, DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger
+} from "@/components/ui/drawer";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle, DialogTrigger,
+} from "@/components/ui/dialog"
+import {Button} from "@/components/ui/button";
+
+import QRCode from "qrcode";
+
 
 interface orderData {
     name: string;
@@ -43,6 +64,27 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const [selectedDelivery, setSelectedDelivery] = useState(null);
     const user = useCurrentUser();
     const [error, setError] = useState();
+    const [qrCodeSrc, setQrCodeSrc] = useState<string>("");
+
+    const [open, setOpen] = React.useState(false)
+    const isDesktop =   window.innerWidth >= 768
+
+    const generateQrCode = (data) => {
+        let opts = {
+            errorCorrectionLevel: 'H',
+            type: 'image/jpeg',
+            quality: 1,
+            margin: 1,
+            color: {
+                dark:"#000000",
+                light:"#ffffff"
+            },
+            width: 248,
+            height: 248
+        }
+        QRCode.toDataURL(data._id.toString(), opts).then(setQrCodeSrc);
+    }
+
 
     const handleDeliverySelection = (method) => {
         setSelectedDelivery(method);
@@ -55,6 +97,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                     setError(data.data.error)
                 }
                 setOrderData(data.data.order);
+                generateQrCode(data.data.order)
             });
 
         } catch (error: any) {
@@ -64,6 +107,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
 
     useEffect(() => {
         getUserDetails();
+
     }, []);
 
     const createdAt = orderData?.createdAt;
@@ -339,6 +383,57 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                                 <p>{"Скачать чек"}</p>
                                 <Image src={pdfLogo} alt={'PDF'}></Image>
                             </div>
+                            {isDesktop ?
+                                <Dialog open={open} onOpenChange={setOpen}>
+                                    <DialogTrigger asChild>
+                                        <div className={'placingOrderQRButton'}>
+                                            <p>{"QR"}</p>
+                                            <Image src={qrlogo} alt={'QR'}></Image>
+                                        </div>
+                                    </DialogTrigger>
+                                    <DialogContent className="sm:max-w-[490px]">
+                                        <DialogHeader>
+                                            <DialogTitle>QR-код для получения заказа при самовывозе</DialogTitle>
+                                            {/*<DialogDescription>*/}
+                                            {/* Покажите этот QR-код, для получения заказа*/}
+                                            {/*</DialogDescription>*/}
+
+                                        </DialogHeader>
+                                        <div className="flex flex-col items-center justify-center">
+                                            <Image src={qrCodeSrc} alt={'QRImage'} width={248} height={248}></Image>
+                                        </div>
+                                    </DialogContent>
+                                </Dialog>
+                                :
+                                <Drawer open={open} onOpenChange={setOpen}>
+                                    <DrawerTrigger asChild>
+                                        <div className={'placingOrderQRButton'}>
+                                            <p>{"QR"}</p>
+                                            <Image src={qrlogo} alt={'QR'}></Image>
+                                        </div>
+                                    </DrawerTrigger>
+                                    <DrawerContent className="h-[60%] text-black p-0 overflow-hidden flex flex-col justify-between">
+                                        <DrawerHeader className="text-left">
+                                            <DrawerTitle>  QR-код для получения заказа при самовывозе</DrawerTitle>
+                                            {/*<DrawerDescription>*/}
+                                            {/*  */}
+                                            {/*</DrawerDescription>*/}
+                                        </DrawerHeader>
+
+
+                                        <div className="flex flex-col items-center justify-center flex-grow">
+                                            <Image src={qrCodeSrc} alt={'QRImage'} width={248} height={248}></Image>
+                                        </div>
+
+                                        <DrawerFooter className="">
+                                            <DrawerClose asChild>
+                                                <Button variant="outline">Закрыть</Button>
+                                            </DrawerClose>
+                                        </DrawerFooter>
+                                    </DrawerContent>
+                                </Drawer>
+                            }
+
                         </div>
                     </div>
                 </div>

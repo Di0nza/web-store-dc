@@ -109,15 +109,14 @@ export const CreateProductModal = () => {
         const newPictures = Array.from(files).map((file: File) =>
             URL.createObjectURL(file)
         );
-        const convertedFiles = [];
-        const newPicturesPromises = Array.from(files).map(async (file) => {
-            const convertedFile = await convertBase64(file) as File;
-            convertedFiles.push(convertedFile)
-        });
-        await Promise.all(newPicturesPromises);
-        // setSelectedPicturesFiles([...selectedPicturesFiles, ...convertedFiles]);
-        setSelectedPicturesFiles([...selectedPicturesFiles, ...files]);
-        setSelectedPictures((prevPictures) => [...prevPictures, ...newPictures]);
+
+        const droppedFiles = event.dataTransfer.files;
+        const droppedPictures = Array.from(droppedFiles).map((file: File) =>
+            URL.createObjectURL(file)
+        );
+
+        setSelectedPicturesFiles([...selectedPicturesFiles, ...files, ...droppedFiles]);
+        setSelectedPictures((prevPictures) => [...prevPictures, ...newPictures, ...droppedPictures]);
         console.log(selectedPictures)
     };
 
@@ -278,9 +277,15 @@ export const CreateProductModal = () => {
         }
     }
 
-    // @ts-ignore
-    // @ts-ignore
-    // @ts-ignore
+    const handleDrop = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const files = e.dataTransfer.files;
+        // Обработка загруженных файлов
+        handlePictureChange(files);
+    };
+
+
     return (
         <>
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
@@ -335,6 +340,7 @@ export const CreateProductModal = () => {
                                                         htmlFor="fileInput"
                                                         style={{border:'1px solid #dadada', borderRadius:'10px'}}
                                                         className={`cursor-pointer flex items-center justify-center ${selectedPictures.length === 0 ? 'h-72 w-72' : 'h-20 w-20 mt-3 mr-5'} bg-white rounded`}
+                                                        onDrop={(e) => handleDrop(e)}
                                                     >
                                                         <Input
                                                             id="fileInput"
