@@ -82,6 +82,10 @@ export default function ProfilePage() {
                     <p>Избранные</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </Link>
+                <Link href={'/articles'} className='additionalProfileLink'>
+                    <p>Статьи</p>
+                    <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
+                </Link>
                 <Link href={'/about'} className='additionalProfileLink'>
                     <p>О Нас</p>
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
