@@ -1,0 +1,98 @@
+.toolbar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-shrink: 1;
+  gap: 13px;
+}
+
+.toolbarSection {
+  display: flex;
+  margin-right: 10px;
+  align-items: center;
+}
+.toolbarSection:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 25px;
+  background: #dadada;
+  margin-left: -11px;
+}
+
+.toolbarButton {
+  padding: 5px;
+}
+
+.toolbarButton svg {
+  height: 20px;
+  width: 20px;
+}
+
+.toolbarSeparator {
+  width: 1px;
+  height: 15px;
+  background: #dadada;
+  margin: 0 5px;
+}
+
+.toolbarPopover {
+  display: flex;
+  min-width: 160px;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #dadada;
+  background-color: #fafafa;
+}
+
+.toolbarPopoverLabel {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.toolbarPopoverBar {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #dadada;
+  border-radius: 10px;
+  padding: 5px 5px 5px 0;
+}
+
+.toolbarPopoverInput {
+  width: 200px;
+}
+
+.toolbarPopoverButton {
+  background-color: #111111;
+  border-radius: 8px;
+  height: 35px;
+  width: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.toolbarRemoveLinkButton{
+  background-color: #d3d3d3;
+  border-radius: 8px;
+  margin-top: 5px;
+  margin-right: 5px;
+  height: 25px;
+  width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.toolbarPopoverButton img{
+  margin-left: 2px;
+  height: 13px;
+  width: 8px;
+}
+
+.headingsSelect {
+  width: 130px;
+}
+

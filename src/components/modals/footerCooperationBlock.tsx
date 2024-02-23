@@ -10,7 +10,7 @@ const FooterCooperationBlock = ({onClose}) => {
     const [message, setMessage] = useState({
         title: '',
         message: '',
-        category: 'Сотрудничество',
+        categories: 'Сотрудничество',
         authorsContact: '',
         createdAt: Date.now(),
     });

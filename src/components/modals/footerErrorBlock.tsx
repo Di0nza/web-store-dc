@@ -10,7 +10,7 @@ const FooterErrorBlock = ({onClose}) => {
     const [message, setMessage] = useState({
         title: '',
         message: '',
-        category: 'Ошибка',
+        categories: 'Ошибка',
         authorsContact: '',
         createdAt: Date.now,
 

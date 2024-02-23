@@ -9,7 +9,7 @@ const OwnDesignOrder = () => {
     const [message, setMessage] = useState({
         title: '',
         message: '',
-        category: 'Особый заказ',
+        categories: 'Особый заказ',
         authorsContact: '',
         createdAt: Date.now,
 

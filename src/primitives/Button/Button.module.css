@@ -1,0 +1,69 @@
+.button {
+  display: flex;
+  padding: 5px 7px;
+  border-radius: 8px;
+  place-items: center;
+  transition: 0.2ms;
+  transition-property: background, color, opacity;
+  outline: none;
+  height: 30px;
+}
+
+.button:disabled {
+  cursor: default;
+  opacity: 0.3;
+}
+
+.iconButton {
+  width: 15px;
+  padding: 0;
+  place-content: center;
+}
+
+.buttonPrimary {
+  background: #fafafa;
+  color: #dadada;
+}
+
+.buttonDestructive {
+  background: #D14758FF;
+  color: #dadada;
+}
+
+.buttonPrimary:hover,
+.buttonPrimary:focus-visible,
+.buttonDestructive:hover,
+.buttonDestructive:focus-visible {
+  opacity: 0.5;
+}
+
+.buttonSecondary {
+  background: #eaeaea;
+  color: #212121;
+}
+
+.buttonSecondary:hover,
+.buttonSecondary:focus-visible {
+  background: #eaeaea;
+  color: #212121;
+  padding: 5px;
+}
+
+.buttonSubtle:not(:disabled):hover,
+.buttonSubtle:not(:disabled):focus-visible,
+.buttonSubtle[data-active] {
+  background: #eaeaea;
+  padding: 5px;
+  height: 30px;
+  color: #212121;
+}
+
+.button:not(.iconButton) .icon {
+  margin-right: 10px;
+  margin-left: -5px;
+}
+
+.label {
+  font-size: 15px;
+  font-weight: 500;
+}

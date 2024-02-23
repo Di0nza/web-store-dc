@@ -1,9 +1,9 @@
 export interface IArticle {
     title: string,
-    category: string,
+    categories: any,
     backgroundImage: string,
     description: string,
-    keywords: string,
+    keywords: any,
     content: string,
     likes: any,
     comments: any,

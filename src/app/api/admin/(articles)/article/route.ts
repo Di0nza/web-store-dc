@@ -2,6 +2,7 @@ import {NextRequest, NextResponse} from "next/server";
 import {currentUser} from "@/lib/auth";
 import User from "@/models/userModel";
 import Article from "@/models/articleModel";
+import ArticleCategory from "@/models/articleCategoryModel";
 
 export async function POST(request: NextRequest) {
     try {
@@ -23,8 +24,18 @@ export async function POST(request: NextRequest) {
         }
 
         const reqBody = await request.json()
-        const {title, category, backgroundImage, description, keywords, content, likes, comments, views, coAuthors, createdAt} = reqBody
-        const newArticle = new Article({title, category, backgroundImage, description, keywords, content, likes, comments, views, coAuthors, createdAt});
+        const {title, categories, backgroundImage, description, keywords, content, likes, comments, views, coAuthors, createdAt} = reqBody
+
+        for (const category of categories) {
+            const categoryCandidate = await ArticleCategory.findOne({name: category.name});
+            if(!categoryCandidate){
+                return NextResponse.json({error: "Категории не существует"}, {status: 200})
+            }
+            categoryCandidate.numberOfArticles = categoryCandidate.numberOfArticles + 1;
+            await categoryCandidate.save();
+        }
+
+        const newArticle = new Article({title, categories, backgroundImage, description, keywords, content, likes, comments, views, coAuthors, createdAt});
         const savedArticle = await newArticle.save()
         return NextResponse.json({
             message: "Article created successfully",

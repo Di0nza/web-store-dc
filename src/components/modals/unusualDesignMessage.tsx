@@ -12,7 +12,7 @@ const UnusualDesignMessage = ({show, onHide, item}) => {
     const [message, setMessage] = useState({
         title: `Особое предпочтение насчет ${item.title}`,
         message: '',
-        category: 'Особое из текущего',
+        categories: 'Особое из текущего',
         authorsContact: '',
         createdAt: Date.now,
 

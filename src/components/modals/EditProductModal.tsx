@@ -154,7 +154,7 @@ export const EditProductModal = () => {
             title: "",
             description: "",
             price: "",
-            category: "",
+            categories: "",
             collection: "",
             sex: "",
             sizes: [

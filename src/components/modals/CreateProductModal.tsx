@@ -209,7 +209,7 @@ export const CreateProductModal = () => {
         defaultValues: {
             title: "",
             description: "",
-            category: "",
+            categories: "",
             collection: "",
             sex: "",
             price: "",
@@ -229,6 +229,7 @@ export const CreateProductModal = () => {
             ]
         }
     });
+
     useEffect(() => {
         form.setValue('additionalInformation.0.title', 'Материал');
         form.setValue('additionalInformation.1.title', 'Уход');

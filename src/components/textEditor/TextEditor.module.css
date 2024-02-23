@@ -1,0 +1,189 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 780px;
+  width: 100%;
+  margin: 0 auto ;
+}
+.container h2 {
+  margin-top: 25px;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.editorHeader {
+  width: 100%;
+  display: flex;
+  margin: 0 auto 0;
+  border-radius: 10px;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #dadada;
+  padding: 10px;
+}
+
+.editorPanel {
+  width: 100%;
+  max-width: 790px;
+  border-radius: 10px;
+  padding: 2px 10px 2px 0;
+  margin-top: 10px;
+  height: 434px;
+  max-height: 434px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #dadada;
+}
+
+.editor {
+  border-radius: inherit;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.editor:focus {
+  outline: none;
+}
+.articleContainer{
+  width: 100%;
+  border: 2px solid #000000;
+  background-color: #111111;
+  border-radius: 10px;
+  height: 48px;
+  margin-top: 10px;
+  color: #fafafa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+
+}
+.changeBlockText{
+  margin: 0 0 10px 0;
+  color: #111111;
+  font-size: 14px;
+}
+.updateProfileBlockLabel{
+  margin: 0 0 2px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.updateArticleLabelBlock{
+  background-color: #d5d5d5;
+  border: 2px dashed #111111;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  height: 150px;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 15px;
+  background-size: cover;
+  background-position: center;
+}
+.updateArticleLabelBlock button{
+  background-color: #fafafa;
+  border: 2px solid #111111;
+  border-radius: 10px;
+  color: #111111;
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 7px 15px;
+}
+.updatePromoProfileBlock{
+  width: 100%;
+  margin: 5px 0 5px;
+}
+.updateProfileBlockLabel{
+  margin: 0 0 2px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.updatePromoProfileBlock input{
+  width: calc(100%);
+  height: 50px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid #dadada;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 11px 10px 9px;
+  outline: none;
+  color: #111111;
+  margin-bottom: 10px;
+}
+.updatePromoProfileBlock input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  color: #111111;
+}
+.editorContainer {
+  min-height: 100%;
+  width: 100%;
+  max-width: 790px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  height: 430px;
+  max-height: 430px;
+  overflow-y: scroll;
+}
+
+.placeholder {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+}
+
+.bubbleMenuWrapper {
+  display: flex;
+  z-index: 100;
+  padding: 5px 5px;
+  background-color: #fafafa;
+  border: 1px solid #dadada;
+  border-radius: 8px;
+}
+
+.selectedCategories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  }
+
+.categoryItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+  padding: 8px 16px;
+  background-color: #ffffff;
+  border: 1px solid #dadada;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.selectedKeyWords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.keyWordItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  background-color: #ffffff;
+  border: 1px solid #dadada;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
