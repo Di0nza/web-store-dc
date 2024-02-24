@@ -27,9 +27,12 @@ export async function GET(
         const articles = await Article.find({ 'categories._id': { $in: [params.articleCategoryId] } });
 
 
+        // @ts-ignore
+        const sortedArticles = articles.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
+
         return NextResponse.json({
             message: "Article fetched successfully",
-            article: articles
+            article: sortedArticles
         });
     } catch (error: any) {
         return NextResponse.json({error: error.message}, {status: 500})

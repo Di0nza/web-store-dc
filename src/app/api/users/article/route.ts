@@ -15,9 +15,12 @@ export async function GET(request: NextRequest) {
         //     return NextResponse.json({error: "Unauthorized."}, {status: 401})
         // }
         const allArticles = await Article.find({});
+        // @ts-ignore
+        const sortedArticles = allArticles.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
+
         return NextResponse.json({
             message: "All allArticles retrieved successfully",
-            article: allArticles
+            article: sortedArticles
         });
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
