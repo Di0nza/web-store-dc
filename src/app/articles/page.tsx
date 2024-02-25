@@ -126,12 +126,12 @@ export default function Articles() {
                                                 <p>{article.views}</p>
                                             </div>
                                             <div className="media">
-                                                <Image style={{height: "20px", width: "20px"}} src={likes}
+                                                <Image style={{height: "14px", width: "14px"}} src={likes}
                                                        alt={''}></Image>
                                                 <p>{article.likes.length}</p>
                                             </div>
                                             <div className="media">
-                                                <Image style={{marginTop: "1px", height: "21px", width: "21px"}}
+                                                <Image style={{marginTop: "1px", height: "14px", width: "14px"}}
                                                        src={comments} alt={''}></Image>
                                                 <p>{article.comments.length}</p>
                                             </div>
