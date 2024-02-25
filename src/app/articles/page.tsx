@@ -8,8 +8,9 @@ import arrowB from "@/img/arrowB.png";
 import Image from "next/image";
 import {IArticleCategory} from "@/types/ArticleCategory";
 import views from "@/img/eye.svg";
-import likes from "@/img/likes.svg";
+import likes from "@/img/favorite.png";
 import comments from "@/img/comment.svg"
+import Link from "next/link";
 
 // Определяем компонент Articles
 export default function Articles() {
@@ -92,7 +93,7 @@ export default function Articles() {
             </div>
             <div className="container">
                 {articles.map((article) => (
-                    <div key={article._id} className="article-card">
+                    <Link href={`/articles/${article._id}`} key={article._id} className="article-card">
                         <div className="article-image-container">
                             <img src={article.backgroundImage} alt={'Background Image'}/>
                         </div>
@@ -101,37 +102,37 @@ export default function Articles() {
                              onMouseLeave={() => setHoveredArticleId(null)}>
                             {hoveredArticleId === article._id ? (
                                 <div className="article-description">
-                                    <div>
-                                        {`${article.description.substring(0, 210)}...`}
-                                    </div>
+                                    {article?.description?.length > 180 ? `${article.description.substring(0, 180)}...` : article.description}
                                 </div>
                             ) : (
                                 <div>
-                                    <div className="flex flex-row p-3 pb-2 justify-around font-bold">
-                                        {article.categories.map((cat) => (
-                                            <p key={cat._id}>
-                                                #{cat.name.toUpperCase()}
-                                            </p>
+                                    <p className="article-title">
+                                        {article?.title?.length > 65 ? `${article.title.substring(0, 65)}...` : article.title}
+                                    </p>
+                                    <div className={'categories-head-list-block'}>
+                                        {article.categories.map((category, index) => (
+                                            <div key={index} className={'category-head-item'}>
+                                                {category.name}
+                                            </div>
                                         ))}
                                     </div>
-                                    <p className="pl-2 pr-2 pb-2">
-                                        {article.title > 150 ? `${article.title.substring(0, 150)}...` : article.title}
-                                    </p>
-                                    <div className="flex flex-col">
-                                        <p className="absolute bottom-0 p-2 font-bold">
+                                    <div className="flex flex-row-reverse justify-between items-end">
+                                        <p className="p-2 absolute bottom-0">
                                             {formatDate(new Date(article.createdAt))}
                                         </p>
-                                        <div className="flex flex-row absolute bottom-0 right-0 p-2 space-x-3">
+                                        <div className="flex absolute bottom-0 left-0 flex-row p-2 space-x-3">
                                             <div className="media">
                                                 <Image src={views} alt={''}></Image>
                                                 <p>{article.views}</p>
                                             </div>
                                             <div className="media">
-                                                <Image style={{height:"20px", width:"20px"}} src={likes} alt={''}></Image>
+                                                <Image style={{height: "20px", width: "20px"}} src={likes}
+                                                       alt={''}></Image>
                                                 <p>{article.likes.length}</p>
                                             </div>
                                             <div className="media">
-                                                <Image style={{ marginTop: "1px", height:"21px", width:"21px"}} src={comments} alt={''}></Image>
+                                                <Image style={{marginTop: "1px", height: "21px", width: "21px"}}
+                                                       src={comments} alt={''}></Image>
                                                 <p>{article.comments.length}</p>
                                             </div>
                                         </div>
@@ -139,7 +140,7 @@ export default function Articles() {
 
                                 </div>)}
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>
