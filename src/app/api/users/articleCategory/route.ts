@@ -22,10 +22,13 @@ export async function GET() {
 
         const articleCategories = await ArticleCategory.find();
 
+        const sortedArticleCategories = articleCategories.sort((a,b) => a.name.localeCompare(b.name));
+
+
         return NextResponse.json({
             message: "All article categories",
             success: true,
-            articleCategories
+            articleCategories: sortedArticleCategories
         })
     } catch (error: any) {
         return NextResponse.json({error: error.message}, {status: 500})
