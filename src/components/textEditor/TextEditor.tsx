@@ -17,8 +17,8 @@ import {CustomTaskItem} from "./CustomTaskItem";
 import {SelectionMenu} from "./SelectionMenu";
 import {Toolbar} from "./Toolbar";
 import styles from "./TextEditor.module.css";
+import arrow from "@/img/arrowB.png"
 import axios from "axios";
-import arrow from '@/img/arrowB.png'
 import {Button} from "@/components/ui/button";
 import {
     DropdownMenu,
@@ -268,7 +268,7 @@ function TiptapEditor({doc, provider}: EditorProps) {
                         {article.categories.map(category => (
                             <div key={category._id} className={styles.categoryItem}>
                                 {category.name}
-                                <X className={"ml-1 h-5 w-5"} onClick={() => removeArticleCategory(category)}/>
+                                <X className={"ml-2 h-4 w-4"} onClick={() => removeArticleCategory(category)}/>
                             </div>
                         ))}
                     </div>
@@ -279,11 +279,12 @@ function TiptapEditor({doc, provider}: EditorProps) {
                 <div className="flex flex-row justify-between mt-2 mb-3">
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <Button className={"bg-white border-black text-black font-bold hover:bg-zinc-100"}>
-                                Добавить категорию к статье
+                            <Button className={styles.categoryItemListBtn}>
+                                <p>Добавить категорию к статье</p>
+                                <div className={styles.categoryItemListArrow}></div>
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-56">
+                        <DropdownMenuContent className={styles.categoryItemList}>
                             <DropdownMenuLabel>Категории</DropdownMenuLabel>
                             <DropdownMenuSeparator/>
                             {allArticleCategories.map(category => (
@@ -294,20 +295,21 @@ function TiptapEditor({doc, provider}: EditorProps) {
                         </DropdownMenuContent>
                     </DropdownMenu>
 
-                    <Button className={"bg-white border-black text-black font-bold hover:bg-zinc-100"}
+                    <Button  className={styles.categoryItemAddBtn}
                             onClick={() => onOpen("createArticleCategory", {})}>
                         Создать категорию
                     </Button>
                 </div>
                 <label className={styles.updateProfileBlockLabel}>Ключевые слова</label>
-                <div className={"flex flex-row content-center items-center justify-center"}>
+                <div className={styles.articlesKeyWordsBlock}>
                     <input
                         placeholder={'Ключевые слова'}
                         type="text"
+                        className={styles.articlesKeyWordsInout}
                         value={newWord}
                         onChange={(e) => setNewWord(e.target.value)} // Обновление состояния нового слова
                     />
-                    <Button className={"bg-white border-black text-black font-bold hover:bg-zinc-100 ml-2 mb-3"}
+                    <Button className={styles.articlesKeyWordsAdd}
                             onClick={() => addNewWord()}>
                         Добавить
                     </Button>
@@ -316,7 +318,7 @@ function TiptapEditor({doc, provider}: EditorProps) {
                     {article.keywords.map((word, index) => (
                         <div key={index} className={styles.keyWordItem}>
                             {word}
-                            <X className={"ml-1 h-5 w-5"} onClick={() => removeKeyWord(index)}/>
+                            <X className={"ml-1 h-4 w-4"} onClick={() => removeKeyWord(index)}/>
                         </div>
                     ))}
                 </div>

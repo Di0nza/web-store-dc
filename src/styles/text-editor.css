@@ -59,7 +59,21 @@ h3.tiptap-heading + h2.tiptap-heading {
   border-radius: 5px;
   padding: 3px 5px;
 }
+.tiptapTaskItem {
+  display: flex;
+  margin: 2px 0 2px 6px;
+}
 
+.tiptipTaskItemCheckbox {
+  flex: 0 0 auto;
+  margin: 2px 6px 0 0;
+  padding-top: 1px;
+  user-select: none;
+}
+
+.tiptipTaskItemContent {
+  flex: 1 1 auto;
+}
 h1 .tiptap-code, h2 .tiptap-code, h3 .tiptap-code {
   font-size: 1em;
 }
@@ -160,14 +174,29 @@ h1 .tiptap-code, h2 .tiptap-code, h3 .tiptap-code {
 }
 
 .tiptap-image, .tiptap-youtube {
-  margin: var(--space-8) 0;
+  position: relative;
+  margin: var(--space-8) auto;
+  overflow: hidden;
+}
+
+.tiptap-image {
+  display: block;
+  width: 100%;
+  max-height: 450px;
+  border-radius: 8px;
+  max-width: 1000px;
+  height: 100%;
+  object-fit: cover;
 }
 
 .tiptap-image.ProseMirror-selectednode, .tiptap-youtube.ProseMirror-selectednode {
   outline: 1.5px solid var(--color-accent);
 }
 
+
 .tiptap-youtube {
+  width: 100%;
+  max-width: 1000px;
   border: 0;
 }
 

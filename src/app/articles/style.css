@@ -11,10 +11,10 @@
 .article-card {
     position: relative;
     width: 100%;
-    height: 350px; /* Высота прямоугольника */
+    height: 320px;
     background-color: #f1f1f1;
     cursor: pointer;
-    min-height: 350px;
+    min-height: 320px;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     display: flex;
@@ -29,11 +29,32 @@
 }
 
 .article-image-container img {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+
+
+.article-description {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100%;
+    font-weight: 100;
+    font-size: medium;
+    padding: 10px 10px 10px 10px;
+    opacity: 0;
+    visibility: hidden;
+}
+.article-title{
+    margin-top: 5px;
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -44,24 +65,27 @@
         visibility: visible;
     }
 }
-
-.article-description {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    font-weight: 100;
-    font-size: medium;
-    padding: 15px 10px 10px 10px;
-    opacity: 0;
-    visibility: hidden;
-}
-
 .article-content{
-    min-height: 200px;
+    min-height: 180px;
+    transition: 0.3s;
 }
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        visibility: visible;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
 .article-content:hover .article-description {
     animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.article-content:not(:hover) .article-description {
+    animation: fadeOut 0.5s ease-in-out forwards;
 }
 
 .article-categories {
@@ -87,14 +111,18 @@
 .media{
     display: flex;
     flex-direction: row;
+    align-items: center;
+    font-size: 15px;
 }
-
-.media Image{
-    width: 24px;
-    height: 24px;
+.media img:first-child{
+    width: 16px;
+    height: 16px;
+}
+.media img{
+    width: 12px;
+    height: 12px;
 }
 
 .media p{
-    font-weight: bold;
-    margin-left: 2px;
+    margin-left: 5px;
 }
