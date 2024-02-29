@@ -12,6 +12,7 @@ import vklogo from '../img/shearIcons/vklogo.png';
 import tglogo from '../img/shearIcons/tglogo.png';
 import instlogo from '../img/shearIcons/viberlogo.png';
 import wtplogo from '../img/shearIcons/wtplogo.png';
+import user from "@/img/user.png"
 import UnusualDesignMessage from "@/components/modals/unusualDesignMessage";
 import axios from "axios";
 import './componentsStyles.css'
@@ -21,6 +22,15 @@ import {OrderProvider, useOrderContext} from "@/orderContext/store";
 import {BestProducts} from "@/components/homeScreen/BestProducts";
 import {toast} from "sonner";
 import instLogo from "@/img/shearIcons/instlogo.png";
+import {Textarea} from "@/components/ui/textarea";
+import {Button} from "@/components/ui/button";
+import {EmojiPicker} from "@/components/emoji-picker";
+import {onChange} from "lib0/storage";
+import {Form, FormControl, FormField, FormItem} from "@/components/ui/form";
+import {useForm} from "react-hook-form";
+import * as z from "zod";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 
 
 function Images(props: { onClick: () => Window, src: any, alt: string, style: { cursor: string; width: string } }) {
@@ -38,6 +48,7 @@ const ArticleContainer = ({article}) => {
     const wrapperRef = useRef(null);
     const [isSizeTableOpen, setIsSizeTableOpen] = useState(false);
     const [isPhotosSliderOpen, setIsPhotosSliderOpen] = useState(false);
+    const [comment, setComment] = useState("")
     // @ts-ignore
     const {sessionTime, setSessionTime} = useOrderContext();
 
@@ -59,54 +70,51 @@ const ArticleContainer = ({article}) => {
         const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
         setCartItems(storedCartItems);
         console.log(storedCartItems);
-        const favorites = localStorage.getItem('favorites');
-        if (favorites) {
-            const favoritesArray = JSON.parse(favorites);
-            const productId = article._id;
-            setIsFavorite(favoritesArray.includes(productId));
+        const liked = localStorage.getItem('liked');
+        if (liked) {
+            const likedArray = JSON.parse(liked);
+            const articleId = article._id;
+            setIsFavorite(likedArray.includes(articleId));
         }
     }, [sessionTime]);
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(article)
-    },[article])
+    }, [article])
 
 
-    enum OptionsType { ADD_TO_FAV = "ADD", DELETE_FROM_FAV = "DEL"}
+    enum OptionsType { LIKE = "ADD", UNLIKE = "DEL"}
 
-    const updateFavoritesAmountInDb = async (id: string, option: OptionsType) => {
+    const updateLikesInDb = async (id: string, option: OptionsType) => {
         try {
             const data = {
                 id: id,
                 option: option
             }
-            await axios.post("/api/users/products/favorites", data);
+            await axios.post("/api/users/article/likes", data);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     }
 
 
-    const handleToggleFavorite = (productId: string) => {
-        let favoritesArray: string[] = [];
-        const favorites = localStorage.getItem('favorites');
+    const handleToggleLike = (articleId: string) => {
+        let likedArray: string[] = [];
+        const favorites = localStorage.getItem('liked');
         if (favorites) {
-            favoritesArray = JSON.parse(favorites);
+            likedArray = JSON.parse(favorites);
         }
-        const index = favoritesArray.indexOf(productId);
+        const index = likedArray.indexOf(articleId);
         if (index !== -1) {
-            favoritesArray.splice(index, 1);
-            console.log(`Товар ${productId} был удален из избранного`);
-            updateFavoritesAmountInDb(productId, OptionsType.DELETE_FROM_FAV);
+            likedArray.splice(index, 1);
+            updateLikesInDb(articleId, OptionsType.UNLIKE);
             setIsFavorite(false);
         } else {
-            favoritesArray.push(productId);
-            console.log(`Товар ${productId} был добавлен в избранное`);
-            updateFavoritesAmountInDb(productId, OptionsType.ADD_TO_FAV);
+            likedArray.push(articleId);
+            updateLikesInDb(articleId, OptionsType.LIKE);
             setIsFavorite(true);
         }
-        localStorage.setItem('favorites', JSON.stringify(favoritesArray));
-        console.log("Избранные товары:", favoritesArray);
+        localStorage.setItem('liked', JSON.stringify(likedArray));
     };
     const copyLinkAndShowMessage = () => {
         let currentUrl = window.location.href;
@@ -169,6 +177,60 @@ const ArticleContainer = ({article}) => {
         };
     }, [wrapperRef]);
 
+    const formSchema = z.object({
+        comment: z.string().min(1),
+    });
+
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            comment: "",
+        }
+    });
+
+    const isLoading = form.formState.isSubmitting;
+
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        try {
+            // const url = qs.stringifyUrl({
+            //     url: apiUrl,
+            //     query,
+            // });
+
+            console.log(values)
+            await axios.post("/api/users/article/comments", {...values, articleId: article._id});
+
+
+            form.reset();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const formatDate = (date) => {
+        const currentDate = new Date();
+        const yesterday = new Date(currentDate);
+        yesterday.setDate(currentDate.getDate() - 1);
+
+        if (date.toDateString() === currentDate.toDateString()) {
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+            return `Сегодня в ${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+        } else if (date.toDateString() === yesterday.toDateString()) {
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+            return `Вчера в ${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+        } else {
+            const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+            const day = date.getDate();
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+            return `${day} ${month} ${year < new Date().getFullYear() ? year : ''} в ${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+        }
+    };
+
 
     return (
         <OrderProvider>
@@ -187,7 +249,7 @@ const ArticleContainer = ({article}) => {
                                         <Image className='error-button-image' src={unusualDesign} alt='!'/>
                                     </div>
                                     <div className='favorite-button-block'
-                                         onClick={() => handleToggleFavorite(article._id)}>
+                                         onClick={() => handleToggleLike(article._id)}>
                                         <Image className='favorite-button-image'
                                                src={!isFavorite ? favorites : unFavorites} alt='Favorite'/>
                                     </div>
@@ -243,6 +305,76 @@ const ArticleContainer = ({article}) => {
                         <p className={'categories-head-description'}>{article.description}</p>
                         <div className={'article-html-content'} dangerouslySetInnerHTML={{__html: article.content}}/>
                     </div>
+                </div>
+                <div>
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)}>
+                            <FormField
+                                control={form.control}
+                                name="comment"
+                                render={({field}) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <div className="relative p-2">
+                                                <Textarea
+                                                    disabled={isLoading}
+                                                    placeholder="Ваш комментарий"
+                                                    className={`text-black`}
+                                                    {...field}/>
+                                                <div className="absolute top-0 right-0">
+                                                    <EmojiPicker
+                                                        onChange={(emoji: string) => field.onChange(`${field.value} ${emoji}`)}
+                                                    />
+                                                </div>
+                                                <Button className="send-comment-button">
+                                                    Отправить
+                                                </Button>
+                                            </div>
+                                        </FormControl>
+                                    </FormItem>
+                                )}
+                            />
+                        </form>
+                    </Form>
+                </div>
+                <div className="flex flex-col-reverse mt-auto">
+                    {article.comments.map((item) => {
+                        return (
+                            <div key={item._id}
+                                 className="relative group flex items-center p-4 transition w-full">
+                                <div className="group flex gap-x-2 items-start w-full">
+                                    <div className="">
+                                        <Avatar>
+                                            {item.image ?
+                                                <AvatarImage src={item.image}/>
+                                                :
+                                                <div style={{backgroundColor: "rgb(241, 241, 241)"}}>
+                                                    <AvatarImage className="p-1"
+                                                                 src={"https://res.cloudinary.com/du8qdkle4/image/upload/v1709167802/pngegg_dw2hw2.png"}/>
+                                                </div>
+                                            }
+                                            <AvatarFallback>CN</AvatarFallback>
+                                        </Avatar>
+                                    </div>
+                                    <div className="flex flex-col w-full">
+                                        <div className="flex items-center gap-x-2">
+                                            <div className="flex items-center">
+                                                <p className="font-semibold text-sm">
+                                                    {item.username}
+                                                </p>
+                                            </div>
+                                            <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                                                {formatDate(new Date(item.createdAt))}
+                                            </span>
+                                        </div>
+                                        <p>
+                                            {item.comment}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </OrderProvider>

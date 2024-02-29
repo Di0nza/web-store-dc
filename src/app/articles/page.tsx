@@ -140,7 +140,7 @@ export default function Articles() {
                                             <div className="media">
                                                 <Image style={{height: "14px", width: "14px"}} src={likes}
                                                        alt={''}></Image>
-                                                <p>{article.likes.length}</p>
+                                                <p>{article.likes}</p>
                                             </div>
                                             <div className="media">
                                                 <Image style={{marginTop: "1px", height: "14px", width: "14px"}}

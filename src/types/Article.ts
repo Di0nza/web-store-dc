@@ -5,7 +5,7 @@ export interface IArticle {
     description: string,
     keywords: any,
     content: string,
-    likes: any,
+    likes: number,
     comments: any,
     views: number,
     coAuthors: any,

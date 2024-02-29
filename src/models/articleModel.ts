@@ -12,7 +12,7 @@ const productSchema = mongoose.models.Article ?
         description: String,
         keywords: [],
         content: String,
-        likes: [],
+        likes: Number,
         comments: [],
         views: Number,
         coAuthors: [],
