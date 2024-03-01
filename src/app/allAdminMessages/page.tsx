@@ -174,7 +174,7 @@ export default function AllAdminMessages() {
                 <h1>{"Сообщения"}</h1>
                 <p className='changeBlockText'>{`Увас ${userOrders?.length} сообщений!`}</p>
                 <div className='messagesSortContainer'>
-                    <div>
+                    <div className='filterSearchMsg'>
                         <div className='filterSearchMsgBlock'>
                             <input
                                 type='search'

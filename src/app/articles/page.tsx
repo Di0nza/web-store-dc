@@ -117,7 +117,7 @@ export default function Articles() {
                                         ))}
                                     </div>
                                     <div className="flex flex-row-reverse justify-between items-end">
-                                        <p className="p-2 absolute bottom-0">
+                                        <p className="p-2 absolute bottom-0 articleDate">
                                             {formatDate(new Date(article.createdAt))}
                                         </p>
                                         <div className="flex absolute bottom-0 left-0 flex-row p-2 space-x-3">

@@ -391,7 +391,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                                             <Image src={qrlogo} alt={'QR'}></Image>
                                         </div>
                                     </DialogTrigger>
-                                    <DialogContent className="sm:max-w-[490px]">
+                                    <DialogContent className="sm:max-w-[490px] placingOrderQRContent">
                                         <DialogHeader>
                                             <DialogTitle>QR-код для получения заказа при самовывозе</DialogTitle>
                                             {/*<DialogDescription>*/}
@@ -427,7 +427,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
 
                                         <DrawerFooter className="">
                                             <DrawerClose asChild>
-                                                <Button variant="outline">Закрыть</Button>
+                                                <Button variant="outline" className={'orderQRButton'}>Закрыть</Button>
                                             </DrawerClose>
                                         </DrawerFooter>
                                     </DrawerContent>

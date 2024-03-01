@@ -560,6 +560,47 @@
     font-weight: 500;
     color: #d50404;
 }
+@media screen and (max-width: 1000px){
+    .messagesContainer{
+        min-height: 100vh;
+        width: calc(100% - 20px);
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 25px 0 0 0;
+        margin: 0 10px;
+    }
+}
+@media screen and (max-width: 800px){
+    .messagesSortContainer{
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .filterSearchMsg{
+        width: calc(100%);
+        max-width: 100%;
+    }
+    .filterSearchMsgBlock{
+        width: calc(100%);
+        max-width: 100%;
+        min-width: 100%;
+        margin: 10px 0 0 0;
+    }
+    .filterMsgBlock{
+        width: calc(100%);
+        max-width: 100%;
+        min-width: 100%;
+        margin: 10px 0 0 0;
+    }
+    .messagesProfileBlock{
+        width: calc(100%);
+        max-width: 100%;
+        margin: 10px 0 30px;
+    }
+}
 @media screen and (max-width: 600px){
     .profileBlock{
         min-height: 100vh;

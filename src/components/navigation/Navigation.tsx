@@ -261,46 +261,63 @@ const Navigation = ({navLinks}: Props) => {
                                     </p>
                                 </div>
                             </div>
-                            <div className={'mini-cart-items-block'}>
-                                {Object.values(groupedCartItems).map((item, index) => (
-                                    <div className={'mini-cart-item'} key={index}>
-                                        <img
-                                            className={'mini-cart-item-img'}
-                                            key={index}
-                                            src={item.image}
-                                            alt={`Thumbnail ${index}`}
-                                        />
-                                        <div className={'mini-cart-item-info'}>
-                                            <div className={'mini-cart-item-info-head'}>
-                                                <div>
-                                                    <h5 className={'mini-cart-item-title'}>{item.title}</h5>
-                                                    <b><p className={'mini-cart-item-size'} key={index}>{item.size}</p>
-                                                    </b>
+                            {Object.values(groupedCartItems)?.length === 0 ? (
+                                <div className={'mini-cart-items-block'}>
+                                    <div className={'mini-cart-no-items'}>
+                                        <p>В вашей корзине нет товаров</p>
+                                    </div>
+                                </div>
+
+                            ) : (
+                                <div className={'mini-cart-items-block'}>
+                                    {Object.values(groupedCartItems).map((item, index) => (
+                                        <div className={'mini-cart-item'} key={index}>
+                                            <img
+                                                className={'mini-cart-item-img'}
+                                                key={index}
+                                                src={item.image}
+                                                alt={`Thumbnail ${index}`}
+                                            />
+                                            <div className={'mini-cart-item-info'}>
+                                                <div className={'mini-cart-item-info-head'}>
+                                                    <div>
+                                                        <h5 className={'mini-cart-item-title'}>{item.title}</h5>
+                                                        <b><p className={'mini-cart-item-size'}
+                                                              key={index}>{item.size}</p>
+                                                        </b>
+                                                    </div>
+                                                    <div className="delete-button"
+                                                         onClick={() => removeAllFromCartLocalStorage(item)}>
+                                                        <Image src={deleteItem} className="delete-button" alt={'x'}/>
+                                                    </div>
                                                 </div>
-                                                <div className="delete-button"
-                                                     onClick={() => removeAllFromCartLocalStorage(item)}>
-                                                    <Image src={deleteItem} className="delete-button" alt={'x'}/>
+                                                <div className={'mini-cart-footer'}>
+                                                    <div key={index} className='mini-count-pad'>
+                                                        <Image src={minus} alt={'-'} className='mini-count-pad-icon'
+                                                               onClick={() => handleDecrease(item)}></Image>
+                                                        <b><p>{item.count}</p></b>
+                                                        <Image src={plus} alt={'+'} className='mini-count-pad-icon'
+                                                               onClick={() => handleIncrease(item)}></Image>
+                                                    </div>
+                                                    <h5>
+                                                        ${item.price * item.count}.00
+                                                    </h5>
                                                 </div>
-                                            </div>
-                                            <div className={'mini-cart-footer'}>
-                                                <div key={index} className='mini-count-pad'>
-                                                    <Image src={minus} alt={'-'} className='mini-count-pad-icon'
-                                                           onClick={() => handleDecrease(item)}></Image>
-                                                    <b><p>{item.count}</p></b>
-                                                    <Image src={plus} alt={'+'} className='mini-count-pad-icon'
-                                                           onClick={() => handleIncrease(item)}></Image>
-                                                </div>
-                                                <h5>
-                                                    ${item.price * item.count}.00
-                                                </h5>
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
-                            </div>
-                            <Link className={'go-to-cart'} href={'/cart'} onClick={closeModal}>
-                                Перейти к корзине
-                            </Link>
+                                    ))}
+                                </div>
+                            )}
+                            {Object.values(groupedCartItems)?.length === 0 ? (
+                                <Link className={'go-to-cart'} href={'/store'} onClick={closeModal}>
+                                    За покупками!
+                                </Link>
+                            ) : (
+                                <Link className={'go-to-cart'} href={'/cart'} onClick={closeModal}>
+                                    Перейти к корзине
+                                </Link>
+                            )}
+
                         </div>
                     </div>
                 )}

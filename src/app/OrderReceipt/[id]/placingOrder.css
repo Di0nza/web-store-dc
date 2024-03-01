@@ -477,7 +477,16 @@
     margin-left: 5px;
     margin-top: 2px;
 }
+.placingOrderQRContent{
+    border-radius: 10px;
+    box-shadow: none;
 
+}
+.orderQRButton{
+    border: 2px solid #111111;
+    border-radius: 8px;
+    height: 46px;
+}
 .placingOrderQRButton{
     border-radius: 10px;
     width: calc(100% - 5px);
@@ -537,7 +546,47 @@
         padding: 25px 15px 0;
     }
 }
+@media screen and (max-width: 900px) {
+    .orderBtnBlock{
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    .placingOrderBlockButton{
+        width: calc(100%);
+        margin: 0 0 20px 0;
+    }
+    .placingOrderPdfButton{
+        width: calc(100%);
+        margin: 0 0 10px 0;
+    }
+    .placingOrderQRButton{
+        width: calc(100%);
+        margin: 0 0 10px 0;
+    }
+}
 @media screen and (max-width: 600px) {
+    .placingOrderBlockButton{
+        width: calc(100% - 10px);
+        margin: 0 10px 10px 0;
+    }
+    .placingOrderPdfButton{
+        width: calc(100% - 10px);
+        margin: 0 10px 10px 0;
+    }
+    .placingOrderQRButton{
+        width: calc(100%);
+        margin: 0 0 10px 0;
+    }
+    .orderBtnBlock{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+    }
     .placingOrderBlockRow{
         width: 100%;
         display: flex;
@@ -568,5 +617,26 @@
         font-size: 14px;
         flex-wrap: wrap;
         margin: 0 0 5px 0;
+    }
+}
+@media screen and (max-width: 470px) {
+    .orderBtnBlock{
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    .placingOrderBlockButton{
+        width: calc(100%);
+        margin: 0 0 20px 0;
+    }
+    .placingOrderPdfButton{
+        width: calc(100%);
+        margin: 0 0 10px 0;
+    }
+    .placingOrderQRButton{
+        width: calc(100%);
+        margin: 0 0 10px 0;
     }
 }

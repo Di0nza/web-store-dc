@@ -126,3 +126,25 @@
 .media p{
     margin-left: 5px;
 }
+@media screen and (max-width: 800px){
+    .container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Четыре столбца */
+        gap: 10px; /* Промежуток между элементами */
+        padding: 0;
+        max-height: none;
+        overflow: hidden;
+        margin-bottom: 50px;
+    }
+}
+@media screen and (max-width: 500px){
+    .container {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr); /* Четыре столбца */
+        gap: 10px; /* Промежуток между элементами */
+        padding: 0;
+        max-height: none;
+        overflow: hidden;
+        margin-bottom: 50px;
+    }
+}
