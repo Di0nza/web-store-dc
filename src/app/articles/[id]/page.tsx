@@ -17,10 +17,10 @@ export async function generateMetadata({params: {id}}: Props): Promise<Metadata>
     return {
         title: article?.title,
         description: article?.description,
-        keywords: ['Clothing', 'fashion', 'women\'s clothing', 'men\'s clothing'],
-        // openGraph: {
-        //     images: product.pictures[0],
-        // },
+        keywords: article?.keywords,
+        openGraph: {
+            images: article?.backgroundImage,
+        },
         icons: 'https://res.cloudinary.com/maticht12345/image/upload/v1701277508/Letter_-_16_wds2cz.png',
     }
 }

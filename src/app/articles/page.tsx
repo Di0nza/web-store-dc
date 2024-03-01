@@ -18,7 +18,7 @@ export default function Articles() {
     const [articles, setArticles] = useState<any[]>([]);
     const [hoveredArticleId, setHoveredArticleId] = useState<string | null>(null);
     const [allArticleCategories, setAllArticleCategories] = useState([]);
-    const [selectedArticleCategory, setSelectedArticleCategory] = useState<IArticleCategory>()
+    const [selectedArticleCategory, setSelectedArticleCategory] = useState<IArticleCategory>({name: "Все", numberOfArticles: 0})
 
 
     const getArticles = async () => {
@@ -67,6 +67,12 @@ export default function Articles() {
         }
     };
 
+    const handleSelectAllArticleCategory = async () => {
+        setSelectedArticleCategory({name: "Все", numberOfArticles: 0})
+        const res = await axios.get(`/api/users/article`);
+        setArticles(res.data.article);
+    }
+
     const handleSelectArticleCategory = async (articleCategory) => {
         setSelectedArticleCategory(articleCategory)
         const res = await axios.get(`/api/users/article/${articleCategory._id}`);
@@ -83,6 +89,12 @@ export default function Articles() {
                 </div>
             </div>
             <div className="article-categories-container">
+                <div className="article-categories"
+                     onClick={() => handleSelectAllArticleCategory()}
+                     style={selectedArticleCategory && selectedArticleCategory.name === "Все" ? {boxShadow: "none"} : {}}
+                >
+                     Все
+                </div>
                 {allArticleCategories.map((category, index) => (
                     <div key={index} className="article-categories"
                          style={selectedArticleCategory && selectedArticleCategory._id === category._id ? {boxShadow: "none"} : {}}
@@ -128,7 +140,7 @@ export default function Articles() {
                                             <div className="media">
                                                 <Image style={{height: "14px", width: "14px"}} src={likes}
                                                        alt={''}></Image>
-                                                <p>{article.likes.length}</p>
+                                                <p>{article.likes}</p>
                                             </div>
                                             <div className="media">
                                                 <Image style={{marginTop: "1px", height: "14px", width: "14px"}}
