@@ -45,3 +45,32 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({error: error.message}, {status: 500})
     }
 }
+
+export async function GET(request: NextRequest) {
+    try {
+        const user = await currentUser();
+        if(!user){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        if(user?.isAdmin === false){
+            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
+        }
+
+        const allArticles = await Article.find({});
+        // @ts-ignore
+        const sortedArticles = allArticles.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
+
+        return NextResponse.json({
+            message: "All allArticles retrieved successfully",
+            article: sortedArticles
+        });
+    } catch (error: any) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+}
