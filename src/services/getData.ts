@@ -1,6 +1,7 @@
 import Products from "../mockData/mockProducts.json";
 import axios from "axios";
 import {IProduct} from "@/types/Product";
+import {IArticle} from "@/types/Article";
 
 export const getData = async () => {
     try {
@@ -41,6 +42,21 @@ export const getDataBySearch = async (search: string) => {
         );
         //console.log(foundProducts)
         return foundProducts;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return null;
+    }
+}
+
+export const getArticlesBySearch = async (search: string) => {
+    try {
+        const data = await axios.get("/api/admin/article");
+        const articles = data.data.article as IArticle[];
+        const foundArticles = articles.filter(article =>
+            article.title.toLowerCase().includes(search.toLowerCase()) ||
+            article.description.toLowerCase().includes(search.toLowerCase())
+        );
+        return foundArticles;
     } catch (error) {
         console.error('Error fetching data:', error);
         return null;

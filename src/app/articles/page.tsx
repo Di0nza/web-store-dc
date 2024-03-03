@@ -1,10 +1,8 @@
 "use client";
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-//import ReactHtmlParser from 'react-html-parser';
 import "@/styles/text-editor.css";
 import "./style.css"
-import arrowB from "@/img/arrowB.png";
 import Image from "next/image";
 import {IArticleCategory} from "@/types/ArticleCategory";
 import views from "@/img/eye.svg";
@@ -12,13 +10,15 @@ import likes from "@/img/favorite.png";
 import comments from "@/img/comment.svg"
 import Link from "next/link";
 
-// Определяем компонент Articles
 export default function Articles() {
 
     const [articles, setArticles] = useState<any[]>([]);
     const [hoveredArticleId, setHoveredArticleId] = useState<string | null>(null);
     const [allArticleCategories, setAllArticleCategories] = useState([]);
-    const [selectedArticleCategory, setSelectedArticleCategory] = useState<IArticleCategory>({name: "Все", numberOfArticles: 0})
+    const [selectedArticleCategory, setSelectedArticleCategory] = useState<IArticleCategory>({
+        name: "Все",
+        numberOfArticles: 0
+    })
 
 
     const getArticles = async () => {
@@ -93,7 +93,7 @@ export default function Articles() {
                      onClick={() => handleSelectAllArticleCategory()}
                      style={selectedArticleCategory && selectedArticleCategory.name === "Все" ? {boxShadow: "none"} : {}}
                 >
-                     Все
+                    Все
                 </div>
                 {allArticleCategories.map((category, index) => (
                     <div key={index} className="article-categories"
@@ -149,7 +149,6 @@ export default function Articles() {
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>)}
                         </div>
                     </Link>
