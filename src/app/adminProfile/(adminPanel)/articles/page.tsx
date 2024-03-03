@@ -21,8 +21,9 @@ export default function SimpleEditor() {
     const [articles, setArticles] = useState<any[]>([]);
     const [hoveredArticleId, setHoveredArticleId] = useState<string | null>(null);
     const [allArticleCategories, setAllArticleCategories] = useState([]);
+    const [selectedDateCategory, setSelectedDateCategory] = useState(null);
     const [selectedArticleCategory, setSelectedArticleCategory] = useState<IArticleCategory>({
-        name: "Все",
+        name: "Показать всех",
         numberOfArticles: 0
     })
 
@@ -74,7 +75,7 @@ export default function SimpleEditor() {
     };
 
     const handleSelectAllArticleCategory = async () => {
-        setSelectedArticleCategory({name: "Все", numberOfArticles: 0})
+        setSelectedArticleCategory({name: "Показать всех", numberOfArticles: 0})
         const res = await axios.get(`/api/users/article`);
         setArticles(res.data.article);
     }
@@ -84,6 +85,35 @@ export default function SimpleEditor() {
         const res = await axios.get(`/api/users/article/${articleCategory._id}`);
         setArticles(res.data.article);
     }
+    const handleDateCategoryFilter = (sortingType) => {
+        if (articles) {
+            let sortedArticles = [...articles];
+
+            switch (sortingType) {
+                case 'dateAscending':
+                    sortedArticles.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+                    break;
+                case 'dateDescending':
+                    sortedArticles.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+                    break;
+                case 'statusAscending':
+                    sortedArticles.sort((a, b) => {
+                        return a.views - b.views;
+                    });
+                    break;
+                case 'statusDescending':
+                    sortedArticles.sort((a, b) => {
+                        return b.views- a.views;
+                    });
+                    break;
+                default:
+                    break;
+            }
+
+            setArticles(sortedArticles);
+            setSelectedDateCategory(sortingType);
+        }
+    };
 
 
     return (
@@ -93,79 +123,107 @@ export default function SimpleEditor() {
                     <p className='store-container-title'>Статьи</p>
                     <p className='store-quantity'>Количество статей {articles?.length}</p>
                 </div>
-                <ArticleSearch onSearch={setArticles}/>
+
             </div>
-            <div className='admin-products-header'>
-                <Link  href={"/adminProfile/articles/create"} className="addItemBtn">
-                    Добавить Статью
-                </Link>
-            </div>
-            <div className="article-categories-container">
-                <div className="article-categories"
-                     onClick={() => handleSelectAllArticleCategory()}
-                     style={selectedArticleCategory && selectedArticleCategory.name === "Все" ? {boxShadow: "none"} : {}}
-                >
-                    Все
-                </div>
-                {allArticleCategories.map((category, index) => (
-                    <div key={index} className="article-categories"
-                         style={selectedArticleCategory && selectedArticleCategory._id === category._id ? {boxShadow: "none"} : {}}
-                         onClick={() => handleSelectArticleCategory(category)}>
-                        {category.name}
-                    </div>
-                ))}
-            </div>
-            <div className="container">
-                {articles?.map((article) => (
-                    <Link href={`/articles/${article._id}`} key={article._id} className="article-card">
-                        <div className="article-image-container">
-                            <img src={article.backgroundImage} alt={'Background Image'}/>
-                        </div>
-                        <div className="article-content"
-                             onMouseEnter={() => setHoveredArticleId(article._id)}
-                             onMouseLeave={() => setHoveredArticleId(null)}>
-                            {hoveredArticleId === article._id ? (
-                                <div className="article-description">
-                                    {article?.description?.length > 180 ? `${article.description.substring(0, 180)}...` : article.description}
-                                </div>
-                            ) : (
-                                <div>
-                                    <p className="article-title">
-                                        {article?.title?.length > 65 ? `${article.title.substring(0, 65)}...` : article.title}
-                                    </p>
-                                    <div className={'categories-head-list-block'}>
-                                        {article.categories.map((category, index) => (
-                                            <div key={index} className={'category-head-item'}>
-                                                {category.name}
-                                            </div>
-                                        ))}
+            <div className='articleBlock'>
+                <div className="container">
+                    {articles?.map((article) => (
+                        <Link href={`/articles/${article._id}`} key={article._id} className="article-card">
+                            <div className="article-image-container">
+                                <img src={article.backgroundImage} alt={'Background Image'}/>
+                            </div>
+                            <div className="article-content"
+                                 onMouseEnter={() => setHoveredArticleId(article._id)}
+                                 onMouseLeave={() => setHoveredArticleId(null)}>
+                                {hoveredArticleId === article._id ? (
+                                    <div className="article-description">
+                                        {article?.description?.length > 180 ? `${article.description.substring(0, 180)}...` : article.description}
                                     </div>
-                                    <div className="flex flex-row-reverse justify-between items-end">
-                                        <p className="p-2 absolute bottom-0">
-                                            {formatDate(new Date(article.createdAt))}
+                                ) : (
+                                    <div>
+                                        <p className="article-title">
+                                            {article?.title?.length > 65 ? `${article.title.substring(0, 65)}...` : article.title}
                                         </p>
-                                        <div className="flex absolute bottom-0 left-0 flex-row p-2 space-x-3">
-                                            <div className="media">
-                                                <Image src={views} alt={''}></Image>
-                                                <p>{article.views}</p>
-                                            </div>
-                                            <div className="media">
-                                                <Image style={{height: "14px", width: "14px"}} src={likes}
-                                                       alt={''}></Image>
-                                                <p>{article.likes}</p>
-                                            </div>
-                                            <div className="media">
-                                                <Image style={{marginTop: "1px", height: "14px", width: "14px"}}
-                                                       src={comments} alt={''}></Image>
-                                                <p>{article.comments.length}</p>
+                                        <div className={'categories-head-list-block'}>
+                                            {article.categories.map((category, index) => (
+                                                <div key={index} className={'category-head-item'}>
+                                                    {category.name}
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <div className="flex flex-row-reverse justify-between items-end">
+                                            <p className="p-2 absolute bottom-0 articleDate">
+                                                {formatDate(new Date(article.createdAt))}
+                                            </p>
+                                            <div className="flex absolute bottom-0 left-0 flex-row p-2 space-x-3">
+                                                <div className="media">
+                                                    <Image src={views} alt={''}></Image>
+                                                    <p>{article.views}</p>
+                                                </div>
+                                                <div className="media">
+                                                    <Image style={{height: "14px", width: "14px"}} src={likes}
+                                                           alt={''}></Image>
+                                                    <p>{article.likes}</p>
+                                                </div>
+                                                <div className="media">
+                                                    <Image style={{marginTop: "1px", height: "14px", width: "14px"}}
+                                                           src={comments} alt={''}></Image>
+                                                    <p>{article.comments.length}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>)}
+                                    </div>)}
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+                <div className='articleFilterBlock'>
+                    <ArticleSearch onSearch={setArticles}/>
+                    <div className='filterBlock'>
+                        <h4>Сортировка заказов</h4>
+                        <div className="article-categories-container">
+                            <div
+                                className={`blockCategory ${selectedArticleCategory && selectedArticleCategory.name === 'Показать всех' ? 'selected' : ''}`}
+                                onClick={() => handleSelectAllArticleCategory()}
+                            >
+                                Показать всех
+                            </div>
+                            {allArticleCategories.map((category, index) => (
+                                <div key={index}
+                                     className={`blockCategory ${selectedArticleCategory && selectedArticleCategory._id === category._id ? 'selected' : ''}`}
+                                     style={selectedArticleCategory && selectedArticleCategory._id === category._id ? {boxShadow: "none"} : {}}
+                                     onClick={() => handleSelectArticleCategory(category)}>
+                                    {category.name}
+                                </div>
+                            ))}
                         </div>
-                    </Link>
-                ))}
+                        <div className='article-categories-container'>
+                            <div onClick={() => handleDateCategoryFilter('dateAscending')}
+                                 className={`blockCategory ${selectedDateCategory === 'dateAscending' ? 'selected' : ''}`}>
+                                Дата: сначала старые
+                            </div>
+                            <div onClick={() => handleDateCategoryFilter('dateDescending')}
+                                 className={`blockCategory ${selectedDateCategory === 'dateDescending' ? 'selected' : ''}`}>
+                                Дата: сначала новые
+                            </div>
+                            <div onClick={() => handleDateCategoryFilter('statusAscending')}
+                                 className={`blockCategory ${selectedDateCategory === 'statusAscending' ? 'selected' : ''}`}>
+                                Популярность: по возрастанию
+                            </div>
+                            <div onClick={() => handleDateCategoryFilter('statusDescending')}
+                                 className={`blockCategory ${selectedDateCategory === 'statusDescending' ? 'selected' : ''}`}>
+                                Популярность: по убыванию
+                            </div>
+                        </div>
+                    </div>
+                    <div className='admin-products-header'>
+                        <Link href={"/adminProfile/articles/create"} className="addItemBtn">
+                            Добавить Статью
+                        </Link>
+                    </div>
+                </div>
             </div>
+
         </div>
     );
 }

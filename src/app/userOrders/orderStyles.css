@@ -338,9 +338,10 @@
     background-color: #fafafa;
     padding: 8px 10px 3px;
 }
-.favorite-button-image{
+.favorite-btn-image{
     width: 20px;
     height: 25px;
+    cursor: pointer;
 }
 .product-info-block p{
     margin: 5px 0;
@@ -908,6 +909,7 @@
 .favorite-button-image{
     width: 20px;
     height: 25px;
+    cursor: pointer;
 }
 .product-info-block p{
     margin: 5px 0;

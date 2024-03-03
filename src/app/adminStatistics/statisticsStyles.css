@@ -562,6 +562,7 @@
 .favorite-button-image{
     width: 20px;
     height: 20px;
+    cursor: pointer;
 }
 .product-info-block p{
     margin: 5px 0;

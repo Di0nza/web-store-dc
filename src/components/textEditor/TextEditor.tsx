@@ -17,6 +17,7 @@ import {CustomTaskItem} from "./CustomTaskItem";
 import {SelectionMenu} from "./SelectionMenu";
 import {Toolbar} from "./Toolbar";
 import styles from "./TextEditor.module.css";
+import '@/styles/text-editor.css';
 import arrow from "@/img/arrowB.png"
 import axios from "axios";
 import {Button} from "@/components/ui/button";
@@ -64,7 +65,7 @@ const OutputHtmlButton = ({editor, article}) => {
                 content: htmlContent,
                 likes: article.likes,
                 comments: article.comments,
-                views: 12,
+                views: 1,
                 coAuthors: article.coAuthors,
                 createdAt: article.createdAt,
             };
@@ -186,7 +187,7 @@ function TiptapEditor({doc, provider}: EditorProps) {
         content: '',
         likes: [],
         comments: [],
-        views: 12,
+        views: 1,
         coAuthors: [],
         createdAt: Date.now(),
     });

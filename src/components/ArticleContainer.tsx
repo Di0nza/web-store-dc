@@ -12,10 +12,13 @@ import vklogo from '../img/shearIcons/vklogo.png';
 import tglogo from '../img/shearIcons/tglogo.png';
 import instlogo from '../img/shearIcons/viberlogo.png';
 import wtplogo from '../img/shearIcons/wtplogo.png';
+import comments from "@/img/comment.svg"
+import profileImg from "@/img/profile.png"
 import user from "@/img/user.png"
 import UnusualDesignMessage from "@/components/modals/unusualDesignMessage";
 import axios from "axios";
 import './componentsStyles.css'
+import '@/styles/text-editor.css';
 import ProductSizeTable from "@/components/modals/ProductSizeTable";
 import BigPhotosSlider from "@/components/modals/BigPhotosSlider";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
@@ -231,10 +234,18 @@ const ArticleContainer = ({article}) => {
         }
     };
 
+    const scrollToCommentBlock = (element) => {
+        const commentBlock = document.getElementById(element);
+
+        if (commentBlock) {
+            commentBlock.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
 
     return (
         <OrderProvider>
-            <div className='main-product-container'>
+            <div className='main-article-container'>
                 <div className='article-info-block'>
                     <Image src={article.backgroundImage} className={'article-info-background-image'} width={1000}
                            height={50} alt={'bg'}></Image>
@@ -245,8 +256,8 @@ const ArticleContainer = ({article}) => {
                             </div>
                             <div className={'cart-items-btns-container'}>
                                 <div className={'cart-items-btns-block'}>
-                                    <div className='error-button' onClick={() => setSendUnusualDesign(true)}>
-                                        <Image className='error-button-image' src={unusualDesign} alt='!'/>
+                                    <div className='comment-button' onClick={() => scrollToCommentBlock('commentBlock')}>
+                                        <Image className='comment-button-image' src={comments} alt='!'/>
                                     </div>
                                     <div className='favorite-button-block'
                                          onClick={() => handleToggleLike(article._id)}>
@@ -288,11 +299,6 @@ const ArticleContainer = ({article}) => {
                                         </div>
                                     </div>
                                 )}
-                                <UnusualDesignMessage
-                                    show={sendUnusualDesign}
-                                    onHide={() => setSendUnusualDesign(false)}
-                                    item={article}
-                                />
                             </div>
                         </div>
                         <div className={'categories-head-block'}>
@@ -306,7 +312,8 @@ const ArticleContainer = ({article}) => {
                         <div className={'article-html-content'} dangerouslySetInnerHTML={{__html: article.content}}/>
                     </div>
                 </div>
-                <div>
+                <div id={'commentBlock'} className={'commentBlock'}>
+                    <h3>Комментарии</h3>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)}>
                             <FormField
@@ -315,20 +322,22 @@ const ArticleContainer = ({article}) => {
                                 render={({field}) => (
                                     <FormItem>
                                         <FormControl>
-                                            <div className="relative p-2">
+                                            <div>
                                                 <Textarea
                                                     disabled={isLoading}
                                                     placeholder="Ваш комментарий"
-                                                    className={`text-black`}
+                                                    className={`comment-text-block`}
                                                     {...field}/>
-                                                <div className="absolute top-0 right-0">
-                                                    <EmojiPicker
-                                                        onChange={(emoji: string) => field.onChange(`${field.value} ${emoji}`)}
-                                                    />
+                                                <div className="nav-comment-block">
+                                                    <div className="send-emoji-button">
+                                                        <EmojiPicker
+                                                            onChange={(emoji: string) => field.onChange(`${field.value} ${emoji}`)}
+                                                        />
+                                                    </div>
+                                                    <Button className="send-comment-button">
+                                                        Отправить
+                                                    </Button>
                                                 </div>
-                                                <Button className="send-comment-button">
-                                                    Отправить
-                                                </Button>
                                             </div>
                                         </FormControl>
                                     </FormItem>
@@ -337,11 +346,11 @@ const ArticleContainer = ({article}) => {
                         </form>
                     </Form>
                 </div>
-                <div className="flex flex-col-reverse mt-auto">
+                <div className="flex flex-col-reverse commentsListBlock">
                     {article.comments.map((item) => {
                         return (
                             <div key={item._id}
-                                 className="relative group flex items-center p-4 transition w-full">
+                                 className="relative group flex items-center transition w-full commentsContent">
                                 <div className="group flex gap-x-2 items-start w-full">
                                     <div className="">
                                         <Avatar>
@@ -349,15 +358,15 @@ const ArticleContainer = ({article}) => {
                                                 <AvatarImage src={item.image}/>
                                                 :
                                                 <div style={{backgroundColor: "rgb(241, 241, 241)"}}>
-                                                    <AvatarImage className="p-1"
-                                                                 src={"https://res.cloudinary.com/du8qdkle4/image/upload/v1709167802/pngegg_dw2hw2.png"}/>
+                                                    <AvatarImage className="p-1 avatarImage"
+                                                                 src={"https://res.cloudinary.com/maticht12345/image/upload/v1709459256/profile_whywvo.png"}/>
                                                 </div>
                                             }
                                             <AvatarFallback>CN</AvatarFallback>
                                         </Avatar>
                                     </div>
                                     <div className="flex flex-col w-full">
-                                        <div className="flex items-center gap-x-2">
+                                    <div className="flex items-center gap-x-2 justify-between">
                                             <div className="flex items-center">
                                                 <p className="font-semibold text-sm">
                                                     {item.username}
@@ -367,7 +376,7 @@ const ArticleContainer = ({article}) => {
                                                 {formatDate(new Date(item.createdAt))}
                                             </span>
                                         </div>
-                                        <p>
+                                        <p >
                                             {item.comment}
                                         </p>
                                     </div>

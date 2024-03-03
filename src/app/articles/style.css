@@ -1,9 +1,10 @@
 .container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Четыре столбца */
-    gap: 10px; /* Промежуток между элементами */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
     padding: 0;
     max-height: none;
+    margin-right: 10px;
     overflow: hidden;
     margin-bottom: 50px;
 }
@@ -52,6 +53,7 @@
 .article-title{
     margin-top: 5px;
     margin-left: 10px;
+    margin-right: 10px;
     font-size: 16px;
     font-weight: bold;
 }
@@ -100,14 +102,52 @@
     border-radius: 10px;
     cursor: pointer;
 }
-
 .article-categories-container{
-    margin: 20px 0 20px 0;
+    margin: 0 0 0 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
 }
-
+.article-categories-container:last-child{
+    margin: 10px 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.articleBlockCategory{
+    font-size: 13px;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    margin: 5px 5px 0 0;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.articleBlockCategory.selected{
+    font-size: 13px;
+    border: 2px solid #111111;
+    border-radius: 8px;
+    padding: 4px 9px;
+    cursor: pointer;
+}
+.filterBlock{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: calc(100%);
+    max-width: 350px;
+    margin: 10px 0 0 0;
+    border: 1px solid #dadada;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 10px;
+}
+.filterBlock h4{
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
 .media{
     display: flex;
     flex-direction: row;
@@ -126,25 +166,58 @@
 .media p{
     margin-left: 5px;
 }
+@media screen and (max-width: 1000px){
+    .filterBlock{
+        display: flex;
+        flex-direction: column;
+        align-content: flex-start;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        width: calc(100%);
+        max-width: calc(100%);
+        margin: 10px 0 0 0;
+        border: 1px solid #dadada;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        padding: 10px;
+    }
+    .filterBlock h4{
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    .container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 0;
+        max-height: none;
+        overflow: hidden;
+        margin-bottom: 50px;
+        margin-right: 10px;
+    }
+}
 @media screen and (max-width: 800px){
     .container {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Четыре столбца */
-        gap: 10px; /* Промежуток между элементами */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
         padding: 0;
         max-height: none;
         overflow: hidden;
         margin-bottom: 50px;
+        margin-right: 10px;
     }
 }
-@media screen and (max-width: 500px){
+@media screen and (max-width: 550px){
     .container {
         display: grid;
-        grid-template-columns: repeat(1, 1fr); /* Четыре столбца */
-        gap: 10px; /* Промежуток между элементами */
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
         padding: 0;
         max-height: none;
         overflow: hidden;
         margin-bottom: 50px;
+        margin-right: 10px;
     }
 }

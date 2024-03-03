@@ -3,6 +3,7 @@ import '../../profile/profileStyles.css'
 import {NextResponse} from "next/server";
 import Article from "@/models/articleModel";
 import {IArticle} from "@/types/Article";
+import '@/styles/text-editor.css';
 import ArticleContainer from "@/components/ArticleContainer";
 
 type Props = {
