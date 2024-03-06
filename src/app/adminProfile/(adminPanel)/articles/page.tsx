@@ -128,7 +128,7 @@ export default function SimpleEditor() {
             <div className='articleBlock'>
                 <div className="container">
                     {articles?.map((article) => (
-                        <Link href={`/articles/${article._id}`} key={article._id} className="article-card">
+                        <Link href={`/adminProfile/articles/edit/${article._id}`} key={article._id} className="article-card">
                             <div className="article-image-container">
                                 <img src={article.backgroundImage} alt={'Background Image'}/>
                             </div>
@@ -227,4 +227,3 @@ export default function SimpleEditor() {
         </div>
     );
 }
-
