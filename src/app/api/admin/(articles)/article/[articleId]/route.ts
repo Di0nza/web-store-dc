@@ -139,3 +139,40 @@ export async function PUT(
         return NextResponse.json({error: error.message}, {status: 500})
     }
 }
+
+export async function DELETE(
+    request: NextRequest,
+    {params}: { params: { articleId: string } }
+) {
+    try {
+
+        const user = await currentUser();
+
+        if (!user) {
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        const userDB = await User.findById(user.id)
+
+        if(!userDB){
+            return NextResponse.json({error: "Unauthorized."}, {status: 401})
+        }
+
+        if (user?.isAdmin === false) {
+            return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
+        }
+
+        const article = await Article.findByIdAndDelete(params.articleId);
+
+        if (!article) {
+            return NextResponse.json({error: "No such article"}, {status: 400})
+        }
+
+        return NextResponse.json({
+            message: "Article deleted successfully",
+            success: true
+        })
+    } catch (error: any) {
+        return NextResponse.json({error: error.message}, {status: 500})
+    }
+}

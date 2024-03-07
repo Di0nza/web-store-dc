@@ -11,6 +11,7 @@ import {DeleteMainPageVideoModal} from "@/components/modals/DeleteMainPageVideoM
 import {DeleteMainPagePhotoModal} from "@/components/modals/DeleteMainPagePhotoModal";
 import {ChangePasswordModal} from "@/components/modals/ChangePasswordModal";
 import {CreateArticleCategoryModal} from "@/components/modals/CreateArticleCategoryModal";
+import {DeleteArticleModal} from "@/components/modals/DeleteArticleModal";
 
 export const ModalProvider = () => {
 
@@ -34,6 +35,7 @@ export const ModalProvider = () => {
             <DeleteMainPagePhotoModal/>
             <ChangePasswordModal/>
             <CreateArticleCategoryModal/>
+            <DeleteArticleModal/>
         </>
     )
 }

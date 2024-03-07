@@ -4,10 +4,12 @@ import {IMainPageVideo} from "@/types/MainPageVideo";
 import {IMainPagePhoto} from "@/types/MainPagePhoto";
 
 export type ModalType = "createProduct" | "editProduct" | "deleteProduct" | "editMainPageVideo" |
-    "deleteMainPageVideo" | "deleteMainPagePhoto" | "changePassword" | "createArticleCategory"
+    "deleteMainPageVideo" | "deleteMainPagePhoto" | "changePassword" | "createArticleCategory" |
+    "deleteArticle"
 
 interface ModalData {
     product?: any;
+    article?:any;
     reload?:string
     video?: IMainPageVideo;
     photo?: IMainPagePhoto;
