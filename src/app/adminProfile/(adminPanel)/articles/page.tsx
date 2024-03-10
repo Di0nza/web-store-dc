@@ -15,6 +15,9 @@ import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/co
 import {ProductsSearch} from "@/components/product/ProductsSearch";
 import {ArticleSearch} from "@/components/article/ArticleSearch";
 import {Button} from "@/components/ui/button";
+import {ActionToolTip} from "@/components/ActionToolTip";
+import deleteProduct from "@/img/delete.png";
+import {ModalType, useModal} from "@/hooks/useModalStore";
 
 export default function SimpleEditor() {
 
@@ -27,6 +30,7 @@ export default function SimpleEditor() {
         numberOfArticles: 0
     })
 
+    const {onOpen, data} = useModal();
 
     const getArticles = async () => {
         try {
@@ -115,6 +119,12 @@ export default function SimpleEditor() {
         }
     };
 
+    const onActionDelete = (e: React.MouseEvent, action: ModalType, article) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onOpen(action, {article});
+    }
+
 
     return (
         <div className='store-container' style={{maxHeight: "none"}}>
@@ -128,7 +138,19 @@ export default function SimpleEditor() {
             <div className='articleBlock'>
                 <div className="container">
                     {articles?.map((article) => (
-                        <Link href={`/articles/${article._id}`} key={article._id} className="article-card">
+                        <Link href={`/adminProfile/articles/edit/${article._id}`} key={article._id} className="article-card">
+                            <div className='product-overlay'
+                                 style={{top:"10px", right:"10px"}}>
+                                <div className="deleteBtnBlock"
+                                     onClick={(e) => onActionDelete(e, "deleteArticle", article)}
+                                    style={{ width:"36px", height:"36px"}}
+                                >
+                                    <ActionToolTip label="Удалить">
+                                        <Image
+                                            src={deleteProduct} alt={'x'}></Image>
+                                    </ActionToolTip>
+                                </div>
+                            </div>
                             <div className="article-image-container">
                                 <img src={article.backgroundImage} alt={'Background Image'}/>
                             </div>
@@ -227,4 +249,3 @@ export default function SimpleEditor() {
         </div>
     );
 }
-

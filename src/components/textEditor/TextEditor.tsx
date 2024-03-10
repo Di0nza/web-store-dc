@@ -32,6 +32,11 @@ import {
 import {useModal} from "@/hooks/useModalStore";
 import {X} from "lucide-react";
 import {CldUploadButton} from "next-cloudinary";
+import {useParams, useRouter} from "next/navigation";
+import {IArticle} from "@/types/Article";
+import {toast} from "sonner";
+
+
 
 export function TextEditor() {
     return (
@@ -50,7 +55,9 @@ type EditorProps = {
     doc: Y.Doc;
     provider: any;
 };
-const OutputHtmlButton = ({editor, article}) => {
+const OutputHtmlButton = ({editor, article, articleId}) => {
+
+
     const outputHtml = async () => {
         try {
             const editorContentRef = editor && editor.contentComponent && editor.contentComponent.editorContentRef;
@@ -69,7 +76,18 @@ const OutputHtmlButton = ({editor, article}) => {
                 coAuthors: article.coAuthors,
                 createdAt: article.createdAt,
             };
-            const response = await axios.post("/api/admin/article", articleData);
+            let response
+            if(articleId){
+                response = await axios.put(`/api/admin/article/${articleId}`, articleData).then((data)=>{
+                    if(data.data.success){
+                        toast.success("Статья успешно обновлена");
+                    }else{
+                        toast.error("Что-то пошло не так")
+                    }
+                });
+            }else{
+                response = await axios.post("/api/admin/article", articleData);
+            }
             console.log(response.data.article._id);
             window.location.reload();
         } catch (error: any) {
@@ -80,7 +98,7 @@ const OutputHtmlButton = ({editor, article}) => {
     return (
         <div className={styles.articleContainer}>
             <button onClick={outputHtml}>
-                Загрузить статью
+                {!articleId ? "Загрузить статью" : "Обновить статью"}
             </button>
         </div>
     );
@@ -178,6 +196,11 @@ function TiptapEditor({doc, provider}: EditorProps) {
             }),
         ],
     });
+
+
+    const params = useParams();
+    const { articleId } = params;
+
     const [article, setArticle] = useState({
         title: '',
         categories: [],
@@ -191,6 +214,7 @@ function TiptapEditor({doc, provider}: EditorProps) {
         coAuthors: [],
         createdAt: Date.now(),
     });
+
     const handleTitleChange = (event) => {
         setArticle({...article, title: event.target.value});
     };
@@ -201,7 +225,7 @@ function TiptapEditor({doc, provider}: EditorProps) {
 
     const {onOpen, data} = useModal();
 
-    const [allArticleCategories, setAllArticleCategories] = useState([]);
+    const [allArticleCategories, setAllArticleCategories] = useState( []);
     const [currentArticleCategories, setCurrentArticleCategories] = useState([]);
     const [keyWords, setKeyWords] = useState([]);
     const [newWord, setNewWord] = useState("");
@@ -216,6 +240,30 @@ function TiptapEditor({doc, provider}: EditorProps) {
 
 
     useEffect(() => {
+        const getArticle = async (id) => {
+            try {
+                const response = await axios.get(`/api/admin/article/${id}`);
+                return response.data.article;
+            } catch (error) {
+                console.error('Error fetching article:', error);
+                return null;
+            }
+        };
+
+        if (articleId) {
+            getArticle(articleId).then(data => {
+                if (data) {
+                    setArticle(data);
+                    if(editor && data.content) {
+                        editor.commands.setContent(data.content)
+                    }
+                    setCurrentArticleCategories(data.categories)
+                }
+            });
+        }
+    }, [articleId, editor]);
+
+    useEffect(() => {
         axios.get("/api/admin/articleCategory").then((response) => {
             const allCategories = response.data.articleCategories;
             const filteredCategories = allCategories.filter(category => {
@@ -225,7 +273,7 @@ function TiptapEditor({doc, provider}: EditorProps) {
         }).catch((error) => {
             console.error('Error fetching article categories:', error);
         });
-    }, [data])
+    }, [data, currentArticleCategories])
 
     const handleCategorySelect = (category) => {
         setArticle({...article, categories: [...article.categories, category]})
@@ -340,7 +388,7 @@ function TiptapEditor({doc, provider}: EditorProps) {
                 <input placeholder={'Соавторы'} type="text"/>
             </div>
 
-            {editor && <OutputHtmlButton editor={editor} article={article}/>}
+            {editor && <OutputHtmlButton editor={editor} article={article} articleId={articleId}/>}
         </div>
     );
 }
