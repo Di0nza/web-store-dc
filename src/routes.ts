@@ -24,8 +24,8 @@ export const publicRoutes = [
     "/privacyPolice",
     "/api/users/messages",
     "/api/users/promoCode",
-    "/api/users/logout"
-
+    "/api/users/logout",
+    "/advertisingPage"
 ]
 
 export const adminRoutes = [
