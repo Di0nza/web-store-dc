@@ -221,7 +221,6 @@ export const EditProductModal = () => {
         }
     }
 
-
     useEffect(() => {
         if (product) {
             form.setValue("title", product.title);
