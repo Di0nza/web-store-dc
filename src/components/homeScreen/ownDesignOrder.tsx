@@ -12,7 +12,6 @@ const OwnDesignOrder = () => {
         categories: 'Особый заказ',
         authorsContact: '',
         createdAt: Date.now,
-
     });
     const addDesignMessage = async () => {
         try {
