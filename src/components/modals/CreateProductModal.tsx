@@ -383,7 +383,7 @@ export const CreateProductModal = () => {
                                 </FormField>
                                 <FormField
                                     control={form.control}
-                                    name="category"
+                                    name="categories"
                                     render={({field}) => (
                                         <FormItem>
                                             <FormLabel className="mt-0 text-xs font-bold">
