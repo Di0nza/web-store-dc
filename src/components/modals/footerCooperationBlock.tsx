@@ -19,7 +19,7 @@ const FooterCooperationBlock = ({onClose}) => {
             const messageData = {
                 title: message.title,
                 message: message.message,
-                category: message.category,
+                category: message.categories,
                 authorsContact: message.authorsContact,
                 createdAt: Date.now,
             };

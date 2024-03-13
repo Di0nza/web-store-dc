@@ -22,7 +22,7 @@ const UnusualDesignMessage = ({show, onHide, item}) => {
             const messageData = {
                 title: message.title,
                 message: value,
-                category: message.category,
+                category: message.categories,
                 authorsContact: message.authorsContact,
                 createdAt: Date.now,
             };
