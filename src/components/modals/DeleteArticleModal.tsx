@@ -49,7 +49,7 @@ export const DeleteArticleModal = () => {
                     </DialogTitle>
                     <DialogDescription className="text-left text-zinc-500">
                         Вы уверены, что хотите удалить эту статью ? <br />
-                        Статья <span className="text-black font-semibold">"{article?.title}"</span> будет удалена безвозвратно.
+                        Статья <span className="text-black font-semibold">{`"${article?.title}"`}</span> будет удалена безвозвратно.
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="px-6 py-4">
