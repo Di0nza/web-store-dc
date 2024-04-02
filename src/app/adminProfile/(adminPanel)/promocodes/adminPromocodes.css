@@ -511,6 +511,8 @@
     box-shadow: none;
     min-height: 48px;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
 }
 .home-video-btn:last-child{
