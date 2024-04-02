@@ -54,9 +54,12 @@ export const LoginForm = () => {
                 .then(async (data) => {
                     console.log(data)
                     if (data.data.error) {
-                        //form.reset();
-                        console.log(data.data.error)
-                        setError(data.data.error);
+                        if (data.data.error === "Что-то пошло не так :(") {
+                            window.location.reload();
+                        } else {
+                            console.log(data.data.error)
+                            setError(data.data.error);
+                        }
                     } else if (data.data.success) {
                         form.reset();
                         setSuccess(data.data.success);
@@ -69,11 +72,10 @@ export const LoginForm = () => {
                         // }
                         window.location.reload();
                     }
-
                 })
                 .catch((e) => {
                     console.log(e)
-                    setError("Что-то пошло не так :(")
+                    window.location.reload();
                 });
         });
     };

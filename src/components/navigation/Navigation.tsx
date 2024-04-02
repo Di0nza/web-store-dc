@@ -162,7 +162,7 @@ const Navigation = ({navLinks}: Props) => {
                 <div className='header-links-block-mobile'>{
                     isAdmin ? (
                         <div>
-                            <Link className={'profileIcoBlock'} href={'adminProfile'}>
+                            <Link className={'profileIcoBlock'} href={'/adminProfile'}>
                                 <Image className={'profileIco'} src={profileIco} alt={'user'}></Image>
                             </Link>
                         </div>

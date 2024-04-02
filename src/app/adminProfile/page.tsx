@@ -115,7 +115,6 @@ export default function ProfilePage() {
                     <Image className='additionalProfileImage' src={arrowB} alt={'>'}/>
                 </div>
             </div>
-
         </div>
     );
 }

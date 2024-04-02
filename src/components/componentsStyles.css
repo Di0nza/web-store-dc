@@ -113,7 +113,7 @@
     padding: 8px 16px;
     margin-top: 5px;
     margin-left: 10px;
-    border-radius: 8px;
+    border-radius: 25px;
 }
 .footer-error-btn{
     display: flex;
@@ -125,7 +125,7 @@
     font-weight: 400;
     padding: 8px 16px;
     margin-top: 5px;
-    border-radius: 8px;
+    border-radius: 25px;
 }
 .footer-info-title{
     display: flex;
@@ -161,6 +161,7 @@
     height: 22px;
 }
 .footer-social-links-block{
+    background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid #dadada;
     margin-left: 7px;
     border-radius: 7px;
@@ -601,7 +602,7 @@
 }
 
 .deleteBtnBlock{
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgb(255, 255, 255);
     margin-top: 3px;
     margin-right: 3px;
     width: 42px;
@@ -655,8 +656,23 @@
     font-weight: 600;
     margin-bottom: 10px;
 }
-.addItemBtn{
+.addArticlesBtn{
     width: 100%;
+    margin-top: 10px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    background-color: #111111;
+    border-radius: 8px;
+    align-self: flex-end;
+    cursor: pointer;
+    color: #fafafa;
+    outline: none;
+}
+.addItemBtn{
+    width: 180px;
     margin-top: 10px;
     height: 48px;
     display: flex;
@@ -1458,6 +1474,9 @@
     margin-bottom: -20px;
 }
 @media screen and (max-width: 1000px){
+    .addArticlesBtn{
+        width: 180px;
+    }
     .filterBlock{
         display: flex;
         flex-direction: column;
@@ -1749,7 +1768,7 @@
         margin-bottom: 15px;
     }
     .footer-container{
-        height: 360px;
+        height: 380px;
     }
     .modal-content-info img{
         display: none;
@@ -1801,6 +1820,12 @@
     }
 }
 @media screen and (max-width: 500px){
+    .addArticlesBtn{
+        width: 100%;
+    }
+    .addItemBtn{
+        width: 100%;
+    }
     .footer-btns-block{
         display: flex;
         flex-direction: column;
@@ -1821,7 +1846,7 @@
         margin-bottom: 15px;
     }
     .footer-container{
-        height: 435px;
+        height: 455px;
     }
     .footer-privacy-text{
         font-size: 13px;
@@ -1909,6 +1934,9 @@
         width: calc(100%);
         margin-right: 0;
     }
+    .footer-container{
+        height: 480px;
+    }
 }
 @media screen and (max-width: 320px){
     .best-product-input{
@@ -1926,7 +1954,7 @@
         margin-bottom: 15px;
     }
     .footer-container{
-        height: 560px;
+        height: 580px;
     }
     .footer-info-block{
         width: 100%;
@@ -1938,6 +1966,6 @@
 }
 @media screen and (max-width: 280px){
     .footer-container{
-        height: 600px;
+        height: 620px;
     }
 }

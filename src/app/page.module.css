@@ -244,11 +244,11 @@
   top: 0;
   right: 0;
   bottom: 0;
-  padding: 0 15px;
+  padding: 0 25px 0 5px;
   width: 325px;
   display: flex;
   align-items: center;
-  align-self: flex-end;
+  align-self: center;
   justify-content: space-between;
   pointer-events: none;
   z-index: 10;

@@ -128,7 +128,7 @@ export default function SimpleEditor() {
 
     return (
         <div className='store-container' style={{maxHeight: "none"}}>
-            <div className='store-head-block'>
+            <div className='articles-head-block'>
                 <div>
                     <p className='store-container-title'>Статьи</p>
                     <p className='store-quantity'>Количество статей {articles?.length}</p>
@@ -159,7 +159,7 @@ export default function SimpleEditor() {
                                  onMouseLeave={() => setHoveredArticleId(null)}>
                                 {hoveredArticleId === article._id ? (
                                     <div className="article-description">
-                                        {article?.description?.length > 180 ? `${article.description.substring(0, 180)}...` : article.description}
+                                        {article?.description?.length > 200 ? `${article.description.substring(0, 200)}...` : article.description}
                                     </div>
                                 ) : (
                                     <div>
@@ -180,7 +180,7 @@ export default function SimpleEditor() {
                                             <div className="flex absolute bottom-0 left-0 flex-row p-2 space-x-3">
                                                 <div className="media">
                                                     <Image src={views} alt={''}></Image>
-                                                    <p>{article.views}</p>
+                                                    <p className="media-num">{article.views}</p>
                                                 </div>
                                                 <div className="media">
                                                     <Image style={{height: "14px", width: "14px"}} src={likes}
@@ -239,7 +239,7 @@ export default function SimpleEditor() {
                         </div>
                     </div>
                     <div className='admin-products-header'>
-                        <Link href={"/adminProfile/articles/create"} className="addItemBtn">
+                        <Link href={"/adminProfile/articles/create"} className="addArticlesBtn">
                             Добавить Статью
                         </Link>
                     </div>

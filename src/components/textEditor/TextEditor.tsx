@@ -325,11 +325,11 @@ function TiptapEditor({doc, provider}: EditorProps) {
                     // <div className={"mt-2 mb-5"} >У статьи нет категории</div>
                     null
                 )}
-                <div className="flex flex-row justify-between mt-2 mb-3">
+                <div className={styles.articleCategoryBlock}>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button className={styles.categoryItemListBtn}>
-                                <p>Добавить категорию к статье</p>
+                                <p>Выбрать категорию</p>
                                 <div className={styles.categoryItemListArrow}></div>
                             </Button>
                         </DropdownMenuTrigger>
@@ -344,7 +344,7 @@ function TiptapEditor({doc, provider}: EditorProps) {
                         </DropdownMenuContent>
                     </DropdownMenu>
 
-                    <Button  className={styles.categoryItemAddBtn}
+                    <Button className={styles.categoryItemAddBtn}
                             onClick={() => onOpen("createArticleCategory", {})}>
                         Создать категорию
                     </Button>
@@ -352,7 +352,7 @@ function TiptapEditor({doc, provider}: EditorProps) {
                 <label className={styles.updateProfileBlockLabel}>Ключевые слова</label>
                 <div className={styles.articlesKeyWordsBlock}>
                     <input
-                        placeholder={'Ключевые слова'}
+                        placeholder={'Вписать слово'}
                         type="text"
                         className={styles.articlesKeyWordsInout}
                         value={newWord}
@@ -372,7 +372,7 @@ function TiptapEditor({doc, provider}: EditorProps) {
                     ))}
                 </div>
                 <label className={styles.updateProfileBlockLabel}>Описание</label>
-                <input placeholder={'Описание'} type="text" value={article.description}
+                <textarea placeholder={'Описание'} value={article.description}
                        onChange={handleDescriptionChange}/>
             </div>
             <label className={styles.updateProfileBlockLabel}>Контент статьи</label>
