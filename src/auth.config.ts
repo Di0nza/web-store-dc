@@ -8,6 +8,7 @@ import bcryptjs from "bcryptjs";
 import {db} from "@/lib/db";
 
 export default {
+    trustHost: true,
     providers: [
         Google({
             clientId: process.env.GOOGLE_CLIENT_ID,

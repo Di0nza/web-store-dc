@@ -87,6 +87,7 @@
     "nodemailer": "^6.9.9",
     "or": "^0.2.0",
     "postcss": "^8.4.32",
+    "prisma": "^5.12.1",
     "qrcode": "^1.5.3",
     "react": "^18",
     "react-dom": "^18",
@@ -119,7 +120,6 @@
     "@types/uuid": "^9.0.7",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.0.3",
-    "prisma": "^5.9.1",
     "react-icons": "^5.0.1",
     "typescript": "^5"
   }

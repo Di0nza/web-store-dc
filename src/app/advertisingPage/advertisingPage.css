@@ -1,3 +1,68 @@
+.aboutUs {
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+}
+.AdvertisingContacts {
+    position: relative;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 25px 0 20px;
+}
+.contacts-bg-img{
+    position: absolute;
+    z-index: 2;
+    margin-left: auto;
+    max-width: 550px;
+    width: 100%;
+    display: flex;
+    opacity: 0.4;
+    right: 0;
+    align-self: flex-end;
+}
+.contacts-social-links{
+    display: flex;
+    margin: 0 0 15px;
+    flex-direction: row;
+}
+.contacts-social-links{
+    display: flex;
+    margin: 0 0 15px;
+    flex-direction: row;
+}
+.contacts-social-links img{
+    width: 28px;
+    cursor: pointer;
+}
+.title {
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.description-block {
+    position: absolute;
+    z-index: 8;
+    max-width: 550px;
+    width: 100%;
+}
+.description {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+.description span{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+.contact-data-block{
+    margin-bottom: 15px;
+}
+.contact-data {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
 .advertisingContainer{
     width: 100%;
     max-width: 1000px;
@@ -24,7 +89,7 @@
     display: flex;
     flex-direction: column;
 }
-.advertisingSocialBlock a{
+.AdvertisingContacts a{
     width: 100%;
     height: 48px;
     margin-bottom: 10px;
@@ -34,9 +99,12 @@
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    padding-left: 10px;
+    margin-right: 10px;
 }
-.advertisingSocialBlock a:last-child{
+.AdvertisingContacts a:last-child{
+    margin-right: 0px;
+}
+.AdvertisingContactsBtn{
     width: 100%;
     height: 48px;
     margin-bottom: 10px;
@@ -50,8 +118,41 @@
     padding-left: 0;
     border-radius: 8px;
 }
+.AdvertisingLinks{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
 .advertisingSocialImg{
     width: 32px;
     height: 32px;
     margin-left: 5px;
+}
+@media screen and (max-width: 1000px){
+    .AdvertisingContacts {
+        position: relative;
+        max-width: 100%;
+        width: calc(100% - 20px);
+        margin: 0 10px;
+        padding: 25px 0 20px;
+    }
+    .contacts-bg-img{
+        position: absolute;
+        z-index: 2;
+        margin-left: auto;
+        margin-top: auto;
+        max-width: 420px;
+        width: 100%;
+        display: flex;
+        opacity: 0.4;
+        right: 20px;
+        align-self: flex-end;
+    }
+}
+@media screen and (max-width: 600px){
+    .contacts-bg-img{
+        display: none;
+    }
 }

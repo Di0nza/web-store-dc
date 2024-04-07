@@ -105,22 +105,33 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         <div className='placingOrderBlock'>
             <OrderNavBarContainer/>
             <h2>{"Оформление заказа"}</h2>
-            <label className={'order-input-title'}>Номер карты</label>
-            <input type="text" placeholder={'0000 0000 0000 0000'} />
-            <label className={'order-input-title'}>Имя и фамилия</label>
-            <input type="text" placeholder={'IVAN IVANOV'}/>
-            <div className={'deliveryMethodBlock'}>
-                <div className={'deliveryInputBlock'}>
-                    <label className={'order-input-title'}>Дата истечения</label>
-                    <input className={'deliveryMethodInputC'} placeholder={'23/23'} type="text" />
+            <div className={'order-payment-sorry'}>
+                <div className={'order-payment-sorry-head'}>
+                    <h2>Приносим свои извинения!</h2><br/>
+                    В данный момент оплата на сайте временно недоступна.<br/>
                 </div>
-                <div className={'deliveryInputBlock'}>
-                    <label className={'order-input-title'}>CVC</label>
-                    <input className={'deliveryMethodInputC'} placeholder={'111'} type="text"/>
+                <span>Вы можете оформить заказ с оплатой:</span><br/>
+                <span>Наличными</span> при курьерской доставке/самовывозе или
+                наложенным платежом через <span>СДЭК</span> или <span>Почту России.</span>
+            </div>
+            <div className={'order-payment-block'}>
+                <label className={'order-input-title'}>Номер карты</label>
+                <input type="text" placeholder={'0000 0000 0000 0000'}/>
+                <label className={'order-input-title'}>Имя и фамилия</label>
+                <input type="text" placeholder={'IVAN IVANOV'}/>
+                <div className={'deliveryMethodBlock'}>
+                    <div className={'deliveryInputBlock'}>
+                        <label className={'order-input-title'}>Дата истечения</label>
+                        <input className={'deliveryMethodInputC'} placeholder={'23/23'} type="text"/>
+                    </div>
+                    <div className={'deliveryInputBlock'}>
+                        <label className={'order-input-title'}>CVC</label>
+                        <input className={'deliveryMethodInputC'} placeholder={'111'} type="text"/>
+                    </div>
                 </div>
             </div>
             <button onClick={createOrder}
-                    style={{pointerEvents: buttonDisabled ? "none" : null }}>
+                    style={{pointerEvents: buttonDisabled ? "none" : null}}>
                 {"Завершить заказ"}
             </button>
         </div>

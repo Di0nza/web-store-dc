@@ -12,6 +12,7 @@ import {Toaster} from "@/components/ui/sonner";
 
 const inter = Inter({subsets: ['latin']})
 
+
 export const metadata: Metadata = {
     title: 'MariDeniz',
     description: 'Shop unique fashion clothing with signature designs',
@@ -21,7 +22,6 @@ export const metadata: Metadata = {
     },
     icons: 'https://res.cloudinary.com/maticht12345/image/upload/v1701277508/Letter_-_16_wds2cz.png',
 }
-
 export default async function RootLayout({children}: { children: React.ReactNode }) {
 
     const session = await auth();

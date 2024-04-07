@@ -103,11 +103,13 @@ const Footer = () => {
                                     <div className='footer-navigation-block'>
                                         <Link href={'/adminStatistics'}>Статистика</Link>
                                         <Link href={'/adminProfile/promocodes'}>Промокоды</Link>
+                                        <Link href={'/adminProfile/articles'}>Статьи</Link>
                                     </div>
                                 ) : (
                                     <div className='footer-navigation-block'>
                                         <Link href={'/store'}>Магазин</Link>
                                         <Link href={'/cart'}>Корзина</Link>
+                                        <Link href={'/articles'}>Статьи</Link>
                                     </div>
                                 )
                             }

@@ -55,7 +55,7 @@ export const EditMainPageVideoModal = () => {
                 </DialogHeader>
                 <div className="p-6 flex flex-wrap w-full" style={{maxHeight: '70vh', overflowY: 'auto'}}>
                     {videos?.map((video) => (
-                        <div key={video._id} className={`relative w-full mb-4`}>
+                        <div key={video._id} className={`relative w-full mb-4 `}>
                             <video
                                 className={`w-full p-2 rounded-3xl ${video.active ? 'border-2 border-solid border-green-500' : 'p-3.5'} cursor-pointer `}
                                 controls={false}

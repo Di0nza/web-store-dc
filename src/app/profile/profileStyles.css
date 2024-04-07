@@ -27,10 +27,12 @@
 }
 .messagesBlockCount{
     background-color: rgba(17, 17, 17, 0.9);
-    padding: 2.5px 5px 2.5px;
+    padding: 1px 5px 2.5px;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 22px;
+    min-width: 22px;
     border-radius: 18px;
     margin-right: 10px;
 }
@@ -504,6 +506,7 @@
     width: 100%;
     padding: 10px;
     margin-top: 10px;
+    resize: none;
     background-color: rgba(250, 250, 250, 0.6);
     font-size: 15px;
 }
@@ -725,30 +728,30 @@
     }
 }
 @media screen and (max-width: 1000px){
-    .products-search-form{
-        width: 100%;
-        display: flex;
-        background-color: rgba(255, 255, 255, 0.8);
-        border: 1px solid #dedede;
-        height: 46px;
-        border-radius: 10px;
-        align-items: center;
-    }
+    /*.products-search-form{*/
+    /*    width: 100%;*/
+    /*    display: flex;*/
+    /*    background-color: rgba(255, 255, 255, 0.8);*/
+    /*    border: 1px solid #dedede;*/
+    /*    height: 46px;*/
+    /*    border-radius: 10px;*/
+    /*    align-items: center;*/
+    /*}*/
     .products-search-form img{
         width: 17px;
         height: 17px;
     }
-    .products-search-form input{
-        width: calc(100% - 42px);
-        height: 44px;
-        border: none;
-        background-color: rgba(255, 255, 255, 0.8);
-        border-radius: 10px;
-        font-size: 14px;
-        padding: 11px 10px 9px;
-        outline: none;
-        color: #111111;
-    }
+    /*.products-search-form input{*/
+    /*    width: calc(100% - 42px);*/
+    /*    height: 44px;*/
+    /*    border: none;*/
+    /*    background-color: rgba(255, 255, 255, 0.8);*/
+    /*    border-radius: 10px;*/
+    /*    font-size: 14px;*/
+    /*    padding: 11px 10px 9px;*/
+    /*    outline: none;*/
+    /*    color: #111111;*/
+    /*}*/
     .ownDesignOrder{
         margin: 40px 15px;
     }

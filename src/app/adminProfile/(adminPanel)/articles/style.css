@@ -8,7 +8,9 @@
     margin-bottom: 50px;
     margin-right: 10px;
 }
-
+.articles-head-block{
+    margin: 25px 0 0 0;
+}
 .article-card {
     position: relative;
     width: 100%;
@@ -45,7 +47,7 @@
     justify-content: flex-start;
     height: 100%;
     font-weight: 100;
-    font-size: medium;
+    font-size: 15px;
     padding: 10px 10px 10px 10px;
     opacity: 0;
     visibility: hidden;
@@ -145,7 +147,8 @@
 }
 
 .media p{
-    margin-left: 5px;
+    margin-left: 4px;
+    font-weight: 500;
 }
 @media screen and (max-width: 1000px){
     .container {
