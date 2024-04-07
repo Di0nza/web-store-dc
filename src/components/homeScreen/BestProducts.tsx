@@ -15,7 +15,7 @@ import arrowW from "@/img/arrowW.png";
 const BestProducts = () => {
     const pathname = usePathname();
     const [products, setProducts] = useState([]);
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
 
     useEffect(() => {
         getAllProductsUser().then((data) => {

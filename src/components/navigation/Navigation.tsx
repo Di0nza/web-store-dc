@@ -63,7 +63,10 @@ const Navigation = ({navLinks}: Props) => {
             console.log(error.message);
         }
     };
-    const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    let storedCartItems;
+    if(typeof localStorage !== "undefined") {
+        storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    }
 
     useEffect(() => {
         //getUserDetails();
