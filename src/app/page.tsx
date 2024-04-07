@@ -5,7 +5,7 @@ import OwnDesignOrder from "@/components/homeScreen/ownDesignOrder";
 import {NewCollection} from "@/components/homeScreen/newСollection";
 import {BestProducts} from "@/components/homeScreen/BestProducts";
 import SplashScreen from "@/components/SplashScreen/SplashScreen";
-import type {Metadata} from "next";
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
     title: 'MariDeniz',
