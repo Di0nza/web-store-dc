@@ -3,7 +3,6 @@ import {Inter} from 'next/font/google'
 import './globals.css'
 import {Header} from "@/components/navigation/Header";
 import {Footer} from "@/components/navigation/Footer";
-// @ts-ignore
 import {OrderProvider} from "@/orderContext/store";
 import {ModalProvider} from "@/components/providers/modalProvider";
 import {SessionProvider} from "next-auth/react";
