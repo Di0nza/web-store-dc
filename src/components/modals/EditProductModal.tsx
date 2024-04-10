@@ -154,7 +154,7 @@ export const EditProductModal = () => {
             title: "",
             description: "",
             price: "",
-            categories: "",
+            category: "",
             collection: "",
             sex: "",
             sizes: [
@@ -226,7 +226,7 @@ export const EditProductModal = () => {
             form.setValue("title", product.title);
             form.setValue("description", product.description);
             form.setValue("price", product.price);
-            form.setValue("categories", product.category);
+            form.setValue("category", product.category);
             form.setValue("collection", product?.collection);
             form.setValue("sex", product?.sex);
             form.setValue("sizes.0.amount", product.sizes[0].amount);
@@ -337,7 +337,7 @@ export const EditProductModal = () => {
                                 </FormField>
                                 <FormField
                                     control={form.control}
-                                    name="categories"
+                                    name="category"
                                     render={({field}) => (
                                         <FormItem>
                                             <FormLabel className="mt-0 text-xs font-bold">

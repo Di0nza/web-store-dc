@@ -113,7 +113,7 @@ export async function POST(request: NextRequest) {
             title: title,
             description: description,
             price: price,
-            categories: category,
+            category: category,
             collection: collection,
             sex: sex,
             sizes: sizes,

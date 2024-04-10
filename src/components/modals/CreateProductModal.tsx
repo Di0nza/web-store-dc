@@ -209,7 +209,7 @@ export const CreateProductModal = () => {
         defaultValues: {
             title: "",
             description: "",
-            categories: "",
+            category: "",
             collection: "",
             sex: "",
             price: "",
@@ -384,7 +384,7 @@ export const CreateProductModal = () => {
                                 </FormField>
                                 <FormField
                                     control={form.control}
-                                    name="categories"
+                                    name="category"
                                     render={({field}) => (
                                         <FormItem>
                                             <FormLabel className="mt-0 text-xs font-bold">
