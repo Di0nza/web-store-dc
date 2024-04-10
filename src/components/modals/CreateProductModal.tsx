@@ -110,13 +110,13 @@ export const CreateProductModal = () => {
             URL.createObjectURL(file)
         );
 
-        const droppedFiles = event.dataTransfer.files;
-        const droppedPictures = Array.from(droppedFiles).map((file: File) =>
-            URL.createObjectURL(file)
-        );
+        // const droppedFiles = event.dataTransfer.files;
+        // const droppedPictures = Array.from(droppedFiles).map((file: File) =>
+        //     URL.createObjectURL(file)
+        // );
 
-        setSelectedPicturesFiles([...selectedPicturesFiles, ...files, ...droppedFiles]);
-        setSelectedPictures((prevPictures) => [...prevPictures, ...newPictures, ...droppedPictures]);
+        setSelectedPicturesFiles([...selectedPicturesFiles, ...files]);
+        setSelectedPictures((prevPictures) => [...prevPictures, ...newPictures]);
         console.log(selectedPictures)
     };
 
@@ -237,6 +237,7 @@ export const CreateProductModal = () => {
 
     const isLoading = form.formState.isSubmitting;
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        console.log("я ТУТ")
         console.log(values);
         console.log(selectedPicturesFiles);
         try {
@@ -278,13 +279,13 @@ export const CreateProductModal = () => {
         }
     }
 
-    const handleDrop = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const files = e.dataTransfer.files;
-        // Обработка загруженных файлов
-        handlePictureChange(files);
-    };
+    // const handleDrop = (e) => {
+    //     e.preventDefault();
+    //     e.stopPropagation();
+    //     const files = e.dataTransfer.files;
+    //     // Обработка загруженных файлов
+    //     handlePictureChange(files);
+    // };
 
 
     return (
@@ -341,7 +342,7 @@ export const CreateProductModal = () => {
                                                         htmlFor="fileInput"
                                                         style={{border:'1px solid #dadada', borderRadius:'10px'}}
                                                         className={`cursor-pointer flex items-center justify-center ${selectedPictures.length === 0 ? 'h-72 w-72' : 'h-20 w-20 mt-3 mr-5'} bg-white rounded`}
-                                                        onDrop={(e) => handleDrop(e)}
+                                                        // onDrop={(e) => handleDrop(e)}
                                                     >
                                                         <Input
                                                             id="fileInput"
@@ -587,7 +588,10 @@ export const CreateProductModal = () => {
                             </div>
                         </div>
                         <footer style={{display:'flex', padding: '15px 10px', justifyContent:'flex-end', margin:'0', borderTop:'1px solid #dadada'}}>
-                            <Button style={{backgroundColor:'#111111', color:'#fafafa'}} variant="secondary" disabled={isLoading}>
+                            <Button
+                                    style={{backgroundColor:'#111111', color:'#fafafa'}}
+                                    variant="secondary"
+                                    type="submit">
                                 Создать
                             </Button>
                         </footer>
