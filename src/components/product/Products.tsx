@@ -1,3 +1,4 @@
+"use client"
 import '../../app/profile/profileStyles.css'
 import Link from "next/link";
 import Image from "next/image";

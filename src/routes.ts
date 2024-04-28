@@ -25,7 +25,10 @@ export const publicRoutes = [
     "/api/users/messages",
     "/api/users/promoCode",
     "/api/users/logout",
-    "/advertisingPage"
+    "/advertisingPage",
+    "/api/users/article",
+    "/api/users/articleCategory",
+    "/articles"
 ]
 
 export const adminRoutes = [
@@ -55,6 +58,8 @@ export const adminEmails = [
 ]
 
 export const storePrefix = "/store"
+
+export const articlePrefix = "/article"
 
 export const apiPublicProductPrefix = "/api/users/products"
 

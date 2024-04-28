@@ -6,9 +6,9 @@ import User from "@/models/userModel";
 
 const makePayment = async (totalCost: number, key: string) => {
 
-    const checkout = new YooCheckout({shopId: "376103", secretKey: "test_jptAvMJ0V6vouYeExI4U-ui5HjNQBk5EDcf9IL-Id5k"});
+    const checkout = new YooCheckout({shopId: "367958", secretKey: "live_l-iCNx2owkfhES7cJAaNcwPG3I5zRyovIaNgXOZgLsg"});
     const idempotenceKey = key;
-    const totalCostString = (totalCost * 99.5).toString();
+    const totalCostString = totalCost.toString();
 
     const createPayload: ICreatePayment = {
         amount: {

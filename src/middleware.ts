@@ -12,6 +12,7 @@ import {
     apiAdminPrefix,
     storePrefix,
     apiPublicProductPrefix,
+    articlePrefix,
 } from "@/routes";
 import {NextResponse} from "next/server";
 import {isAdmin} from "@/lib/auth";
@@ -36,6 +37,7 @@ export default auth(async (req) => {
     const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
     const isAdminRoute = adminRoutes.includes(nextUrl.pathname);
     const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+    const isArticle = nextUrl.pathname.startsWith(articlePrefix);
 
     if (isApiAuthRoute) {
         return null;
@@ -52,7 +54,7 @@ export default auth(async (req) => {
         return null;
     }
 
-    if (!isLoggedIn && !isPublicRoute && !isStore && !isApiPublicProductRoute){
+    if (!isLoggedIn && !isPublicRoute && !isStore && !isApiPublicProductRoute && !isArticle){
         return NextResponse.redirect(new URL("/login", nextUrl));
     }
 
