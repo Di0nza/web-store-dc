@@ -7,6 +7,7 @@ import {usePathname, useRouter} from "next/navigation";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
 import OrderNavBarContainer from "@/components/navigation/OrderNavBarContainer";
 import {useCurrentUser} from "@/hooks/useCurrentUser";
+import {v4 as uuidv4} from 'uuid';
 
 interface UserData {
     name: string;
@@ -29,14 +30,29 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [selectedDelivery, setSelectedDelivery] = useState(null);
     // @ts-ignore
-    const {name, setName, email, setEmail, telephone, setTelephone} = useOrderContext();
+    const {name, setName, email, setEmail, telephone, setTelephone, setIdempotenceKey} = useOrderContext();
     const user = useCurrentUser();
-
     const createOrder = async () => {
         try {
             setName(userData.name);
             setEmail(userData.email);
             setTelephone(telephone);
+            setIdempotenceKey(uuidv4());
+
+            const storedOrderData = localStorage.getItem('orderData');
+            const currentOrderData = storedOrderData ? JSON.parse(storedOrderData) : {};
+
+            const updatedOrderData = {
+                ...currentOrderData,
+                name: userData.name,
+                email: userData.email,
+                telephone: telephone,
+                idempotenceKey: uuidv4()
+            };
+
+            localStorage.setItem('orderData', JSON.stringify(updatedOrderData));
+
+
             router.push(`/placingOrder/delivery`);
         } catch (error:any) {
             console.log(error.message);

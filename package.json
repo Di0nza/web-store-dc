@@ -10,6 +10,7 @@
     "postinstall": "prisma generate --schema=./src/prisma/schema.prisma"
   },
   "dependencies": {
+    "@a2seven/yoo-checkout": "^1.1.4",
     "@auth/mongodb-adapter": "^2.0.12",
     "@auth/prisma-adapter": "^1.2.0",
     "@emoji-mart/data": "^1.1.2",

@@ -155,6 +155,19 @@
     font-size: 14px;
     color: #111111;
 }
+
+.errorOrderLink{
+    border: 2px solid #111111;
+    margin-top: 10px;
+    padding: 10px 0;
+    border-radius: 8px;
+    color: #111111;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .placingOrderBlock input{
     width: calc(100%);
     height: 50px;

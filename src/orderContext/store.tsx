@@ -34,6 +34,7 @@ export const OrderProvider = ({children}) => {
     const [products, setProducts] = useState([]);
     const [tokenReload, setTokenReload] = useState(false);
     const [sessionTime, setSessionTime] = useState('');
+    const [idempotenceKey, setIdempotenceKey] = useState('')
 
     return (
         <OrderContext.Provider
@@ -58,7 +59,8 @@ export const OrderProvider = ({children}) => {
                 createdAt, setCreatedAt,
                 products, setProducts,
                 tokenReload, setTokenReload,
-                sessionTime, setSessionTime
+                sessionTime, setSessionTime,
+                idempotenceKey, setIdempotenceKey
             }}
         >
             {children}

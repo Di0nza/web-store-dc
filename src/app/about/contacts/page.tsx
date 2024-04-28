@@ -33,9 +33,15 @@ export default function Contacts() {
             <Image className={'contacts-bg-img'} src={aboutBg} alt={''}/>
             <h2 className={'title'}>Контакты</h2>
             <div className={'contact-data-block'}>
-                <p className={'contact-data'}><b>Наш адрес:</b> ул. Название, город, Почтовый индекс</p>
-                <p className={'contact-data'}><b>Телефон:</b> +123456789</p>
-                <p className={'contact-data'}><b>Email:</b> info@example.com</p>
+                {/*<p className={'contact-data'}><b>Наш адрес:</b> ул. Название, город, Почтовый индекс</p>*/}
+                <div style={{display:"flex", flexDirection:"row"}}>
+                <p className={'contact-data'}><b>Телефоны:</b></p>
+                    <div style={{display:"flex", flexDirection:"column", marginLeft:"6px"}}>
+                <p className={'contact-data'}> +8 (962) 936-11-40</p>
+                <p className={'contact-data'}> +8 (929) 524-47-28</p>
+                    </div>
+                </div>
+                <p className={'contact-data'}><b>Email:</b> maridenizbrand@gmail.com</p>
                 <p className={'contact-data'}><b>График работы:</b> Пн-Пт, 9:00-18:00</p>
             </div>
             <div className='contacts-social-links'>

@@ -3,11 +3,10 @@ import {currentUser} from "@/lib/auth";
 import {v4 as uuidv4} from 'uuid';
 import {ICreatePayment, YooCheckout} from '@a2seven/yoo-checkout';
 import User from "@/models/userModel";
-import PaymentTokenModel from "@/models/paymentTokenModel";
 
 const makePayment = async (totalCost: number, key: string) => {
 
-    const checkout = new YooCheckout({ shopId: "376103", secretKey: "test_jptAvMJ0V6vouYeExI4U-ui5HjNQBk5EDcf9IL-Id5k" });
+    const checkout = new YooCheckout({shopId: "376103", secretKey: "test_jptAvMJ0V6vouYeExI4U-ui5HjNQBk5EDcf9IL-Id5k"});
     const idempotenceKey = key;
     const totalCostString = (totalCost * 99.5).toString();
 
@@ -33,53 +32,23 @@ const makePayment = async (totalCost: number, key: string) => {
 export async function POST(request: NextRequest) {
     try {
         const user = await currentUser();
-        if(!user){
+        if (!user) {
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
         const userDB = await User.findById(user.id)
 
-        if(!userDB){
+        if (!userDB) {
             return NextResponse.json({error: "Unauthorized."}, {status: 401})
         }
-
-        const token = await PaymentTokenModel.findOne({userId: user.id, active: true});
-
-        const reqBody = await request.json()
+        const reqBody = await request.json();
         const {totalCost, idempotenceKey} = reqBody;
-
-        let payment;
-        let paymentToken;
-
-        if(token){
-            const currentDate = new Date();
-            if(token.expiresIn <= currentDate){
-                paymentToken = new PaymentTokenModel({
-                    userId: user.id,
-                    idempotenceKey: uuidv4(),
-                });
-                const savedToken = await paymentToken.save();
-                payment = await makePayment(totalCost, savedToken.idempotenceKey);
-            }else if(token.expiresIn > currentDate){
-                if(token.active) {
-                    payment = await makePayment(totalCost, token.idempotenceKey);
-                }else if(!token.active){
-                    paymentToken = new PaymentTokenModel({
-                        userId: user.id,
-                        idempotenceKey: uuidv4(),
-                    });
-                    const savedToken = await paymentToken.save();
-                    payment = await makePayment(totalCost, savedToken.idempotenceKey);
-                }
-            }
-        }else{
-            paymentToken = new PaymentTokenModel({
-                userId: user.id,
-                idempotenceKey: uuidv4(),
-            });
-            const savedToken = await paymentToken.save();
-            payment = await makePayment(totalCost, savedToken.idempotenceKey);
+        if(!totalCost || !idempotenceKey){
+            return NextResponse.json({error: "Ошибка оплаты заказа. Пройдите этап оформления заказа еще раз!"});
         }
 
+        let payment;
+
+        payment = await makePayment(totalCost, idempotenceKey);
 
         return NextResponse.json({
             message: "Payment result",

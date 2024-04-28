@@ -50,6 +50,22 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
             setStreet(street === '' ? 'Пушкинская' : street);
             setAdditionalInformation(additionalInformation === '' ? 'Без дополнительной информации' : additionalInformation);
             setDeliveryMethod(deliveryMethod);
+
+            const storedOrderData = localStorage.getItem('orderData');
+            const currentOrderData = storedOrderData ? JSON.parse(storedOrderData) : {};
+
+            const updatedOrderData = {
+                ...currentOrderData,
+                zip: zip === '' ? '298312' : zip,
+                house: house === '' ? '23' : house,
+                apartment: apartment === '' ? '2' : apartment,
+                deliveryMethod: deliveryMethod,
+                city: city === '' ? 'Москва' : city,
+                country: country === '' ? 'Москва' : country
+            };
+
+            localStorage.setItem('orderData', JSON.stringify(updatedOrderData));
+
             router.push(`/placingOrder/payment`);
         } catch (error:any) {
             console.log(error.message);

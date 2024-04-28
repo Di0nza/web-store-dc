@@ -82,6 +82,13 @@
     margin-bottom: 20px;
 }
 
+.subtitle {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
 .description-block {
     position: absolute;
     z-index: 8;
@@ -91,6 +98,10 @@
 .description {
     font-size: 16px;
     margin-bottom: 15px;
+}
+.requisites{
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 .contact-data-block{
     margin-bottom: 15px;

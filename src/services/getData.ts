@@ -21,6 +21,15 @@ export const getAllProductsAdmin = async ()=>{
     }
 }
 
+export const makeNewPayment = async (data) => {
+    try {
+        return await axios.post("/api/users/payment", data);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return null;
+    }
+}
+
 export const getAllProductsUser = async ()=>{
     try {
         return await axios.get("/api/users/products");

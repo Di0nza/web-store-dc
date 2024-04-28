@@ -66,7 +66,7 @@ export default function Cart() {
         products: [],
     });
     // @ts-ignore
-    const {setProducts, setTotalNumber, setTotalCost, setCreatedBy, setPromotionalCode} = useOrderContext();
+    // const {setProducts, setTotalNumber, setTotalCost, setCreatedBy, setPromotionalCode} = useOrderContext();
 
 
     const getUserDetails = async () => {
@@ -94,6 +94,7 @@ export default function Cart() {
 
     useEffect(() => {
         getPromoCodes();
+        localStorage.setItem('orderData', JSON.stringify({}));
     }, []);
 
     const applyPromoCode = (e) => {
@@ -121,14 +122,27 @@ export default function Cart() {
             if(!allProductsAvailable){
                 toast.warning("Некоторых товаров из корзины нет в наличии")
             }else{
-                setTotalNumber(cartItems.length);
-                setTotalCost(cartItems.reduce(
-                    (total, item) => parseFloat(total) + parseFloat(item.price),
-                    0
-                ) * ((100 - discount) / 100));
-                setCreatedBy(userData?._id);
-                setProducts(cartItems);
-                setPromotionalCode(discount);
+                // setTotalNumber(cartItems.length);
+                // setTotalCost(cartItems.reduce(
+                //     (total, item) => parseFloat(total) + parseFloat(item.price),
+                //     0
+                // ) * ((100 - discount) / 100));
+                // setCreatedBy(userData?.id);
+                // setProducts(cartItems);
+                // setPromotionalCode(discount);
+
+                const orderData = {
+                    totalNumber: cartItems.length,
+                    totalCost: cartItems.reduce(
+                        (total, item) => parseFloat(total) + parseFloat(item.price),
+                        0
+                    ) * ((100 - discount) / 100),
+                    createdBy: userData?.id,
+                    products: cartItems,
+                    promotionalCode: discount
+                };
+                localStorage.setItem('orderData', JSON.stringify(orderData));
+
                 router.push(`/placingOrder`);
             }
         } catch (error: any) {

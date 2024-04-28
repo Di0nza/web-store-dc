@@ -104,8 +104,8 @@ export async function POST(request: NextRequest) {
                 await prod.save();
             }
         }
-        let emailHtml = generateEmailTemplate(reqBody);
-        await Mailer(email, "MariDeniz Ваш заказ уже в обработке", emailHtml);
+        //let emailHtml = generateEmailTemplate(reqBody);
+        //await Mailer(email, "MariDeniz Ваш заказ уже в обработке", emailHtml);
         return NextResponse.json({
             message: "Order created successfully",
             savedOrder
