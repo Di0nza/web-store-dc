@@ -7,11 +7,6 @@ import OrderNavBarContainer from "@/components/navigation/OrderNavBarContainer";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
 import {useCurrentUser} from "@/hooks/useCurrentUser";
 
-interface UserData {
-    name: string;
-    email: string;
-    telephone: string;
-}
 type Props = {
     params: {
         id: any;
@@ -42,26 +37,20 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     };
     const createOrder = async () => {
         try {
-            setZip(zip === '' ? '298312' : zip);
-            setCity(city === '' ? 'Москва' : city);
-            setCountry(country === '' ? 'Москва' : country);
-            setApartment(apartment === '' ? '2' : apartment);
-            setHouse(house === '' ? '23' : house);
-            setStreet(street === '' ? 'Пушкинская' : street);
-            setAdditionalInformation(additionalInformation === '' ? 'Без дополнительной информации' : additionalInformation);
-            setDeliveryMethod(deliveryMethod);
 
             const storedOrderData = localStorage.getItem('orderData');
             const currentOrderData = storedOrderData ? JSON.parse(storedOrderData) : {};
 
             const updatedOrderData = {
                 ...currentOrderData,
-                zip: zip === '' ? '298312' : zip,
-                house: house === '' ? '23' : house,
-                apartment: apartment === '' ? '2' : apartment,
+                zip: zip === '' ? '' : zip,
+                house: house === '' ? '' : house,
+                apartment: apartment === '' ? '' : apartment,
                 deliveryMethod: deliveryMethod,
-                city: city === '' ? 'Москва' : city,
-                country: country === '' ? 'Москва' : country
+                city: city === '' ? '' : city,
+                country: country === '' ? '' : country,
+                additionalInformation: additionalInformation === '' ? 'Без дополнительной информации' : additionalInformation,
+                street: street === '' ? '' : street,
             };
 
             localStorage.setItem('orderData', JSON.stringify(updatedOrderData));
@@ -71,17 +60,60 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
             console.log(error.message);
         }
     }
-    const getUserDetails = async () => {
-        try {
-            const res = await axios.get<{ data: UserData }>('/api/users/userdata');
-            setUserData(res.data.data);
-            console.log(name, email, telephone, createdBy, products, totalCost, totalNumber, promotionalCode)
-        } catch (error: any) {
-            console.log(error.message);
-        }
-    };
+
     useEffect(() => {
-        //getUserDetails();
+
+        const storedOrderData = localStorage.getItem('orderData');
+        const currentOrderData = storedOrderData ? JSON.parse(storedOrderData) : {};
+
+        if (currentOrderData.zip) {
+            setZip(currentOrderData.zip);
+        } else {
+            setZip('');
+        }
+
+        if (currentOrderData.city) {
+            setCity(currentOrderData.city);
+        } else {
+            setCity('');
+        }
+
+        if (currentOrderData.country) {
+            setCountry(currentOrderData.country);
+        } else {
+            setCountry('');
+        }
+
+        if (currentOrderData.apartment) {
+            setApartment(currentOrderData.apartment);
+        } else {
+            setApartment('');
+        }
+
+        if (currentOrderData.house) {
+            setHouse(currentOrderData.house);
+        } else {
+            setHouse('');
+        }
+
+        if (currentOrderData.street) {
+            setStreet(currentOrderData.street);
+        } else {
+            setStreet('');
+        }
+
+        if (currentOrderData.additionalInformation) {
+            setAdditionalInformation(currentOrderData.additionalInformation);
+        } else {
+            setAdditionalInformation('');
+        }
+
+        if (currentOrderData.deliveryMethod) {
+            setDeliveryMethod(currentOrderData.deliveryMethod);
+        } else {
+            setDeliveryMethod('');
+        }
+
         setUserData(user);
     }, []);
 

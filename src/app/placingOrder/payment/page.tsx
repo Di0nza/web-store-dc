@@ -62,6 +62,13 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
             const currentOrderData = storedOrderData ? JSON.parse(storedOrderData) : {};
             const updatedOrderData = {
                 ...currentOrderData,
+                orderStatus: [
+                    {title: "Обработка заказа", createdDate: Date.now(), selected: true},
+                    {title: "Упаковка заказа", createdDate: '', selected: false},
+                    {title: "Товар в пути", createdDate: '', selected: false},
+                    {title: "Ожидает в пункте выдачи", createdDate: '', selected: false},
+                    {title: "Получен покупателем", createdDate: '', selected: false},
+                ],
                 paymentState: 'Оплачено',
                 createdAt: Date.now(),
                 trackingCode: '',

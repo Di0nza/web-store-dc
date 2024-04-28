@@ -24,8 +24,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     const router = useRouter();
     const [userData, setUserData] = useState({
         name: '',
-        email: '',
-        telephone: ''
+        email: ''
     });
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [selectedDelivery, setSelectedDelivery] = useState(null);
@@ -71,10 +70,22 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         }
     };
     useEffect(() => {
-        //getUserDetails();
-        // @ts-ignore
-        setUserData(user);
+        const storedOrderData = localStorage.getItem('orderData');
+        const currentOrderData = storedOrderData ? JSON.parse(storedOrderData) : {};
+        if(currentOrderData.name && currentOrderData.email && currentOrderData.telephone){
+            setUserData({
+                name: currentOrderData.name,
+                email: currentOrderData.email});
+            setTelephone(currentOrderData.telephone);
+        }else{
+            // @ts-ignore
+            setUserData(user);
+        }
     }, []);
+
+    useEffect(() => {
+        console.log(user)
+    }, [user]);
 
     return (
         <OrderProvider>
