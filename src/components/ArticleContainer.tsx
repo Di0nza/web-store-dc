@@ -12,7 +12,7 @@ import vklogo from '../img/shearIcons/vklogo.png';
 import tglogo from '../img/shearIcons/tglogo.png';
 import instlogo from '../img/shearIcons/viberlogo.png';
 import wtplogo from '../img/shearIcons/wtplogo.png';
-import comments from "@/img/comment.svg"
+import commentsImg from "@/img/comment.svg"
 import profileImg from "@/img/profile.png"
 import user from "@/img/user.png"
 import UnusualDesignMessage from "@/components/modals/unusualDesignMessage";
@@ -51,7 +51,7 @@ const ArticleContainer = ({article}) => {
     const wrapperRef = useRef(null);
     const [isSizeTableOpen, setIsSizeTableOpen] = useState(false);
     const [isPhotosSliderOpen, setIsPhotosSliderOpen] = useState(false);
-    const [comment, setComment] = useState("")
+    const [comments, setComments] = useState([])
     // @ts-ignore
     const {sessionTime, setSessionTime} = useOrderContext();
 
@@ -71,6 +71,7 @@ const ArticleContainer = ({article}) => {
 
     useEffect(() => {
         const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        setComments(article.comments);
         setCartItems(storedCartItems);
         console.log(storedCartItems);
         const liked = localStorage.getItem('liked');
@@ -201,7 +202,9 @@ const ArticleContainer = ({article}) => {
             // });
 
             console.log(values)
-            await axios.post("/api/users/article/comments", {...values, articleId: article._id});
+            await axios.post("/api/users/article/comments", {...values, articleId: article._id}).then((data)=>{
+                setComments([...comments, data.data.comment])
+            });
 
 
             form.reset();
@@ -257,7 +260,7 @@ const ArticleContainer = ({article}) => {
                             <div className={'cart-items-btns-container'}>
                                 <div className={'cart-items-btns-block'}>
                                     <div className='comment-button' onClick={() => scrollToCommentBlock('commentBlock')}>
-                                        <Image className='comment-button-image' src={comments} alt='!'/>
+                                        <Image className='comment-button-image' src={commentsImg} alt='!'/>
                                     </div>
                                     <div className='favorite-button-block'
                                          onClick={() => handleToggleLike(article._id)}>
@@ -347,7 +350,7 @@ const ArticleContainer = ({article}) => {
                     </Form>
                 </div>
                 <div className="flex flex-col-reverse commentsListBlock">
-                    {article.comments.map((item) => {
+                    {comments && comments.map((item) => {
                         return (
                             <div key={item._id}
                                  className="relative group flex items-center transition w-full commentsContent">

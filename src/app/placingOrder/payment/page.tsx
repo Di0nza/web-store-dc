@@ -140,6 +140,15 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                 console.log(data.data.error);
                 setError(data.data.error);
             }
+            const updatedOrderData = {
+                ...currentOrderData,
+                paymentInfo: {
+                    id: data.data.paymentResult.id,
+                    created_at: data.data.paymentResult.created_at
+                }
+            };
+
+            localStorage.setItem('orderData', JSON.stringify(updatedOrderData));
             setConfirmationToken(data.data.paymentResult.confirmation.confirmation_token);
         }).catch(error => {
             console.error('Ошибка при выполнении платежа:', error);

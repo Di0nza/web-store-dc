@@ -32,17 +32,20 @@ export async function POST(request: NextRequest) {
 
         const newObjectId = new mongoose.Types.ObjectId();
 
-        article.comments.push({
+        const savedComment = {
             _id: newObjectId,
             comment: comment,
             username: user.name,
             image: user.image,
             createdAt: new Date()
-        })
+        };
+
+        article.comments.push(savedComment);
 
         await article.save();
 
         return NextResponse.json({
+            comment: savedComment,
             message: "Comment created successfully",
         });
     } catch (error: any) {

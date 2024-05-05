@@ -1,6 +1,7 @@
 import mongoose, {model, Schema} from 'mongoose'
 import {IOrder} from "@/types/Order";
 
+// @ts-ignore
 const productSchema = mongoose.models.Order ?
     mongoose.model('Order') :
     model('Order', new Schema<IOrder>({
@@ -16,6 +17,10 @@ const productSchema = mongoose.models.Order ?
         additionalInformation: String,
         deliveryMethod: String,
         paymentState: String,
+        paymentInfo: {
+            id: String,
+            created_at: Date,
+        },
         promotionalCode: String,
         orderStatus: [],
         totalCost: Number,

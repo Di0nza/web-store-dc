@@ -1,3 +1,7 @@
+interface IPaymentInfo{
+    id: string,
+    created_at: Date
+}
 export interface IOrder {
     name: string;
     email: string;
@@ -11,6 +15,7 @@ export interface IOrder {
     additionalInformation: string,
     deliveryMethod: string,
     paymentState: string,
+    paymentInfo: IPaymentInfo,
     promotionalCode: string,
     orderStatus: any,
     totalCost: number,
