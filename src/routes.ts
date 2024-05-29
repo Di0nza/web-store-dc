@@ -54,7 +54,7 @@ export const authRoutes = [
 ]
 
 export const adminEmails = [
-    "dimonza49@gmail.com","matveytreyvas@gmail.com"
+    "dimonza49@gmail.com","matveytreyvas@gmail.com", "mari28deniz@gmail.com"
 ]
 
 export const storePrefix = "/store"
