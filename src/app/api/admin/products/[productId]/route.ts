@@ -82,20 +82,26 @@ export async function PATCH(
             if (typeof key === 'string') {
                 if (key.startsWith('picturesFiles[')) {
                     const fileValue = value as File;
+                    //console.log(`Processing file: ${fileValue.name}`);
                     const bytes = await fileValue.arrayBuffer();
-                    const buffer = Buffer.from(bytes)
+                    const mime = fileValue.type;
+                    const encoding = 'base64';
+                    const base64Data = Buffer.from(bytes).toString('base64');
+                    const fileUri = 'data:' + mime + ';' + encoding + ',' + base64Data;
+
                     const uploadPromise = new Promise((resolve, reject) => {
-                        let cld_upload_stream = cloudinary.uploader.upload_stream({folder: 'my-folder'}, function (error, result) {
+                        //console.log(`Start uploading ${fileValue.name}`)
+                        cloudinary.uploader.upload(fileUri, function (error, result) {
                             if (error) {
+                                //console.error('Upload error:', error);
                                 reject(error);
                             } else {
+                                //console.log('Upload successful:', result.secure_url);
                                 resolve(result.secure_url);
                             }
                         });
-
-                        streamifier.createReadStream(buffer).pipe(cld_upload_stream);
                     });
-                   picturesNames.push(await uploadPromise)
+                    picturesNames.push(await uploadPromise);
                 } else if (key.startsWith('picturesString[')) {
                     picturesNames.push(value as string);
                 }

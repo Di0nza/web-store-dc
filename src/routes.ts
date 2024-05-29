@@ -28,7 +28,8 @@ export const publicRoutes = [
     "/advertisingPage",
     "/api/users/article",
     "/api/users/articleCategory",
-    "/articles"
+    "/articles",
+    "/api/users/products"
 ]
 
 export const adminRoutes = [
