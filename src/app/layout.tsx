@@ -26,7 +26,7 @@ export default async function RootLayout({children}: { children: React.ReactNode
     const session = await auth();
 
     return (
-        <SessionProvider session={session}>
+        <SessionProvider session={session} baseUrl={process.env.NEXTAUTH_URL}>
             <html lang="en">
             <ModalProvider/>
             <OrderProvider>

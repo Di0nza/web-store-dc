@@ -208,7 +208,7 @@ function TiptapEditor({doc, provider}: EditorProps) {
         description: '',
         keywords: [],
         content: '',
-        likes: [],
+        likes: 0,
         comments: [],
         views: 1,
         coAuthors: [],

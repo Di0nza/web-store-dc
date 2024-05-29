@@ -5,12 +5,20 @@ import {useEffect, useState} from "react";
 import {getAllProductsUser, getData} from '@/services/getData'
 import {Products} from "@/components/product/Products";
 import {ProductsSearch} from "@/components/product/ProductsSearch";
+//import {getProviders} from "next-auth/react";
 
 export default function Store() {
     const [products, setProducts] = useState<any[]>([]);
     useEffect(() => {
         getAllProductsUser().then((data)=>setProducts(data.data.products))
     }, [])
+
+    // useEffect(() => {
+    //     (async () => {
+    //         const proivders = await getProviders();
+    //         console.log('providers :>> ', proivders);
+    //     })();
+    // }, []);
 
     return products ? (
 
