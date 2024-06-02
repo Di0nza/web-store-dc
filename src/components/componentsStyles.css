@@ -1001,9 +1001,17 @@
     font-weight: bold;
     border: 2px solid #111111;
 }
+.avatarImageBlock{
+    width: 40px;
+    height: 40px;
+    padding: 12px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .avatarImage{
-    width: 25px;
-    height: 28px;
+    width: 21px;
+    height: 25px;
     margin: 6px 8px 8px;
 }
 .addImagesBlock{

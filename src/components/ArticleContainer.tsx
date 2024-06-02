@@ -388,7 +388,7 @@ const ArticleContainer = ({article}) => {
                         <p>Общее количество: {comments.length}</p>
                     </div>
                     <div className="comments-header-btn">
-                        <p>{indexOfFirstComment + 1}-{Math.min(indexOfLastComment, comments.length)} из {comments.length}</p>
+                        <p>{Math.min(indexOfLastComment, comments.length)}-{indexOfFirstComment + 1} из {comments.length}</p>
                         <button className="comments-header-btn-left" onClick={prevPage} disabled={indexOfFirstComment === 0}>
                             <Image src={imgArrow} alt={'<'}></Image>
                         </button>
@@ -409,8 +409,8 @@ const ArticleContainer = ({article}) => {
                                             {item.image ?
                                                 <AvatarImage src={item.image}/>
                                                 :
-                                                <div style={{backgroundColor: "rgb(241, 241, 241)"}}>
-                                                    <AvatarImage className="p-1 avatarImage"
+                                                <div className="avatarImageBlock" style={{backgroundColor: "rgb(241, 241, 241)"}}>
+                                                    <AvatarImage className="avatarImage"
                                                                  src={"https://res.cloudinary.com/maticht12345/image/upload/v1709459256/profile_whywvo.png"}/>
                                                 </div>
                                             }
