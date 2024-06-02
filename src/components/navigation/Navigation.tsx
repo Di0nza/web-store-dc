@@ -191,7 +191,7 @@ const Navigation = ({navLinks}: Props) => {
                                     </div>
                                 )}
                             </div>
-                            <Link href={'profile'} className={'profileIcoBlock'} style={{marginLeft: '10px'}}>
+                            <Link href={'/profile'} className={'profileIcoBlock'} style={{marginLeft: '10px'}}>
                                 <Image className={'profileIco'} src={profileIco} alt={'user'}></Image>
                             </Link>
                         </div>
