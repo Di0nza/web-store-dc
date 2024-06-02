@@ -303,7 +303,7 @@ const Navigation = ({navLinks}: Props) => {
                                                                onClick={() => handleIncrease(item)}></Image>
                                                     </div>
                                                     <h5>
-                                                        ${item.price * item.count}.00
+                                                        {item.price * item.count}.00 ₽
                                                     </h5>
                                                 </div>
                                             </div>

@@ -1001,6 +1001,13 @@
     font-weight: bold;
     border: 2px solid #111111;
 }
+.avatarImageBlock{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .avatarImage{
     width: 25px;
     height: 28px;
