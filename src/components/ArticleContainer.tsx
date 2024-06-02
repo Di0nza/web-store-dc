@@ -410,7 +410,7 @@ const ArticleContainer = ({article}) => {
                                                 <AvatarImage src={item.image}/>
                                                 :
                                                 <div className="avatarImageBlock" style={{backgroundColor: "rgb(241, 241, 241)"}}>
-                                                    <AvatarImage className="p-1 avatarImage"
+                                                    <AvatarImage className="avatarImage"
                                                                  src={"https://res.cloudinary.com/maticht12345/image/upload/v1709459256/profile_whywvo.png"}/>
                                                 </div>
                                             }
