@@ -903,7 +903,7 @@
     align-items: center;
 }
 .send-emoji-button{
-    height: 48px;
+    height: 45px;
     margin-top: 5px;
     outline: none;
     font-size: 15px;
@@ -912,11 +912,61 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 10px;
+    padding: 10px 9px;
     color: #111111;
     border-radius: 8px;
     font-weight: bold;
-    border: 2px solid #111111;
+    border: 1px solid #dedede;
+}
+.comments-header{
+    margin: 25px 0 5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.comments-header h3{
+    font-size: 25px;
+    font-weight: bold;
+}
+.comments-header-btn{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    align-items: center;
+}
+.comments-header-btn-left{
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 12px;
+    color: #111111;
+    border-radius: 8px;
+    font-weight: bold;
+    border: 1px solid #dedede;
+    margin-left: 10px;
+}
+.comments-header-btn-left img{
+    width: 10px;
+    rotate: 180deg;
+    margin-right: 2px;
+}
+.comments-header-btn-right{
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 12px;
+    color: #111111;
+    border-radius: 8px;
+    font-weight: bold;
+    border: 1px solid #dedede;
+    margin-left: 10px;
+}
+.comments-header-btn-right img{
+    width: 10px;
+    margin-left: 2px;
 }
 .send-comment-button{
     height: 48px;
@@ -930,6 +980,23 @@
     align-items: center;
     padding: 10px 15px;
     color: #fafafa;
+    border-radius: 8px;
+    font-weight: bold;
+    border: 2px solid #111111;
+}
+.send-comment-link{
+    height: 48px;
+    margin-top: 5px;
+    outline: none;
+    font-size: 15px;
+    box-shadow: none;
+    background-color: #111111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    color: #fafafa;
+    text-decoration: none;
     border-radius: 8px;
     font-weight: bold;
     border: 2px solid #111111;

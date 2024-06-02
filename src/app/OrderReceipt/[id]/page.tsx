@@ -177,7 +177,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         const pdfTitle = `Заказ #${orderData?._id.toString()}`;
         const pdfContent = 'Спасибо за ваш заказ!';
         const pdfContent3 =
-            `Сумма заказа: ${orderData?.totalCost.toFixed(2)}$ - (${orderData?.promotionalCode ? orderData?.promotionalCode : 0}%) (${orderData?.paymentState})`;
+            `Сумма заказа: ${orderData?.totalCost.toFixed(2)}₽ - (${orderData?.promotionalCode ? orderData?.promotionalCode : 0}%) (${orderData?.paymentState})`;
         const pdfContent5 = 'Дата оформления: ' + formattedDateTime;
         const pdfContent6 = 'Способ доставки: ' + orderData?.deliveryMethod;
         const data = [
@@ -186,10 +186,10 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
             `Телефон: ${orderData.telephone}`,
             `Пункт назвачения: ${orderData?.country}, ${orderData?.city},ул. ${orderData?.street},(д.${orderData?.house},кв.${orderData?.apartment}),${orderData?.zip}`,
         ];
-        const pdfContentBlock1 = `Сумма заказа: ${orderTotal.toFixed(2)}$`;
-        const pdfContentBlock2 = `НДС (+23%): ${orderTotalWithoutVat.toFixed(2)} + ${vat.toFixed(2)}$`;
-        const pdfContentBlock3 = `Просокод (-${orderData?.promotionalCode}%): ${discountedTotal}$`;
-        const pdfContentBlock4 = `Итого: ${orderData?.totalCost.toFixed(2)}$`;
+        const pdfContentBlock1 = `Сумма заказа: ${orderTotal.toFixed(2)}₽`;
+        const pdfContentBlock2 = `НДС (+23%): ${orderTotalWithoutVat.toFixed(2)} + ${vat.toFixed(2)}₽`;
+        const pdfContentBlock3 = `Просокод (-${orderData?.promotionalCode}%): ${discountedTotal}₽`;
+        const pdfContentBlock4 = `Итого: ${orderData?.totalCost.toFixed(2)}₽`;
 
         doc.setFontSize(18);
         doc.text(pdfTitle, 10, 20);
@@ -289,7 +289,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                                         </div>
                                         <div className={'mini-cart-footer'}>
                                             <h5>
-                                                ${item.price}.00
+                                                {item.price}.00 ₽
                                             </h5>
                                         </div>
                                     </div>
@@ -352,7 +352,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                                 <b>Сумма заказа:</b>
                             </div>
                             <div className={'OrderTotalBlockValues'}>
-                                <p>${orderTotal.toFixed(2)}</p>
+                                <p>{orderTotal.toFixed(2)} ₽</p>
                             </div>
                         </div>
                         <div className={'OrderTotalCostBlock'}>
@@ -361,8 +361,8 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                                 <b>Просокод (-{orderData?.promotionalCode}%):</b>
                             </div>
                             <div className={'OrderTotalBlockValues'}>
-                                <p>${orderTotalWithoutVat.toFixed(2)} + ${vat.toFixed(2)}</p>
-                                <p>${discountedTotal}</p>
+                                <p>{orderTotalWithoutVat.toFixed(2)} ₽ + {vat.toFixed(2)} ₽</p>
+                                <p>{discountedTotal} ₽</p>
                             </div>
                         </div>
                         <div className={'OrderTotalCostBlockBottom'}>
@@ -370,7 +370,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                                 <b>Итого:</b>
                             </div>
                             <div className={'OrderTotalBlockValues'}>
-                                <p>${orderData?.totalCost.toFixed(2)}</p>
+                                <p>{orderData?.totalCost.toFixed(2)} ₽</p>
                             </div>
                         </div>
                     </div>
