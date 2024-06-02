@@ -6,6 +6,7 @@ export async function GET(
 ) {
     try {
 
+        console.log(request)
         const photos = await MainPagePhoto.find({active:true});
 
         //console.log(photos)

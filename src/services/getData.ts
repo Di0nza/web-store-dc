@@ -40,7 +40,7 @@ export const getAllProductsUser = async ()=>{
 }
 export const getDataBySearch = async (search: string) => {
     try {
-        const data = await axios.get("/api/admin/products");
+        const data = await axios.get("/api/users/products");
         const products = data.data.products as IProduct[];
         //console.log(products)
         const foundProducts = products.filter(product =>
