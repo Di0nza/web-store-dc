@@ -261,7 +261,7 @@ export default function UserOrders() {
                                     <div className={'mini-order-footer'}>
                                         <p className={'mini-cart-item-date'}>{formatTimestampToDate(item.orderStatus.slice().reverse().find(status => status.selected)?.createdDate)}</p>
                                         <div className={'mini-cart-footer-right'}>
-                                            <h5 className={'mini-cart-item-cost'}>Стоимость: <b>${item.totalCost.toFixed(2)}</b>
+                                            <h5 className={'mini-cart-item-cost'}>Стоимость: <b>{item.totalCost.toFixed(2)} ₽</b>
                                             </h5>
                                             <p className={'mini-cart-item-date'}>{formatDateTime(item.createdAt)}</p>
                                         </div>

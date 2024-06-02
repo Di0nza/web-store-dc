@@ -248,7 +248,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
             <div>
                 <h2>{"Спасибо за ваш заказ!"}</h2>
                 <h4 className='placingOrderBlockTitle'><b>{orderData?.totalNumber}</b> товаров на
-                    сумму <b>${orderData?.totalCost.toFixed(2)}</b> ({orderData?.paymentState})</h4>
+                    сумму <b>{orderData?.totalCost.toFixed(2)} ₽</b> ({orderData?.paymentState})</h4>
             </div>
         </div>
         <div>
