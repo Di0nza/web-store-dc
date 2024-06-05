@@ -34,6 +34,9 @@ import {useForm} from "react-hook-form";
 import * as z from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import imgArrow from "../img/arrowB.png";
+import {useCurrentUser} from "@/hooks/useCurrentUser";
+import Link from "next/link";
 
 
 function Images(props: { onClick: () => Window, src: any, alt: string, style: { cursor: string; width: string } }) {
@@ -51,7 +54,8 @@ const ArticleContainer = ({article}) => {
     const wrapperRef = useRef(null);
     const [isSizeTableOpen, setIsSizeTableOpen] = useState(false);
     const [isPhotosSliderOpen, setIsPhotosSliderOpen] = useState(false);
-    const [comments, setComments] = useState([])
+    const [comments, setComments] = useState([]);
+    const user = useCurrentUser();
     // @ts-ignore
     const {sessionTime, setSessionTime} = useOrderContext();
 
@@ -71,7 +75,9 @@ const ArticleContainer = ({article}) => {
 
     useEffect(() => {
         const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
-        setComments(article.comments);
+        // @ts-ignore
+        const sortedComments = article.comments.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setComments(sortedComments)
         setCartItems(storedCartItems);
         console.log(storedCartItems);
         const liked = localStorage.getItem('liked');
@@ -237,6 +243,27 @@ const ArticleContainer = ({article}) => {
         }
     };
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const commentsPerPage = 5;
+
+    const indexOfFirstComment = (comments.length - 1) - ((currentPage - 1) * commentsPerPage);
+    const indexOfLastComment = Math.max(indexOfFirstComment - commentsPerPage, 0);
+    const currentComments = comments.slice(indexOfLastComment, indexOfFirstComment + 1).reverse();
+
+    // Обработчики для переключения страниц
+    const nextPage = () => {
+
+        if (indexOfFirstComment < comments.length - 1) {
+            setCurrentPage(prevPage => prevPage - 1);
+        }
+    };
+
+    const prevPage = () => {
+        if (indexOfLastComment > 0) {
+            setCurrentPage(prevPage => prevPage + 1);
+        }
+    };
+
     const scrollToCommentBlock = (element) => {
         const commentBlock = document.getElementById(element);
 
@@ -337,9 +364,15 @@ const ArticleContainer = ({article}) => {
                                                             onChange={(emoji: string) => field.onChange(`${field.value} ${emoji}`)}
                                                         />
                                                     </div>
-                                                    <Button className="send-comment-button">
-                                                        Отправить
-                                                    </Button>
+                                                    {user ? (
+                                                        <Button className="send-comment-button">
+                                                            Отправить
+                                                        </Button>
+                                                    ) : (
+                                                        <Link className="send-comment-link" href={'/login'}>
+                                                            Войти
+                                                        </Link>
+                                                    )}
                                                 </div>
                                             </div>
                                         </FormControl>
@@ -349,8 +382,24 @@ const ArticleContainer = ({article}) => {
                         </form>
                     </Form>
                 </div>
+                <div className="comments-header">
+                    <div className="comments-header-info">
+                        <h3>Комментарии</h3>
+                        <p>Общее количество: {comments.length}</p>
+                    </div>
+                    <div className="comments-header-btn">
+                        <p>{Math.min(indexOfLastComment, comments.length)}-{indexOfFirstComment + 1} из {comments.length}</p>
+                        <button className="comments-header-btn-left" onClick={prevPage} disabled={indexOfFirstComment === 0}>
+                            <Image src={imgArrow} alt={'<'}></Image>
+                        </button>
+                        <button className="comments-header-btn-right" onClick={nextPage} disabled={indexOfLastComment >= comments.length}>
+                            <Image src={imgArrow} alt={'>'}></Image>
+                        </button>
+                    </div>
+                </div>
+
                 <div className="flex flex-col-reverse commentsListBlock">
-                    {comments && comments.map((item) => {
+                    {currentComments && currentComments.map((item) => {
                         return (
                             <div key={item._id}
                                  className="relative group flex items-center transition w-full commentsContent">
@@ -360,8 +409,8 @@ const ArticleContainer = ({article}) => {
                                             {item.image ?
                                                 <AvatarImage src={item.image}/>
                                                 :
-                                                <div style={{backgroundColor: "rgb(241, 241, 241)"}}>
-                                                    <AvatarImage className="p-1 avatarImage"
+                                                <div className="avatarImageBlock" style={{backgroundColor: "rgb(241, 241, 241)"}}>
+                                                    <AvatarImage className="avatarImage"
                                                                  src={"https://res.cloudinary.com/maticht12345/image/upload/v1709459256/profile_whywvo.png"}/>
                                                 </div>
                                             }

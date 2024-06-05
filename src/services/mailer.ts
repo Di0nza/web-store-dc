@@ -1,19 +1,20 @@
 import nodemailer from "nodemailer";
+import SMTPTransport from "nodemailer/lib/smtp-transport";
 
-export const Mailer = async (email, subject, html) => {
+export const Mailer = async (email: string, subject: string, html: string) => {
     try {
         const transporter = nodemailer.createTransport({
-            host: process.env.HOST,
-            port: Number(process.env.EMAIL_PORT),
+            host: "smtp.timeweb.ru",
+            port: 2525,
             auth: {
-                user: 'cisdeals@delkind.pl',
-                pass: 'SDE7heXNE*9H85W',
+                user: "maridenizbrand@maridenizbrand.com",
+                pass: "gz2UXb05$5jr",
             },
             secure: false,
-        });
+        } as SMTPTransport.Options);
 
         await transporter.sendMail({
-            from: process.env.USER,
+            from: "maridenizbrand@maridenizbrand.com",
             to: email,
             subject: subject,
             html: html,

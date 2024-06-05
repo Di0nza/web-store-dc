@@ -348,7 +348,7 @@ const ProductContainer = ({product}) => {
                             <div className='product-info-block-header'>
                                 <div>
                                     <h3>{product.title}</h3>
-                                    <p className='product-info-price'>${product.price}.00</p>
+                                    <p className='product-info-price'>{product.price}.00 ₽</p>
                                 </div>
                                 <div className={'cart-items-btns-container'}>
                                     <div className={'cart-items-btns-block'}>

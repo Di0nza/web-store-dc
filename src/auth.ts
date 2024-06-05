@@ -36,7 +36,7 @@ export const {
             const existingUser  = await db.user.findUnique({ where: { id } });
 
             //TODO Не забыть расскомментировать
-            //if (!existingUser?.emailVerified) return false;
+            if (!existingUser?.emailVerified) return false;
 
             return true;
         },

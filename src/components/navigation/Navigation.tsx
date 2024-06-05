@@ -191,7 +191,7 @@ const Navigation = ({navLinks}: Props) => {
                                     </div>
                                 )}
                             </div>
-                            <Link href={'profile'} className={'profileIcoBlock'} style={{marginLeft: '10px'}}>
+                            <Link href={'/profile'} className={'profileIcoBlock'} style={{marginLeft: '10px'}}>
                                 <Image className={'profileIco'} src={profileIco} alt={'user'}></Image>
                             </Link>
                         </div>
@@ -303,7 +303,7 @@ const Navigation = ({navLinks}: Props) => {
                                                                onClick={() => handleIncrease(item)}></Image>
                                                     </div>
                                                     <h5>
-                                                        ${item.price * item.count}.00
+                                                        {item.price * item.count}.00 ₽
                                                     </h5>
                                                 </div>
                                             </div>

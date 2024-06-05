@@ -86,7 +86,7 @@ export default function SimpleEditor() {
 
     const handleSelectArticleCategory = async (articleCategory) => {
         setSelectedArticleCategory(articleCategory)
-        const res = await axios.get(`/api/users/article/${articleCategory._id}`);
+        const res = await axios.get(`/api/users/article/sort/${articleCategory._id}`);
         setArticles(res.data.article);
     }
     const handleDateCategoryFilter = (sortingType) => {

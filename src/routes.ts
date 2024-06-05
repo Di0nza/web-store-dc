@@ -22,7 +22,6 @@ export const publicRoutes = [
     "/cart",
     "/favorites",
     "/privacyPolice",
-    "/api/users/messages",
     "/api/users/promoCode",
     "/api/users/logout",
     "/advertisingPage",
@@ -41,8 +40,8 @@ export const adminRoutes = [
     "/adminProfile",
     "/adminStatistics",
     "/allAdminOrders",
-    "/api/users/logout"
-
+    "/adminProfile/articles",
+    "/adminProfile/articles/create",
 ]
 
 /**ВСЕ ОСТАЛЬНЫЕ РОУТЫ СЧИТАЮТСЯ ПРИВАТНЫМИ*/
@@ -59,6 +58,12 @@ export const adminEmails = [
 ]
 
 export const storePrefix = "/store"
+
+export const apiPublicArticleSortPrefix = "api/users/article/sort"
+
+export const articleAdminPrefix = "/"
+
+export const adminPrefix = "/admin"
 
 export const articlePrefix = "/article"
 

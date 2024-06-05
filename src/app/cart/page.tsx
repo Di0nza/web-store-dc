@@ -308,7 +308,7 @@ export default function Cart() {
                                                        onClick={() => handleIncrease(item)}></Image>
                                             </div>
                                             <h5>
-                                                ${item.price * item.count}.00
+                                                {item.price * item.count}.00 ₽
                                             </h5>
                                         </div>
                                     </div>
@@ -360,7 +360,7 @@ export default function Cart() {
                                                 {/*</div>*/}
                                             </div>
                                             <h5 style={{opacity: 0.5}}>
-                                                ${item.price * item.count}.00
+                                                {item.price * item.count}.00 ₽
                                             </h5>
                                         </div>
                                     </div>
@@ -372,13 +372,13 @@ export default function Cart() {
                         <div className="modal-header">
                             <div className="modal-header-title">
                                 <h4>Итог заказа:</h4>
-                                <p className="modal-header-title-value">${roundedTotalValue}</p>
+                                <p className="modal-header-title-value">{roundedTotalValue} ₽</p>
                             </div>
                         </div>
                         <div className="summary-info">
                             <p><b>{cartItems.length}</b> товаров на сумму{' '}
                                 <b>
-                                    ${(cartItems.reduce((total, item) => parseFloat(total) + parseFloat(item.price), 0)).toFixed(2)}{' '}
+                                    {(cartItems.reduce((total, item) => parseFloat(total) + parseFloat(item.price), 0)).toFixed(2)} ₽{' '}
                                     {discount !== 0 && `- ${discount}%`}
                                 </b>
                             </p>

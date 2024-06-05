@@ -41,10 +41,10 @@ const BestProducts = () => {
                                         <div className='best-product-info'>
                                             <img className='best-product-img' src={product.pictures[0]}
                                                  alt={product.title}></img>
-                                            <p className='product-title'>{product.title}</p>
+                                            <p className='product-title'>{product.title.length > 23 ? `${product.title.slice(0, 23)}...` : product.title}</p>
                                             <p className='product-category'>{product.category}</p>
                                         </div>
-                                        <p className='product-price'>${product.price}.00</p>
+                                        <p className='product-price'>{product.price}.00 ₽</p>
                                     </Link>
                                 </div>
                             ))}

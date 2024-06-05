@@ -8,7 +8,7 @@ export async function GET(
     request: NextRequest,
 ) {
     try {
-
+        console.log(request)
         const video = await MainPageVideo.findOne({active:true});
 
         return NextResponse.json({
