@@ -8,18 +8,6 @@ connect()
 export async function GET() {
     try {
 
-        const user = await currentUser();
-
-        if (!user) {
-            return NextResponse.json({error: "Unauthorized."}, {status: 401})
-        }
-
-        const userDB = await User.findById(user.id)
-
-        if (!userDB) {
-            return NextResponse.json({error: "Unauthorized."}, {status: 401})
-        }
-
         const articleCategories = await ArticleCategory.find();
 
         const sortedArticleCategories = articleCategories.sort((a,b) => a.name.localeCompare(b.name));
