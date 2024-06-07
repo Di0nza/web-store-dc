@@ -260,7 +260,7 @@ const Navigation = ({navLinks}: Props) => {
                                 </div>
                                 <div className="modal-header-info">
                                     <p><b>{cartItems.length}</b> товаров на
-                                        сумму <b>${cartItems.reduce((total, item) => parseFloat(total) + parseFloat(item.price), 0)}.00</b>
+                                        сумму <b>{cartItems.reduce((total, item) => parseFloat(total) + parseFloat(item.price), 0)}.00 ₽</b>
                                     </p>
                                 </div>
                             </div>

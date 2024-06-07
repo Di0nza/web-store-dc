@@ -489,7 +489,7 @@
 }
 .placingOrderQRButton{
     border-radius: 10px;
-    width: calc(100% - 5px);
+    width: calc(100% - 10px);
     height: 50px;
     background-color: #fafafa;
     color: #111111;
@@ -503,7 +503,7 @@
     cursor: pointer;
     font-weight: 600;
     margin-bottom: 70px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 .placingOrderQRButton img{
     width: 30px;

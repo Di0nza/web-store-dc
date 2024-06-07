@@ -207,7 +207,9 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
         doc.text(pdfContentBlock2, 10, 140);
         doc.text(pdfContentBlock3, 10, 150);
         doc.text(pdfContentBlock4, 10, 160);
-        doc.text('MariDeniz', 170, 280);
+        doc.addImage('https://res.cloudinary.com/dzdmstsam/image/upload/v1717702108/headerLogo_e5dhwk.png', 'PNG', 166, 260, 25, 13);
+        doc.addImage(qrCodeSrc, 'PNG', 9, 220, 45, 45);
+        doc.text('MariDenizDesign', 160, 280);
         doc.text(pdfContent5, 10, 280);
         doc.save(`order${orderData?._id.toString().substring(7)}.pdf`);
     };

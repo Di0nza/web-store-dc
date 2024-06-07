@@ -3,6 +3,7 @@ import Order from "@/models/orderModel";
 import { NextRequest, NextResponse } from "next/server";
 import {currentUser} from "@/lib/auth";
 import User from "@/models/userModel";
+import {ChangeOrderStatusEmail} from "@/lib/mail";
 
 
 connect();
@@ -81,7 +82,7 @@ export async function PUT(request: NextRequest) {
         }
         existingOrder.markModified('orderStatus');
         const updatedOrder = await existingOrder.save();
-
+        await ChangeOrderStatusEmail(existingOrder.email, updatedOrder);
         return NextResponse.json({
             message: "Order updated successfully",
             updatedOrder

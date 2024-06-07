@@ -4,29 +4,8 @@ import Product from "@/models/productModel"
 import {NextRequest, NextResponse} from "next/server";
 import {currentUser} from "@/lib/auth";
 import User from "@/models/userModel";
-import {Mailer} from "@/services/mailer";
+import {sendOrderConfirmationEmail} from "@/lib/mail";
 connect()
-
-const generateEmailTemplate = (newOrder) => {
-    const title = "MariDeniz Ваш заказ уже в обработке";
-    const emailHtml = `
-    <html>
-      <head>
-        <title>${title}</title>
-      </head>
-      <body style="background-color: #f1f1f1;text-align: center;width: 700px;padding: 0">
-        <div style=" margin: 0 auto; padding: 3px 3px 20px 3px;">
-          <div style="text-align: center; margin-top: 20px;">
-            <h1 style=" color: #000000;font-size: 18px; font-weight: bold;">${newOrder.email}</h1>
-            <p style="color: #000000;font-size: 14px;">${newOrder.name}</p>
-            <p style="color: #000000;font-size: 14px;">Для подтверждения вашей электронной почты, пожалуйста, перейдите по ссылке:</p>
-          </div>
-        </div>
-      </body>
-    </html>
-  `;
-    return emailHtml;
-};
 
 
 export async function POST(request: NextRequest) {
@@ -106,8 +85,23 @@ export async function POST(request: NextRequest) {
                 await prod.save();
             }
         }
-        //let emailHtml = generateEmailTemplate(reqBody);
-        //await Mailer(email, "MariDeniz Ваш заказ уже в обработке", emailHtml);
+        await sendOrderConfirmationEmail(email, {
+            name,
+            products,
+            zip,
+            city,
+            country,
+            street,
+            house,
+            apartment,
+            totalCost,
+            promotionalCode,
+            orderStatus,
+            trackingCode,
+            trackingLink,
+            deliveryMethod,
+            createdAt,
+        });
         return NextResponse.json({
             message: "Order created successfully",
             savedOrder
