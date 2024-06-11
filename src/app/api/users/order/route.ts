@@ -1,10 +1,12 @@
-import {connect} from "@/db/db";
 import Order from "@/models/orderModel";
 import Product from "@/models/productModel"
 import {NextRequest, NextResponse} from "next/server";
 import {currentUser} from "@/lib/auth";
 import User from "@/models/userModel";
 import {sendOrderConfirmationEmail} from "@/lib/mail";
+import {connect} from "@/db/db";
+
+connect();
 export const maxDuration = 59;
 
 

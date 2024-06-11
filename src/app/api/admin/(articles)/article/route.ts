@@ -3,7 +3,9 @@ import {currentUser} from "@/lib/auth";
 import User from "@/models/userModel";
 import Article from "@/models/articleModel";
 import ArticleCategory from "@/models/articleCategoryModel";
+import {connect} from "@/db/db";
 
+connect();
 export const maxDuration = 59;
 
 export async function POST(request: NextRequest) {

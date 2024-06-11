@@ -3,7 +3,9 @@ import {currentUser} from "@/lib/auth";
 import {v4 as uuidv4} from 'uuid';
 import {ICreatePayment, YooCheckout} from '@a2seven/yoo-checkout';
 import User from "@/models/userModel";
+import {connect} from "@/db/db";
 
+connect();
 const makePayment = async (totalCost: number, key: string) => {
 
     const checkout = new YooCheckout({shopId: "367958", secretKey: "live_l-iCNx2owkfhES7cJAaNcwPG3I5zRyovIaNgXOZgLsg"});

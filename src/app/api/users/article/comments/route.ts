@@ -4,7 +4,9 @@ import User from "@/models/userModel";
 import Article from "@/models/articleModel";
 import ArticleCategory from "@/models/articleCategoryModel";
 import mongoose from "mongoose";
+import {connect} from "@/db/db";
 
+connect();
 export const maxDuration = 59;
 
 

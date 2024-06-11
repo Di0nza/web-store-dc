@@ -1,4 +1,3 @@
-import {connect} from "@/db/db";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
@@ -17,6 +16,9 @@ import {sendVerificationEmail} from "@/lib/mail";
 import {getVerificationTokenByEmail, getVerificationTokenByToken} from "@/services/verificationToken";
 import userModel from "@/models/userModel";
 import verificationTokenModel from "@/models/verificationTokenModel";
+import {connect} from "@/db/db";
+
+connect();
 export const maxDuration = 59;
 
 export async function POST(request:NextRequest) {

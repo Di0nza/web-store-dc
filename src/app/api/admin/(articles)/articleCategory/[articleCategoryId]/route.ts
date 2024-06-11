@@ -2,7 +2,9 @@ import ArticleCategory from "@/models/articleCategoryModel";
 import {NextRequest, NextResponse} from "next/server";
 import {currentUser} from "@/lib/auth";
 import User from "@/models/userModel";
+import {connect} from "@/db/db";
 
+connect();
 export const maxDuration = 59;
 
 export async function DELETE(

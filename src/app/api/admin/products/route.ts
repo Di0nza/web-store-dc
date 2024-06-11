@@ -1,4 +1,3 @@
-import {connect} from "@/db/db";
 import Product from "@/models/productModel";
 import {NextRequest, NextResponse} from "next/server";
 import {IProduct} from "@/types/Product";
@@ -8,7 +7,9 @@ import {currentUser, isAdmin} from "@/lib/auth";
 import User from "@/models/userModel";
 const cloudinary = require('cloudinary').v2;
 const streamifier = require('streamifier');
+import {connect} from "@/db/db";
 
+connect();
 
 cloudinary.config({
     cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,

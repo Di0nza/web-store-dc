@@ -5,6 +5,9 @@ import Article from "@/models/articleModel";
 import {v2 as cloudinary} from "cloudinary";
 import Product from "@/models/productModel";
 import ArticleCategory from "@/models/articleCategoryModel";
+import {connect} from "@/db/db";
+
+connect();
 export const maxDuration = 59;
 
 

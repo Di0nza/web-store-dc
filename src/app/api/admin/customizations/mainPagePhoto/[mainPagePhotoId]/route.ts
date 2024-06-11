@@ -1,11 +1,12 @@
-import {connect} from "@/db/db";
 import {NextRequest, NextResponse} from "next/server";
 import {ITokenData} from "@/types/TokenData";
 import {getDataFromToken} from "@/helpers/getDataFromToken";
 import MainPagePhoto from "@/models/mainPagePhotoModel";
 import {currentUser, isAdmin} from "@/lib/auth";
 import User from "@/models/userModel";
+import {connect} from "@/db/db";
 
+connect();
 export const maxDuration = 59;
 
 export async function PATCH(

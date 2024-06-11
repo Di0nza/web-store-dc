@@ -7,7 +7,9 @@ import ResetPasswordTokenModel from "@/models/resetPasswordTokenModel";
 import User from "@/models/userModel";
 import {currentUser} from "@/lib/auth";
 import bcryptjs from "bcryptjs";
+import {connect} from "@/db/db";
 
+connect();
 /**Вызывается из профиля пользователя, когда она залогинен*/
 export const maxDuration = 59;
 

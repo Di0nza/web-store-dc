@@ -1,4 +1,3 @@
-import {connect} from "@/db/db";
 import Product from "@/models/productModel";
 import {NextRequest, NextResponse} from "next/server";
 import {IProduct} from "@/types/Product";
@@ -6,6 +5,10 @@ import {ITokenData} from "@/types/TokenData";
 import {getDataFromToken} from "@/helpers/getDataFromToken";
 import {currentUser, isAdmin} from "@/lib/auth";
 import User from "@/models/userModel";
+import {connect} from "@/db/db";
+
+connect();
+
 
 const cloudinary = require('cloudinary').v2;
 const streamifier = require('streamifier');

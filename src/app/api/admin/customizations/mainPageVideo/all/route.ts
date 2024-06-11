@@ -5,7 +5,9 @@ import Product from "@/models/productModel";
 import MainPageVideo from "@/models/mainPageVideoModel";
 import {currentUser, isAdmin} from "@/lib/auth";
 import User from "@/models/userModel";
+import {connect} from "@/db/db";
 
+connect();
 export const maxDuration = 59;
 
 export async function GET(

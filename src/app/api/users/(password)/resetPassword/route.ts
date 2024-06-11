@@ -1,4 +1,3 @@
-import {connect} from "@/db/db";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
@@ -17,7 +16,9 @@ import {sendPasswordResetEmail, sendVerificationEmail} from "@/lib/mail";
 import {getVerificationTokenByEmail, getVerificationTokenByToken} from "@/services/verificationToken";
 import userModel from "@/models/userModel";
 import verificationTokenModel from "@/models/verificationTokenModel";
+import {connect} from "@/db/db";
 
+connect();
 
 /**Вызывается на странице, где вводится email, для восстановление пароля*/
 export const maxDuration = 59;

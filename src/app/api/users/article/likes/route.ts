@@ -1,7 +1,9 @@
 import {NextRequest, NextResponse} from "next/server";
 import Article from "@/models/articleModel";
 import {IArticle} from "@/types/Article";
+import {connect} from "@/db/db";
 
+connect();
 enum OptionsType { LIKE = "ADD", UNLIKE = "DEL"}
 
 export const maxDuration = 59;

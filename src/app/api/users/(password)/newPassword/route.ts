@@ -5,7 +5,9 @@ import userModel from "@/models/userModel";
 import {NewPasswordSchema} from "@/types/authSchemas";
 import bcryptjs from "bcryptjs";
 import ResetPasswordTokenModel from "@/models/resetPasswordTokenModel";
+import {connect} from "@/db/db";
 
+connect();
 /**Вызывается со страницы, на которой уже пишут новый пароль, с токеном в адресной строке*/
 
 export const maxDuration = 59;

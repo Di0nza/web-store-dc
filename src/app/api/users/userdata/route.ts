@@ -1,7 +1,9 @@
 import { getDataFromToken } from "@/helpers/getDataFromToken";
-import {connect} from "@/db/db";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
+import {connect} from "@/db/db";
+
+connect();
 
 export const maxDuration = 59;
 

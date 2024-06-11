@@ -3,6 +3,9 @@ import {NextRequest, NextResponse} from "next/server";
 import {IProduct} from "@/types/Product";
 import {currentUser} from "@/lib/auth";
 import User from "@/models/userModel";
+import {connect} from "@/db/db";
+
+connect();
 
 export const maxDuration = 59;
 

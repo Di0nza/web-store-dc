@@ -3,6 +3,9 @@ import {currentUser} from "@/lib/auth";
 import User from "@/models/userModel";
 import ArticleCategory from "@/models/articleCategoryModel";
 import Article from "@/models/articleModel";
+import {connect} from "@/db/db";
+
+connect();
 export const maxDuration = 59;
 
 

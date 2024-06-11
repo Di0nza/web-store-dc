@@ -1,11 +1,12 @@
-import {connect} from "@/db/db";
 import {NextRequest, NextResponse} from "next/server";
 import {currentUser, isAdmin} from "@/lib/auth";
 import ArticleCategory from "@/models/articleCategoryModel";
 import User from "@/models/userModel";
 import {IProduct} from "@/types/Product";
 import Product from "@/models/productModel";
+import {connect} from "@/db/db";
 
+connect();
 export const maxDuration = 59;
 export async function GET(request: NextRequest) {
     try {

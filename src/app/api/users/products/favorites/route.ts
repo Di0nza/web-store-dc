@@ -1,6 +1,9 @@
 import {NextRequest, NextResponse} from "next/server";
 import Product from "@/models/productModel";
 import {IProduct} from "@/types/Product";
+import {connect} from "@/db/db";
+
+connect();
 export const maxDuration = 59;
 
 

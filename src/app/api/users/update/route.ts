@@ -1,10 +1,12 @@
-import { connect } from "@/db/db";
 import { getDataFromToken } from "@/helpers/getDataFromToken";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { ITokenData } from "@/types/TokenData";
 import {currentUser} from "@/lib/auth";
+import {connect} from "@/db/db";
+
+connect();
 export const maxDuration = 59;
 
 export async function PUT(request: NextRequest) {

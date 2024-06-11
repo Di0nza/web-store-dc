@@ -2,6 +2,9 @@ import {NextRequest, NextResponse} from "next/server";
 import {currentUser} from "@/lib/auth";
 import User from "@/models/userModel";
 import Order from "@/models/orderModel";
+import {connect} from "@/db/db";
+
+connect();
 export const maxDuration = 59;
 
 export async function GET(

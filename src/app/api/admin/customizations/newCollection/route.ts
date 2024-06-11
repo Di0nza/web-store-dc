@@ -5,7 +5,9 @@ import * as z from "zod";
 import {IProduct} from "@/types/Product";
 import Product from "@/models/productModel";
 import User from "@/models/userModel";
+import {connect} from "@/db/db";
 
+connect();
 
 
 const NewCollectionSchema = z.object({

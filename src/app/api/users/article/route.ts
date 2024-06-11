@@ -4,7 +4,9 @@ import User from "@/models/userModel";
 import Article from "@/models/articleModel";
 import {IProduct} from "@/types/Product";
 import Product from "@/models/productModel";
+import {connect} from "@/db/db";
 
+connect();
 export const maxDuration = 59;
 
 export async function GET(request: NextRequest) {
