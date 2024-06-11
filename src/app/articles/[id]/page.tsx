@@ -5,6 +5,9 @@ import Article from "@/models/articleModel";
 import {IArticle} from "@/types/Article";
 import '@/styles/text-editor.css';
 import ArticleContainer from "@/components/ArticleContainer";
+import {connect} from "@/db/db";
+
+connect();
 
 type Props = {
     params: {
