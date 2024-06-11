@@ -208,7 +208,7 @@ const ArticleContainer = ({article}) => {
 
             console.log(values)
             await axios.post("/api/users/article/comments", {...values, articleId: article._id}).then((data)=>{
-                setComments([...comments, data.data.comment])
+                setComments([data.data.comment, ...comments])
             });
 
 
@@ -245,21 +245,20 @@ const ArticleContainer = ({article}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const commentsPerPage = 5;
 
-    const indexOfFirstComment = (comments.length - 1) - ((currentPage - 1) * commentsPerPage);
-    const indexOfLastComment = Math.max(indexOfFirstComment - commentsPerPage, 0);
-    const currentComments = comments.slice(indexOfLastComment, indexOfFirstComment + 1).reverse();
+    const indexOfFirstComment = (currentPage - 1) * commentsPerPage;
+    const indexOfLastComment = Math.min(indexOfFirstComment + commentsPerPage, comments.length);
+    const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment).reverse();
 
     // Обработчики для переключения страниц
     const nextPage = () => {
-
-        if (indexOfFirstComment < comments.length - 1) {
-            setCurrentPage(prevPage => prevPage - 1);
+        if (indexOfLastComment < comments.length) {
+            setCurrentPage(prevPage => prevPage + 1);
         }
     };
 
     const prevPage = () => {
-        if (indexOfLastComment > 0) {
-            setCurrentPage(prevPage => prevPage + 1);
+        if (indexOfFirstComment > 0) {
+            setCurrentPage(prevPage => prevPage - 1);
         }
     };
 
@@ -360,7 +359,7 @@ const ArticleContainer = ({article}) => {
                                                 <div className="nav-comment-block">
                                                     <div className="send-emoji-button">
                                                         <EmojiPicker
-                                                            onChange={(emoji: string) => field.onChange(`${field.value} ${emoji}`)}
+                                                            onChange={(emoji: string) => field.onChange(`${field.value}${emoji}`)}
                                                         />
                                                     </div>
                                                     {user ? (
@@ -387,7 +386,7 @@ const ArticleContainer = ({article}) => {
                         <p>Общее количество: {comments.length}</p>
                     </div>
                     <div className="comments-header-btn">
-                        <p>{Math.min(indexOfLastComment, comments.length)}-{indexOfFirstComment + 1} из {comments.length}</p>
+                        <p>{indexOfFirstComment + 1}-{Math.min(indexOfLastComment, comments.length)} из {comments.length}</p>
                         <button className="comments-header-btn-left" onClick={prevPage} disabled={indexOfFirstComment === 0}>
                             <Image src={imgArrow} alt={'<'}></Image>
                         </button>
