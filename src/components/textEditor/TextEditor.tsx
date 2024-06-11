@@ -302,7 +302,7 @@ function TiptapEditor({doc, provider}: EditorProps) {
                 <label className={styles.updateProfileBlockLabel}>Фон</label>
                 <div className={styles.updateArticleLabelBlock} style={{ backgroundImage: `url(${article.backgroundImage})` }}>
                     <CldUploadButton
-                        uploadPreset="qiladgcy"
+                        uploadPreset="pnfbfwpd"
                         onUpload={(result: any) => {
                             setArticle({...article, backgroundImage: result.info.secure_url})
                         }}>

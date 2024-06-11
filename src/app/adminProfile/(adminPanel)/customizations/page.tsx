@@ -196,7 +196,7 @@ const Page = () => {
                                         <div className="home-video-btn-block">
                                             <CldUploadButton
                                                 className={'home-video-btn'}
-                                                uploadPreset="qiladgcy"
+                                                uploadPreset="pnfbfwpd"
                                                 onUpload={(result: any) => {
                                                     setMainVideoPublicUrl(result.info.secure_url)
                                                 }}>
@@ -326,7 +326,7 @@ const Page = () => {
                                                         <div className="home-video-btn-block" style={{margin: '0'}}>
                                                             <CldUploadButton
                                                                 className={'home-video-btn'}
-                                                                uploadPreset="qiladgcy"
+                                                                uploadPreset="pnfbfwpd"
                                                                 onUpload={(result: any) => {
                                                                     setNewCollection((prevCollection) => ({
                                                                         ...prevCollection,
@@ -431,7 +431,7 @@ const Page = () => {
                                     <div className="home-slider-btn-block" style={{margin: '0'}}>
                                         <CldUploadButton
                                             className={'home-slider-btn'}
-                                            uploadPreset="qiladgcy"
+                                            uploadPreset="pnfbfwpd"
                                             onUpload={(result: any) => {
                                                 setMainPhotoPublicUrl(result.info.secure_url)
                                             }}>
