@@ -209,7 +209,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
             <OrderNavBarContainer/>
             <h2>{"Оформление заказа"}</h2>
             <div id="payment-form"></div>
-            <button onClick={createOrder}></button>
+            {/*<button onClick={createOrder}></button>*/}
             {error ?
                     <div style={{margin: '5px 0 10px 0'}}>
                         <FormError message={error}/>
