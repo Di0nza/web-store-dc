@@ -84,7 +84,7 @@ const OrdersChart = ({ userOrders }) => {
                         labels: chartLabels,
                         datasets: [
                             {
-                                label: 'Суммарный доход($)',
+                                label: 'Суммарный доход(₽)',
                                 data: chartData,
                                 backgroundColor: 'rgba(231, 231, 231, 0.64)',
                                 borderColor: '#111111',
@@ -110,7 +110,7 @@ const OrdersChart = ({ userOrders }) => {
                             y: {
                                 title: {
                                     display: true,
-                                    text: 'Суммарный доход($)',
+                                    text: 'Суммарный доход(₽)',
                                     color: '#111111',
                                 },
                                 beginAtZero: true,
@@ -223,7 +223,7 @@ const OrdersChart = ({ userOrders }) => {
             <canvas ref={chartContainer}/>
             <div className={'periodResults'}>
                 <p><b>Количество заказов:</b> {selectedStatInfo.orders.value}</p>
-                <p><b>Доход:</b> {selectedStatInfo?.totalCost.value?.toFixed(2)}$</p>
+                <p><b>Доход:</b> {selectedStatInfo?.totalCost.value?.toFixed(2)}₽</p>
                 <p className={'periodResultsExplanations'}>Информация за выбранный промежуток времени</p>
             </div>
             <div className={'chartBtnBlock'}>
