@@ -152,7 +152,7 @@ export const sendOrderConfirmationEmail = async (email: string, orderDetails: an
         <div style="background-color: #f4f4f4; padding: 20px; text-align: center;">
             <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
                 <div style="background-color: #000000; padding: 20px;">
-                    <img src="https://res.cloudinary.com/dzdmstsam/image/upload/v1717702099/HomeScreenLogo_vxswth.png" alt="MariDenizDesign Logo" style="width: 100px; height: auto;">
+                    <img src="https://res.cloudinary.com/dzdmstsam/image/upload/v1718138999/Group_vgpezw.png" alt="MariDenizDesign Logo" style="width: 100px; height: auto;">
                 </div>
                 <div style="padding: 20px 30px 40px;">
                     <h2 style="color: #212121;">Подтверждение заказа</h2>
@@ -170,15 +170,14 @@ export const sendOrderConfirmationEmail = async (email: string, orderDetails: an
                             ${productRows}
                         </tbody>
                     </table>
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                        <div style="text-align: left; width: 48%;">
+                    <div style="text-align: left; width: 100%; margin-top: 20px">
                             <p style="color: #626262;"><b>Адрес доставки:</b> ${street}, ${house}${apartment ? `, кв. ${apartment}` : ''}, ${zip}, ${city}, ${country}</p>
                             <p style="color: #626262;"><b>Способ доставки:</b> ${deliveryMethod}</p>
                             <p style="color: #626262;"><b>Дата создания заказа:</b> ${new Date(createdAt).toLocaleDateString()}</p>
                             ${trackingCode ? `<p style="color: #626262;"><b>Код отслеживания:</b> ${trackingCode}</p>` : ''}
                             ${trackingLink ? `<p style="color: #626262;"><a href="${trackingLink}">Ссылка для отслеживания</a></p>` : ''}
-                        </div>
-                        <div style="width: 52%;">
+                    </div>
+                        <div style="width: 100%; margin-top: 20px">
                             <table style="width: 100%; border-collapse: collapse; text-align: left;">
                                 <tr>
                                     <td style="text-align: left; background-color: #f2f2f2; padding: 10px; border: 1px solid #dddddd;"><b>Сумма заказа:</b></td>
@@ -198,7 +197,6 @@ export const sendOrderConfirmationEmail = async (email: string, orderDetails: an
                                 </tr>
                             </table>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -264,7 +262,7 @@ export const ChangeOrderStatusEmail = async (email: string, orderDetails: any) =
         <div style="background-color: #f4f4f4; padding: 20px; text-align: center;">
             <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
                 <div style="background-color: #000000; padding: 20px;">
-                    <img src="https://res.cloudinary.com/dzdmstsam/image/upload/v1717702099/HomeScreenLogo_vxswth.png" alt="MariDenizDesign Logo" style="width: 100px; height: auto;">
+                    <img src="https://res.cloudinary.com/dzdmstsam/image/upload/v1718138999/Group_vgpezw.png" alt="MariDenizDesign Logo" style="width: 100px; height: auto;">
                 </div>
                 <div style="padding: 20px 30px 40px;">
                     <h2 style="color: #212121;">Изменение статуса заказа</h2>
@@ -320,7 +318,7 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
         <div style="background-color: #f4f4f4; padding: 20px; text-align: center;">
             <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
                 <div style="background-color: #000000; padding: 20px;">
-                    <img src="https://res.cloudinary.com/dzdmstsam/image/upload/v1717702099/HomeScreenLogo_vxswth.png" alt="MariDenizDesign Logo" style="width: 100px; height: auto;">
+                    <img src="https://res.cloudinary.com/dzdmstsam/image/upload/v1718138999/Group_vgpezw.png" alt="MariDenizDesign Logo" style="width: 100px; height: auto;">
                 </div>
                 <div style="padding: 20px 30px 40px;">
                     <h2 style="color: #212121;">Сброс пароля</h2>
@@ -354,7 +352,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
         <div style="background-color: #f4f4f4; padding: 20px; text-align: center;">
             <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
                 <div style="background-color: #000000; padding: 20px;">
-                    <img src="https://res.cloudinary.com/dzdmstsam/image/upload/v1717702099/HomeScreenLogo_vxswth.png" alt="MariDenizDesign Logo" style="width: 100px; height: auto;">
+                    <img src="https://res.cloudinary.com/dzdmstsam/image/upload/v1718138999/Group_vgpezw.png" alt="MariDenizDesign Logo" style="width: 100px; height: auto;">
                 </div>
                 <div style="padding: 20px 30px 40px;">
                     <h2 style="color: #212121;">Добро пожаловать в MariDenizDesign!</h2>
