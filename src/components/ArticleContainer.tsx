@@ -44,7 +44,6 @@ function Images(props: { onClick: () => Window, src: any, alt: string, style: { 
 }
 
 const ArticleContainer = ({article}) => {
-    const [selectedSize, setSelectedSize] = useState(null);
     const [cartItems, setCartItems] = useState([]);
     const [isFavorite, setIsFavorite] = useState(false);
     const [currentUrl, setCurrentUrl] = useState('');

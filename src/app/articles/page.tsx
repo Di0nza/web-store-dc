@@ -27,7 +27,6 @@ export default function Articles() {
         try {
             const res = await axios.get('/api/users/article');
             setArticles(res.data.article);
-            console.log(res.data.article);
         } catch (error: any) {
             console.log(error.message);
         }

@@ -97,7 +97,7 @@ export async function PUT(
             content,
             likes,
             comments,
-            views,
+            views: article.views,
             coAuthors,
             createdAt
         });

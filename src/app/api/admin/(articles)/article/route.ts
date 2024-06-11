@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({error: "Forbidden. You don't have administrator rights."}, {status: 403})
         }
 
-        const allArticles = await Article.find({});
+        const allArticles = await Article.find({}).select('-content');
         // @ts-ignore
         const sortedArticles = allArticles.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
 
