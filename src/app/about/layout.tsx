@@ -4,7 +4,7 @@ import './AboutStyles.css'
 import AboutNavigation from "@/components/aboutNavigation";
 
 export const metadata: Metadata = {
-    title: 'About | MariDeniz',
+    title: 'About | MariDenizDesign',
     description: 'Shop unique fashion clothing with signature designs',
     keywords: ['Clothing', 'fashion', 'women\'s clothing', 'men\'s clothing'],
     openGraph: {

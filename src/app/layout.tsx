@@ -13,7 +13,7 @@ const inter = Inter({subsets: ['latin']})
 
 
 export const metadata: Metadata = {
-    title: 'MariDeniz',
+    title: 'MariDenizDesign',
     description: 'Shop unique fashion clothing with signature designs',
     keywords: ['Clothing', 'fashion', 'women\'s clothing', 'men\'s clothing'],
     openGraph: {

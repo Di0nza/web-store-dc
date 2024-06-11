@@ -4,7 +4,7 @@ import './placingOrder.css'
 import {usePathname} from "next/navigation";
 
 export const metadata: Metadata = {
-    title: 'Order | MariDeniz',
+    title: 'Order | MariDenizDesign',
     description: 'Shop unique fashion clothing with signature designs',
     keywords: ['Clothing', 'fashion', 'women\'s clothing', 'men\'s clothing'],
     openGraph: {

@@ -21,7 +21,7 @@ export async function generateMetadata({params: {id}}: Props): Promise<Metadata>
     const article = await getArticleById(id) as IArticle;
 
     return {
-        title: article?.title,
+        title:`MariDenizDesign | ${article?.title}`,
         description: article?.description,
         keywords: article?.keywords,
         openGraph: {

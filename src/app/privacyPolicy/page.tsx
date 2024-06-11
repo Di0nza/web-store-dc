@@ -4,7 +4,7 @@ import './PrivacyPolicyStyles.css'
 import {usePathname} from "next/navigation";
 
 export const metadata: Metadata = {
-    title: 'PrivacyPolicy | MariDeniz',
+    title: 'PrivacyPolicy | MariDenizDesign',
     description: 'Shop unique fashion clothing with signature designs',
     keywords: ['Clothing', 'fashion', 'women\'s clothing', 'men\'s clothing'],
     openGraph: {
@@ -19,7 +19,7 @@ export default function PrivacyPolicy() {
                 <div className={'privacyPolicy'}>
                     <h1>Политика конфиденциальности</h1>
                     <p>
-                        Добро пожаловать в MariDeniz! Мы ценим вашу конфиденциальность и стремимся
+                        Добро пожаловать в MariDenizDesign! Мы ценим вашу конфиденциальность и стремимся
                         обеспечить безопасное использование нашего интернет-магазина.
                     </p>
 
