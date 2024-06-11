@@ -3,7 +3,7 @@ import Messages from "@/models/messageModel";
 import {NextRequest, NextResponse} from "next/server";
 import {currentUser} from "@/lib/auth";
 import User from "@/models/userModel";
-connect()
+export const maxDuration = 59;
 
 export async function POST(request: NextRequest) {
     try {

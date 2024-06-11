@@ -22,7 +22,7 @@ const opts = {
     resource_type: "auto",
 };
 
-connect()
+export const maxDuration = 59;
 
 export async function POST(request: NextRequest) {
     try {

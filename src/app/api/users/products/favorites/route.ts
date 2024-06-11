@@ -1,6 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
 import Product from "@/models/productModel";
 import {IProduct} from "@/types/Product";
+export const maxDuration = 59;
 
 
 enum OptionsType { ADD_TO_FAV = "ADD", DELETE_FROM_FAV = "DEL"}

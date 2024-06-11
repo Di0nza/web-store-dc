@@ -9,6 +9,7 @@ import {currentUser} from "@/lib/auth";
 import bcryptjs from "bcryptjs";
 
 /**Вызывается из профиля пользователя, когда она залогинен*/
+export const maxDuration = 59;
 
 export async function POST(request:NextRequest) {
     try {

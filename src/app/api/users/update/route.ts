@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { ITokenData } from "@/types/TokenData";
 import {currentUser} from "@/lib/auth";
-connect();
+export const maxDuration = 59;
 
 export async function PUT(request: NextRequest) {
     try {

@@ -5,6 +5,8 @@ import Article from "@/models/articleModel";
 import {IProduct} from "@/types/Product";
 import Product from "@/models/productModel";
 
+export const maxDuration = 59;
+
 export async function GET(request: NextRequest) {
     try {
         const allArticles = await Article.find({}).select('-content');

@@ -4,6 +4,8 @@ import {IArticle} from "@/types/Article";
 
 enum OptionsType { LIKE = "ADD", UNLIKE = "DEL"}
 
+export const maxDuration = 59;
+
 export async function POST(request: NextRequest) {
     try {
 
@@ -20,7 +22,7 @@ export async function POST(request: NextRequest) {
         //     return NextResponse.json({error: "Unauthorized."}, {status: 401})
         // }
 
-        const article = await Article.findById(id);
+        const article = await Article.findById(id).select('-content');
 
         if (!article) {
             return NextResponse.json({error: "No such article"}, {status: 400});

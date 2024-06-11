@@ -6,7 +6,8 @@ import User from "@/models/userModel";
 import {ChangeOrderStatusEmail} from "@/lib/mail";
 
 
-connect();
+export const maxDuration = 59;
+
 
 export async function GET(request: NextRequest) {
     try {

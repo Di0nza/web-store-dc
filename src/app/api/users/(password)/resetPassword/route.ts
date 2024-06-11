@@ -17,9 +17,10 @@ import {sendPasswordResetEmail, sendVerificationEmail} from "@/lib/mail";
 import {getVerificationTokenByEmail, getVerificationTokenByToken} from "@/services/verificationToken";
 import userModel from "@/models/userModel";
 import verificationTokenModel from "@/models/verificationTokenModel";
-connect()
+
 
 /**Вызывается на странице, где вводится email, для восстановление пароля*/
+export const maxDuration = 59;
 
 
 export async function POST(request:NextRequest) {

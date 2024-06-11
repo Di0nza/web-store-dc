@@ -6,6 +6,9 @@ import MainPageVideo from "@/models/mainPageVideoModel";
 import {currentUser, isAdmin} from "@/lib/auth";
 import User from "@/models/userModel";
 
+export const maxDuration = 59;
+
+
 export async function POST(
     request: NextRequest,
 ) {

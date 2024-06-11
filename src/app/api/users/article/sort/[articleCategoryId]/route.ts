@@ -3,6 +3,8 @@ import {currentUser} from "@/lib/auth";
 import User from "@/models/userModel";
 import ArticleCategory from "@/models/articleCategoryModel";
 import Article from "@/models/articleModel";
+export const maxDuration = 59;
+
 
 export async function GET(
     request: NextRequest,

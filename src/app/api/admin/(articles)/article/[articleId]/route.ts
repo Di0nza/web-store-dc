@@ -5,6 +5,8 @@ import Article from "@/models/articleModel";
 import {v2 as cloudinary} from "cloudinary";
 import Product from "@/models/productModel";
 import ArticleCategory from "@/models/articleCategoryModel";
+export const maxDuration = 59;
+
 
 export async function GET(
     request: NextRequest,

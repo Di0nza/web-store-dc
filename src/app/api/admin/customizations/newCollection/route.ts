@@ -7,6 +7,7 @@ import Product from "@/models/productModel";
 import User from "@/models/userModel";
 
 
+
 const NewCollectionSchema = z.object({
     title: z.string().min(1, {
         message: "Введите название коллекции",
@@ -16,6 +17,7 @@ const NewCollectionSchema = z.object({
     active: z.boolean(),
 });
 
+export const maxDuration = 59;
 
 export async function PATCH(
     request: NextRequest,

@@ -1,5 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 import Product from "@/models/productModel";
+export const maxDuration = 59;
 
 export async function POST(
     request: NextRequest,

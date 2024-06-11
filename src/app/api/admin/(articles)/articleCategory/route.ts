@@ -1,12 +1,10 @@
-import {connect} from "@/db/db";
 import {NextRequest, NextResponse} from "next/server";
 import {currentUser, isAdmin} from "@/lib/auth";
 import ArticleCategory from "@/models/articleCategoryModel";
 import User from "@/models/userModel";
 
+export const maxDuration = 59;
 
-
-connect()
 
 export async function POST(request: NextRequest) {
     try {

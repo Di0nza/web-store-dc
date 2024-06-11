@@ -6,6 +6,7 @@ import MainPagePhoto from "@/models/mainPagePhotoModel";
 import {currentUser, isAdmin} from "@/lib/auth";
 import User from "@/models/userModel";
 
+export const maxDuration = 59;
 
 export async function PATCH(
     request: NextRequest,

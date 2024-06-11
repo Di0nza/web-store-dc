@@ -5,6 +5,9 @@ import Article from "@/models/articleModel";
 import ArticleCategory from "@/models/articleCategoryModel";
 import mongoose from "mongoose";
 
+export const maxDuration = 59;
+
+
 export async function POST(request: NextRequest) {
     try {
 
@@ -24,7 +27,7 @@ export async function POST(request: NextRequest) {
         const reqBody = await request.json()
         const {comment, articleId} = reqBody
 
-        const article = await Article.findById(articleId);
+        const article = await Article.findById(articleId).select('-content');;
 
         if(!article){
             return NextResponse.json({error: "No such article"}, {status: 400})

@@ -12,6 +12,8 @@ type Props = {
     }
 };
 
+export const maxDuration = 59;
+
 export async function generateMetadata({params: {id}}: Props): Promise<Metadata> {
     const article = await getArticleById(id) as IArticle;
 

@@ -22,6 +22,8 @@ const opts = {
     resource_type: "auto",
 };
 
+export const maxDuration = 59;
+
 export async function PATCH(
     request: NextRequest,
     {params}: { params: { productId: string } }

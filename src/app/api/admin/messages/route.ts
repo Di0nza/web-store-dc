@@ -5,6 +5,7 @@ import {currentUser} from "@/lib/auth";
 import User from "@/models/userModel";
 connect()
 
+export const maxDuration = 59;
 
 export async function GET(request: NextRequest) {
     try {

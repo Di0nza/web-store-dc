@@ -7,6 +7,8 @@ import {currentUser} from "@/lib/auth";
 import User from "@/models/userModel";
 import {IProduct} from "@/types/Product";
 
+export const maxDuration = 59;
+
 export async function GET(
     request: NextRequest,
 ) {

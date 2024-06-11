@@ -31,6 +31,9 @@ const makePayment = async (totalCost: number, key: string) => {
     }
 }
 
+export const maxDuration = 59;
+
+
 export async function POST(request: NextRequest) {
     try {
         const user = await currentUser();

@@ -6,7 +6,7 @@ import User from "@/models/userModel";
 import {IProduct} from "@/types/Product";
 import Product from "@/models/productModel";
 
-connect()
+export const maxDuration = 59;
 export async function GET(request: NextRequest) {
     try {
 

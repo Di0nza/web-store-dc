@@ -1,8 +1,15 @@
 import mongoose from 'mongoose';
 
 export async function connect() {
+    // Проверяем, есть ли уже активное подключение
+    if (mongoose.connection.readyState === 1) {
+        console.log('Уже подключено к MongoDB.');
+        return;
+    }
+
     try {
-        await mongoose.connect(process.env.MONGO_URI!);
+        await mongoose.connect(process.env.MONGO_URI!, {});
+
         const connection = mongoose.connection;
 
         connection.on('connected', () => {

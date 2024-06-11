@@ -8,6 +8,7 @@ import ResetPasswordTokenModel from "@/models/resetPasswordTokenModel";
 
 /**Вызывается со страницы, на которой уже пишут новый пароль, с токеном в адресной строке*/
 
+export const maxDuration = 59;
 
 export async function POST(request:NextRequest) {
     try {

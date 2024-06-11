@@ -3,7 +3,7 @@ import {connect} from "@/db/db";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 
-connect();
+export const maxDuration = 59;
 
 export async function GET(request:NextRequest){
     try {
