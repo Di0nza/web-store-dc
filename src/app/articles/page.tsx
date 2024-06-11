@@ -172,7 +172,7 @@ export default function Articles() {
                 </div>
                 <div className='articleFilterBlock'>
                     <ArticleSearch onSearch={setArticles}/>
-                    <div className='filterBlock'>
+                    <div className='filtersBlock'>
                         <h4>Сортировка заказов</h4>
                         <div className="article-categories-container">
                             <div

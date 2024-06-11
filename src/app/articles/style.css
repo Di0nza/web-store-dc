@@ -129,21 +129,21 @@
     padding: 4px 9px;
     cursor: pointer;
 }
-.filterBlock{
+.filtersBlock{
     display: flex;
     flex-direction: column;
     align-content: flex-start;
     justify-content: flex-start;
     flex-wrap: wrap;
     width: calc(100%);
-    max-width: 350px;
-    margin: 10px 0 0 0;
+    max-width: calc(1000px);
+    margin: 10px 0 15px 0;
     border: 1px solid #dadada;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     padding: 10px;
 }
-.filterBlock h4{
+.filtersBlock h4{
     font-size: 17px;
     font-weight: 600;
     margin-bottom: 10px;
@@ -168,7 +168,7 @@
     font-weight: 500;
 }
 @media screen and (max-width: 1000px){
-    .filterBlock{
+    .filtersBlock{
         display: flex;
         flex-direction: column;
         align-content: flex-start;
@@ -182,7 +182,7 @@
         border-radius: 10px;
         padding: 10px;
     }
-    .filterBlock h4{
+    .filtersBlock h4{
         font-size: 17px;
         font-weight: 600;
         margin-bottom: 10px;

@@ -628,7 +628,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
+    flex-direction: column-reverse;
     align-items: flex-start;
 }
 .admin-products-header{
