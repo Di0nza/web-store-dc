@@ -27,7 +27,7 @@ export async function generateMetadata({params: {id}}: Props): Promise<Metadata>
         openGraph: {
             images: article?.backgroundImage,
         },
-        icons: 'https://res.cloudinary.com/maticht12345/image/upload/v1701277508/Letter_-_16_wds2cz.png',
+        icons: 'https://res.cloudinary.com/dzdmstsam/image/upload/v1718646289/Letter_-_126_x8fpma.png',
     }
 }
 

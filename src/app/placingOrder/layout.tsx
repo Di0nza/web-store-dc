@@ -8,9 +8,9 @@ export const metadata: Metadata = {
     description: 'Shop unique fashion clothing with signature designs',
     keywords: ['Clothing', 'fashion', 'women\'s clothing', 'men\'s clothing'],
     openGraph: {
-        images: 'https://res.cloudinary.com/maticht12345/image/upload/v1701277508/Letter_-_16_wds2cz.png',
+        images: 'https://res.cloudinary.com/dzdmstsam/image/upload/v1718646315/Letter_-_16_zwgkz9.png',
     },
-    icons: 'https://res.cloudinary.com/maticht12345/image/upload/v1701277508/Letter_-_16_wds2cz.png',
+    icons: 'https://res.cloudinary.com/dzdmstsam/image/upload/v1718646289/Letter_-_126_x8fpma.png',
 }
 
 export default function OrderLayout({children}: { children: React.ReactNode }) {

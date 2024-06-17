@@ -20,13 +20,13 @@ export async function generateMetadata({params: {id}}: Props): Promise<Metadata>
 
 
     return {
-        title: product.title,
+        title: `MariDenizDesign | ${product.title}`,
         description: product.description,
         keywords: ['Clothing', 'fashion', 'women\'s clothing', 'men\'s clothing'],
         openGraph: {
             images: product.pictures[0].toString(),
         },
-        icons: 'https://res.cloudinary.com/maticht12345/image/upload/v1701277508/Letter_-_16_wds2cz.png',
+        icons: 'https://res.cloudinary.com/dzdmstsam/image/upload/v1718646289/Letter_-_126_x8fpma.png',
     }
 }
 
