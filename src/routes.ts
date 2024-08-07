@@ -17,7 +17,7 @@ export const publicRoutes = [
     "/about/delivery",
     "/about/payment",
     "/about/returns",
-    "/about/team",
+    "/about/instructions",
     "/api/users/messages",
     "/cart",
     "/favorites",

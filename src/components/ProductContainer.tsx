@@ -10,7 +10,7 @@ import oklogo from '../img/shearIcons/oklogo.png';
 import fblogo from '../img/shearIcons/fblogo.png';
 import vklogo from '../img/shearIcons/vklogo.png';
 import tglogo from '../img/shearIcons/tglogo.png';
-import instlogo from '../img/shearIcons/viberlogo.png';
+import instlogo from '../img/shearIcons/instlogo.png';
 import wtplogo from '../img/shearIcons/wtplogo.png';
 import UnusualDesignMessage from "@/components/modals/unusualDesignMessage";
 import axios from "axios";

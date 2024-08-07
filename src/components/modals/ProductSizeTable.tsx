@@ -46,34 +46,34 @@ const ProductSizeTable = ({ onClose }) => {
                     <div className="size-column">
                         <div className="size-item">
                             <p>Грудь (см)</p>
-                            <p>78-83</p>
-                            <p>83-88</p>
-                            <p>88-93</p>
-                            <p>93-98</p>
-                            <p>98-103</p>
-                            <p>103-108</p>
+                            <p>74-78</p>
+                            <p>78-85</p>
+                            <p>85-93</p>
+                            <p>93-101</p>
+                            <p>101-108</p>
+                            <p>108-115</p>
                         </div>
                     </div>
                     <div className="size-column">
                         <div className="size-item">
                             <p>Талия (см)</p>
-                            <p>60-65</p>
-                            <p>65-70</p>
-                            <p>70-75</p>
-                            <p>75-80</p>
-                            <p>80-85</p>
-                            <p>85-90</p>
+                            <p>63-67</p>
+                            <p>67-73</p>
+                            <p>73-80</p>
+                            <p>80-88</p>
+                            <p>88-96</p>
+                            <p>96-103</p>
                         </div>
                     </div>
                     <div className="size-column">
                         <div className="size-item">
                             <p>Бёдра (см)</p>
-                            <p>80-85</p>
-                            <p>85-90</p>
-                            <p>90-95</p>
-                            <p>95-100</p>
-                            <p>100-105</p>
-                            <p>105-110</p>
+                            <p>79-84</p>
+                            <p>84-90</p>
+                            <p>90-97</p>
+                            <p>97-103</p>
+                            <p>103-110</p>
+                            <p>110-118</p>
                         </div>
                     </div>
                 </div>

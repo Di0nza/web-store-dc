@@ -40,24 +40,29 @@
 
 @keyframes simpleLogo {
     0% {
+        max-width: 220px;
         width: 220px;
         height: 118px;
     }
     100% {
+        max-width: 220px;
         width: 220px;
         height: 118px;
     }
 }
 @keyframes shrinkLogo {
     0% {
+        max-width: 220px;
         width: 220px;
         height: 118px;
     }
     50% {
+        max-width: 220px;
         width: 220px;
         height: 118px;
     }
     100% {
+        max-width: 220px;
         width: 100px;
         height: 118px;
     }
@@ -71,14 +76,17 @@
 
 @keyframes revertLogo {
     0% {
+        max-width: 220px;
         width: 220px;
         height: 118px;
     }
     50% {
+        max-width: 220px;
         width: 100px;
         height: 118px;
     }
     100% {
+        max-width: 220px;
         width: 220px;
         height: 118px;
     }
@@ -169,24 +177,29 @@
 
     @keyframes simpleLogo {
         0% {
+            max-width: 184px;
             width: 184px;
             height: 95px;
         }
         100% {
+            max-width: 184px;
             width: 184px;
             height: 95px;
         }
     }
     @keyframes shrinkLogo {
         0% {
+            max-width: 184px;
             width: 184px;
             height: 95px;
         }
         50% {
+            max-width: 184px;
             width: 184px;
             height: 95px;
         }
         100% {
+            max-width: 184px;
             width: 90px;
             height: 95px;
         }
@@ -200,14 +213,17 @@
 
     @keyframes revertLogo {
         0% {
+            max-width: 184px;
             width: 184px;
             height: 95px;
         }
         50% {
+            max-width: 184px;
             width: 90px;
             height: 95px;
         }
         100% {
+            max-width: 184px;
             width: 184px;
             height: 95px;
         }

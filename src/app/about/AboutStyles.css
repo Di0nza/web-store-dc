@@ -94,6 +94,8 @@
     z-index: 8;
     max-width: 650px;
     width: 100%;
+    max-height: 650px;
+    overflow-y: scroll;
 }
 .description {
     font-size: 16px;
@@ -121,6 +123,14 @@
         align-items: flex-start;
         justify-content: flex-start;
     }
+    .description-block {
+        position: absolute;
+        z-index: 8;
+        max-width: 650px;
+        width: 100%;
+        max-height: 560px;
+        overflow-y: scroll;
+    }
 }
 @media screen and (max-width: 800px){
     .contacts-bg-img{
@@ -139,5 +149,15 @@
 @media screen and (max-width: 600px){
     .contacts-bg-img{
         display: none;
+    }
+}
+@media screen and (max-width: 430px){
+    .description-block {
+        position: absolute;
+        z-index: 8;
+        max-width: 650px;
+        width: 100%;
+        max-height: 450px;
+        overflow-y: scroll;
     }
 }

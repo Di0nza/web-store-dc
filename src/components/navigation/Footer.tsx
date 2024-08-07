@@ -74,7 +74,7 @@ const Footer = () => {
                                     <div className='footer-navigation-block'>
                                         <Link href={'/about'}>О нас</Link>
                                         <Link href={'/about/contacts'}>Контакты</Link>
-                                        <Link href={'/about/team'}>Команда</Link>
+                                        <Link href={'/about/instructions'}>Команда</Link>
                                     </div>
                                 )}
                             {userData !== null ? (
