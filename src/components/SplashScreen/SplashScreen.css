@@ -33,13 +33,10 @@
 .splash-screen-logo {
     width: 220px;
     height: auto;
-    transition: width 1s ease-in-out;
-    animation: simpleLogo 1s forwards, shrinkLogo 1s forwards 0.5s;
-    animation-iteration-count: 1;
 }
 
 .splash-screen-logo {
-    transition: width 0.5s ease-in-out 0.5s;
+    transition: ease-in-out 0.8s;
     animation: revertLogo 0.8s;
     animation-iteration-count: 1;
 }
@@ -59,21 +56,6 @@
         max-width: 220px;
         width: 220px;
         height: 118px;
-    }
-}
-
-@keyframes moveLogo {
-    0% {
-        transform: translate(0, 0);
-    }
-    28% {
-        width: 65px;
-        height: 35px;
-    }
-    100% {
-        transform: translate(-719%, -1046%);
-        width: 65px;
-        height: 35px;
     }
 }
 
