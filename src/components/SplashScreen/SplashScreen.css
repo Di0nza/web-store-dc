@@ -32,28 +32,21 @@
 
 .splash-screen-logo {
     width: 220px;
-    height: auto;
-}
-
-.splash-screen-logo {
-    transition: ease-in-out 0.8s;
+    height: 118px;
     animation: revertLogo 0.8s;
     animation-iteration-count: 1;
 }
 
 @keyframes revertLogo {
     0% {
-        max-width: 220px;
         width: 220px;
         height: 118px;
     }
     50% {
-        max-width: 220px;
         width: 100px;
         height: 118px;
     }
     100% {
-        max-width: 220px;
         width: 220px;
         height: 118px;
     }
@@ -122,43 +115,6 @@
     .splash-screen-logo {
         width: 184px;
         height: 95px;
-        transition: width 1s ease-in-out;
-        animation: simpleLogo 1s forwards, shrinkLogo 1s forwards 0.5s;
-        animation-iteration-count: 1;
-    }
-
-    @keyframes simpleLogo {
-        0% {
-            max-width: 184px;
-            width: 184px;
-            height: 95px;
-        }
-        100% {
-            max-width: 184px;
-            width: 184px;
-            height: 95px;
-        }
-    }
-    @keyframes shrinkLogo {
-        0% {
-            max-width: 184px;
-            width: 184px;
-            height: 95px;
-        }
-        50% {
-            max-width: 184px;
-            width: 184px;
-            height: 95px;
-        }
-        100% {
-            max-width: 184px;
-            width: 90px;
-            height: 95px;
-        }
-    }
-
-    .splash-screen-logo {
-        transition: width 0.5s ease-in-out 0.5s;
         animation: revertLogo 0.8s;
         animation-iteration-count: 1;
     }
