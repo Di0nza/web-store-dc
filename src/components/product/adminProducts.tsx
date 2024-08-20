@@ -74,7 +74,7 @@ export const AdminProducts = ({search}) => {
                             <p className='product-title'>{product.title}</p>
                             <p className='product-category'>{product.category}</p>
                         </div>
-                        <p className='product-price'>${product.price}.00</p>
+                        <p className='product-price'>{product.price}.00 ₽</p>
                     </div>
                 ))}
             </div>

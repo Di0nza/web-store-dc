@@ -131,7 +131,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
     return (
         <div className='placingOrderBlock'>
             <h2>{`Заказ #${orderData?._id}`}</h2>
-            <h4><b>{orderData?.totalNumber}</b> товаров на сумму <b>${orderData?.totalCost.toFixed(2)}</b> ({orderData?.paymentState})</h4>
+            <h4><b>{orderData?.totalNumber}</b> товаров на сумму <b>{orderData?.totalCost.toFixed(2)} ₽</b> ({orderData?.paymentState})</h4>
             <div>
                 <div className='placingOrderBlockRow'>
                     <div className={'firstInfoContainer'}>
@@ -228,7 +228,7 @@ export default function PlacingOrder({params: {id}}: Props): JSX.Element {
                                             </div>
                                             <div className={'mini-cart-footer'}>
                                                 <h5>
-                                                    ${item.price}.00
+                                                    {item.price}.00 ₽
                                                 </h5>
                                             </div>
                                         </div>
