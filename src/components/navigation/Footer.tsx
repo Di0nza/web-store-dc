@@ -11,9 +11,8 @@ import FooterErrorBlock from "@/components/modals/footerErrorBlock";
 import {OrderProvider, useOrderContext} from "@/orderContext/store";
 import {useCurrentUser} from "@/hooks/useCurrentUser";
 import instLogo from "@/img/shearIcons/instlogo.png";
-import pnstlogo from "@/img/shearIcons/pnstlogo.png";
 import vklogo from "@/img/shearIcons/vklogo.png";
-import fblogo from "@/img/shearIcons/fblogo.png";
+import tglogo from "@/img/shearIcons/tglogo.png";
 interface UserData {
     isAdmin: boolean;
     name: string;
@@ -121,18 +120,23 @@ const Footer = () => {
                             </Link>
                             <div className='footer-social-links'>
                                 <div className='footer-social-links-block'>
-                                    <Image src={instLogo} alt={'inst'}/>
+                                    <a href="https://t.me/marideniz_brand28" target="_blank" rel="noopener noreferrer">
+                                        <Image src={tglogo} alt="Telegram"/>
+                                    </a>
                                 </div>
                                 <div className='footer-social-links-block'>
-                                    <Image src={pnstlogo} alt={'inst'}/>
+                                    <a href="https://vk.com/marideniz_brand" target="_blank" rel="noopener noreferrer">
+                                        <Image src={vklogo} alt="VKontakte"/>
+                                    </a>
                                 </div>
                                 <div className='footer-social-links-block'>
-                                    <Image src={vklogo} alt={'inst'}/>
-                                </div>
-                                <div className='footer-social-links-block'>
-                                    <Image src={fblogo} alt={'inst'}/>
+                                    <a href="https://www.instagram.com/marideniz.ru?igsh=aDV0eDJpOW1ndW5t"
+                                       target="_blank" rel="noopener noreferrer">
+                                        <Image src={instLogo} alt="Instagram"/>
+                                    </a>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div className='footer-error-block'>

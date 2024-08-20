@@ -47,13 +47,20 @@ export default function Contacts() {
             </div>
             <div className='contacts-social-links'>
                 <div className='footer-social-links-block'>
-                    <Image src={instLogo} alt={'inst'}/>
+                    <a href="https://t.me/marideniz_brand28" target="_blank" rel="noopener noreferrer">
+                        <Image src={tglogo} alt="Telegram"/>
+                    </a>
                 </div>
                 <div className='footer-social-links-block'>
-                    <Image src={tglogo} alt={'inst'}/>
+                    <a href="https://vk.com/marideniz_brand" target="_blank" rel="noopener noreferrer">
+                        <Image src={vklogo} alt="VKontakte"/>
+                    </a>
                 </div>
                 <div className='footer-social-links-block'>
-                    <Image src={vklogo} alt={'inst'}/>
+                    <a href="https://www.instagram.com/marideniz.ru?igsh=aDV0eDJpOW1ndW5t"
+                       target="_blank" rel="noopener noreferrer">
+                        <Image src={instLogo} alt="Instagram"/>
+                    </a>
                 </div>
             </div>
 

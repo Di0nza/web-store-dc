@@ -30,7 +30,7 @@ const BestProducts = () => {
             <div className='best-product-block'>
                 <div className='best-product-head'>
                     <h3>Наши товары</h3>
-                    <p>Исследуйте уникальные товары, которые подчеркнут ваш стиль. Новая коллекция уже ждёт вас!</p>
+                    <p>Здесь вы найдете то, в чем приобретете внутреннюю свободу. Переходите и выбирайте!</p>
                 </div>
                 <div className='best-product-items-body'>
                     <div className='best-product-scroll-block'>

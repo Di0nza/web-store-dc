@@ -32,40 +32,10 @@
 
 .splash-screen-logo {
     width: 220px;
-    height: 118px;
+    height: auto;
     transition: width 1s ease-in-out;
     animation: simpleLogo 1s forwards, shrinkLogo 1s forwards 0.5s;
     animation-iteration-count: 1;
-}
-
-@keyframes simpleLogo {
-    0% {
-        max-width: 220px;
-        width: 220px;
-        height: 118px;
-    }
-    100% {
-        max-width: 220px;
-        width: 220px;
-        height: 118px;
-    }
-}
-@keyframes shrinkLogo {
-    0% {
-        max-width: 220px;
-        width: 220px;
-        height: 118px;
-    }
-    50% {
-        max-width: 220px;
-        width: 220px;
-        height: 118px;
-    }
-    100% {
-        max-width: 220px;
-        width: 100px;
-        height: 118px;
-    }
 }
 
 .splash-screen-logo {
